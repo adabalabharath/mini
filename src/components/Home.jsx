@@ -3,7 +3,7 @@ import home from "../assets/e-commerce-online-shopping-doodle-hand-drawn-icon-se
 import Typography from "@mui/material/Typography";
 import wrogn from "../assets/Wrogn.jpeg";
 import Rdstr from "../assets/Rdstr.jpeg";
-import Hrx from "../assets/Hrx.jpeg";
+import Hrx from "../assets/hrx.jpeg";
 import HN from "../assets/H&N.jpeg";
 import puma from "../assets/puma.jpeg";
 import skechers from "../assets/skechers.jpeg";
