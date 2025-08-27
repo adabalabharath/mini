@@ -1,0 +1,36 @@
+import { useState } from 'react'
+import Navbar from './components/Navbar'
+import { Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import ShopMen from './components/ShopMen'
+import ShopWomen from './components/ShopWomen'
+import ShopKids from './components/ShopKids'
+import ShopHomeLiving from './components/ShopHomeLiving'
+import ShopBeauty from './components/ShopBeauty'
+import Profile from './components/Profile'
+import WishList from './components/WishList'
+import Bag from './components/Bag'
+import PrivateRoute from './components/PrivateRoute'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop-men" element={<ShopMen />} />
+        <Route path="/shop-women" element={<ShopWomen />} />
+        <Route path="/shop-kids" element={<ShopKids />} />
+        <Route path="/shop-home" element={<ShopHomeLiving />} />
+        <Route path="/shop-beauty" element={<ShopBeauty />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/wishlist" element={<PrivateRoute><WishList /></PrivateRoute>} />
+        <Route path="/bag" element={<PrivateRoute><Bag /></PrivateRoute>} />
+       </Routes>
+    </>
+  )
+}
+
+export default App
