@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -32,7 +32,7 @@ const Navbar = () => {
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
-
+const navigation=useNavigate();
   
   return (
     <AppBar
@@ -52,7 +52,7 @@ const Navbar = () => {
         }}
       >
         {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center",cursor:'pointer' }} onClick={() => navigation('/')}>
           <img
             style={{ height: "70px", width: "80px" }}
             src={miniLogo}
