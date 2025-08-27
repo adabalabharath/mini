@@ -73,7 +73,6 @@ const Profile = () => {
     <Grid container justifyContent="center" >
       <Grid item xs={12} sm={8} md={8} lg={4}> 
     <Card sx={{
-        width: "100%",   
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
