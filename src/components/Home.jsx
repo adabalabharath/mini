@@ -11,10 +11,10 @@ import levis from "../assets/levis.jpeg";
 import crocs from "../assets/crocs.jpeg";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import activewear from "../assets/activeNd.jpeg";
+import activewear from "../assets/ActiveNd.jpeg";
 import loungeWear from "../assets/loungeNd.jpeg";
-import workWear from "../assets/workND.jpeg";
-import kurtas from "../assets/kurtasNd.jpeg";
+import workWear from "../assets/WorkND.jpeg";
+import kurtas from "../assets/kurtasND.jpeg";
 import sandals from "../assets/SandalsNd.jpeg";
 import shoes from "../assets/sportswear.jpeg"
 import handBag from "../assets/handbags.jpeg"
