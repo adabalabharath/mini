@@ -19,7 +19,7 @@ import sandals from "../assets/sandals.jpeg";
 import shoes from "../assets/sportswear.jpeg";
 import handBag from "../assets/handbags.jpeg";
 import watches from "../assets/watches.jpeg";
-import forHim from "../assets/forhim.png";
+import forHim from "../assets/forHim.png";
 import forHer from "../assets/forher.png";
 import kids from "../assets/kids.png";
 import beauty from "../assets/beauty.png";
