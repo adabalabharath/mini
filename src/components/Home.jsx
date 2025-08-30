@@ -20,7 +20,7 @@ import shoes from "../assets/sportswear.jpeg";
 import handBag from "../assets/handbags.jpeg";
 import watches from "../assets/watches.jpeg";
 import forHim from "../assets/forHim.png";
-import forHer from "../assets/forher.png";
+import forHer from "../assets/forHer.png";
 import kids from "../assets/kids.png";
 import beauty from "../assets/beauty.png";
 import us from "../assets/home.png";
