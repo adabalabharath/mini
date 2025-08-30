@@ -28,7 +28,7 @@ import frock from "../assets/frock.jpeg";
 import set from "../assets/set.jpeg";
 import boyShoes from "../assets/boyShoes.jpeg";
 import addidasKid from "../assets/addidasKid.jpeg";
-import tv from "../assets/tv.jpeg";
+import tv from "../assets/Tv.jpeg";
 import fridge from "../assets/fridge.jpeg";
 import washingMachine from "../assets/wm.jpeg";
 import oven from "../assets/oven.jpeg";
