@@ -73,13 +73,14 @@ const navigation=useNavigate();
 
         {/* Nav Pages */}
         <Box sx={{ gap: 3, display: { xs: "none", sm: "none", md: "flex" } }}>
-          {pages.map((p) => (
+          {pages.map((p,i) => (
             <Link
               to={`/shop-${p.toLowerCase()}`}
               style={{ textDecoration: "none", color: "inherit" }}
+               key={i}
             >
               <Typography
-                key={p}
+               
                 sx={{ fontFamily: "cursive", cursor: "pointer" }}
                 variant="subtitle1"
               >

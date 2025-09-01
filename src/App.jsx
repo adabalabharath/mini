@@ -1,23 +1,33 @@
-import { useState } from 'react'
-import Navbar from './components/Navbar'
-import { Route, Routes } from 'react-router-dom'
-import Home from './components/Home'
-import ShopMen from './components/ShopMen'
-import ShopWomen from './components/ShopWomen'
-import ShopKids from './components/ShopKids'
-import ShopHomeLiving from './components/ShopHomeLiving'
-import ShopBeauty from './components/ShopBeauty'
-import Profile from './components/Profile'
-import WishList from './components/WishList'
-import Bag from './components/Bag'
-import PrivateRoute from './components/PrivateRoute'
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import ShopMen from "./components/ShopMen";
+import ShopWomen from "./components/ShopWomen";
+import ShopKids from "./components/ShopKids";
+import ShopHomeLiving from "./components/ShopHomeLiving";
+import ShopBeauty from "./components/ShopBeauty";
+import Profile from "./components/Profile";
+import WishList from "./components/WishList";
+import Bag from "./components/Bag";
+import PrivateRoute from "./components/PrivateRoute";
+import { useDispatch } from "react-redux";
+import { setProducts } from "./redux/action";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
 
+  const fetchProducts = async () => {
+    dispatch(setProducts);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop-men" element={<ShopMen />} />
@@ -26,11 +36,25 @@ function App() {
         <Route path="/shop-home" element={<ShopHomeLiving />} />
         <Route path="/shop-beauty" element={<ShopBeauty />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/wishlist" element={<PrivateRoute><WishList /></PrivateRoute>} />
-        <Route path="/bag" element={<PrivateRoute><Bag /></PrivateRoute>} />
-       </Routes>
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateRoute>
+              <WishList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/bag"
+          element={
+            <PrivateRoute>
+              <Bag />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

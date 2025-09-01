@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import home from "../assets/e-commerce-online-shopping-doodle-hand-drawn-icon-set-outline-drawing-e-commerce-online-shopping-line-clipart-symbol-collection-395304571.webp";
 import Typography from "@mui/material/Typography";
 import wrogn from "../assets/Wrogn.jpeg";
@@ -48,6 +48,14 @@ const beautyProducts = [lipstick, foundation, mascara, blush];
 const women = [sandals, shoes, handBag, watches];
 
 const Home = () => {
+  const [MenClothingHover, setMenClothingHover] = useState(null);
+  const [womenClothingHover, setWomenClothingHover] = useState(null);
+  const [womenHover, setWomenHover] = useState(null);
+  const [isHovered, setIsHovered] = useState(null);
+  const [kidsHover,setKidsHover]=useState(null)
+  const [homeHover,setHomeHover]=useState(null)
+  const [beautyHover,setBeautyHover]=useState(null)
+  
   return (
     <div>
       <Box
@@ -107,7 +115,7 @@ const Home = () => {
               alt="for him"
               style={{
                 width: "100%",
-                border: "2px solid black",
+                border: "3px solid black",
                 height: "300px",
               }}
             />
@@ -130,9 +138,19 @@ const Home = () => {
               alt="clothing"
               style={{
                 width: "200px",
-                border: "2px solid black",
+                border:
+                  MenClothingHover === i
+                    ? "3px solid white"
+                    : "3px solid black",
                 borderRadius: 10,
+                boxShadow:
+                  MenClothingHover === i
+                    ? "0px 4px 20px rgba(0,0,0,0.5)"
+                    : "none",
+                transition: "all 0.3s ease",
               }}
+              onMouseEnter={() => setMenClothingHover(i)}
+              onMouseLeave={() => setMenClothingHover(null)}
             />
           </Grid>
         ))}
@@ -151,11 +169,17 @@ const Home = () => {
             <img
               src={el}
               alt="footwear"
+              key={i}
               style={{
                 width: "200px",
-                border: "2px solid black",
+                border: isHovered === i ? "3px solid white" : "3px solid black",
                 borderRadius: 10,
+                boxShadow:
+                  isHovered === i ? "0px 4px 20px rgba(0,0,0,0.5)" : "none",
+                transition: "all 0.3s ease",
               }}
+              onMouseEnter={() => setIsHovered(i)}
+              onMouseLeave={() => setIsHovered(null)}
             />
           </Grid>
         ))}
@@ -191,7 +215,7 @@ const Home = () => {
               style={{
                 width: "100%",
                 height: "300px",
-                border: "2px solid black",
+                border: "3px solid black",
               }}
             />
           </Link>
@@ -222,9 +246,19 @@ const Home = () => {
                 style={{
                   width: "200px",
                   height: "200px",
-                  border: "2px solid black",
+                  border:
+                    womenClothingHover === i
+                      ? "3px solid white"
+                      : "3px solid black",
                   borderRadius: 10,
+                  boxShadow:
+                    womenClothingHover === i
+                      ? "0px 4px 20px rgba(0,0,0,0.5)"
+                      : "none",
+                  transition: "all 0.3s ease",
                 }}
+                onMouseEnter={() => setWomenClothingHover(i)}
+                onMouseLeave={() => setWomenClothingHover(null)}
               />
               {/* <Typography
                 variant="subtitle1"
@@ -266,9 +300,15 @@ const Home = () => {
                 style={{
                   width: "200px",
                   height: "200px",
-                  border: "2px solid black",
+                  border:
+                    womenHover === i ? "3px solid white" : "3px solid black",
                   borderRadius: 10,
+                  boxShadow:
+                    womenHover === i ? "0px 4px 20px rgba(0,0,0,0.5)" : "none",
+                  transition: "all 0.3s ease",
                 }}
+                onMouseEnter={() => setWomenHover(i)}
+                onMouseLeave={() => setWomenHover(null)}
               />
             </Grid>
           </Box>
@@ -303,7 +343,7 @@ const Home = () => {
               alt="for kids"
               style={{
                 width: "100%",
-                border: "2px solid black",
+                border: "3px solid black",
                 height: "300px",
               }}
             />
@@ -334,9 +374,19 @@ const Home = () => {
                 style={{
                   width: "200px",
                   height: "200px",
-                  border: "2px solid black",
+                 border:
+                    kidsHover === i
+                      ? "3px solid white"
+                      : "3px solid black",
                   borderRadius: 10,
+                  boxShadow:
+                    kidsHover === i
+                      ? "0px 4px 20px rgba(0,0,0,0.5)"
+                      : "none",
+                  transition: "all 0.3s ease",
                 }}
+                onMouseEnter={() => setKidsHover(i)}
+                onMouseLeave={() => setKidsHover(null)}
               />
             </Box>
           </Grid>
@@ -370,7 +420,7 @@ const Home = () => {
               alt="for home"
               style={{
                 width: "100%",
-                border: "2px solid black",
+                border: "3px solid black",
                 height: "300px",
               }}
             />{" "}
@@ -403,9 +453,19 @@ const Home = () => {
                   width: "200px",
 
                   height: "200px",
-                  border: "2px solid black",
+                 border:
+                    homeHover === i
+                      ? "3px solid white"
+                      : "3px solid black",
                   borderRadius: 10,
+                  boxShadow:
+                    homeHover === i
+                      ? "0px 4px 20px rgba(0,0,0,0.5)"
+                      : "none",
+                  transition: "all 0.3s ease",
                 }}
+                onMouseEnter={() => setHomeHover(i)}
+                onMouseLeave={() => setHomeHover(null)}
               />
             </Box>
           </Grid>
@@ -441,7 +501,7 @@ const Home = () => {
               alt="for beauty"
               style={{
                 width: "100%",
-                border: "2px solid black",
+                border: "3px solid black",
                 height: "300px",
               }}
             />
@@ -473,9 +533,19 @@ const Home = () => {
                 style={{
                   width: "200px",
                   height: "200px",
-                  border: "2px solid black",
+                 border:
+                    beautyHover === i
+                      ? "3px solid white"
+                      : "3px solid black",
                   borderRadius: 10,
+                  boxShadow:
+                    beautyHover === i
+                      ? "0px 4px 20px rgba(0,0,0,0.5)"
+                      : "none",
+                  transition: "all 0.3s ease",
                 }}
+                onMouseEnter={() => setBeautyHover(i)}
+                onMouseLeave={() => setBeautyHover(null)}
               />
             </Box>
           </Grid>
