@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import miniLogo from "../assets/OIP (4).jpeg";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -17,8 +17,11 @@ import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from "./AuthProvider";
+import Autocomplete from "@mui/material/Autocomplete";
+import {clearFilters} from '../redux/action'
+import { useDispatch, useSelector } from "react-redux";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
 const settings = ["Profile", "Wishlist", "Bag"];
 const settingsIcons = [
@@ -28,12 +31,19 @@ const settingsIcons = [
 ];
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const {logout}=useContext(AuthContext);
+  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch=useDispatch()
+  const { logout } = useContext(AuthContext);
+  const products = useSelector((store) => store.products);
+  const options = products.filter((x) =>
+    x.productName.toLowerCase().includes(search)
+  );
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
-const navigation=useNavigate();
-  
+  const navigation = useNavigate();
+
   return (
     <AppBar
       position="static"
@@ -52,7 +62,10 @@ const navigation=useNavigate();
         }}
       >
         {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center",cursor:'pointer' }} onClick={() => navigation('/')}>
+        <Box
+          sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          onClick={() => navigation("/")}
+        >
           <img
             style={{ height: "70px", width: "80px" }}
             src={miniLogo}
@@ -73,14 +86,13 @@ const navigation=useNavigate();
 
         {/* Nav Pages */}
         <Box sx={{ gap: 3, display: { xs: "none", sm: "none", md: "flex" } }}>
-          {pages.map((p,i) => (
+          {pages.map((p, i) => (
             <Link
               to={`/shop-${p.toLowerCase()}`}
               style={{ textDecoration: "none", color: "inherit" }}
-               key={i}
+              key={i}
             >
               <Typography
-               
                 sx={{ fontFamily: "cursive", cursor: "pointer" }}
                 variant="subtitle1"
               >
@@ -91,60 +103,101 @@ const navigation=useNavigate();
         </Box>
 
         {/* Search Bar */}
-        <Box sx={{ flex: 1, maxWidth: 400, mx: 1 }}>
-          <TextField
-            placeholder="Search products..."
-            variant="outlined"
-            size="small"
-            fullWidth
+        <Box sx={{ flex: 1,mx: 1 }}>
+          <Autocomplete
+            freeSolo
+            options={search ? options.map((p) => p.productName) : []}
+            value={search}
+            onChange={(event, newValue) => {
+              setSearch(newValue);
+              if (newValue && newValue.trim() !== "") {
+                // Clear all existing params and set only search
+                dispatch(clearFilters())
+                const params = new URLSearchParams();
+                params.set("search", newValue);
+                setSearchParams(params);
+              } else {
+                
+                setSearchParams({});
+              }
+            }}
+            onInputChange={(event, newInputValue) => setSearch(newInputValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search Products"
+                variant="outlined"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black", // default border
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "black", // border on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "black", // border on focus
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "gray", // default label
+                    fontFamily: "inherit",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "black", // label on focus
+                    fontFamily: "cursive",
+                  },
+                }}
+              />
+            )}
           />
         </Box>
         <Button onClick={() => setDrawerOpen(true)}>
-          <MenuIcon sx={{ display: { xs: "block", md: "none" ,color:'black'} }} />
+          <MenuIcon
+            sx={{ display: { xs: "block", md: "none", color: "black" } }}
+          />
         </Button>
-        <Drawer
-  anchor="right"
-  open={drawerOpen}
-  onClose={toggleDrawer(false)}
->
-  <Box
-    sx={{
-      width: 250,
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-    }}
-    role="presentation"
-    onClick={toggleDrawer(false)}
-    onKeyDown={toggleDrawer(false)}
-  >
-    {/* Top Menu */}
-    <List>
-      {settings.map((p, i) => (
-        <ListItem button key={i} component={Link} to={p.toLowerCase()}>
-          <ListItemIcon>{settingsIcons[i]}</ListItemIcon>
-          <ListItemText primary={p} sx={{ color: "black" }} />
-        </ListItem>
-      ))}
-    </List>
+        <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+          <Box
+            sx={{
+              width: 250,
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+            role="presentation"
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+          >
+            {/* Top Menu */}
+            <List>
+              {settings.map((p, i) => (
+                <ListItem button key={i} component={Link} to={p.toLowerCase()}>
+                  <ListItemIcon>{settingsIcons[i]}</ListItemIcon>
+                  <ListItemText primary={p} sx={{ color: "black" }} />
+                </ListItem>
+              ))}
+            </List>
 
-    {/* Logout at bottom */}
-  {localStorage.getItem('loggedInUser')!==null &&  <Box sx={{ mt: "auto", mb: 2 }}>
-      <Button
-        onClick={logout}
-        sx={{
-          textTransform: "none",
-          color: "black",
-          width: "100%",
-          justifyContent: "flex-start",
-        }}
-      >
-        <LogoutIcon sx={{ mr: 1 }} />
-        <Typography>Logout</Typography>
-      </Button>
-    </Box>}
-  </Box>
-</Drawer>
+            {/* Logout at bottom */}
+            {localStorage.getItem("loggedInUser") !== null && (
+              <Box sx={{ mt: "auto", mb: 2 }}>
+                <Button
+                  onClick={logout}
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    width: "100%",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <LogoutIcon sx={{ mr: 1 }} />
+                  <Typography>Logout</Typography>
+                </Button>
+              </Box>
+            )}
+          </Box>
+        </Drawer>
 
         {/* Icons Section */}
         <Box

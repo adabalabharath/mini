@@ -8,44 +8,84 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Rating from "@mui/material/Rating";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  priceFilter,
+  genderFilter,
+  setSizeFilter,
+  ratingFilter,
+  clearFilters,
+} from "../redux/action";
+import { useSearchParams } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Filters = () => {
   const [value, setValue] = React.useState([0, 1000]);
-  const [price, setPrice] = React.useState(1000);
-  const [gender, setGender] = React.useState([]);
-  const [rating, setRating] = React.useState(null);
-  const [size, setSize] = React.useState([]);
+  const state = useSelector((store) => store.filters);
+  const { price, rating, gender, size } = state;
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(state);
+  const dispatch = useDispatch();
+
   const handleChange = (event, newValue) => {
     console.log(newValue);
     setValue(newValue);
-    setPrice(newValue[1]);
+    dispatch(priceFilter(newValue));
   };
 
   const handleGenderChange = (g) => {
-    setGender((prev) =>
-      prev.includes(g) ? prev.filter((x) => x != g) : [...prev, g]
-    );
+    console.log(g);
+    const genders = gender.includes(g)
+      ? gender.filter((x) => x != g)
+      : [...gender, g];
+    dispatch(genderFilter(genders));
   };
 
   const handleSize = (s) => {
-    setSize((prev) =>
-      prev.includes(s) ? prev.filter((x) => x != s) : [...prev, s]
-    );
+    const sizes = size.includes(s) ? size.filter((x) => x != s) : [...size, s];
+    dispatch(setSizeFilter(sizes));
   };
 
   const handlePriceChange = (event) => {
     const newValue = Number(event.target.value);
-    console.log(newValue);
-    setPrice(newValue);
+    const newPrice = [value[0], newValue];
+    dispatch(priceFilter(newPrice));
     setValue([value[0], newValue]);
   };
 
   const handleRating = (rate) => {
-    setRating(rate);
+    dispatch(ratingFilter(rate));
   };
 
+  const clearAll = () => {
+    dispatch(clearFilters());
+  };
 
+  const applyFilters = () => {
+  const params = {};
+
+  if (gender.length > 0) {
+    params.gender = gender.join(",");
+  }
+
+  if (size.length > 0) {
+    params.size = size.join(",");
+  }
+
+  if (rating) {
+    params.rating = rating;
+  }
+
+  if (price.start !== null && price.end !== null) {
+    params.priceStart = price.start;
+    params.priceEnd = price.end;
+  }
+
+  setSearchParams(params);
+};
+
+useEffect(()=>{applyFilters()},[state])
 
   return (
     <Grid
@@ -58,15 +98,33 @@ const Filters = () => {
         display: "flex",
         flexDirection: "column",
       }}
-      
     >
-      <Grid item>
+      <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="body1"
           sx={{ fontFamily: "cursive", fontWeight: "bold" }}
         >
           Filters
         </Typography>
+        <Button
+          sx={{
+            p: 0,
+            color: "black",
+            border: "1px solid black",
+            textTransform: "none",
+          }}
+          variant="outlined"
+          size="small"
+          disabled={
+            gender.length == 0 &&
+            price.start == null &&
+            rating == null &&
+            size.length == 0
+          }
+          onClick={clearAll}
+        >
+          Clear All
+        </Button>
       </Grid>
       <Typography
         variant="body2"
@@ -87,6 +145,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={gender.includes("male")}
             />
             <Typography variant="caption">Male</Typography>
           </Box>
@@ -99,6 +158,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={gender.includes("female")}
             />
             <Typography variant="caption">Female</Typography>
           </Box>
@@ -111,6 +171,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={gender.includes("others")}
             />
             <Typography variant="caption">other</Typography>
           </Box>
@@ -133,10 +194,10 @@ const Filters = () => {
           valueLabelDisplay="on"
           sx={{
             "& .MuiSlider-valueLabel": {
-              backgroundColor: "white", 
-              color: "black", 
-              border: "1px solid #ccc", 
-              boxShadow: "0px 2px 10px rgba(0,0,0,0.2)", 
+              backgroundColor: "white",
+              color: "black",
+              border: "1px solid #ccc",
+              boxShadow: "0px 2px 10px rgba(0,0,0,0.2)",
             },
             "& .MuiSlider-thumb": {
               color: "black",
@@ -158,7 +219,7 @@ const Filters = () => {
             control={
               <Radio
                 size="small"
-                checked={price === 2000 ? true : false}
+                checked={price?.end === 2000 ? true : false}
                 sx={{
                   "&.Mui-checked": { color: "black" },
                 }}
@@ -171,7 +232,7 @@ const Filters = () => {
             control={
               <Radio
                 size="small"
-                checked={price === 5000 ? true : false}
+                checked={price?.end === 5000 ? true : false}
                 sx={{ "&.Mui-checked": { color: "black" } }}
               />
             }
@@ -182,7 +243,7 @@ const Filters = () => {
             control={
               <Radio
                 size="small"
-                checked={price === 7000 ? true : false}
+                checked={price?.end === 7000 ? true : false}
                 sx={{ "&.Mui-checked": { color: "black" } }}
               />
             }
@@ -193,7 +254,7 @@ const Filters = () => {
             control={
               <Radio
                 size="small"
-                checked={price === 10000 ? true : false}
+                checked={price?.end === 10000 ? true : false}
                 sx={{ "&.Mui-checked": { color: "black" } }}
               />
             }
@@ -319,7 +380,7 @@ const Filters = () => {
         </Grid>
       </Grid>
 
-       <Typography
+      <Typography
         variant="body2"
         sx={{ fontFamily: "cursive", fontWeight: "bold" }}
       >
@@ -338,6 +399,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={size.includes("xl")}
             />
             <Typography variant="caption">x-Large</Typography>
           </Box>
@@ -350,6 +412,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={size.includes("l")}
             />
             <Typography variant="caption">Large</Typography>
           </Box>
@@ -362,6 +425,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={size.includes("m")}
             />
             <Typography variant="caption">Medium</Typography>
           </Box>
@@ -374,6 +438,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={size.includes("s")}
             />
             <Typography variant="caption">Small</Typography>
           </Box>
@@ -386,6 +451,7 @@ const Filters = () => {
                   color: "black",
                 },
               }}
+              checked={size.includes("xs")}
             />
             <Typography variant="caption">x-Small</Typography>
           </Box>
