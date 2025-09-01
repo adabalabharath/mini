@@ -57,7 +57,7 @@ const Navbar = () => {
       <Toolbar
         sx={{
           display: "flex",
-          //alignItems: "center",
+          alignItems: "center",
           justifyContent: "space-between",
         }}
       >
@@ -103,7 +103,7 @@ const Navbar = () => {
         </Box>
 
         {/* Search Bar */}
-        <Box sx={{ flex: 1,mx: 1 }}>
+        <Box sx={{ flex: 1,mx: 1,maxWidth:400 }}>
           <Autocomplete
             freeSolo
             options={search ? options.map((p) => p.productName) : []}
