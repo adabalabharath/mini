@@ -59,6 +59,8 @@ const Profile = () => {
     if (user) {
       login(user);
       navigate(from, { replace: true });
+    }else{
+      alert('wrong creds')
     }
   };
 

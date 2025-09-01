@@ -13,6 +13,7 @@ import Bag from "./components/Bag";
 import PrivateRoute from "./components/PrivateRoute";
 import { useDispatch } from "react-redux";
 import { setProducts } from "./redux/action";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -36,6 +37,8 @@ function App() {
         <Route path="/shop-home" element={<ShopHomeLiving />} />
         <Route path="/shop-beauty" element={<ShopBeauty />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/product/:name" element={<ProductDetail />} />
+        <Route path="/productId/:id" element={<ProductDetail />} />
         <Route
           path="/wishlist"
           element={

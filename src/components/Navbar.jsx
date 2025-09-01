@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -20,7 +20,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from "./AuthProvider";
 import Autocomplete from "@mui/material/Autocomplete";
-import {clearFilters} from '../redux/action'
 import { useDispatch, useSelector } from "react-redux";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
 const settings = ["Profile", "Wishlist", "Bag"];
@@ -32,8 +31,6 @@ const settingsIcons = [
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [search, setSearch] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
-  const dispatch=useDispatch()
   const { logout } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
   const options = products.filter((x) =>
@@ -110,16 +107,8 @@ const Navbar = () => {
             value={search}
             onChange={(event, newValue) => {
               setSearch(newValue);
-              if (newValue && newValue.trim() !== "") {
-                // Clear all existing params and set only search
-                dispatch(clearFilters())
-                const params = new URLSearchParams();
-                params.set("search", newValue);
-                setSearchParams(params);
-              } else {
-                
-                setSearchParams({});
-              }
+              navigation(`/product/${newValue}`)
+              setSearch('')
             }}
             onInputChange={(event, newInputValue) => setSearch(newInputValue)}
             renderInput={(params) => (

@@ -25,15 +25,20 @@ const Filters = () => {
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size } = state;
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(state);
+  console.log(value);
   const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
-
+  useEffect(()=>{
+    if(price.start && price.end){
+    setValue([price.start,price.end])
+    }else{
+      setValue(value)
+    }
+  },[price])
   const handleGenderChange = (g) => {
     console.log(g);
     const genders = gender.includes(g)
@@ -63,29 +68,31 @@ const Filters = () => {
   };
 
   const applyFilters = () => {
-  const params = {};
+    const params = {};
 
-  if (gender.length > 0) {
-    params.gender = gender.join(",");
-  }
+    if (gender.length > 0) {
+      params.gender = gender.join(",");
+    }
 
-  if (size.length > 0) {
-    params.size = size.join(",");
-  }
+    if (size.length > 0) {
+      params.size = size.join(",");
+    }
 
-  if (rating) {
-    params.rating = rating;
-  }
+    if (rating) {
+      params.rating = rating;
+    }
 
-  if (price.start !== null && price.end !== null) {
-    params.priceStart = price.start;
-    params.priceEnd = price.end;
-  }
+    if (price.start !== null && price.end !== null) {
+      params.priceStart = price.start;
+      params.priceEnd = price.end;
+    }
 
-  setSearchParams(params);
-};
+    setSearchParams(params);
+  };
 
-useEffect(()=>{applyFilters()},[state])
+  useEffect(() => {
+    applyFilters();
+  }, [state]);
 
   return (
     <Grid

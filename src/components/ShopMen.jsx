@@ -8,36 +8,18 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import TuneIcon from "@mui/icons-material/Tune";
+import { Link } from "react-router-dom";
+import { filtersHook } from "../customHook/filtersHook";
 const ShopMen = () => {
   const [products, setProducts] = useState([]);
   const [drawerFilters, setDrawerFilters] = useState(false);
-  const data = useSelector((store) => store.products);
+  const data=useSelector((store)=>store.products)
   const filters = useSelector((store) => store.filters);
-  console.log(filters.gender);
-
-  useEffect(() => {
-    let filtered = data.filter((x) => x.gender === "male");
-    if (filters.gender.length > 0) {
-      filtered = data.filter((x) => filters.gender.includes(x.gender));
-    }
-
-    if (filters.price?.start && filters.price?.end) {
-      filtered = filtered.filter(
-        (x) => x.price >= filters.price.start && x.price <= filters.price.end
-      );
-    }
-
-    if (filters.rating) {
-      filtered = filtered.filter((x) => x.rating >= filters.rating);
-    }
-
-    if (filters.size?.length > 0) {
-      filtered = filtered.filter((x) =>
-        filters.size.some((y) => x.availableSizes.includes(y.toUpperCase()))
-      );
-    }
-    setProducts(filtered);
-  }, [data, filters?.gender, filters?.size, filters?.rating, filters?.price]);
+  console.log(filters)
+  useEffect(()=>{
+  const prods=filtersHook("male",data,filters)
+  setProducts(prods)
+  },[data,filters])
 
   return (
     <Grid container sx={{ mt: 2, justifyContent: "space-between" }}>
@@ -87,28 +69,33 @@ const ShopMen = () => {
             key={product.id}
             sx={{ textAlign: "center", border: "1px solid black", m: 1 }}
           >
-            <img
-              src={product.imageUrl}
-              alt={product.productName}
-              style={{ maxWidth: "100%" }}
-            />
-            <Typography variant="subtitle2">{product.productName}</Typography>
-            <Typography variant="subtitle2">
-              Price: {product.price}/-
-            </Typography>
-            <Typography variant="subtitle2">
-              Rating:{" "}
-              <Rating
-                value={product.rating}
-                readOnly
-                size="small"
-                sx={{
-                  "& .MuiRating-iconFilled": {
-                    color: "black",
-                  },
-                }}
+            <Link
+              to={`/productId/${product.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <img
+                src={product.imageUrl}
+                alt={product.productName}
+                style={{ maxWidth: "100%" }}
               />
-            </Typography>
+              <Typography variant="subtitle2">{product.productName}</Typography>
+              <Typography variant="subtitle2">
+                Price: {product.price}/-
+              </Typography>
+              <Typography variant="subtitle2">
+                Rating:{" "}
+                <Rating
+                  value={product.rating}
+                  readOnly
+                  size="small"
+                  sx={{
+                    "& .MuiRating-iconFilled": {
+                      color: "black",
+                    },
+                  }}
+                />
+              </Typography>
+            </Link>
           </Grid>
         ))}
       </Grid>
