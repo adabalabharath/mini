@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import ShopMen from "./components/ShopMen";
 import ShopWomen from "./components/ShopWomen";
@@ -29,33 +29,35 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop-men" element={<ShopMen />} />
-        <Route path="/shop-women" element={<ShopWomen />} />
-        <Route path="/shop-kids" element={<ShopKids />} />
-        <Route path="/shop-home" element={<ShopHomeLiving />} />
-        <Route path="/shop-beauty" element={<ShopBeauty />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/product/:name" element={<ProductDetail />} />
-        <Route path="/productId/:id" element={<ProductDetail />} />
-        <Route
-          path="/wishlist"
-          element={
-            <PrivateRoute>
-              <WishList />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/bag"
-          element={
-            <PrivateRoute>
-              <Bag />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop-men" element={<ShopMen />} />
+          <Route path="/shop-women" element={<ShopWomen />} />
+          <Route path="/shop-kids" element={<ShopKids />} />
+          <Route path="/shop-home" element={<ShopHomeLiving />} />
+          <Route path="/shop-beauty" element={<ShopBeauty />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/product/:name" element={<ProductDetail />} />
+          <Route path="/productId/:id" element={<ProductDetail />} />
+          <Route
+            path="/wishlist"
+            element={
+              <PrivateRoute>
+                <WishList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bag"
+            element={
+              <PrivateRoute>
+                <Bag />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
