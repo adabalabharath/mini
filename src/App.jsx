@@ -32,11 +32,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop-men" element={<ShopMen />} />
-          <Route path="/shop-women" element={<ShopWomen />} />
-          <Route path="/shop-kids" element={<ShopKids />} />
-          <Route path="/shop-home" element={<ShopHomeLiving />} />
-          <Route path="/shop-beauty" element={<ShopBeauty />} />
+          <Route path="/shop/men" element={<ShopMen />} />
+          <Route path="/shop/women" element={<ShopWomen />} />
+          <Route path="/shop/kids" element={<ShopKids />} />
+          <Route path="/shop/home" element={<ShopHomeLiving />} />
+          <Route path="/shop/beauty" element={<ShopBeauty />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/product/:name" element={<ProductDetail />} />
           <Route path="/productId/:id" element={<ProductDetail />} />

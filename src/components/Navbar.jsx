@@ -85,7 +85,7 @@ const Navbar = () => {
         <Box sx={{ gap: 3, display: { xs: "none", sm: "none", md: "flex" } }}>
           {pages.map((p, i) => (
             <Link
-              to={`/shop-${p.toLowerCase()}`}
+              to={`/shop/${p.toLowerCase()}`}
               style={{ textDecoration: "none", color: "inherit" }}
               key={i}
             >
