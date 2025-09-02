@@ -6,7 +6,7 @@ import { store } from './redux/store.js'
 import { AuthProvider } from './components/AuthProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/'>
   <Provider store={store}>
     <AuthProvider>
     <App />
