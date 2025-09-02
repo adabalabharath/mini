@@ -23,3 +23,7 @@ export const genderFilter=(gender)=>(dispatch)=>{
 export const clearFilters=()=>(dispatch)=>{
     return dispatch({type:"CLEAR_FILTERS"});
 }
+
+export const sortProducts=(order)=>(dispatch)=>{
+    return dispatch({type:"SORT",payload:order})
+}

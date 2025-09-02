@@ -8,18 +8,33 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import TuneIcon from "@mui/icons-material/Tune";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { filtersHook } from "../customHook/filtersHook";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Box from "@mui/material/Box";
 const ShopMen = () => {
   const [products, setProducts] = useState([]);
   const [drawerFilters, setDrawerFilters] = useState(false);
-  const data=useSelector((store)=>store.products)
+  const data = useSelector((store) => store.products);
   const filters = useSelector((store) => store.filters);
-  console.log(filters)
-  useEffect(()=>{
-  const prods=filtersHook("male",data,filters)
-  setProducts(prods)
-  },[data,filters])
+  
+  const navigate=useNavigate();
+  useEffect(() => {
+    const prods = filtersHook("male", data, filters);
+    setProducts(prods);
+  }, [data, filters]);
+
+  const handleCart=()=>{
+     if(!localStorage.getItem('loggedInUser')){
+        navigate('/profile')
+    }
+  }
+
+  const handleFavourite=(e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    
+  }
 
   return (
     <Grid container sx={{ mt: 2, justifyContent: "space-between" }}>
@@ -31,8 +46,6 @@ const ShopMen = () => {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-
-          justifyContent: "space-between",
         }}
       >
         <Grid
@@ -65,25 +78,59 @@ const ShopMen = () => {
         </Grid>
         {products?.map((product) => (
           <Grid
-            size={{ xs: 5.4, sm: 5.4, md: 2 }}
+            size={{ xs: 6, sm: 6, md: 2 }}
             key={product.id}
-            sx={{ textAlign: "center", border: "1px solid black", m: 1 }}
+            sx={{
+              border: "1px solid white",
+              mb: 2,
+
+              p: 2,
+              height: "100%",
+              maxHeight: "400px",
+            }}
           >
             <Link
               to={`/productId/${product.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <img
-                src={product.imageUrl}
-                alt={product.productName}
-                style={{ maxWidth: "100%" }}
-              />
-              <Typography variant="subtitle2">{product.productName}</Typography>
+              <Box sx={{ position: "relative", width: "100%", height: 200 }}>
+                <img
+                  src={product.imageUrl}
+                  alt={product.productName}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    // objectFit: "contain", // keeps proportions without overflow
+                    borderRadius: 8,
+                  }}
+                />
+                <Button
+                  sx={{
+                    position: "absolute",
+                    right: 10,
+                    top: 10,
+                    minWidth: "auto", // removes extra padding
+                    padding: "4px",
+                    backgroundColor: "white",
+                    borderRadius: "50%",
+
+                    "&:hover": { backgroundColor: "#f5f5f5" },
+                  }}
+                  onClick={handleFavourite}
+                >
+                  <FavoriteBorderIcon sx={{ color: "black" }} />
+                </Button>
+              </Box>
+
+              <Typography variant="h6">{product.brand}</Typography>
+
               <Typography variant="subtitle2">
-                Price: {product.price}/-
+                {product.productName.split(" ").length >= 5
+                  ? product.productName.split(" ").slice(0, 4).join(" ") + "..."
+                  : product.productName}
               </Typography>
-              <Typography variant="subtitle2">
-                Rating:{" "}
+              <Typography variant="caption">
+                {product.rating}
                 <Rating
                   value={product.rating}
                   readOnly
@@ -95,7 +142,23 @@ const ShopMen = () => {
                   }}
                 />
               </Typography>
+              <Typography variant="h6">
+                {"\u20B9"}
+                {product.price} <sup>00</sup>
+              </Typography>
             </Link>
+            <Button
+              variant="contained"
+              sx={{
+                textTransform: "none",
+                backgroundColor: "black",
+                color: "white",
+                my: 1,
+              }}
+              onClick={handleCart}
+            >
+              Add to cart
+            </Button>
           </Grid>
         ))}
       </Grid>

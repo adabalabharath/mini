@@ -8,7 +8,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Rating from "@mui/material/Rating";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   priceFilter,
@@ -16,29 +16,30 @@ import {
   setSizeFilter,
   ratingFilter,
   clearFilters,
+  sortProducts,
 } from "../redux/action";
 import { useSearchParams } from "react-router-dom";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const Filters = () => {
-  const [value, setValue] = React.useState([0, 1000]);
+  const [value, setValue] = useState([0, 1000]);
   const state = useSelector((store) => store.filters);
-  const { price, rating, gender, size } = state;
+  const { price, rating, gender, size, sort } = state;
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(value);
   const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
-  useEffect(()=>{
-    if(price.start && price.end){
-    setValue([price.start,price.end])
-    }else{
-      setValue(value)
+  useEffect(() => {
+    if (price.start && price.end) {
+      setValue([price.start, price.end]);
+    } else {
+      setValue(value);
     }
-  },[price])
+  }, [price]);
   const handleGenderChange = (g) => {
     console.log(g);
     const genders = gender.includes(g)
@@ -66,6 +67,10 @@ const Filters = () => {
   const clearAll = () => {
     dispatch(clearFilters());
   };
+  const sortOrder = (order) => {
+    console.log(order)
+    dispatch(sortProducts(order));
+  };
 
   const applyFilters = () => {
     const params = {};
@@ -86,7 +91,7 @@ const Filters = () => {
       params.priceStart = price.start;
       params.priceEnd = price.end;
     }
-
+    sort === "asc" ? (params.sort = "ASC") : (params.sort = "DESC");
     setSearchParams(params);
   };
 
@@ -218,7 +223,19 @@ const Filters = () => {
           }}
         />
       </Box>
-
+      <Box sx={{
+    display: "flex",
+    justifyContent: "center",
+    gap:2
+   
+  }}>
+        <Button onClick={() => sortOrder("asc")} disabled={sort == "asc"} sx={{textTransform:'none',border:sort=='asc'?"1px solid transparent":"1px solid black",color:'black'}}>
+          Sort by Asc
+        </Button>
+        <Button onClick={() => sortOrder("des")} disabled={sort == "des"} sx={{textTransform:'none',border:sort=='des'?"1px solid transparent":"1px solid black",color:'black'}}>
+          Sort by Des
+        </Button>
+      </Box>
       <Grid item container direction="column" spacing={1}>
         <RadioGroup value={value} onChange={handlePriceChange}>
           <FormControlLabel

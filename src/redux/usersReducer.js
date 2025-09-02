@@ -3,6 +3,7 @@ const initialState = {
   products: [],
   filters: {
     price: { start: null, end: null },
+    sort: "asc",
     rating: null,
     gender: [],
     size: [],
@@ -33,6 +34,7 @@ export const usersReducer = (state = initialState, action) => {
           },
         },
       };
+
     case "SET_RATING_FILTER":
       return {
         ...state,
@@ -52,11 +54,17 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         filters: {
-          price: {start:null,end:null},
+          price: { start: null, end: null },
           rating: null,
           size: [],
           gender: [],
         },
+      };
+
+    case "SORT":
+      return {
+        ...state,
+        filters: { ...state.filters, sort: action.payload },
       };
 
     default:
