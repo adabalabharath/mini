@@ -108,7 +108,7 @@ const Home = () => {
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
         <Grid item>
-          <Link to={"/shop-men"}>
+          <Link to={"/shop/men"}>
             {" "}
             <img
               src={forHim}
@@ -207,7 +207,7 @@ const Home = () => {
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
         <Grid item>
-          <Link to={"/shop-women"}>
+          <Link to={"/shop/women"}>
             {" "}
             <img
               src={forHer}
@@ -336,7 +336,7 @@ const Home = () => {
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
         <Grid item>
-          <Link to={"/shop-kids"}>
+          <Link to={"/shop/kids"}>
             {" "}
             <img
               src={kids}
@@ -413,7 +413,7 @@ const Home = () => {
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
         <Grid item>
-          <Link to={"/shop-home"}>
+          <Link to={"/shop/home"}>
             {" "}
             <img
               src={us}
@@ -494,7 +494,7 @@ const Home = () => {
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
         <Grid item>
-          <Link to={"/shop-beauty"}>
+          <Link to={"/shop/beauty"}>
             {" "}
             <img
               src={beauty}
