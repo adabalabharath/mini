@@ -58,6 +58,7 @@ export const usersReducer = (state = initialState, action) => {
           rating: null,
           size: [],
           gender: [],
+          sort:'asc'
         },
       };
 

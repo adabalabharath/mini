@@ -20,7 +20,6 @@ import {
 } from "../redux/action";
 import { useSearchParams } from "react-router-dom";
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 
 const Filters = () => {
   const [value, setValue] = useState([0, 1000]);
@@ -39,9 +38,8 @@ const Filters = () => {
     } else {
       setValue(value);
     }
-  }, [price]);
+  }, [state]);
   const handleGenderChange = (g) => {
-    console.log(g);
     const genders = gender.includes(g)
       ? gender.filter((x) => x != g)
       : [...gender, g];
@@ -65,10 +63,10 @@ const Filters = () => {
   };
 
   const clearAll = () => {
+    setValue([0,1000])
     dispatch(clearFilters());
   };
   const sortOrder = (order) => {
-    console.log(order)
     dispatch(sortProducts(order));
   };
 
