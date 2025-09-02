@@ -100,41 +100,44 @@ const Navbar = () => {
         </Box>
 
         {/* Search Bar */}
-        <Box sx={{ flex: 1,mx: 1,maxWidth:400 }}>
+        <Box sx={{ flex: 1, mx: 1, maxWidth: 400 }}>
           <Autocomplete
             freeSolo
             options={search ? options.map((p) => p.productName) : []}
             value={search}
+            disableClearable={!search}
             onChange={(event, newValue) => {
-              setSearch(newValue);
-              navigation(`/product/${newValue}`)
-              setSearch('')
+              if (newValue && newValue.trim() !== "") {
+                setSearch(newValue);
+                navigation(`/product/${newValue}`);
+                setSearch("");
+              }
             }}
             onInputChange={(event, newInputValue) => setSearch(newInputValue)}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Search Products"
+                label="Search Products..."
                 variant="outlined"
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "black", // default border
+                      borderColor: "black",
                     },
                     "&:hover fieldset": {
-                      borderColor: "black", // border on hover
+                      borderColor: "black",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "black", // border on focus
+                      borderColor: "black",
                     },
                   },
                   "& .MuiInputLabel-root": {
-                    color: "gray", // default label
-                    fontFamily: "inherit",
+                    color: "gray",
+                    fontFamily: "fantasy",
                   },
                   "& .MuiInputLabel-root.Mui-focused": {
-                    color: "black", // label on focus
-                    fontFamily: "cursive",
+                    color: "black",
+                    fontFamily: "fantasy",
                   },
                 }}
               />
