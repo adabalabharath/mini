@@ -105,7 +105,7 @@ const Filters = () => {
       <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="body1"
-          sx={{ fontFamily: "cursive", fontWeight: "bold" }}
+          sx={{   fontWeight: "bold" }}
         >
           Filters
         </Typography>
@@ -131,7 +131,7 @@ const Filters = () => {
       </Grid>
       <Typography
         variant="body2"
-        sx={{ fontFamily: "cursive", fontWeight: "bold" }}
+        sx={{   fontWeight: "bold" }}
       >
         Gender
       </Typography>
@@ -182,7 +182,7 @@ const Filters = () => {
       </Grid>
       <Typography
         variant="body2"
-        sx={{ fontFamily: "cursive", fontWeight: "bold" }}
+        sx={{   fontWeight: "bold" }}
       >
         Price range
       </Typography>
@@ -299,7 +299,7 @@ const Filters = () => {
 
       <Typography
         variant="body2"
-        sx={{ fontFamily: "cursive", fontWeight: "bold" }}
+        sx={{   fontWeight: "bold" }}
       >
         ratings
       </Typography>
@@ -416,7 +416,7 @@ const Filters = () => {
 
       <Typography
         variant="body2"
-        sx={{ fontFamily: "cursive", fontWeight: "bold" }}
+        sx={{   fontWeight: "bold" }}
       >
         Size
       </Typography>

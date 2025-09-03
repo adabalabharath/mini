@@ -77,7 +77,7 @@ const Page = ({ products }) => {
             },
           }}
         >
-          {products.length>0 && (
+          {products.length > 0 && (
             <Button
               variant="filled"
               fullWidth
@@ -251,7 +251,7 @@ const Page = ({ products }) => {
             <img
               src="/images/noItems.png"
               alt="No items"
-              style={{ height: "200px" }}
+              style={{ height: "300px",width:'200px' }}
             />
           </Grid>
         )}

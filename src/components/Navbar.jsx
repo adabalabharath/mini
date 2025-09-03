@@ -90,7 +90,7 @@ const Navbar = () => {
               key={i}
             >
               <Typography
-                sx={{ fontFamily: "cursive", cursor: "pointer" }}
+                sx={{   cursor: "pointer" }}
                 variant="subtitle1"
               >
                 {p}

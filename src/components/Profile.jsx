@@ -175,8 +175,7 @@ const Profile = () => {
                   backgroundColor: "black",
                   color: "white",
                   border: "none",
-                  borderRadius: 5,
-                  fontFamily:'cursive',
+                  borderRadius: 5, 
                   textTransform:'none',
                   cursor: "pointer",
                 }}
@@ -191,7 +190,6 @@ const Profile = () => {
                   padding: 10,
                   backgroundColor: "black",
                   color: "white",
-                  fontFamily:'cursive',
                   border: "none",
                   borderRadius: 5,
                   cursor: "pointer",

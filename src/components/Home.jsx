@@ -82,7 +82,7 @@ const Home = () => {
       </Typography>
       <Typography
         variant="h6"
-        sx={{ textAlign: "center", mt: 2, fontFamily: "cursive" }}
+        sx={{ textAlign: "center", mt: 2,}}
       >
         Your one-stop shop for fashion and lifestyle products
       </Typography>
@@ -90,7 +90,7 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-          fontFamily: "cursive",
+           
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -189,7 +189,7 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-          fontFamily: "cursive",
+           
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -264,7 +264,7 @@ const Home = () => {
                 variant="subtitle1"
                 sx={{
                   m: 2,
-                  fontFamily: "cursive",
+                   
                   fontWeight: "bold",
                   alignItems: "center",
                   textAlign: "center",
@@ -319,7 +319,7 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-          fontFamily: "cursive",
+           
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -396,7 +396,7 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-          fontFamily: "cursive",
+           
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -476,7 +476,7 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-          fontFamily: "cursive",
+           
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
