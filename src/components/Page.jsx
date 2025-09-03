@@ -75,7 +75,7 @@ const Page = ({ products }) => {
               height: 500,
               
             }}
-            gap={3}
+            
           >
             <Link
               to={`/productId/${product.id}`}
@@ -110,14 +110,14 @@ const Page = ({ products }) => {
                   <FavoriteBorderIcon sx={{ color: "black" }} />
                 </Button>
               </Box>
-              <Grid container height={180} direction={'column'}  justifyContent={'space-between'} my={1}>
+              <Grid container height={180} direction={'column'}  justifyContent={'space-evenly'} >
               <Grid >
               <Typography variant="h6" fontWeight={'fantasy'}>{product.brand}</Typography>
              </Grid>
              <Grid >
               <Typography variant="subtitle2">
                 {product.productName.split(" ").length >= 3
-                  ? product.productName.split(" ").slice(0,5).join(" ") + "..."
+                  ? product.productName.split(" ").slice(0,4).join(" ") + "..."
                   : product.productName}
               </Typography>
               </Grid>
