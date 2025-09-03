@@ -29,7 +29,7 @@ const Bag = () => {
           textTransform: "none",
           border:1,
           color: "black",
-          mt:2
+          my:2
         }}
         fullWidth
       >
