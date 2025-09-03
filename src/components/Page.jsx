@@ -139,7 +139,7 @@ const Page = ({ products }) => {
               </Typography>
               </Grid>
               <Grid>
-              <Typography variant="subtitle1">
+              <Typography variant="h6">
                 {"\u20B9"} 
                  {product.price} <sup style={{color:'light-black'}}>00</sup>
               </Typography>
