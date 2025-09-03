@@ -42,7 +42,6 @@ const Bag = () => {
       tax,
       total: orderTotal + shipping + tax,
     };
-    
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard
