@@ -110,7 +110,7 @@ const Page = ({ products }) => {
                   <FavoriteBorderIcon sx={{ color: "black" }} />
                 </Button>
               </Box>
-              <Grid container height={180} direction={'column'}  justifyContent={'space-evenly'} >
+              <Grid container height={200} direction={'column'}  justifyContent={'space-evenly'} >
               <Grid >
               <Typography variant="h6" fontWeight={'fantasy'}>{product.brand}</Typography>
              </Grid>
@@ -121,9 +121,9 @@ const Page = ({ products }) => {
                   : product.productName}
               </Typography>
               </Grid>
-              <Grid>
+              <Grid >
               <Typography variant="caption">
-                {product.rating}{" "}
+                
                 <Rating
                   value={product.rating}
                   precision={0.1} 
@@ -134,11 +134,13 @@ const Page = ({ products }) => {
                       color: "black",
                     },
                   }}
+
                 />
+                {`(${product.rating})`}
               </Typography>
               </Grid>
               <Grid>
-              <Typography variant="h6">
+              <Typography variant="subtitle1">
                 {"\u20B9"} 
                  {product.price} <sup style={{color:'light-black'}}>00</sup>
               </Typography>
