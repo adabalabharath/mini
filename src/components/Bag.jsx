@@ -18,7 +18,7 @@ const Bag = () => {
 
   return (
     <>
-    <Grid container direction={'column'}sx={{ minHeight: "100vh" }}>
+    <Grid container direction={'column'}>
       <Grid sx={{ flexGrow: 1 }}>
       <Page products={products} />
      </Grid>
@@ -29,7 +29,7 @@ const Bag = () => {
           textTransform: "none",
           border:1,
           color: "black",
-          
+          mt:2
         }}
         fullWidth
       >
