@@ -18,8 +18,8 @@ const Bag = () => {
 
   return (
     <>
-    <Grid container direction={'column'} justifyContent={'space-between'} gap={3}>
-      <Grid height={ "100%"}>
+    <Grid container direction={'column'}sx={{ minHeight: "100vh" }}>
+      <Grid sx={{ flexGrow: 1 }}>
       <Page products={products} />
      </Grid>
      <Grid >

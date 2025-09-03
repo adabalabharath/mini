@@ -21,6 +21,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from "./AuthProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
+import Badge from "@mui/material/Badge";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
 const settings = ["Profile", "Wishlist", "Bag"];
 const settingsIcons = [
@@ -31,7 +32,7 @@ const settingsIcons = [
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [search, setSearch] = useState("");
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
   const options = products.filter((x) =>
     x.productName.toLowerCase().includes(search)
@@ -89,10 +90,7 @@ const Navbar = () => {
               style={{ textDecoration: "none", color: "inherit" }}
               key={i}
             >
-              <Typography
-                sx={{   cursor: "pointer" }}
-                variant="subtitle1"
-              >
+              <Typography sx={{ cursor: "pointer" }} variant="subtitle1">
                 {p}
               </Typography>
             </Link>
@@ -165,7 +163,15 @@ const Navbar = () => {
             <List>
               {settings.map((p, i) => (
                 <ListItem button key={i} component={Link} to={p.toLowerCase()}>
-                  <ListItemIcon>{settingsIcons[i]}</ListItemIcon>
+                  {i == 2 ? (
+                    <ListItemIcon>
+                      <Badge badgeContent={user.bag.length} color="primary">
+                        {settingsIcons[i]}
+                      </Badge>
+                    </ListItemIcon>
+                  ) : (
+                    <ListItemIcon>{settingsIcons[i]}</ListItemIcon>
+                  )}
                   <ListItemText primary={p} sx={{ color: "black" }} />
                 </ListItem>
               ))}
@@ -238,7 +244,9 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              <LocalMallIcon />
+              <Badge badgeContent={user.bag.length} color='secondary'>
+                <LocalMallIcon />
+              </Badge>
               <Typography variant="caption">Bag</Typography>
             </Box>
           </Link>
