@@ -29,7 +29,7 @@ const Profile = () => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     // check if user already exists
-    const userExists = users.some((user) => user.email === email);
+    const userExists = users.some((user) => user?.email === email);
     if (userExists) {
       alert("User already exists!");
       setSignUp(false);
@@ -158,10 +158,10 @@ const Profile = () => {
             }}
           >
             <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
-              Welcome, {user.name}!
+              Welcome, {user?.name}!
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
-              Email: {user.email}
+              Email: {user?.email}
             </Typography>
             <ButtonGroup
              

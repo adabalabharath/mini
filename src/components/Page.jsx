@@ -22,16 +22,16 @@ const Page = ({ products }) => {
   const location = useLocation();
 
   const handleCart = (item) => {
-    let exists = user.bag.find((x) => x.id === item.id);
+    let exists = user?.bag.find((x) => x.id === item.id);
     if (!user) {
       navigate("/profile");
     } else {
       const updatedUser = exists
         ? {
             ...user,
-            bag: user.bag.filter((x) => x.id !== item.id),
+            bag: user?.bag.filter((x) => x.id !== item.id),
           }
-        : { ...user, bag: [...user.bag, item] };
+        : { ...user, bag: [...user?.bag, item] };
       console.log(updatedUser);
       localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
       setUser(updatedUser);
@@ -40,16 +40,16 @@ const Page = ({ products }) => {
 
   const handleFav = (product) => {
     setFav(true);
-    let exists = user.wishlist.find((x) => x.id === product.id);
+    let exists = user?.wishlist.find((x) => x.id === product.id);
     if (!user) {
       navigate("/profile");
     }
     const updatedUser = exists
       ? {
           ...user,
-          wishlist: user.wishlist.filter((x) => x.id !== product.id),
+          wishlist: user?.wishlist.filter((x) => x.id !== product.id),
         }
-      : { ...user, wishlist: [...user.wishlist, product] };
+      : { ...user, wishlist: [...user?.wishlist, product] };
     localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
     setUser(updatedUser);
   };
@@ -197,7 +197,7 @@ const Page = ({ products }) => {
                   }}
                   onClick={() => handleFav(product)}
                 >
-                  {user.wishlist.find((x) => x.id == product.id) ? (
+                  {user?.wishlist?.find((x) => x.id == product.id) ? (
                     <FavoriteIcon sx={{ color: "red" }} />
                   ) : (
                     <FavoriteBorderIcon sx={{ color: "black" }} />

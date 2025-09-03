@@ -165,7 +165,7 @@ const Navbar = () => {
                 <ListItem button key={i} component={Link} to={p.toLowerCase()}>
                   {i == 2 ? (
                     <ListItemIcon>
-                      <Badge badgeContent={user.bag.length} color="primary">
+                      <Badge badgeContent={user?.bag?.length} color="primary">
                         {settingsIcons[i]}
                       </Badge>
                     </ListItemIcon>
@@ -244,7 +244,7 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              <Badge badgeContent={user.bag.length} color='secondary'>
+              <Badge badgeContent={user?.bag?.length} color='secondary'>
                 <LocalMallIcon />
               </Badge>
               <Typography variant="caption">Bag</Typography>

@@ -14,18 +14,18 @@ const Bag = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
   useEffect(() => {
-    const prods = filtersHook("", user.bag, filters);
+    const prods = filtersHook("", user?.bag, filters);
     setProducts(prods);
-  }, [user.bag, filters]);
+  }, [user?.bag, filters]);
 
-  console.log(user.email);
+  console.log(user?.email);
 
   const sendEmail = () => {
-    const orderTotal = user.bag.reduce((a, b) => a + b.price, 0);
+    const orderTotal = user?.bag.reduce((a, b) => a + b.price, 0);
     const shipping = 50;
     const tax = 100;
 
-    const orders = user.bag.map((item) => ({
+    const orders = user?.bag.map((item) => ({
       name: item.productName,
       units: 1,
       price: item.price,
@@ -34,8 +34,8 @@ const Bag = () => {
     }));
 
     const templateParams = {
-      name: user.name,
-      email: user.email,
+      name: user?.name,
+      email: user?.email,
       order_id: Date.now(),
       orders,
       shipping,

@@ -10,9 +10,9 @@ const WishList = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    const prods = filtersHook("", user.wishlist, filters);
+    const prods = filtersHook("", user?.wishlist, filters);
     setProducts(prods);
-  }, [user.wishlist, filters]);
+  }, [user?.wishlist, filters]);
 
   return <Page products={products} />;
 }
