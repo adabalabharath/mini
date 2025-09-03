@@ -1,37 +1,36 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Drawer from '@mui/material/Drawer'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Filters from './Filters'
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Filters from "./Filters";
 import TuneIcon from "@mui/icons-material/Tune";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import Rating from '@mui/material/Rating'
+import Rating from "@mui/material/Rating";
 
-const Page = ({products}) => {
- const [drawerFilters, setDrawerFilters] = useState(false);
- const navigate=useNavigate()
-    const handleCart=()=>{
-     if(!localStorage.getItem('loggedInUser')){
-        navigate('/profile')
+const Page = ({ products }) => {
+  const [drawerFilters, setDrawerFilters] = useState(false);
+  const navigate = useNavigate();
+  const handleCart = () => {
+    if (!localStorage.getItem("loggedInUser")) {
+      navigate("/profile");
     }
-  }
+  };
 
-  const handleFavourite=(e)=>{
+  const handleFavourite = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-  }
+  };
 
   return (
     <Grid container sx={{ mt: 2, justifyContent: "space-between" }}>
-      <Grid size={2} sx={{ display: { xs: "none", md: "block" } }}>
+      <Grid size={2.5} sx={{ display: { xs: "none", md: "block" } }}>
         <Filters />
       </Grid>
       <Grid
-        size={{ xs: 12, sm: 12, md: 10 }}
+        size={{ xs: 12, sm: 12, md: 9.5 }}
         sx={{
           display: "flex",
           flexWrap: "wrap",
@@ -65,31 +64,30 @@ const Page = ({products}) => {
             <Filters />
           </Drawer>
         </Grid>
+       <Grid container rowSpacing={3} columnSpacing={3}>
         {products?.map((product) => (
           <Grid
             size={{ xs: 6, sm: 6, md: 2 }}
             key={product.id}
             sx={{
-              border: "1px solid white",
-              mb: 2,
-
+              border: "1px solid white",           
               p: 2,
               height: "100%",
-              maxHeight: "400px",
+              maxHeight: 450,
             }}
           >
             <Link
               to={`/productId/${product.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Box sx={{ position: "relative", width: "100%", height: 200 }}>
+              <Box sx={{ position: "relative", width: "100%" }} >
                 <img
                   src={product.imageUrl}
                   alt={product.productName}
                   style={{
                     width: "100%",
-                    height: "100%",
-                    // objectFit: "contain", // keeps proportions without overflow
+                   
+                    objectFit: "contain", 
                     borderRadius: 8,
                   }}
                 />
@@ -98,7 +96,7 @@ const Page = ({products}) => {
                     position: "absolute",
                     right: 10,
                     top: 10,
-                    minWidth: "auto", // removes extra padding
+                    minWidth: "auto", 
                     padding: "4px",
                     backgroundColor: "white",
                     borderRadius: "50%",
@@ -150,9 +148,10 @@ const Page = ({products}) => {
             </Button>
           </Grid>
         ))}
+        </Grid>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

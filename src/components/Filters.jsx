@@ -227,10 +227,10 @@ const Filters = () => {
     gap:2
    
   }}>
-        <Button onClick={() => sortOrder("asc")} disabled={sort == "asc"} sx={{textTransform:'none',border:sort=='asc'?"1px solid transparent":"1px solid black",color:'black'}}>
+        <Button onClick={() => sortOrder("asc")} disabled={sort == "asc"} sx={{textTransform:'none',border:sort=='asc'?"1px solid transparent":"1px solid black",color:'black',maxWidth:'100px'}}>
           Sort by Asc
         </Button>
-        <Button onClick={() => sortOrder("des")} disabled={sort == "des"} sx={{textTransform:'none',border:sort=='des'?"1px solid transparent":"1px solid black",color:'black'}}>
+        <Button onClick={() => sortOrder("des")} disabled={sort == "des"} sx={{textTransform:'none',border:sort=='des'?"1px solid transparent":"1px solid black",color:'black',maxWidth:'100px'}}>
           Sort by Des
         </Button>
       </Box>
