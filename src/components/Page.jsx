@@ -109,7 +109,7 @@ const Page = ({ products }) => {
                   <FavoriteBorderIcon sx={{ color: "black" }} />
                 </Button>
               </Box>
-              <Grid container height={220} direction={'column'}  justifyContent={'space-evenly'} >
+              <Grid container height={220} direction={'column'}  justifyContent={'space-evenly'} flexWrap={'wrap'}>
               <Grid >
               <Typography variant="h6" fontWeight={'fantasy'}>{product.brand}</Typography>
              </Grid>
