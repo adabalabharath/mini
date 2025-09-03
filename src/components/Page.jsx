@@ -64,7 +64,7 @@ const Page = ({ products }) => {
             <Filters />
           </Drawer>
         </Grid>
-       <Grid container rowSpacing={3} columnSpacing={3}>
+       <Grid container rowSpacing={5} columnSpacing={3}>
         {products?.map((product) => (
           <Grid
             size={{ xs: 6, sm: 6, md: 2 }}
@@ -73,7 +73,6 @@ const Page = ({ products }) => {
               border: "1px solid white",           
               p: 2,
               height: 500,
-              
             }}
             
           >
@@ -110,7 +109,7 @@ const Page = ({ products }) => {
                   <FavoriteBorderIcon sx={{ color: "black" }} />
                 </Button>
               </Box>
-              <Grid container height={200} direction={'column'}  justifyContent={'space-evenly'} >
+              <Grid container height={220} direction={'column'}  justifyContent={'space-evenly'} >
               <Grid >
               <Typography variant="h6" fontWeight={'fantasy'}>{product.brand}</Typography>
              </Grid>
