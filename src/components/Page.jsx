@@ -72,23 +72,25 @@ const Page = ({ products }) => {
             sx={{
               border: "1px solid white",           
               p: 2,
-              height: "100%",
-              maxHeight: 450,
+              height: 500,
+              
             }}
+            gap={3}
           >
             <Link
               to={`/productId/${product.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Box sx={{ position: "relative", width: "100%" }} >
+              <Box sx={{ position: "relative", width: "100%"}} >
                 <img
                   src={product.imageUrl}
                   alt={product.productName}
                   style={{
                     width: "100%",
-                   
-                    objectFit: "contain", 
+                    height:220,
+                    
                     borderRadius: 8,
+                    
                   }}
                 />
                 <Button
@@ -108,18 +110,23 @@ const Page = ({ products }) => {
                   <FavoriteBorderIcon sx={{ color: "black" }} />
                 </Button>
               </Box>
-
-              <Typography variant="h6">{product.brand}</Typography>
-
+              <Grid container height={180} direction={'column'}  justifyContent={'space-between'} my={1}>
+              <Grid >
+              <Typography variant="h6" fontWeight={'fantasy'}>{product.brand}</Typography>
+             </Grid>
+             <Grid >
               <Typography variant="subtitle2">
-                {product.productName.split(" ").length >= 5
-                  ? product.productName.split(" ").slice(0, 4).join(" ") + "..."
+                {product.productName.split(" ").length >= 3
+                  ? product.productName.split(" ").slice(0,5).join(" ") + "..."
                   : product.productName}
               </Typography>
+              </Grid>
+              <Grid>
               <Typography variant="caption">
-                {product.rating}
+                {product.rating}{" "}
                 <Rating
                   value={product.rating}
+                  precision={0.1} 
                   readOnly
                   size="small"
                   sx={{
@@ -129,11 +136,16 @@ const Page = ({ products }) => {
                   }}
                 />
               </Typography>
+              </Grid>
+              <Grid>
               <Typography variant="h6">
-                {"\u20B9"}
-                {product.price} <sup>00</sup>
+                {"\u20B9"} 
+                 {product.price} <sup style={{color:'light-black'}}>00</sup>
               </Typography>
+              </Grid>
+              </Grid>
             </Link>
+            
             <Button
               variant="contained"
               sx={{
@@ -146,6 +158,7 @@ const Page = ({ products }) => {
             >
               Add to cart
             </Button>
+           
           </Grid>
         ))}
         </Grid>
