@@ -1,6 +1,7 @@
 export const filtersHook = (gen, data, filters) => {
-  let filtered = data.filter((x) => x.gender === gen);
-  console.log(filters.price);
+  let filtered = gen ? data.filter((x) => x.gender === gen) : data;
+  console.log(filtered);
+  console.log(filters)
   if (filters.gender.length > 0) {
     filtered = data.filter((x) => filters.gender.includes(x.gender));
     console.log("hi gender");

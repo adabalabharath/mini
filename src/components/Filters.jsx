@@ -22,23 +22,16 @@ import { useSearchParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 const Filters = () => {
-  const [value, setValue] = useState([0, 1000]);
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size, sort } = state;
+  const [value, setValue] = useState([price.start||0, price.end||1000]);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
-  useEffect(() => {
-    if (price.start && price.end) {
-      setValue([price.start, price.end]);
-    } else {
-      setValue(value);
-    }
-  }, [state]);
+ 
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
       ? gender.filter((x) => x != g)
@@ -63,7 +56,7 @@ const Filters = () => {
   };
 
   const clearAll = () => {
-    setValue([0,1000])
+    setValue([0, 1000]);
     dispatch(clearFilters());
   };
   const sortOrder = (order) => {
@@ -221,16 +214,35 @@ const Filters = () => {
           }}
         />
       </Box>
-      <Box sx={{
-    display: "flex",
-    justifyContent: "center",
-    gap:2
-   
-  }}>
-        <Button onClick={() => sortOrder("asc")} disabled={sort == "asc"} sx={{textTransform:'none',border:sort=='asc'?"1px solid transparent":"1px solid black",color:'black',maxWidth:'100px'}}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 2,
+        }}
+      >
+        <Button
+          onClick={() => sortOrder("asc")}
+          disabled={sort == "asc"}
+          sx={{
+            textTransform: "none",
+            border: sort == "asc" ? "1px solid transparent" : "1px solid black",
+            color: "black",
+            maxWidth: "100px",
+          }}
+        >
           Sort by Asc
         </Button>
-        <Button onClick={() => sortOrder("des")} disabled={sort == "des"} sx={{textTransform:'none',border:sort=='des'?"1px solid transparent":"1px solid black",color:'black',maxWidth:'100px'}}>
+        <Button
+          onClick={() => sortOrder("des")}
+          disabled={sort == "des"}
+          sx={{
+            textTransform: "none",
+            border: sort == "des" ? "1px solid transparent" : "1px solid black",
+            color: "black",
+            maxWidth: "100px",
+          }}
+        >
           Sort by Des
         </Button>
       </Box>
