@@ -25,11 +25,13 @@ const Page = ({ products }) => {
     if (!user) {
       navigate("/profile");
     } else {
-      const updatedUser = exists ?{
-          ...user,
-          bag: user.bag.filter((x) => x.id !== item.id),
-        } :{ ...user, bag: [...user.bag, item] };
-      console.log(updatedUser)
+      const updatedUser = exists
+        ? {
+            ...user,
+            bag: user.bag.filter((x) => x.id !== item.id),
+          }
+        : { ...user, bag: [...user.bag, item] };
+      console.log(updatedUser);
       localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
       setUser(updatedUser);
     }
@@ -94,7 +96,11 @@ const Page = ({ products }) => {
         <Grid container rowSpacing={5} columnSpacing={3}>
           {products?.map((product) => (
             <Grid
-              size={{ xs: 6, sm: 6, md: 2 }}
+              size={{
+                xs: products.length === 1 ? 12 : 6,
+                sm: products.length === 1 ? 12 : 6,
+                md: products.length === 1 ? 12 : 2,
+              }}
               key={product.id}
               sx={{
                 border: "1px solid white",
