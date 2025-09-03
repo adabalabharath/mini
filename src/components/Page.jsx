@@ -77,7 +77,7 @@ const Page = ({ products }) => {
             },
           }}
         >
-          {products.length > 0 && (
+          {products.length>0 && (
             <Button
               variant="filled"
               fullWidth
@@ -97,14 +97,14 @@ const Page = ({ products }) => {
           </Drawer>
         </Grid>
 
-        {products.length > 0 ? (
-          <Grid container size={12} rowSpacing={5} columnSpacing={3} >
+        {products.length ? (
+          <Grid container size={12} rowSpacing={5} columnSpacing={3}>
             {products?.map((product) => (
               <Grid
                 size={{
-                  xs:  6,
-                  sm:  6,
-                  md:  2,
+                  xs: 6,
+                  sm: 6,
+                  md: 2,
                 }}
                 key={product.id}
                 sx={{
@@ -246,9 +246,13 @@ const Page = ({ products }) => {
               justifyContent: "center",
             }}
             size={12}
-              mt={10}
+            mt={10}
           >
-            <img src="/images/noItems.png" alt="No items" style={{height:'200px'}}/>
+            <img
+              src="/images/noItems.png"
+              alt="No items"
+              style={{ height: "200px" }}
+            />
           </Grid>
         )}
       </Grid>

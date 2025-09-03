@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthProvider";
 import { useSelector } from "react-redux";
 import { filtersHook } from "../customHook/filtersHook";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const Bag = () => {
   const [products, setProducts] = useState([]);
@@ -17,19 +18,25 @@ const Bag = () => {
 
   return (
     <>
+    <Grid container direction={'column'} justifyContent={'space-between'} gap={3}>
+      <Grid >
       <Page products={products} />
-      {products.length && <Button
-        variant="contained"
+     </Grid>
+     <Grid >
+      {products.length>0 && <Button
+        variant="outlined"
         sx={{
           textTransform: "none",
-          backgroundColor: "black",
-          color: "white",
-          my: 1,
+          border:1,
+          color: "black",
+          
         }}
         fullWidth
       >
         Proceed to Buy items
       </Button>}
+      </Grid>
+      </Grid>
     </>
   );
 };
