@@ -73,6 +73,7 @@ const Page = ({ products }) => {
               border: "1px solid white",           
               p: 2,
               height: 500,
+              flexWrap:'wrap',
             }}
             
           >
