@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AuthContext } from "./AuthProvider";
+import NoItems from "./NoItems";
 
 const Page = ({ products }) => {
   const [drawerFilters, setDrawerFilters] = useState(false);
@@ -76,14 +77,16 @@ const Page = ({ products }) => {
             },
           }}
         >
-          <Button
-            variant="filled"
-            fullWidth
-            sx={{ textTransform: "none" }}
-            onClick={() => setDrawerFilters(true)}
-          >
-            <TuneIcon /> Apply Filters
-          </Button>
+          {products.length > 0 && (
+            <Button
+              variant="filled"
+              fullWidth
+              sx={{ textTransform: "none" }}
+              onClick={() => setDrawerFilters(true)}
+            >
+              <TuneIcon /> Apply Filters
+            </Button>
+          )}
           <Drawer
             anchor="left"
             open={drawerFilters}
@@ -93,145 +96,161 @@ const Page = ({ products }) => {
             <Filters />
           </Drawer>
         </Grid>
-        <Grid container rowSpacing={5} columnSpacing={3}>
-          {products?.map((product) => (
-            <Grid
-              size={{
-                xs: products.length === 1 ? 12 : 6,
-                sm: products.length === 1 ? 12 : 6,
-                md: products.length === 1 ? 12 : 2,
-              }}
-              key={product.id}
-              sx={{
-                border: "1px solid white",
-                p: 2,
-                height: 500,
-                flexWrap: "wrap",
-                position: "relative",
-              }}
-            >
-              <Link
-                to={`/productId/${product.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: "100%",
-                    pointerEvents: fav ? "auto" : "none",
-                  }}
-                >
-                  <img
-                    src={product.imageUrl}
-                    alt={product.productName}
-                    style={{
-                      width: "100%",
-                      height: 220,
 
-                      borderRadius: 8,
-                    }}
-                  />
-                </Box>
-                <Grid
-                  container
-                  height={220}
-                  direction={"column"}
-                  justifyContent={"space-evenly"}
-                  flexWrap={"wrap"}
-                >
-                  <Grid>
-                    <Typography variant="h6" fontWeight={"fantasy"}>
-                      {product.brand}
-                    </Typography>
-                  </Grid>
-                  <Grid>
-                    <Typography variant="subtitle2">
-                      {product.productName.split(" ").length >= 3
-                        ? product.productName.split(" ").slice(0, 4).join(" ") +
-                          "..."
-                        : product.productName}
-                    </Typography>
-                  </Grid>
-                  <Grid>
-                    <Typography variant="caption">
-                      <Rating
-                        value={product.rating}
-                        precision={0.1}
-                        readOnly
-                        size="small"
-                        sx={{
-                          "& .MuiRating-iconFilled": {
-                            color: "black",
-                          },
-                        }}
-                      />
-                      {`(${product.rating})`}
-                    </Typography>
-                  </Grid>
-                  <Grid>
-                    <Typography variant="subtitle1">
-                      {"\u20B9"}
-                      {product.price}{" "}
-                      <sup style={{ color: "light-black" }}>00</sup>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Link>
-              <IconButton
-                sx={{
-                  position: "absolute",
-                  right: 20,
-                  top: 20,
-                  minWidth: "auto",
-                  padding: "4px",
-                  backgroundColor: "white",
-                  borderRadius: "50%",
-                  "&:hover": { backgroundColor: "#f5f5f5" },
+        {products.length > 0 ? (
+          <Grid container size={12} rowSpacing={5} columnSpacing={3} >
+            {products?.map((product) => (
+              <Grid
+                size={{
+                  xs:  6,
+                  sm:  6,
+                  md:  2,
                 }}
-                onClick={() => handleFav(product)}
+                key={product.id}
+                sx={{
+                  border: "1px solid white",
+                  p: 2,
+                  height: 500,
+                  flexWrap: "wrap",
+                  position: "relative",
+                }}
               >
-                {user.wishlist.find((x) => x.id == product.id) ? (
-                  <FavoriteIcon sx={{ color: "red" }} />
-                ) : (
-                  <FavoriteBorderIcon sx={{ color: "black" }} />
-                )}
-              </IconButton>
+                <Link
+                  to={`/productId/${product.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      pointerEvents: fav ? "auto" : "none",
+                    }}
+                  >
+                    <img
+                      src={product.imageUrl}
+                      alt={product.productName}
+                      style={{
+                        width: "100%",
+                        height: 220,
 
-              {location.pathname == "/bag" ? (
-                <Button
-                  variant="contained"
+                        borderRadius: 8,
+                      }}
+                    />
+                  </Box>
+                  <Grid
+                    container
+                    height={220}
+                    direction={"column"}
+                    justifyContent={"space-evenly"}
+                    flexWrap={"wrap"}
+                  >
+                    <Grid>
+                      <Typography variant="h6" fontWeight={"fantasy"}>
+                        {product.brand}
+                      </Typography>
+                    </Grid>
+                    <Grid>
+                      <Typography variant="subtitle2">
+                        {product.productName.split(" ").length >= 3
+                          ? product.productName
+                              .split(" ")
+                              .slice(0, 4)
+                              .join(" ") + "..."
+                          : product.productName}
+                      </Typography>
+                    </Grid>
+                    <Grid>
+                      <Typography variant="caption">
+                        <Rating
+                          value={product.rating}
+                          precision={0.1}
+                          readOnly
+                          size="small"
+                          sx={{
+                            "& .MuiRating-iconFilled": {
+                              color: "black",
+                            },
+                          }}
+                        />
+                        {`(${product.rating})`}
+                      </Typography>
+                    </Grid>
+                    <Grid>
+                      <Typography variant="subtitle1">
+                        {"\u20B9"}
+                        {product.price}{" "}
+                        <sup style={{ color: "light-black" }}>00</sup>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Link>
+                <IconButton
                   sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                    my: 1,
+                    position: "absolute",
+                    right: 20,
+                    top: 20,
+                    minWidth: "auto",
+                    padding: "4px",
+                    backgroundColor: "white",
+                    borderRadius: "50%",
+                    "&:hover": { backgroundColor: "#f5f5f5" },
                   }}
-                  fullWidth
-                  onClick={() => handleCart(product)}
+                  onClick={() => handleFav(product)}
                 >
-                  Remove
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                    my: 1,
-                  }}
-                  fullWidth
-                  onClick={() => handleCart(product)}
-                  disabled={user?.bag?.find((x) => x.id == product.id)}
-                >
-                  {user?.bag?.find((x) => x.id == product.id)
-                    ? "Added To cart"
-                    : "Add to cart"}
-                </Button>
-              )}
-            </Grid>
-          ))}
-        </Grid>
+                  {user.wishlist.find((x) => x.id == product.id) ? (
+                    <FavoriteIcon sx={{ color: "red" }} />
+                  ) : (
+                    <FavoriteBorderIcon sx={{ color: "black" }} />
+                  )}
+                </IconButton>
+
+                {location.pathname == "/bag" ? (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      backgroundColor: "black",
+                      color: "white",
+                      my: 1,
+                    }}
+                    fullWidth
+                    onClick={() => handleCart(product)}
+                  >
+                    Remove
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      backgroundColor: "black",
+                      color: "white",
+                      my: 1,
+                    }}
+                    fullWidth
+                    onClick={() => handleCart(product)}
+                    disabled={user?.bag?.find((x) => x.id == product.id)}
+                  >
+                    {user?.bag?.find((x) => x.id == product.id)
+                      ? "Added To cart"
+                      : "Add to cart"}
+                  </Button>
+                )}
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+            size={12}
+              mt={10}
+          >
+            <img src="/images/noItems.png" alt="No items" style={{height:'200px'}}/>
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );
