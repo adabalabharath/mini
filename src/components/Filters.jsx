@@ -24,14 +24,14 @@ import Button from "@mui/material/Button";
 const Filters = () => {
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size, sort } = state;
-  const [value, setValue] = useState([price.start||0, price.end||1000]);
+  const [value, setValue] = useState([price.start || 0, price.end || 1000]);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
- 
+
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
       ? gender.filter((x) => x != g)
@@ -83,7 +83,17 @@ const Filters = () => {
       params.priceEnd = price.end;
     }
     sort === "asc" ? (params.sort = "ASC") : (params.sort = "DESC");
-    setSearchParams(params);
+    setSearchParams(
+      (prev) => {
+        const current = Object.fromEntries(prev.entries());
+
+        if (JSON.stringify(current) !== JSON.stringify(params)) {
+          return params;
+        }
+        return prev;
+      },
+      { replace: true }
+    );
   };
 
   useEffect(() => {
@@ -103,10 +113,7 @@ const Filters = () => {
       }}
     >
       <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography
-          variant="body1"
-          sx={{   fontWeight: "bold" }}
-        >
+        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
           Filters
         </Typography>
         <Button
@@ -129,10 +136,7 @@ const Filters = () => {
           Clear All
         </Button>
       </Grid>
-      <Typography
-        variant="body2"
-        sx={{   fontWeight: "bold" }}
-      >
+      <Typography variant="body2" sx={{ fontWeight: "bold" }}>
         Gender
       </Typography>
       <Divider />
@@ -180,10 +184,7 @@ const Filters = () => {
           </Box>
         </Grid>
       </Grid>
-      <Typography
-        variant="body2"
-        sx={{   fontWeight: "bold" }}
-      >
+      <Typography variant="body2" sx={{ fontWeight: "bold" }}>
         Price range
       </Typography>
       <Box sx={{ m: 2 }}>
@@ -297,10 +298,7 @@ const Filters = () => {
         </RadioGroup>
       </Grid>
 
-      <Typography
-        variant="body2"
-        sx={{   fontWeight: "bold" }}
-      >
+      <Typography variant="body2" sx={{ fontWeight: "bold" }}>
         ratings
       </Typography>
       <Divider />
@@ -414,10 +412,7 @@ const Filters = () => {
         </Grid>
       </Grid>
 
-      <Typography
-        variant="body2"
-        sx={{   fontWeight: "bold" }}
-      >
+      <Typography variant="body2" sx={{ fontWeight: "bold" }}>
         Size
       </Typography>
       <Divider />
