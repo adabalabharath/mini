@@ -72,7 +72,7 @@ const Bag = () => {
                 textTransform: "none",
                 border: 1,
                 color: "black",
-                my: 2,
+                mt: 2,
               }}
               fullWidth
               onClick={sendEmail}
