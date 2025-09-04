@@ -240,20 +240,33 @@ const Page = ({ products }) => {
             ))}
           </Grid>
         ) : (
-          <Grid
+          <Box
             sx={{
               display: "flex",
-              justifyContent: "center",
+              flexDirection:'column',
+              alignItems:'center',
+              width:'100%'
             }}
-            size={12}
+            
             mt={10}
           >
+            
             <img
               src="/images/noItems.png"
               alt="No items"
               style={{ height: "300px",width:'200px' }}
             />
-          </Grid>
+            
+           
+              <Link to='/' sx={{textDecoration:'none'}}> <Button sx={{
+                      textTransform: "none",
+                      backgroundColor: "black",
+                      color: "white",
+                      my: 1,
+                    }}>Go to Home</Button> </Link>
+            
+            
+          </Box>
         )}
       </Grid>
     </Grid>
