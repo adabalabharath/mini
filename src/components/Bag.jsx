@@ -90,9 +90,9 @@ const Bag = () => {
     const orders = selected.map((item) => ({
       name: item.productName,
       units: item.qty,
+      size: item.selectedSize,
       price: item.price * item.qty,
       image: item.imageUrl,
-      selectedSize: item.selectedSize,
     }));
     const templateParams = {
       userName: user?.name,
