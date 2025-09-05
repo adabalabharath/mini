@@ -103,8 +103,7 @@ const Bag = () => {
       tax,
       total: orderTotal + shipping + tax,
     };
-    console.log(templateParams);
-    setDialog(true);
+   
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard
@@ -113,7 +112,7 @@ const Bag = () => {
         "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
       )
       .then(() => {
-        alert("order placed successfully");
+        setDialog(true);
       })
       .catch((error) => {
         console.error(error);
