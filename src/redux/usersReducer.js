@@ -1,5 +1,7 @@
 const initialState = {
+  isLoading: false,
   users: [],
+  isError: false,
   products: [],
   filters: {
     price: { start: null, end: null },
@@ -12,15 +14,31 @@ const initialState = {
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "LOADING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+
     case "ADD_USER":
       return {
         ...state,
         users: [...state.users, action.payload],
       };
+    case "Failure":
+      return {
+        ...state,
+        users: [],
+        isLoading: false,
+        isError: true,
+      };
+
     case "SET_PRODUCTS":
       return {
         ...state,
         products: action.payload,
+        isLoading: false,
+        isError: false,
       };
     case "SET_PRICE_FILTER":
       return {
@@ -58,7 +76,7 @@ export const usersReducer = (state = initialState, action) => {
           rating: null,
           size: [],
           gender: [],
-          sort:'asc'
+          sort: "asc",
         },
       };
 

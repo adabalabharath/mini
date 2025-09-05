@@ -43,6 +43,7 @@ const Profile = () => {
       password,
       wishlist: [],
       bag: [],
+      orders:[]
     };
 
     users.push(newUser);

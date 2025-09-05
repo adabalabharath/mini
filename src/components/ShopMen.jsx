@@ -12,7 +12,10 @@ const ShopMen = () => {
   }, [data, filters]);
 
   return (
-    <Page products={products}/>
+    <>
+      <Page products={products} />
+      {products.length && ''}
+    </>
   );
 };
 

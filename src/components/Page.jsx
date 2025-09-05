@@ -13,28 +13,53 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AuthContext } from "./AuthProvider";
 import NoItems from "./NoItems";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import { useSelector } from "react-redux";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Page = ({ products }) => {
   const [drawerFilters, setDrawerFilters] = useState(false);
+  const [sizeDrawer, setSizeDrawer] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [open, setOpen] = useState(false);
+  const isLoading = useSelector((store) => store.isLoading);
   const [fav, setFav] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleCart = (item) => {
-    let exists = user?.bag.find((x) => x.id === item.id);
-    if (!user) {
-      navigate("/profile");
+    console.log(user);
+    if (item.availableSizes.length > 0) {
+      setSizeDrawer(true);
+      const exists = user?.bag.some(
+        (x) => x.id === item.id && x.selectedSize === selectedSize
+      );
+
+      if (exists) {
+        const updatedBag = user.bag.map((x) =>
+          x.id === item.id && x.selectedSize === selectedSize
+            ? { ...x, qty: x.qty + 1 }
+            : x
+        );
+        const updatedUser = { ...user, bag: updatedBag };
+        localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+        setUser(updatedUser);
+      } else {
+        const cartItem = { ...item, selectedSize, qty: 1, selected: true };
+        const updatedUser = { ...user, bag: [...user.bag, cartItem] };
+        localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+        setUser(updatedUser);
+      }
     } else {
-      const updatedUser = exists
-        ? {
-            ...user,
-            bag: user?.bag.filter((x) => x.id !== item.id),
-          }
-        : { ...user, bag: [...user?.bag, item] };
-      console.log(updatedUser);
+      const cartItem = { ...item, selectedSize, qty: 1, selected: true };
+      const updatedUser = { ...user, bag: [...user.bag, cartItem] };
       localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
       setUser(updatedUser);
+      setOpen(true);
     }
   };
 
@@ -97,7 +122,24 @@ const Page = ({ products }) => {
           </Drawer>
         </Grid>
 
-        {products.length ? (
+        {isLoading ? (
+          <Grid container size={12} rowSpacing={5} columnSpacing={3}>
+            {/* Skeleton loaders for when data is loading */}
+            {[...Array(18)].map((_, index) => (
+              <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
+                <Box
+                  sx={{ p: 2, border: "1px solid white", position: "relative" }}
+                >
+                  <Skeleton variant="rectangular" width="100%" height={220} />
+                  <Skeleton variant="text" width="60%" height={30} />
+                  <Skeleton variant="text" width="50%" />
+                  <Skeleton variant="text" width="30%" />
+                  <Skeleton variant="text" width="40%" />
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        ) : products.length > 0 ? (
           <Grid container size={12} rowSpacing={5} columnSpacing={3}>
             {products?.map((product) => (
               <Grid
@@ -139,7 +181,7 @@ const Page = ({ products }) => {
                   </Box>
                   <Grid
                     container
-                    height={220}
+                    height={200}
                     direction={"column"}
                     justifyContent={"space-evenly"}
                     flexWrap={"wrap"}
@@ -204,69 +246,117 @@ const Page = ({ products }) => {
                   )}
                 </IconButton>
 
-                {location.pathname == "/bag" ? (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      textTransform: "none",
-                      backgroundColor: "black",
-                      color: "white",
-                      my: 1,
-                    }}
-                    fullWidth
-                    onClick={() => handleCart(product)}
-                  >
-                    Remove
-                  </Button>
-                ) : (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      textTransform: "none",
-                      backgroundColor: "black",
-                      color: "white",
-                      my: 1,
-                    }}
-                    fullWidth
-                    onClick={() => handleCart(product)}
-                    disabled={user?.bag?.find((x) => x.id == product.id)}
-                  >
-                    {user?.bag?.find((x) => x.id == product.id)
-                      ? "Added To cart"
-                      : "Add to cart"}
-                  </Button>
-                )}
+                <Button
+                  variant="contained"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "black",
+                    color: "white",
+                    my: 1,
+                  }}
+                  fullWidth
+                  onClick={() => {
+                    !user
+                      ? navigate("/profile")
+                      : product.availableSizes.length > 0
+                      ? (setSelectedProduct(product), setSizeDrawer(true))
+                      : handleCart(product);
+                  }}
+                  //disabled={user?.bag?.find((x) => x.id == product.id)}
+                >
+                  Add to Bag
+                </Button>
               </Grid>
             ))}
+            <Drawer
+              anchor="bottom"
+              open={sizeDrawer}
+              onClose={() => setSizeDrawer(false)}
+            >
+              <Typography sx={{ p: 2, fontWeight: "bold" }}>
+                Select a size
+              </Typography>
+              <Box sx={{ display: "flex", gap: 2, px: 2, pb: 2 }}>
+                {selectedProduct?.availableSizes?.map((size) => (
+                  <Button
+                    key={size}
+                    variant={selectedSize === size ? "contained" : "outlined"}
+                    size="small"
+                    sx={{
+                      borderRadius: "50%",
+                      minWidth: 40,
+                      minHeight: 40,
+                      borderColor: "black",
+                      color: selectedSize == size ? "white" : "black",
+                      backgroundColor: selectedSize == size && "black",
+                    }}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </Button>
+                ))}
+              </Box>
+              <Button
+                fullWidth
+                variant="contained"
+                disabled={!selectedSize}
+                onClick={() => {
+                  handleCart(selectedProduct);
+                  setSizeDrawer(false);
+                  setOpen(true);
+                }}
+                sx={{ backgroundColor: "black", color: "white" }}
+              >
+                Done
+              </Button>
+            </Drawer>
+            <Snackbar
+              open={open}
+              autoHideDuration={3000}
+              onClose={() => setOpen(false)}
+            >
+              <Alert
+                onClose={() => setOpen(false)}
+                severity="success"
+                variant="filled"
+                sx={{ width: "100%" }}
+              >
+                Successfully Added to Bag
+              </Alert>
+            </Snackbar>
           </Grid>
-        ) : (
+        ) : products.length == 0 ? (
           <Box
             sx={{
               display: "flex",
-              flexDirection:'column',
-              alignItems:'center',
-              width:'100%'
+              flexDirection: "column",
+              alignItems: "center",
+              width: "100%",
             }}
-            
             mt={10}
           >
-            
             <img
               src="/images/noItems.png"
               alt="No items"
-              style={{ height: "300px",width:'200px' }}
+              style={{ height: "300px", width: "200px" }}
             />
-            
-           
-              <Link to='/' sx={{textDecoration:'none'}}> <Button sx={{
-                      textTransform: "none",
-                      backgroundColor: "black",
-                      color: "white",
-                      my: 1,
-                    }}>Go to Home</Button> </Link>
-            
-            
+
+            <Link to="/" sx={{ textDecoration: "none" }}>
+              {" "}
+              <Button
+                sx={{
+                  textTransform: "none",
+                  backgroundColor: "black",
+                  color: "white",
+                  my: 1,
+                }}
+              >
+                Go to Home
+              </Button>{" "}
+            </Link>
           </Box>
+        ) : (
+          ""
         )}
       </Grid>
     </Grid>

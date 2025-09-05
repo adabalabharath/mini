@@ -1,8 +1,13 @@
 import axios from "axios";
 
 export const setProducts = async(dispatch) =>{
+    try{
+    dispatch({type:"LOADING"})
     const response = await axios.get("/products.json");
-    return dispatch({type:"SET_PRODUCTS",payload:response.data});
+     dispatch({type:"SET_PRODUCTS",payload:response.data});
+    }catch(error){
+      dispatch({type:'FAILURE',payload:error})
+    }
 }
 
 export const setSizeFilter = (size)=>(dispatch)=>{
