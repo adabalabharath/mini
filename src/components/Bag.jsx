@@ -35,6 +35,7 @@ const Bag = () => {
   const [shipping, setShipping] = useState(0);
   const [tax, setTax] = useState(0);
   const [dialog, setDialog] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   useEffect(() => {
     const prods = filtersHook("", user?.bag, filters);
@@ -103,7 +104,7 @@ const Bag = () => {
       tax,
       total: orderTotal + shipping + tax,
     };
-   
+    setLoading(true);
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard
@@ -113,6 +114,7 @@ const Bag = () => {
       )
       .then(() => {
         setDialog(true);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
@@ -429,6 +431,7 @@ const Bag = () => {
               mt: 2,
             }}
             onClick={sendEmail}
+            loading={loading}
             fullWidth
             disabled={
               products.reduce((a, b) => (b.selected ? a + 1 : a), 0) < 1
