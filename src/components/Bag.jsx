@@ -42,8 +42,6 @@ const Bag = () => {
     setProducts(prods);
   }, [user?.bag, filters]);
 
-  console.log(shipping);
-
   useEffect(() => {
     console.log(products.filter((x) => x.selected));
 
@@ -83,15 +81,13 @@ const Bag = () => {
     }
   }, [ordered]);
 
-  console.log(user);
-
   const sendEmail = () => {
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
     const orders = selected.map((item) => ({
       name: item.productName,
       units: item.qty,
-      size: item.selectedSize,
+      size: item.selectedSize? item.selectedSize:'Free Size',
       price: item.price * item.qty,
       image: item.imageUrl,
     }));
@@ -176,7 +172,6 @@ const Bag = () => {
         ? x
         : [...user.wishlist, product],
     };
-    console.log(updatedUser);
     setUser(updatedUser);
     localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
     setRemove(false);
