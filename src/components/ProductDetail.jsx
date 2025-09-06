@@ -169,126 +169,127 @@ const ProductDetail = () => {
       )}
       {product && (
         <Grid container direction={"column"}>
-          <Grid my={2} size={{ xs: 12, sm: 12, md: 2 }}>
+         
+          <Grid size={{ xs: 12, md: 4 }} pt={2}>
             <img src={product?.imageUrl} style={{ width: "100%" }} />
+            <Grid
+              display={"flex"}
+              flexDirection={"column"}
+              gap={1}
+              mb={2}
+              size={{ xs: 12, md: 4 }}
+            >
+              <Typography sx={{ color: "grey" }}>
+                <span style={{ fontWeight: "bold", color: "black" }}>
+                  {product?.brand}
+                </span>{" "}
+                {product?.gender == "male"
+                  ? "Men " + product?.productName
+                  : "Women " + product?.productName}
+              </Typography>
+
+              <Typography sx={{ fontWeight: "bold" }} variant="button">
+                <span style={{ color: "grey", fontWeight: "lighter" }}>
+                  MRP{" "}
+                  <s>
+                    {"\u20B9"}
+                    {product?.price + 2000}&nbsp;
+                  </s>
+                </span>{" "}
+                {"\u20B9"}
+                {product?.price}
+              </Typography>
+
+              <Typography
+                sx={{ fontWeight: "bold", color: "red" }}
+                variant="caption "
+              >
+                Only Few Left!
+              </Typography>
+            </Grid>
+
+            {product?.availableSizes.length ? (
+              <>
+                {" "}
+                <Typography>Select a Size</Typography>
+                <Grid display={"flex"} flexWrap={"wrap"}>
+                  {product?.availableSizes.map((size) => (
+                    <Button
+                      key={size}
+                      variant={selectedSize === size ? "contained" : "outlined"}
+                      size="small"
+                      sx={{
+                        borderRadius: "30%",
+                        minWidth: 30,
+                        minHeight: 30,
+                        borderColor: "black",
+                        mt: 1,
+                        mr: 1,
+
+                        border: "1px solid grey",
+
+                        textTransform: "none",
+                        color: selectedSize == size ? "white" : "black",
+                        backgroundColor: selectedSize == size && "black",
+                      }}
+                      onClick={() => {
+                        handleSize(size);
+                      }}
+                    >
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        {size}
+                        <Typography variant="caption" color="grey">
+                          {"\u20B9"}
+                          {product?.price}
+                        </Typography>
+                      </Box>
+                    </Button>
+                  ))}
+                </Grid>
+              </>
+            ) : (
+              <Typography variant="subtitle"> Size: Free Size</Typography>
+            )}
+            <Grid mt={2} display={"flex"} gap={1}>
+              <Button onClick={() => handleFav(product)}>
+                {user?.wishlist?.some((x) => x.id == product?.id) ? (
+                  <FavoriteIcon sx={{ color: "red" }} />
+                ) : (
+                  <FavoriteBorderIcon sx={{ color: "black" }} />
+                )}
+              </Button>
+              <Button
+                variant="contained"
+                color="black"
+                fullWidth
+                onClick={handleBag}
+                sx={{ color: "white", backgroundColor: "black" }}
+                size="small"
+              >
+                Add to Bag
+              </Button>
+              <Button
+                variant="contained"
+                color="black"
+                fullWidth
+                onClick={() => {
+                  if (!user) {
+                    navigate("/profile");
+                    return;
+                  }
+                  if (product.availableSizes.length > 0) {
+                    selectedSize ? setBuy(true) : setDialog(true);
+                  } else {
+                    setBuy(true);
+                  }
+                }}
+                size="small"
+                sx={{ color: "white", backgroundColor: "black" }}
+              >
+                Buy now
+              </Button>
+            </Grid>
           </Grid>
-          <Grid
-            display={"flex"}
-            flexDirection={"column"}
-            gap={1}
-            mb={2}
-            size={{ xs: 12, sm: 12, md: 2 }}
-          >
-            <Typography sx={{ color: "grey" }}>
-              <span style={{ fontWeight: "bold", color: "black" }}>
-                {product?.brand}
-              </span>{" "}
-              {product?.gender == "male"
-                ? "Men " + product?.productName
-                : "Women " + product?.productName}
-            </Typography>
-
-            <Typography sx={{ fontWeight: "bold" }} variant="button">
-              <span style={{ color: "grey", fontWeight: "lighter" }}>
-                MRP{" "}
-                <s>
-                  {"\u20B9"}
-                  {product?.price + 2000}&nbsp;
-                </s>
-              </span>{" "}
-              {"\u20B9"}
-              {product?.price}
-            </Typography>
-
-            <Typography
-              sx={{ fontWeight: "bold", color: "red" }}
-              variant="caption "
-            >
-              Only Few Left!
-            </Typography>
-          </Grid>
-
-          {product?.availableSizes.length ? (
-            <>
-              {" "}
-              <Typography>Select a Size</Typography>
-              <Box display={"flex"}>
-                {product?.availableSizes.map((size) => (
-                  <Button
-                    key={size}
-                    variant={selectedSize === size ? "contained" : "outlined"}
-                    size="small"
-                    sx={{
-                      borderRadius: "30%",
-                      minWidth: 30,
-                      minHeight: 30,
-                      borderColor: "black",
-                      mt: 1,
-                      mr: 1,
-
-                      border: "1px solid grey",
-
-                      textTransform: "none",
-                      color: selectedSize == size ? "white" : "black",
-                      backgroundColor: selectedSize == size && "black",
-                    }}
-                    onClick={() => {
-                      handleSize(size);
-                    }}
-                  >
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      {size}
-                      <Typography variant="caption" color="grey">
-                        {"\u20B9"}
-                        {product?.price}
-                      </Typography>
-                    </Box>
-                  </Button>
-                ))}
-              </Box>
-            </>
-          ) : (
-            <Typography variant="subtitle"> Size: Free Size</Typography>
-          )}
-          <Box mt={2} display={"flex"} gap={1}>
-            <Button onClick={() => handleFav(product)}>
-              {user?.wishlist?.some((x) => x.id == product?.id) ? (
-                <FavoriteIcon sx={{ color: "red" }} />
-              ) : (
-                <FavoriteBorderIcon sx={{ color: "black" }} />
-              )}
-            </Button>
-            <Button
-              variant="contained"
-              color="black"
-              fullWidth
-              onClick={handleBag}
-              sx={{ color: "white", backgroundColor: "black" }}
-              size="small"
-            >
-              Add to Bag
-            </Button>
-            <Button
-              variant="contained"
-              color="black"
-              fullWidth
-              onClick={() => {
-                if (!user) {
-                  navigate("/profile");
-                  return;
-                }
-                if (product.availableSizes.length > 0) {
-                  selectedSize ? setBuy(true) : setDialog(true);
-                } else {
-                  setBuy(true);
-                }
-              }}
-              size="small"
-              sx={{ color: "white", backgroundColor: "black" }}
-            >
-              Buy now
-            </Button>
-          </Box>
         </Grid>
       )}
       <Dialog open={dialog} onClose={() => setDialog(false)}>
