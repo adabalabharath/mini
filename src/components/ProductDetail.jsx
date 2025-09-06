@@ -191,7 +191,7 @@ const ProductDetail = () => {
             Only Few Left!
           </Typography>
         </Grid>
-        <Grid>
+       
           {product?.availableSizes.length ? (
             <>
               {" "}
@@ -241,15 +241,17 @@ const ProductDetail = () => {
               )}
             </Button>
             <Button
-              variant="outlined"
+              variant="contained"
               color="black"
               fullWidth
               onClick={handleBag}
+              sx={{color:'white',backgroundColor:'black'}}
+              size="small"
             >
               Add to Bag
             </Button>
             <Button
-              variant="outlined"
+              variant="contained"
               color="black"
               fullWidth
               onClick={() => {
@@ -259,15 +261,17 @@ const ProductDetail = () => {
                 }
                 if (product.availableSizes.length > 0) {
                   selectedSize ? setBuy(true) : setDialog(true);
-                } else if (product.availableSizes.length == 0) {
+                } else {
                   setBuy(true);
                 }
               }}
+              size="small"
+              sx={{color:'white',backgroundColor:'black'}}
             >
               Buy now
             </Button>
           </Box>
-        </Grid>
+      
       </Grid>
       <Dialog open={dialog} onClose={() => setDialog(false)}>
         <DialogContent>Please select a size to continue</DialogContent>
@@ -293,7 +297,7 @@ const ProductDetail = () => {
         </Alert>
       </Snackbar>
       <Drawer
-        open={buy && selectedSize}
+        open={buy}
         anchor="bottom"
         onClose={() => setBuy(false)}
       >
