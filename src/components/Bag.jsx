@@ -24,6 +24,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import orderPlaced from "../../public/images/orderPlaced.jpeg";
+import Skeleton from "@mui/material/Skeleton";
 const Bag = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -37,6 +38,20 @@ const Bag = () => {
   const [dialog, setDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, localSet } = useContext(AuthContext);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  useEffect(() => {
+    let timer;
+
+    if (!products) {
+      timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 3000);
+    } else {
+      setShowSkeleton(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [products]);
   useEffect(() => {
     //const prods = filtersHook("", user?.bag, filters);
     setProducts(user.bag);
@@ -86,7 +101,7 @@ const Bag = () => {
     const orders = selected.map((item) => ({
       name: item.productName,
       units: item.qty,
-      size: item.selectedSize? item.selectedSize:'Free Size',
+      size: item.selectedSize ? item.selectedSize : "Free Size",
       price: item.price * item.qty,
       image: item.imageUrl,
     }));
@@ -185,7 +200,7 @@ const Bag = () => {
     setRemove(false);
   };
 
-  console.log(user.bag)
+  console.log(user.bag);
 
   return products.length ? (
     <>
@@ -466,6 +481,23 @@ const Bag = () => {
             </Button>
           </DialogActions>
         </Dialog>
+      </Grid>
+    </>
+  ) : !products.length && showSkeleton ? (
+    <>
+      <Grid container size={12} rowSpacing={5} columnSpacing={3}>
+        {/* Skeleton loaders for when data is loading */}
+        {[...Array(18)].map((_, index) => (
+          <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
+            <Box sx={{ p: 2, border: "1px solid white", position: "relative" }}>
+              <Skeleton variant="rectangular" width="100%" height={220} />
+              <Skeleton variant="text" width="60%" height={30} />
+              <Skeleton variant="text" width="50%" />
+              <Skeleton variant="text" width="30%" />
+              <Skeleton variant="text" width="40%" />
+            </Box>
+          </Grid>
+        ))}
       </Grid>
     </>
   ) : (

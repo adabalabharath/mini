@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Filters from "./Filters";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -30,7 +30,20 @@ const Page = ({ products }) => {
   const [fav, setFav] = useState(false);
   const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  useEffect(() => {
+    let timer;
+
+    if (!products.length) {
+      timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 3000);
+    } else {
+      setShowSkeleton(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [products]);
 
   const handleCart = (item) => {
     if (item.availableSizes.length > 0) {
@@ -58,7 +71,6 @@ const Page = ({ products }) => {
       localSet(updatedUser);
       setOpen(true);
     }
-   
   };
 
   const handleFav = (product) => {
@@ -119,7 +131,7 @@ const Page = ({ products }) => {
           </Drawer>
         </Grid>
 
-        {isLoading ? (
+        {!products.length && showSkeleton ? (
           <Grid container size={12} rowSpacing={5} columnSpacing={3}>
             {/* Skeleton loaders for when data is loading */}
             {[...Array(18)].map((_, index) => (
