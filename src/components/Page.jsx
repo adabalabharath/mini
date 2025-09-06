@@ -7,9 +7,9 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Filters from "./Filters";
 import TuneIcon from "@mui/icons-material/Tune";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AuthContext } from "./AuthProvider";
 import NoItems from "./NoItems";
@@ -18,6 +18,7 @@ import Stack from "@mui/material/Stack";
 import { useSelector } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { addToBag } from "../customHook/addToBagHook";
 
 const Page = ({ products }) => {
   const [drawerFilters, setDrawerFilters] = useState(false);
@@ -27,12 +28,11 @@ const Page = ({ products }) => {
   const [open, setOpen] = useState(false);
   const isLoading = useSelector((store) => store.isLoading);
   const [fav, setFav] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleCart = (item) => {
-    console.log(user);
     if (item.availableSizes.length > 0) {
       setSizeDrawer(true);
       const exists = user?.bag.some(
@@ -46,21 +46,19 @@ const Page = ({ products }) => {
             : x
         );
         const updatedUser = { ...user, bag: updatedBag };
-        localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-        setUser(updatedUser);
+        localSet(updatedUser);
       } else {
         const cartItem = { ...item, selectedSize, qty: 1, selected: true };
         const updatedUser = { ...user, bag: [...user.bag, cartItem] };
-        localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-        setUser(updatedUser);
+        localSet(updatedUser);
       }
     } else {
       const cartItem = { ...item, selectedSize, qty: 1, selected: true };
       const updatedUser = { ...user, bag: [...user.bag, cartItem] };
-      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-      setUser(updatedUser);
+      localSet(updatedUser);
       setOpen(true);
     }
+   
   };
 
   const handleFav = (product) => {
@@ -75,8 +73,7 @@ const Page = ({ products }) => {
           wishlist: user?.wishlist.filter((x) => x.id !== product.id),
         }
       : { ...user, wishlist: [...user?.wishlist, product] };
-    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-    setUser(updatedUser);
+    localSet(updatedUser);
   };
 
   return (

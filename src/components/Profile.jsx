@@ -43,7 +43,7 @@ const Profile = () => {
       password,
       wishlist: [],
       bag: [],
-      orders:[]
+      orders: [],
     };
 
     users.push(newUser);
@@ -60,8 +60,8 @@ const Profile = () => {
     if (user) {
       login(user);
       navigate(from, { replace: true });
-    }else{
-      alert('wrong creds')
+    } else {
+      alert("wrong creds");
     }
   };
 
@@ -165,7 +165,6 @@ const Profile = () => {
               Email: {user?.email}
             </Typography>
             <ButtonGroup
-             
               sx={{ display: "flex", flexDirection: "column", gap: 2 }}
               aria-label="outlined primary button group"
             >
@@ -176,8 +175,8 @@ const Profile = () => {
                   backgroundColor: "black",
                   color: "white",
                   border: "none",
-                  borderRadius: 5, 
-                  textTransform:'none',
+                  borderRadius: 5,
+                  textTransform: "none",
                   cursor: "pointer",
                 }}
                 onClick={() => navigate("/wishlist")}
@@ -194,29 +193,27 @@ const Profile = () => {
                   border: "none",
                   borderRadius: 5,
                   cursor: "pointer",
-                  textTransform:'none'
+                  textTransform: "none",
                 }}
                 onClick={() => navigate("/bag")}
               >
                 Go to Bag
               </Button>
-
             </ButtonGroup>
-              <Button
-                sx={{
-                  width: "100%",
-                  backgroundColor: "red",
-                  color: "white",
-                  border: "none",
-                  borderRadius: 1,
-                  cursor: "pointer",
-                  mt: 2,
-                }}
-                onClick={logout}
-              
-              >
-                Logout
-              </Button>
+            <Button
+              sx={{
+                width: "100%",
+                backgroundColor: "red",
+                color: "white",
+                border: "none",
+                borderRadius: 1,
+                cursor: "pointer",
+                mt: 2,
+              }}
+              onClick={logout}
+            >
+              Logout
+            </Button>
           </Card>
         )}
       </Grid>

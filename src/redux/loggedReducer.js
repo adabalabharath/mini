@@ -1,5 +1,11 @@
 const initialState={
-    bag:[]
+    id:null,
+    name:'',
+    email:"",
+    wishlist:[],
+    bag:[],
+    orders:[],
+    password:''
 }
 
 

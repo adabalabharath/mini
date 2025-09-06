@@ -32,6 +32,7 @@ const settingsIcons = [
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [search, setSearch] = useState("");
+  const [selectedProduct,setSelectedProduct]=useState(null)
   const { logout, user } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
   const options = products.filter((x) =>
@@ -41,7 +42,6 @@ const Navbar = () => {
     setDrawerOpen(open);
   };
   const navigation = useNavigate();
-
   return (
     <AppBar
       position="static"

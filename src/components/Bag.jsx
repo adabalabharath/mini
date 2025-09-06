@@ -36,10 +36,10 @@ const Bag = () => {
   const [tax, setTax] = useState(0);
   const [dialog, setDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, localSet } = useContext(AuthContext);
   useEffect(() => {
-    const prods = filtersHook("", user?.bag, filters);
-    setProducts(prods);
+    //const prods = filtersHook("", user?.bag, filters);
+    setProducts(user.bag);
   }, [user?.bag, filters]);
 
   useEffect(() => {
@@ -76,8 +76,7 @@ const Bag = () => {
         bag: user.bag.filter((x) => !x.selected),
         orders: [...user.orders, ...user.bag.filter((x) => x.selected)],
       };
-      setUser(remaining);
-      localStorage.setItem("loggedInUser", JSON.stringify(remaining));
+      localSet(remaining);
     }
   }, [ordered]);
 
@@ -125,8 +124,7 @@ const Bag = () => {
         x.id == product.id ? { ...x, selectedSize: event.target.value } : x
       ),
     };
-    setUser(updated);
-    localStorage.setItem("loggedInUser", JSON.stringify(updated));
+    localSet(updated);
   };
 
   const handleQty = (event, product) => {
@@ -138,8 +136,7 @@ const Bag = () => {
           : x
       ),
     };
-    setUser(updated);
-    localStorage.setItem("loggedInUser", JSON.stringify(updated));
+    localSet(updated);
   };
 
   const handleRemove = (product) => {
@@ -153,8 +150,7 @@ const Bag = () => {
         return !(x.id == product.id && x.selectedSize == product.selectedSize);
       }),
     };
-    setUser(updatedUser);
-    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+    localSet(updatedUser);
     setRemove(false);
   };
 
@@ -172,8 +168,7 @@ const Bag = () => {
         ? x
         : [...user.wishlist, product],
     };
-    setUser(updatedUser);
-    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+    localSet(updatedUser);
     setRemove(false);
   };
 
@@ -186,10 +181,11 @@ const Bag = () => {
           : x
       ),
     };
-    setUser(updatedUser);
-    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+    localSet(updatedUser);
     setRemove(false);
   };
+
+  console.log(user.bag)
 
   return products.length ? (
     <>

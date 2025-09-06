@@ -8,6 +8,10 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("loggedInUser") || "null")
   );
   
+  const localSet=(user)=>{
+      localStorage.setItem("loggedInUser",JSON.stringify(user))
+      setUser(user)
+  }
 
   const login = (userData) => {
     localStorage.setItem("loggedInUser", JSON.stringify(userData));
@@ -20,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user,setUser, login, logout }}>
+    <AuthContext.Provider value={{ user,localSet, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
