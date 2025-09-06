@@ -58,7 +58,6 @@ const Bag = () => {
   }, [user?.bag, filters]);
 
   useEffect(() => {
-    console.log(products.filter((x) => x.selected));
 
     let original = products.reduce(
       (a, b) => (b.selected ? a + b.price * b.qty : a),
@@ -155,7 +154,6 @@ const Bag = () => {
   };
 
   const handleRemove = (product) => {
-    console.log(product);
     const updatedUser = {
       ...user,
       bag: user.bag.filter((x) => {
@@ -170,7 +168,6 @@ const Bag = () => {
   };
 
   const handleMove = (product) => {
-    console.log(product);
     const updatedUser = {
       ...user,
       bag: user.bag.filter((x) => {
@@ -199,8 +196,6 @@ const Bag = () => {
     localSet(updatedUser);
     setRemove(false);
   };
-
-  console.log(user.bag);
 
   return products.length ? (
     <>

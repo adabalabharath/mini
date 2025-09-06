@@ -8,7 +8,7 @@ const ShopWomen = () => {
   const filters = useSelector((store) => store.filters);
   useEffect(() => {
     const women = filtersHook("female", data, filters);
-    console.log(women)
+
     setFemaleProducts(women);
   }, [data, filters]);
 
