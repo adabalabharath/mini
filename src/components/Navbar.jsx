@@ -10,7 +10,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import ListItem from "@mui/material/ListItem";
@@ -20,17 +19,19 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from "./AuthProvider";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import SellIcon from "@mui/icons-material/Sell";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
-const settings = ["Profile", "Wishlist", "Bag"];
+const settings = ["Profile", "Wishlist", "Bag","Orders"];
 const settingsIcons = [
   <PersonIcon />,
   <FavoriteBorderIcon />,
   <LocalMallIcon />,
+  <SellIcon/>
 ];
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);

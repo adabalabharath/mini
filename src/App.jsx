@@ -14,6 +14,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useDispatch } from "react-redux";
 import { setProducts } from "./redux/action";
 import ProductDetail from "./components/ProductDetail";
+import Orders from "./components/Orders";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -38,6 +39,7 @@ function App() {
           <Route path="/shop/home" element={<ShopHomeLiving />} />
           <Route path="/shop/beauty" element={<ShopBeauty />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
           <Route path="/product/:name" element={<ProductDetail />} />
           <Route path="/productId/:id" element={<ProductDetail />} />
           <Route

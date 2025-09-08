@@ -19,11 +19,11 @@ import Alert from "@mui/material/Alert";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import SellIcon from '@mui/icons-material/Sell';
+import SellIcon from "@mui/icons-material/Sell";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LogoutIcon from "@mui/icons-material/Logout";
-import PhoneIcon from '@mui/icons-material/Phone';
+import PhoneIcon from "@mui/icons-material/Phone";
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
   email: Yup.string().email("Invalid email").required("Required"),
@@ -236,7 +236,9 @@ const Profile = () => {
                   sx={{ width: "100px", height: "100px" }}
                 />
               ) : (
-                <Avatar sx={{ width: "100px", height: "100px",fontSize:'40px' }}>
+                <Avatar
+                  sx={{ width: "100px", height: "100px", fontSize: "40px" }}
+                >
                   {user.name.split("")[0].toUpperCase()}
                 </Avatar>
               )}
@@ -259,8 +261,50 @@ const Profile = () => {
                 Hello, {user?.name}
               </Typography>
             </Box>
-           <Box display={'flex'} flexDirection={'column'} gap={2}>
-            <Link to="/wishlist">
+            <Box display={"flex"} flexDirection={"column"} gap={2}>
+              <Link to="/wishlist">
+                <Button
+                  fullWidth
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    justifyContent: "flex-start",
+                  }}
+                  size="large"
+                >
+                  <FavoriteBorderIcon sx={{ mr: 1 }} />
+                  Wishlist
+                </Button>
+              </Link>
+
+              <Link to="/bag">
+                <Button
+                  fullWidth
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    justifyContent: "flex-start",
+                  }}
+                  size="large"
+                >
+                  <LocalMallIcon sx={{ mr: 1 }} />
+                  Bag
+                </Button>
+              </Link>
+              <Link to="/orders">
+                <Button
+                  fullWidth
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    justifyContent: "flex-start",
+                  }}
+                  size="large"
+                >
+                  <SellIcon sx={{ mr: 1 }} />
+                  Orders
+                </Button>
+              </Link>
               <Button
                 fullWidth
                 sx={{
@@ -269,67 +313,23 @@ const Profile = () => {
                   justifyContent: "flex-start",
                 }}
                 size="large"
+                //href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
               >
-                <FavoriteBorderIcon sx={{ mr: 1 }} />
-                Wishlist
+                <PhoneIcon sx={{ mr: 1 }} />
+                Contact Us
               </Button>
-            </Link>
 
-            <Link to="/bag">
               <Button
-                fullWidth
+                onClick={() => setLogoutDialog(true)}
                 sx={{
                   textTransform: "none",
                   color: "black",
                   justifyContent: "flex-start",
                 }}
-                size="large"
               >
-                <LocalMallIcon sx={{ mr: 1 }} />
-                Bag
+                <LogoutIcon sx={{ mr: 1 }} />
+                Logout
               </Button>
-            </Link>
-
-            <Button
-              fullWidth
-              sx={{
-                textTransform: "none",
-                color: "black",
-                justifyContent: "flex-start",
-              }}
-              disabled
-              size="large"
-            >
-              <SellIcon sx={{mr:1}}/>
-              Orders
-            </Button>
-
-            <Button
-              fullWidth
-              sx={{
-                textTransform: "none",
-                color: "black",
-                justifyContent: "flex-start",
-              }}
-              size="large"
-              //href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
-            >
-              <PhoneIcon sx={{mr:1}}/>
-              Contact Us
-            </Button>
-
-            <Button
-              onClick={() => setLogoutDialog(true)}
-              sx={{
-                textTransform: "none",
-                color: "black",
-                justifyContent: "flex-start",
-              }}
-
-            >
-             <LogoutIcon sx={{mr:1}}/>
-              Logout
-            </Button>
             </Box>
           </Grid>
         )}
@@ -368,7 +368,9 @@ const Profile = () => {
           onClose={() => setLogoutDialog(false)}
           sx={{ borderRadius: 5 }}
         >
-          <DialogContent><Typography>Are you sure, you want to Logout?</Typography></DialogContent>
+          <DialogContent>
+            <Typography>Are you sure, you want to Logout?</Typography>
+          </DialogContent>
           <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               onClick={() => {
@@ -377,19 +379,19 @@ const Profile = () => {
               sx={{
                 textTransform: "none",
                 color: "white",
-                backgroundColor:'black',
-                mb:2
+                backgroundColor: "black",
+                mb: 2,
               }}
             >
               Yes
             </Button>
             <Button
               onClick={() => setLogoutDialog(false)}
-               sx={{
+              sx={{
                 textTransform: "none",
                 color: "white",
-                backgroundColor:'black',
-                mb:2
+                backgroundColor: "black",
+                mb: 2,
               }}
             >
               No

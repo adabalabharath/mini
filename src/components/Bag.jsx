@@ -20,8 +20,6 @@ import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import orderPlaced from "../../public/images/orderPlaced.jpeg";
 import Skeleton from "@mui/material/Skeleton";
@@ -58,7 +56,6 @@ const Bag = () => {
   }, [user?.bag, filters]);
 
   useEffect(() => {
-
     let original = products.reduce(
       (a, b) => (b.selected ? a + b.price * b.qty : a),
       0
@@ -339,21 +336,24 @@ const Bag = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Box
-                  display="flex"
-                  flexDirection={"row"}
-                  justifyContent={"space-evenly"}
-                >
+                <Box display="flex" flexDirection={"row"}>
                   <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
+                    sx={{ textTransform: "none", border: 1 }}
+                    fullWidth
                   >
-                    remove
+                    Remove
                   </Button>
                   <Button
-                    color="black"
-                    sx={{ textTransform: "none" }}
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      backgroundColor: "black",
+                      color: "white",
+                    }}
                     onClick={() => handleMove(selectedProduct)}
+                    fullWidth
                   >
                     Move to wishlist
                   </Button>
