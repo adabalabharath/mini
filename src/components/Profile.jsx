@@ -104,7 +104,7 @@ const Profile = () => {
       console.log("logout timer started",new Date())
       setTimeout(() => {
         console.log("logging out"), logout();
-      }, 120000);
+      }, 1800000);
     } else {
       setWrongCred(true);
     }
