@@ -11,44 +11,70 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+const schema = Yup.object({
+  name: Yup.string().min(3, "Minimum three letters required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
+    .matches(
+      /[@$!%*?&]/,
+      "Password must contain at least one special character"
+    ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
+const loginSchema = Yup.object({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Password is required"),
+});
 const Profile = () => {
   const [signUp, setSignUp] = useState(true);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [wrongCred, setWrongCred] = useState(false);
+  const [exists, setExists] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname;
-  const [profile,setProfile]=useState("")
+  const [profile, setProfile] = useState("");
   // const users = useSelector((store) => store.users);
-  const { login, user, logout,localSet } = useContext(AuthContext);
-  useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setName("");
-  }, [signUp]);
-  const handleSignup = () => {
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const { login, user, logout, localSet } = useContext(AuthContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signUp ? schema : loginSchema),
+  });
 
-    // check if user already exists
-    const userExists = users.some((user) => user?.email === email);
+  const handleSignup = (data) => {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const userExists = users.some((user) => user?.email === data.email);
     if (userExists) {
-      alert("User already exists!");
+      setExists(true);
       setSignUp(false);
       return;
     }
 
     const newUser = {
       id: Date.now(),
-      name,
-      email,
-      password,
+      name: data.name,
+      email: data.email,
+      password: data.password,
       wishlist: [],
       bag: [],
       orders: [],
-      profile:""
+      profile: "",
     };
 
     users.push(newUser);
@@ -57,16 +83,17 @@ const Profile = () => {
     setSignUp(false);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (data) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const user = users.find(
-      (u) => u.email === email && u.password === password
+      (u) => u.email === data.email && u.password === data.password
     );
+
     if (user) {
       login(user);
       navigate(from, { replace: true });
     } else {
-      alert("wrong creds");
+      setWrongCred(true);
     }
   };
 
@@ -76,18 +103,16 @@ const Profile = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfile(reader.result);
-        const existing=JSON.parse(localStorage.getItem('loggedInUser'))
-        const profileUser={...existing,profile:reader.result}
-        localSet(profileUser)
+        const existing = JSON.parse(localStorage.getItem("loggedInUser"));
+        const profileUser = { ...existing, profile: reader.result };
+        localSet(profileUser);
       };
       reader.readAsDataURL(file);
-
     }
   };
-   const handleClick = () => {
+  const handleClick = () => {
     document.getElementById("avatar-upload")?.click();
   };
-
 
   useEffect(() => {
     const loggedInUser = JSON.parse(
@@ -97,8 +122,6 @@ const Profile = () => {
       setSignUp(false);
     } else setSignUp(true);
   }, []);
-
-  console.log(user)
 
   return (
     <Grid container>
@@ -115,62 +138,74 @@ const Profile = () => {
               boxShadow: 3,
             }}
           >
-            <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
-              {signUp ? "Sign Up" : "Login"}
-            </Typography>
-            {signUp && (
+            <form onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
+                {signUp ? "Sign Up" : "Login to continue"}
+              </Typography>
+              {signUp && (
+                <TextField
+                  fullWidth
+                  label={"name"}
+                  sx={{ mb: 2 }}
+                  {...register("name")}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                />
+              )}
               <TextField
                 fullWidth
-                label={"name"}
+                label={"email"}
                 sx={{ mb: 2 }}
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message}
               />
-            )}
-            <TextField
-              fullWidth
-              label={"email"}
-              sx={{ mb: 2 }}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-            <TextField
-              fullWidth
-              label={"password"}
-              sx={{ mb: 2 }}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-            {signUp && (
-              <TextField fullWidth label={"confirm password"} sx={{ mb: 2 }} />
-            )}
-            <button
-              style={{
-                width: "100%",
-                padding: 10,
-                backgroundColor: "black",
-                color: "white",
-                border: "none",
-                borderRadius: 5,
-                cursor: "pointer",
-              }}
-              onClick={signUp ? handleSignup : handleLogin}
-            >
-              {signUp ? "Sign Up" : "Login"}
-            </button>
-            <Typography
-              sx={{
-                mt: 2,
-                cursor: "pointer",
-                textAlign: "center",
-                textDecoration: "underline",
-              }}
-              onClick={() => setSignUp(!signUp)}
-            >
-              {signUp
-                ? "Already have an account? Login"
-                : "Don't have an account? Sign Up"}
-            </Typography>
+              <TextField
+                fullWidth
+                label={"password"}
+                sx={{ mb: 2 }}
+                {...register("password")}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+              {signUp && (
+                <TextField
+                  fullWidth
+                  label={"confirm password"}
+                  sx={{ mb: 2 }}
+                  {...register("confirmPassword")}
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword?.message}
+                />
+              )}
+              <button
+                style={{
+                  width: "100%",
+                  padding: 10,
+                  backgroundColor: "black",
+                  color: "white",
+                  border: "none",
+                  borderRadius: 5,
+                  cursor: "pointer",
+                }}
+                type="submit"
+              >
+                {signUp ? "Sign Up" : "Login"}
+              </button>
+              <Typography
+                sx={{
+                  mt: 2,
+                  cursor: "pointer",
+                  textAlign: "center",
+                  textDecoration: "underline",
+                }}
+                onClick={() => setSignUp(!signUp)}
+              >
+                {signUp
+                  ? "Already have an account? Login"
+                  : "Don't have an account? Sign Up"}
+              </Typography>
+            </form>
           </Card>
         ) : (
           <Grid size={12} my={2}>
@@ -187,7 +222,12 @@ const Profile = () => {
                 src={user.profile || ""}
                 sx={{ width: "100px", height: "100px" }}
               />
-              <Box position={"absolute"} bottom={55} right={"calc(50% - 40px)"} onClick={handleClick}>
+              <Box
+                position={"absolute"}
+                bottom={55}
+                right={"calc(50% - 40px)"}
+                onClick={handleClick}
+              >
                 <AddAPhotoIcon sx={{ color: "grey", fontSize: 24 }} />
               </Box>
               <input
@@ -211,6 +251,7 @@ const Profile = () => {
 
                   justifyContent: "flex-start",
                 }}
+                size="large"
               >
                 Wishlist
               </Button>
@@ -224,6 +265,7 @@ const Profile = () => {
                   color: "black",
                   justifyContent: "flex-start",
                 }}
+                size="large"
               >
                 Bag
               </Button>
@@ -238,6 +280,7 @@ const Profile = () => {
                 justifyContent: "flex-start",
               }}
               disabled
+              size="large"
             >
               Orders
             </Button>
@@ -250,6 +293,7 @@ const Profile = () => {
 
                 justifyContent: "flex-start",
               }}
+              size="large"
               disabled
             >
               Contact Us
@@ -270,6 +314,36 @@ const Profile = () => {
             </Box>
           </Grid>
         )}
+        <Snackbar
+          open={wrongCred}
+          autoHideDuration={3000}
+          onClose={() => setWrongCred(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setWrongCred(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            wrong credentials
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={exists}
+          autoHideDuration={3000}
+          onClose={() => setExists(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setExists(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            Account already exists
+          </Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );
