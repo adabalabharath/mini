@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
@@ -15,11 +15,11 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "./redux/action";
 import ProductDetail from "./components/ProductDetail";
 import Orders from "./components/Orders";
+import { AuthContext } from "./components/AuthProvider";
 
 function App() {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
-
   const fetchProducts = async () => {
     dispatch(setProducts);
   };
@@ -39,7 +39,14 @@ function App() {
           <Route path="/shop/home" element={<ShopHomeLiving />} />
           <Route path="/shop/beauty" element={<ShopBeauty />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+          <Route
+            path="/orders"
+            element={
+              <PrivateRoute>
+                <Orders />
+              </PrivateRoute>
+            }
+          />
           <Route path="/product/:name" element={<ProductDetail />} />
           <Route path="/productId/:id" element={<ProductDetail />} />
           <Route

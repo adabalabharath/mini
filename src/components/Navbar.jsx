@@ -182,7 +182,7 @@ const Navbar = () => {
             </List>
 
             {/* Logout at bottom */}
-            {user !== null && (
+            {user && (
               <Box sx={{ mt: "auto", mb: 2 }}>
                 <Button
                   onClick={() => setLogoutDialog(true)}

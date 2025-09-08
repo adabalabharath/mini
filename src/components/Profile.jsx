@@ -97,11 +97,14 @@ const Profile = () => {
     );
 
     if (user) {
+      const loginTime = new Date().getTime();
+      localStorage.setItem("loginTime", loginTime);
       login(user);
       navigate(from, { replace: true });
+      console.log("logout timer started",new Date())
       setTimeout(() => {
         console.log("logging out"), logout();
-      }, 3600000);
+      }, 120000);
     } else {
       setWrongCred(true);
     }
