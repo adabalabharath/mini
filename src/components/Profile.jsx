@@ -19,6 +19,11 @@ import Alert from "@mui/material/Alert";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import SellIcon from '@mui/icons-material/Sell';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PhoneIcon from '@mui/icons-material/Phone';
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
   email: Yup.string().email("Invalid email").required("Required"),
@@ -50,8 +55,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname;
-  const [profile, setProfile] = useState("");
-  // const users = useSelector((store) => store.users);
   const { login, user, logout, localSet } = useContext(AuthContext);
   const {
     register,
@@ -96,6 +99,9 @@ const Profile = () => {
     if (user) {
       login(user);
       navigate(from, { replace: true });
+      setTimeout(() => {
+        console.log("logging out"), logout();
+      }, 3600000);
     } else {
       setWrongCred(true);
     }
@@ -106,8 +112,7 @@ const Profile = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfile(reader.result);
-        const existing = JSON.parse(localStorage.getItem("loggedInUser"));
+        const existing = user;
         const profileUser = { ...existing, profile: reader.result };
         localSet(profileUser);
       };
@@ -119,9 +124,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const loggedInUser = JSON.parse(
-      localStorage.getItem("loggedInUser") || null
-    );
+    const loggedInUser = user;
     if (loggedInUser) {
       setSignUp(false);
     } else setSignUp(true);
@@ -226,11 +229,17 @@ const Profile = () => {
               width={"100%"}
               position={"relative"}
             >
-              <Avatar
-                alt="Remy Sharp"
-                src={user.profile || ""}
-                sx={{ width: "100px", height: "100px" }}
-              />
+              {user.profile ? (
+                <Avatar
+                  alt="Remy Sharp"
+                  src={user.profile}
+                  sx={{ width: "100px", height: "100px" }}
+                />
+              ) : (
+                <Avatar sx={{ width: "100px", height: "100px",fontSize:'40px' }}>
+                  {user.name.split("")[0].toUpperCase()}
+                </Avatar>
+              )}
               <Box
                 position={"absolute"}
                 bottom={55}
@@ -250,18 +259,18 @@ const Profile = () => {
                 Hello, {user?.name}
               </Typography>
             </Box>
-
+           <Box display={'flex'} flexDirection={'column'} gap={2}>
             <Link to="/wishlist">
               <Button
                 fullWidth
                 sx={{
                   textTransform: "none",
                   color: "black",
-
                   justifyContent: "flex-start",
                 }}
                 size="large"
               >
+                <FavoriteBorderIcon sx={{ mr: 1 }} />
                 Wishlist
               </Button>
             </Link>
@@ -276,6 +285,7 @@ const Profile = () => {
                 }}
                 size="large"
               >
+                <LocalMallIcon sx={{ mr: 1 }} />
                 Bag
               </Button>
             </Link>
@@ -285,12 +295,12 @@ const Profile = () => {
               sx={{
                 textTransform: "none",
                 color: "black",
-
                 justifyContent: "flex-start",
               }}
               disabled
               size="large"
             >
+              <SellIcon sx={{mr:1}}/>
               Orders
             </Button>
 
@@ -299,12 +309,12 @@ const Profile = () => {
               sx={{
                 textTransform: "none",
                 color: "black",
-
                 justifyContent: "flex-start",
               }}
               size="large"
-              href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
+              //href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
             >
+              <PhoneIcon sx={{mr:1}}/>
               Contact Us
             </Button>
 
@@ -313,12 +323,14 @@ const Profile = () => {
               sx={{
                 textTransform: "none",
                 color: "black",
-
                 justifyContent: "flex-start",
               }}
+
             >
-              <Typography>Logout</Typography>
+             <LogoutIcon sx={{mr:1}}/>
+              Logout
             </Button>
+            </Box>
           </Grid>
         )}
         <Snackbar
@@ -354,9 +366,9 @@ const Profile = () => {
         <Dialog
           open={logoutDialog}
           onClose={() => setLogoutDialog(false)}
-          sx={{ p: 1, borderRadius: 5 }}
+          sx={{ borderRadius: 5 }}
         >
-          <DialogContent>Are you sure, you want to Logout?</DialogContent>
+          <DialogContent><Typography>Are you sure, you want to Logout?</Typography></DialogContent>
           <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               onClick={() => {

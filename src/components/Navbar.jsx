@@ -36,7 +36,6 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [search, setSearch] = useState("");
   const [logoutDialog, setLogoutDialog] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const { logout, user } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
   const options = products.filter((x) =>
@@ -182,7 +181,7 @@ const Navbar = () => {
             </List>
 
             {/* Logout at bottom */}
-            {localStorage.getItem("loggedInUser") !== null && (
+            {user !== null && (
               <Box sx={{ mt: "auto", mb: 2 }}>
                 <Button
                   onClick={() => setLogoutDialog(true)}
@@ -260,7 +259,7 @@ const Navbar = () => {
             onClose={() => setLogoutDialog(false)}
             sx={{ p: 1, borderRadius: 5 }}
           >
-            <DialogContent>Are you sure, you want to Logout?</DialogContent>
+            <DialogContent><Typography>Are you sure, you want to Logout?</Typography></DialogContent>
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
               <Button
                 onClick={() => {

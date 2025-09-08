@@ -292,7 +292,7 @@ const ProductDetail = () => {
         </Grid>
       )}
       <Dialog open={dialog} onClose={() => setDialog(false)}>
-        <DialogContent>Please select a size to continue</DialogContent>
+        <DialogContent><Typography>Please select a size to continue</Typography></DialogContent>
         <DialogActions
           onClick={() => setDialog(false)}
           sx={{ display: "flex", justifyContent: "center" }}

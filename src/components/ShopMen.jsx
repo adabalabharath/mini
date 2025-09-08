@@ -14,7 +14,6 @@ const ShopMen = () => {
   return (
     <>
       <Page products={products} />
-      {products.length && ''}
     </>
   );
 };
