@@ -303,7 +303,7 @@ const Profile = () => {
                 justifyContent: "flex-start",
               }}
               size="large"
-              disabled
+              href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
             >
               Contact Us
             </Button>
