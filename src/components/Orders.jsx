@@ -158,7 +158,7 @@ const Orders = () => {
                   <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
-                    sx={{border:1,textTransform:'none'}}
+                    sx={{textTransform:'none'}}
                     fullWidth
                   >
                     Yes

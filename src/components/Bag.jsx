@@ -340,7 +340,7 @@ const Bag = () => {
                   <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
-                    sx={{ textTransform: "none", border: 1 }}
+                    sx={{ textTransform: "none"}}
                     fullWidth
                   >
                     Remove
