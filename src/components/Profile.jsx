@@ -118,8 +118,6 @@ const Profile = () => {
     document.getElementById("avatar-upload")?.click();
   };
 
-  console.log(user);
-
   useEffect(() => {
     const loggedInUser = JSON.parse(
       localStorage.getItem("loggedInUser") || null
