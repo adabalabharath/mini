@@ -138,7 +138,7 @@ const Profile = () => {
               boxShadow: 3,
             }}
           >
-            <form onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)}>
+            <form onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)} autoComplete="off">
               <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                 {signUp ? "Sign Up" : "Login to continue"}
               </Typography>
@@ -150,6 +150,7 @@ const Profile = () => {
                   {...register("name")}
                   error={!!errors.name}
                   helperText={errors.name?.message}
+                  
                 />
               )}
               <TextField
@@ -167,6 +168,7 @@ const Profile = () => {
                 {...register("password")}
                 error={!!errors.password}
                 helperText={errors.password?.message}
+                type="password"
               />
               {signUp && (
                 <TextField
@@ -176,6 +178,7 @@ const Profile = () => {
                   {...register("confirmPassword")}
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword?.message}
+                  type="password"
                 />
               )}
               <button
@@ -341,7 +344,7 @@ const Profile = () => {
             variant="filled"
             sx={{ width: "100%" }}
           >
-            Account already exists
+            Email already exists
           </Alert>
         </Snackbar>
       </Grid>
