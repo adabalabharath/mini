@@ -3,11 +3,14 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { use, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Box from "@mui/material/Box";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import Avatar from "@mui/material/Avatar";
 
 const Profile = () => {
   const [signUp, setSignUp] = useState(true);
@@ -18,8 +21,9 @@ const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname;
+  const [profile,setProfile]=useState("")
   // const users = useSelector((store) => store.users);
-  const { login, user, logout } = useContext(AuthContext);
+  const { login, user, logout,localSet } = useContext(AuthContext);
   useEffect(() => {
     setEmail("");
     setPassword("");
@@ -44,6 +48,7 @@ const Profile = () => {
       wishlist: [],
       bag: [],
       orders: [],
+      profile:""
     };
 
     users.push(newUser);
@@ -65,6 +70,25 @@ const Profile = () => {
     }
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfile(reader.result);
+        const existing=JSON.parse(localStorage.getItem('loggedInUser'))
+        const profileUser={...existing,profile:reader.result}
+        localSet(profileUser)
+      };
+      reader.readAsDataURL(file);
+
+    }
+  };
+   const handleClick = () => {
+    document.getElementById("avatar-upload")?.click();
+  };
+
+
   useEffect(() => {
     const loggedInUser = JSON.parse(
       localStorage.getItem("loggedInUser") || null
@@ -74,9 +98,11 @@ const Profile = () => {
     } else setSignUp(true);
   }, []);
 
+  console.log(user)
+
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={12} sm={8} md={8} lg={4}>
+    <Grid container>
+      <Grid size={{ xs: 12, md: 8 }}>
         {!user ? (
           <Card
             sx={{
@@ -147,74 +173,102 @@ const Profile = () => {
             </Typography>
           </Card>
         ) : (
-          <Card
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              m: 5,
-              p: 3,
-              boxShadow: 3,
-            }}
-          >
-            <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
-              Welcome, {user?.name}!
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-              Email: {user?.email}
-            </Typography>
-            <ButtonGroup
-              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-              aria-label="outlined primary button group"
+          <Grid size={12} my={2}>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              width={"100%"}
+              position={"relative"}
             >
-              <Button
-                style={{
-                  width: "100%",
-                  padding: 10,
-                  backgroundColor: "black",
-                  color: "white",
-                  border: "none",
-                  borderRadius: 5,
-                  textTransform: "none",
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate("/wishlist")}
-              >
-                Go to wishlist
-              </Button>
+              <Avatar
+                alt="Remy Sharp"
+                src={user.profile || ""}
+                sx={{ width: "100px", height: "100px" }}
+              />
+              <Box position={"absolute"} bottom={55} right={"calc(50% - 40px)"} onClick={handleClick}>
+                <AddAPhotoIcon sx={{ color: "grey", fontSize: 24 }} />
+              </Box>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <Typography variant="h6" m={2}>
+                Hello, {user?.name}
+              </Typography>
+            </Box>
 
+            <Link to="/wishlist">
               <Button
-                style={{
-                  width: "100%",
-                  padding: 10,
-                  backgroundColor: "black",
-                  color: "white",
-                  border: "none",
-                  borderRadius: 5,
-                  cursor: "pointer",
+                fullWidth
+                sx={{
                   textTransform: "none",
+                  color: "black",
+
+                  justifyContent: "flex-start",
                 }}
-                onClick={() => navigate("/bag")}
               >
-                Go to Bag
+                Wishlist
               </Button>
-            </ButtonGroup>
+            </Link>
+
+            <Link to="/bag">
+              <Button
+                fullWidth
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+                  justifyContent: "flex-start",
+                }}
+              >
+                Bag
+              </Button>
+            </Link>
+
             <Button
+              fullWidth
               sx={{
-                width: "100%",
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-                borderRadius: 1,
-                cursor: "pointer",
-                mt: 2,
+                textTransform: "none",
+                color: "black",
+
+                justifyContent: "flex-start",
               }}
-              onClick={logout}
+              disabled
             >
-              Logout
+              Orders
             </Button>
-          </Card>
+
+            <Button
+              fullWidth
+              sx={{
+                textTransform: "none",
+                color: "black",
+
+                justifyContent: "flex-start",
+              }}
+              disabled
+            >
+              Contact Us
+            </Button>
+
+            <Box sx={{ mt: "auto", mb: 2 }}>
+              <Button
+                onClick={logout}
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+
+                  justifyContent: "flex-start",
+                }}
+              >
+                <Typography>Logout</Typography>
+              </Button>
+            </Box>
+          </Grid>
         )}
       </Grid>
     </Grid>

@@ -168,8 +168,7 @@ const ProductDetail = () => {
         </Box>
       )}
       {product && (
-        <Grid container direction={"column"}>
-         
+        <Grid container direction={"column"}>         
           <Grid size={{ xs: 12, md: 4 }} pt={2}>
             <img src={product?.imageUrl} style={{ width: "100%" }} />
             <Grid
