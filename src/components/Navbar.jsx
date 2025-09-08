@@ -22,6 +22,9 @@ import { AuthContext } from "./AuthProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
 const settings = ["Profile", "Wishlist", "Bag"];
 const settingsIcons = [
@@ -32,7 +35,8 @@ const settingsIcons = [
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [search, setSearch] = useState("");
-  const [selectedProduct,setSelectedProduct]=useState(null)
+  const [logoutDialog, setLogoutDialog] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const { logout, user } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
   const options = products.filter((x) =>
@@ -181,7 +185,7 @@ const Navbar = () => {
             {localStorage.getItem("loggedInUser") !== null && (
               <Box sx={{ mt: "auto", mb: 2 }}>
                 <Button
-                  onClick={logout}
+                  onClick={() => setLogoutDialog(true)}
                   sx={{
                     textTransform: "none",
                     color: "black",
@@ -244,12 +248,42 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              <Badge badgeContent={user?.bag?.length} color='secondary'>
+              <Badge badgeContent={user?.bag?.length} color="secondary">
                 <LocalMallIcon />
               </Badge>
               <Typography variant="caption">Bag</Typography>
             </Box>
           </Link>
+
+          <Dialog
+            open={logoutDialog}
+            onClose={() => setLogoutDialog(false)}
+            sx={{ p: 1, borderRadius: 5 }}
+          >
+            <DialogContent>Are you sure, you want to Logout?</DialogContent>
+            <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                onClick={() => {
+                  logout(), setLogoutDialog(false);
+                }}
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                onClick={() => setLogoutDialog(false)}
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+                }}
+              >
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Box>
       </Toolbar>
     </AppBar>

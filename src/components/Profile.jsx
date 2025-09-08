@@ -16,6 +16,9 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
   email: Yup.string().email("Invalid email").required("Required"),
@@ -42,6 +45,7 @@ const Profile = () => {
   const [signUp, setSignUp] = useState(true);
   const [wrongCred, setWrongCred] = useState(false);
   const [exists, setExists] = useState(false);
+  const [logoutDialog, setLogoutDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -114,6 +118,8 @@ const Profile = () => {
     document.getElementById("avatar-upload")?.click();
   };
 
+  console.log(user);
+
   useEffect(() => {
     const loggedInUser = JSON.parse(
       localStorage.getItem("loggedInUser") || null
@@ -121,7 +127,7 @@ const Profile = () => {
     if (loggedInUser) {
       setSignUp(false);
     } else setSignUp(true);
-  }, []);
+  }, [user]);
 
   return (
     <Grid container>
@@ -138,7 +144,10 @@ const Profile = () => {
               boxShadow: 3,
             }}
           >
-            <form onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)} autoComplete="off">
+            <form
+              onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)}
+              autoComplete="off"
+            >
               <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                 {signUp ? "Sign Up" : "Login to continue"}
               </Typography>
@@ -150,7 +159,6 @@ const Profile = () => {
                   {...register("name")}
                   error={!!errors.name}
                   helperText={errors.name?.message}
-                  
                 />
               )}
               <TextField
@@ -304,7 +312,7 @@ const Profile = () => {
 
             <Box sx={{ mt: "auto", mb: 2 }}>
               <Button
-                onClick={logout}
+                onClick={() => setLogoutDialog(true)}
                 sx={{
                   textTransform: "none",
                   color: "black",
@@ -347,6 +355,35 @@ const Profile = () => {
             Email already exists
           </Alert>
         </Snackbar>
+        <Dialog
+          open={logoutDialog}
+          onClose={() => setLogoutDialog(false)}
+          sx={{ p: 1, borderRadius: 5 }}
+        >
+          <DialogContent>Are you sure, you want to Logout?</DialogContent>
+          <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              onClick={() => {
+                logout(), setLogoutDialog(false);
+              }}
+              sx={{
+                textTransform: "none",
+                color: "black",
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              onClick={() => setLogoutDialog(false)}
+              sx={{
+                textTransform: "none",
+                color: "black",
+              }}
+            >
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     </Grid>
   );
