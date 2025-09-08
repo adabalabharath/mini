@@ -376,16 +376,20 @@ const Profile = () => {
               }}
               sx={{
                 textTransform: "none",
-                color: "black",
+                color: "white",
+                backgroundColor:'black',
+                mb:2
               }}
             >
               Yes
             </Button>
             <Button
               onClick={() => setLogoutDialog(false)}
-              sx={{
+               sx={{
                 textTransform: "none",
-                color: "black",
+                color: "white",
+                backgroundColor:'black',
+                mb:2
               }}
             >
               No

@@ -257,7 +257,7 @@ const Navbar = () => {
           <Dialog
             open={logoutDialog}
             onClose={() => setLogoutDialog(false)}
-            sx={{ p: 1, borderRadius: 5 }}
+            sx={{ borderRadius: 5 }}
           >
             <DialogContent><Typography>Are you sure, you want to Logout?</Typography></DialogContent>
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
@@ -265,19 +265,13 @@ const Navbar = () => {
                 onClick={() => {
                   logout(), setLogoutDialog(false);
                 }}
-                sx={{
-                  textTransform: "none",
-                  color: "black",
-                }}
+                sx={{mb:2,backgroundColor:'black',color:'white',textTransform:'none'}}
               >
                 Yes
               </Button>
               <Button
                 onClick={() => setLogoutDialog(false)}
-                sx={{
-                  textTransform: "none",
-                  color: "black",
-                }}
+                sx={{mb:2,backgroundColor:'black',color:'white',textTransform:'none'}}
               >
                 No
               </Button>
