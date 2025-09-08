@@ -128,7 +128,7 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <Grid container justifyContent={'center'}>
+    <Grid container justifyContent={"center"}>
       <Grid size={{ xs: 12, md: 8 }}>
         {!user ? (
           <Card
@@ -308,19 +308,17 @@ const Profile = () => {
               Contact Us
             </Button>
 
-            <Box sx={{ mt: "auto", mb: 2 }}>
-              <Button
-                onClick={() => setLogoutDialog(true)}
-                sx={{
-                  textTransform: "none",
-                  color: "black",
+            <Button
+              onClick={() => setLogoutDialog(true)}
+              sx={{
+                textTransform: "none",
+                color: "black",
 
-                  justifyContent: "flex-start",
-                }}
-              >
-                <Typography>Logout</Typography>
-              </Button>
-            </Box>
+                justifyContent: "flex-start",
+              }}
+            >
+              <Typography>Logout</Typography>
+            </Button>
           </Grid>
         )}
         <Snackbar
