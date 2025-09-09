@@ -1322,5 +1322,406 @@
     "rating": 4.7,
     "price": 3295,
     "availableSizes": [36, 37, 38, 39, 40]
+  },
+  
+  {
+    "id": "KSH001",
+    "productName": "Nike Kids Running Shoes",
+    "gender": "others",
+    "imageUrl": "/images/kids1.jpeg",
+    "brand": "Nike",
+    "type": "shoes",
+    "rating": 4.5,
+    "price": 2200,
+    "availableSizes": [28, 29, 30, 31, 32]
+  },
+  {
+    "id": "KSH002",
+    "productName": "Adidas Kids Sports Sneakers",
+    "gender": "others",
+    "imageUrl": "/images/kids2.jpeg",
+    "brand": "Adidas",
+    "type": "shoes",
+    "rating": 4.3,
+    "price": 1999,
+    "availableSizes": [30, 31, 32, 33, 34]
+  },
+  {
+    "id": "KFR001",
+    "productName": "Peach Fairy Party Frock",
+    "gender": "others",
+    "imageUrl": "/images/kids3.jpeg",
+    "brand": "BabyHug",
+    "type": "frock",
+    "rating": 4.6,
+    "price": 1850,
+    "availableSizes": ["S", "M", "L"]
+  },
+  {
+    "id": "KFR002",
+    "productName": "Red Bow Cotton Frock",
+    "gender": "others",
+    "imageUrl": "/images/kids4.jpg",
+    "brand": "Mothercare",
+    "type": "frock",
+    "rating": 4.4,
+    "price": 1499,
+    "availableSizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "KSW001",
+    "productName": "Puma Kids Sportswear Set",
+    "gender": "others",
+    "imageUrl": "/images/kids5.jpeg",
+    "brand": "Puma",
+    "type": "sportswear",
+    "rating": 4.5,
+    "price": 2100,
+    "availableSizes": ["S", "M", "L"]
+  },
+  {
+    "id": "KSW002",
+    "productName": "Adidas Junior Training Tracksuit",
+    "gender": "others",
+    "imageUrl": "/images/kids6.jpeg",
+    "brand": "Adidas",
+    "type": "sportswear",
+    "rating": 4.2,
+    "price": 2500,
+    "availableSizes": ["M", "L", "XL"]
+  },
+  {
+    "id": "KTS001",
+    "productName": "Marvel Avengers Kids T-Shirt",
+    "gender": "others",
+    "imageUrl": "/images/kids7.jpeg",
+    "brand": "Marvel",
+    "type": "tshirt",
+    "rating": 4.7,
+    "price": 899,
+    "availableSizes": ["S", "M", "L"]
+  },
+  {
+    "id": "KTS002",
+    "productName": "Frozen Elsa Printed T-Shirt",
+    "gender": "others",
+    "imageUrl": "/images/kids8.jpeg",
+    "brand": "Disney",
+    "type": "tshirt",
+    "rating": 4.6,
+    "price": 950,
+    "availableSizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "KSHR001",
+    "productName": "Blue Denim Kids Shorts",
+    "gender": "others",
+    "imageUrl": "/images/kids9.jpeg",
+    "brand": "Levi's Kids",
+    "type": "shorts",
+    "rating": 4.3,
+    "price": 1200,
+    "availableSizes": ["S", "M", "L"]
+  },
+  {
+    "id": "KSHR002",
+    "productName": "Pink Cotton Summer Shorts",
+    "gender": "others",
+    "imageUrl": "/images/kids10.jpeg",
+    "brand": "H&M Kids",
+    "type": "shorts",
+    "rating": 4.4,
+    "price": 1100,
+    "availableSizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "KTS003",
+    "productName": "Spiderman Graphic T-Shirt",
+    "gender": "others",
+    "imageUrl": "/images/kids11.jpeg",
+    "brand": "Marvel",
+    "type": "tshirt",
+    "rating": 4.8,
+    "price": 999,
+    "availableSizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "KSW003",
+    "productName": "Reebok Kids Activewear Set",
+    "gender": "others",
+    "imageUrl": "/images/kids12.jpeg",
+    "brand": "Reebok",
+    "type": "sportswear",
+    "rating": 4.5,
+    "price": 2300,
+    "availableSizes": ["S", "M", "L"]
+  },
+
+  {
+    "id": "HA001",
+    "productName": "LG 260L Double Door Refrigerator",
+    "gender": "",
+    "imageUrl": "/images/home1.jpeg",
+    "brand": "LG",
+    "type": "refrigerator",
+    "rating": 4.6,
+    "price": 28990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA002",
+    "productName": "Samsung 7kg Front Load Washing Machine",
+    "gender": "",
+    "imageUrl": "/images/home2.jpeg",
+    "brand": "Samsung",
+    "type": "washing machine",
+    "rating": 4.5,
+    "price": 31990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA003",
+    "productName": "Philips 750W Mixer Grinder",
+    "gender": "",
+    "imageUrl": "/images/home3.jpeg",
+    "brand": "Philips",
+    "type": "mixer grinder",
+    "rating": 4.3,
+    "price": 4999,
+    "availableSizes": []
+  },
+  {
+    "id": "HA004",
+    "productName": "Prestige 2-Slice Pop-up Toaster",
+    "gender": "",
+    "imageUrl": "/images/home4.jpeg",
+    "brand": "Prestige",
+    "type": "toaster",
+    "rating": 4.2,
+    "price": 1799,
+    "availableSizes": []
+  },
+  {
+    "id": "HA005",
+    "productName": "IFB 30 L Convection Microwave Oven",
+    "gender": "",
+    "imageUrl": "/images/home5.jpeg",
+    "brand": "IFB",
+    "type": "microwave oven",
+    "rating": 4.5,
+    "price": 12990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA006",
+    "productName": "Eureka Forbes Water Purifier",
+    "gender": "",
+    "imageUrl": "/images/home6.jpeg",
+    "brand": "Eureka Forbes",
+    "type": "water purifier",
+    "rating": 4.4,
+    "price": 10990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA007",
+    "productName": "Dyson V11 Cordless Vacuum Cleaner",
+    "gender": "",
+    "imageUrl": "/images/home7.jpeg",
+    "brand": "Dyson",
+    "type": "vacuum cleaner",
+    "rating": 4.7,
+    "price": 44990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA008",
+    "productName": "Bajaj 15L Water Heater",
+    "gender": "",
+    "imageUrl": "/images/home8.jpeg",
+    "brand": "Bajaj",
+    "type": "water heater",
+    "rating": 4.3,
+    "price": 7990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA009",
+    "productName": "Crompton 1200mm Ceiling Fan",
+    "gender": "",
+    "imageUrl": "/images/home9.jpeg",
+    "brand": "Crompton",
+    "type": "ceiling fan",
+    "rating": 4.2,
+    "price": 2599,
+    "availableSizes": []
+  },
+  {
+    "id": "HA010",
+    "productName": "Panasonic 1.5 Ton Inverter AC",
+    "gender": "",
+    "imageUrl": "/images/home10.jpeg",
+    "brand": "Panasonic",
+    "type": "air conditioner",
+    "rating": 4.6,
+    "price": 34990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA011",
+    "productName": "Whirlpool Solo Microwave 20L",
+    "gender": "",
+    "imageUrl": "/images/home11.jpeg",
+    "brand": "Whirlpool",
+    "type": "microwave oven",
+    "rating": 4.1,
+    "price": 7990,
+    "availableSizes": []
+  },
+  {
+    "id": "HA012",
+    "productName": "Philips 1000W Dry Iron",
+    "gender": "",
+    "imageUrl": "/images/home12.jpeg",
+    "brand": "Philips",
+    "type": "iron",
+    "rating": 4.3,
+    "price": 1699,
+    "availableSizes": []
   }
+,
+  {
+    "id": "BEA001",
+    "productName": "L'Oreal Paris Revitalift Face Serum",
+    "gender": "beauty",
+    "imageUrl": "/images/bt1.jpeg",
+    "brand": "L'Oreal",
+    "type": "serum",
+    "rating": 4.7,
+    "price": 1299,
+    "availableSizes": ["30ml", "50ml"]
+  },
+  {
+    "id": "BEA002",
+    "productName": "Maybelline Superstay Matte Lipstick",
+    "gender": "beauty",
+    "imageUrl": "/images/bt2.jpeg",
+    "brand": "Maybelline",
+    "type": "lipstick",
+    "rating": 4.5,
+    "price": 599,
+    "availableSizes": ["5g"]
+  },
+  {
+    "id": "BEA003",
+    "productName": "Neutrogena Hydro Boost Water Gel",
+    "gender": "beauty",
+    "imageUrl": "/images/bt3.jpeg",
+    "brand": "Neutrogena",
+    "type": "moisturizer",
+    "rating": 4.6,
+    "price": 899,
+    "availableSizes": ["50ml", "100ml"]
+  },
+  {
+    "id": "BEA004",
+    "productName": "The Body Shop Tea Tree Face Wash",
+    "gender": "beauty",
+    "imageUrl": "/images/bt4.jpeg",
+    "brand": "The Body Shop",
+    "type": "face wash",
+    "rating": 4.4,
+    "price": 799,
+    "availableSizes": ["100ml"]
+  },
+  {
+    "id": "BEA005",
+    "productName": "MAC Studio Fix Powder Plus Foundation",
+    "gender": "beauty",
+    "imageUrl": "/images/bt5.jpeg",
+    "brand": "MAC",
+    "type": "foundation",
+    "rating": 4.8,
+    "price": 1750,
+    "availableSizes": ["10g"]
+  },
+  {
+    "id": "BEA006",
+    "productName": "Clinique Dramatically Different Moisturizer",
+    "gender": "beauty",
+    "imageUrl": "/images/bt6.jpeg",
+    "brand": "Clinique",
+    "type": "moisturizer",
+    "rating": 4.7,
+    "price": 2000,
+    "availableSizes": ["50ml", "125ml"]
+  },
+  {
+    "id": "BEA007",
+    "productName": "Dove Beauty Bar Soap",
+    "gender": "beauty",
+    "imageUrl": "/images/bt7.jpeg",
+    "brand": "Dove",
+    "type": "soap",
+    "rating": 4.3,
+    "price": 150,
+    "availableSizes": ["100g"]
+  },
+  {
+    "id": "BEA008",
+    "productName": "Maybelline Lash Sensational Mascara",
+    "gender": "beauty",
+    "imageUrl": "/images/bt8.jpeg",
+    "brand": "Maybelline",
+    "type": "mascara",
+    "rating": 4.5,
+    "price": 799,
+    "availableSizes": ["9.5ml"]
+  },
+  {
+    "id": "BEA009",
+    "productName": "Forest Essentials Ayurvedic Facial Mist",
+    "gender": "beauty",
+    "imageUrl": "/images/bt9.jpeg",
+    "brand": "Forest Essentials",
+    "type": "facial mist",
+    "rating": 4.8,
+    "price": 1200,
+    "availableSizes": ["50ml"]
+  },
+  {
+    "id": "BEA010",
+    "productName": "Glossier Cloud Paint Gel Blush",
+    "gender": "beauty",
+    "imageUrl": "/images/bt10.jpeg",
+    "brand": "Glossier",
+    "type": "blush",
+    "rating": 4.6,
+    "price": 1400,
+    "availableSizes": ["10ml"]
+  },
+  {
+    "id": "BEA011",
+    "productName": "Fenty Skin Fat Water Toner Serum",
+    "gender": "beauty",
+    "imageUrl": "/images/bt11.jpeg",
+    "brand": "Fenty Skin",
+    "type": "toner serum",
+    "rating": 4.5,
+    "price": 2200,
+    "availableSizes": ["120ml"]
+  },
+  {
+    "id": "BEA012",
+    "productName": "Tatcha Silk Canvas Primer",
+    "gender": "beauty",
+    "imageUrl": "/images/bt12.jpeg",
+    "brand": "Tatcha",
+    "type": "primer",
+    "rating": 4.9,
+    "price": 3500,
+    "availableSizes": ["30ml"]
+  }
+
+
 ]
