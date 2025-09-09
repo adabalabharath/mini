@@ -19,13 +19,21 @@ import { AuthContext } from "./components/AuthProvider";
 
 function App() {
   const [count, setCount] = useState(0);
+  const {logout}=useContext(AuthContext)
   const dispatch = useDispatch();
   const fetchProducts = async () => {
     dispatch(setProducts);
   };
-
+  
   useEffect(() => {
     fetchProducts();
+    let login=localStorage.getItem('loginTime')
+    const now =new Date().getTime()
+    console.log('useeffect timer started')
+    if(new Date(parseInt(login))-now<0){
+      logout()
+       console.log('useeffect timer logged out')
+    }
   }, []);
   return (
     <>
