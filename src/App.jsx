@@ -18,8 +18,7 @@ import Orders from "./components/Orders";
 import { AuthContext } from "./components/AuthProvider";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const {logout}=useContext(AuthContext)
+  const {user,logout}=useContext(AuthContext)
   const dispatch = useDispatch();
   const fetchProducts = async () => {
     dispatch(setProducts);
@@ -27,14 +26,30 @@ function App() {
   
   useEffect(() => {
     fetchProducts();
-    // let login=localStorage.getItem('loginTime')
-    // const now =new Date().getTime()
-    // console.log('useeffect timer started')
-    // if(new Date(parseInt(login))-now<0){
-    //   logout()
-    //    console.log('useeffect timer logged out')
-    // }
   }, []);
+
+useEffect(() => {
+  const checkLogin = () => {
+    console.log("checking login")
+    const now = Date.now();
+    const loggedTime = localStorage.getItem("loginTime");
+
+    if (loggedTime) {
+      const elapsed = now - parseInt(loggedTime, 10);
+      if (elapsed >= 30 * 60 * 1000) { 
+        console.log("useeffect logging out")
+        logout();
+      }
+      console.log()
+    }
+  };
+  checkLogin();
+
+  const interval = user && setInterval(checkLogin, 60000);
+
+  return () => clearInterval(interval); 
+}, []);
+
   return (
     <>
       <BrowserRouter>
