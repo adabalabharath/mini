@@ -1460,7 +1460,7 @@
   {
     "id": "HA001",
     "productName": "LG 260L Double Door Refrigerator",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home1.jpeg",
     "brand": "LG",
     "type": "refrigerator",
@@ -1471,7 +1471,7 @@
   {
     "id": "HA002",
     "productName": "Samsung 7kg Front Load Washing Machine",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home2.jpeg",
     "brand": "Samsung",
     "type": "washing machine",
@@ -1482,7 +1482,7 @@
   {
     "id": "HA003",
     "productName": "Philips 750W Mixer Grinder",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home3.jpeg",
     "brand": "Philips",
     "type": "mixer grinder",
@@ -1493,7 +1493,7 @@
   {
     "id": "HA004",
     "productName": "Prestige 2-Slice Pop-up Toaster",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home4.jpeg",
     "brand": "Prestige",
     "type": "toaster",
@@ -1504,7 +1504,7 @@
   {
     "id": "HA005",
     "productName": "IFB 30 L Convection Microwave Oven",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home5.jpeg",
     "brand": "IFB",
     "type": "microwave oven",
@@ -1515,7 +1515,7 @@
   {
     "id": "HA006",
     "productName": "Eureka Forbes Water Purifier",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home6.jpeg",
     "brand": "Eureka Forbes",
     "type": "water purifier",
@@ -1526,7 +1526,7 @@
   {
     "id": "HA007",
     "productName": "Dyson V11 Cordless Vacuum Cleaner",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home7.jpeg",
     "brand": "Dyson",
     "type": "vacuum cleaner",
@@ -1537,7 +1537,7 @@
   {
     "id": "HA008",
     "productName": "Bajaj 15L Water Heater",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home8.jpeg",
     "brand": "Bajaj",
     "type": "water heater",
@@ -1548,7 +1548,7 @@
   {
     "id": "HA009",
     "productName": "Crompton 1200mm Ceiling Fan",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home9.jpeg",
     "brand": "Crompton",
     "type": "ceiling fan",
@@ -1559,7 +1559,7 @@
   {
     "id": "HA010",
     "productName": "Panasonic 1.5 Ton Inverter AC",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home10.jpeg",
     "brand": "Panasonic",
     "type": "air conditioner",
@@ -1570,7 +1570,7 @@
   {
     "id": "HA011",
     "productName": "Whirlpool Solo Microwave 20L",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home11.jpeg",
     "brand": "Whirlpool",
     "type": "microwave oven",
@@ -1581,7 +1581,7 @@
   {
     "id": "HA012",
     "productName": "Philips 1000W Dry Iron",
-    "gender": "",
+    "gender": "home",
     "imageUrl": "/images/home12.jpeg",
     "brand": "Philips",
     "type": "iron",

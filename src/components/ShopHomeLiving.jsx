@@ -8,7 +8,7 @@ const ShopHomeLiving = () => {
     const data = useSelector((store) => store.products);
     const filters = useSelector((store) => store.filters);
     useEffect(() => {
-      const prods = filtersHook("", data, filters);
+      const prods = filtersHook("home", data, filters);
       setProducts(prods);
     }, [data, filters]);
   

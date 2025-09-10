@@ -8,9 +8,9 @@ const WishList = () => {
   const [products, setProducts] = useState([]);
   const filters = useSelector((store) => store.filters);
   const { user } = useContext(AuthContext);
-
+  console.log('')
   useEffect(() => {
-    const prods = filtersHook("", user?.wishlist, filters);
+    const prods = filtersHook(undefined, user?.wishlist, filters);
     setProducts(prods);
   }, [user?.wishlist, filters]);
 
