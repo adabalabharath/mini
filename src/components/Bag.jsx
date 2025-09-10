@@ -57,9 +57,16 @@ const Bag = () => {
 
   useEffect(() => {
     let original = products.reduce(
-      (a, b) => (b.selected ? a + b.price * b.qty : a),
+      (a, b) =>
+        b.selected
+          ? a +
+            (b.prices
+              ? b.prices[parseInt(b.selectedSize)] * b.qty
+              : b.price * b.qty)
+          : a,
       0
     );
+    console.log(original);
 
     let extra = original > 0 ? original + 3899 : 0;
     setMrp(extra);
@@ -98,7 +105,9 @@ const Bag = () => {
       name: item.productName,
       units: item.qty,
       size: item.selectedSize ? item.selectedSize : "Free Size",
-      price: item.price * item.qty,
+      price: item.prices
+        ? item.prices[parseInt(item.selectedSize)] * item.qty
+        : item.price * item.qty,
       image: item.imageUrl,
     }));
     const templateParams = {
@@ -286,7 +295,9 @@ const Bag = () => {
                   <Typography sx={{ my: 3, fontWeight: "bold" }}>
                     {" "}
                     {"\u20B9"}
-                    {x.price * x.qty}
+                    {x.gender === "beauty" && x.prices
+                      ? x?.prices[parseInt(x.selectedSize)] * x.qty
+                      : x.price * x.qty}
                   </Typography>
                   <Button
                     sx={{
@@ -340,7 +351,7 @@ const Bag = () => {
                   <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
-                    sx={{ textTransform: "none"}}
+                    sx={{ textTransform: "none" }}
                     fullWidth
                   >
                     Remove
@@ -462,11 +473,12 @@ const Bag = () => {
             }}
           >
             <Button
-              variant="outlined"
+              variant="contained"
               sx={{
                 alignItems: "center",
+                backgroundColor: "black",
                 border: "1px solid green",
-                color: "green",
+                color: "white",
               }}
               onClick={() => {
                 setDialog(false), setOrdered(true);

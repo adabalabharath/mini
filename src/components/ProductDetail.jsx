@@ -168,7 +168,7 @@ const ProductDetail = () => {
         </Box>
       )}
       {product && (
-        <Grid container direction={"column"}>         
+        <Grid container direction={"column"}>
           <Grid size={{ xs: 12, md: 4 }} pt={2}>
             <img src={product?.imageUrl} style={{ width: "100%" }} />
             <Grid
@@ -184,7 +184,9 @@ const ProductDetail = () => {
                 </span>{" "}
                 {product?.gender == "male"
                   ? "Men " + product?.productName
-                  : "Women " + product?.productName}
+                  : product.gender == "female"
+                  ? "Women " + product?.productName
+                  : product?.productName}
               </Typography>
 
               <Typography sx={{ fontWeight: "bold" }} variant="button">
@@ -239,7 +241,7 @@ const ProductDetail = () => {
                         {size}
                         <Typography variant="caption" color="grey">
                           {"\u20B9"}
-                          {product?.price}
+                          {product.gender==="beauty" && product.prices ? product?.prices[parseInt(size)]: product?.price}
                         </Typography>
                       </Box>
                     </Button>
@@ -292,12 +294,19 @@ const ProductDetail = () => {
         </Grid>
       )}
       <Dialog open={dialog} onClose={() => setDialog(false)}>
-        <DialogContent><Typography>Please select a size to continue.</Typography></DialogContent>
+        <DialogContent>
+          <Typography>Please select a size to continue.</Typography>
+        </DialogContent>
         <DialogActions
           onClick={() => setDialog(false)}
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          <Button variant="contained" sx={{mb:2,backgroundColor:'black',color:'white'}}>Ok</Button>
+          <Button
+            variant="contained"
+            sx={{ mb: 2, backgroundColor: "black", color: "white" }}
+          >
+            Ok
+          </Button>
         </DialogActions>
       </Dialog>
       <Snackbar

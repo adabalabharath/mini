@@ -1599,7 +1599,8 @@
     "type": "serum",
     "rating": 4.7,
     "price": 1299,
-    "availableSizes": ["30ml", "50ml"]
+    "availableSizes": ["30ml", "50ml"],
+    "prices":{"30":1299,"50":1700}
   },
   {
     "id": "BEA002",
@@ -1621,7 +1622,8 @@
     "type": "moisturizer",
     "rating": 4.6,
     "price": 899,
-    "availableSizes": ["50ml", "100ml"]
+    "availableSizes": ["50ml", "100ml"],
+    "prices":{"50":899,"100":1400}
   },
   {
     "id": "BEA004",
@@ -1654,7 +1656,8 @@
     "type": "moisturizer",
     "rating": 4.7,
     "price": 2000,
-    "availableSizes": ["50ml", "125ml"]
+    "availableSizes": ["50ml", "125ml"],
+    "prices":{"50":2000,"100":4000}
   },
   {
     "id": "BEA007",
