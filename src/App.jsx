@@ -25,16 +25,16 @@ function App() {
     dispatch(setProducts);
   };
   
-  // useEffect(() => {
-  //   fetchProducts();
-  //   let login=localStorage.getItem('loginTime')
-  //   const now =new Date().getTime()
-  //   console.log('useeffect timer started')
-  //   if(new Date(parseInt(login))-now<0){
-  //     logout()
-  //      console.log('useeffect timer logged out')
-  //   }
-  // }, []);
+  useEffect(() => {
+    fetchProducts();
+    // let login=localStorage.getItem('loginTime')
+    // const now =new Date().getTime()
+    // console.log('useeffect timer started')
+    // if(new Date(parseInt(login))-now<0){
+    //   logout()
+    //    console.log('useeffect timer logged out')
+    // }
+  }, []);
   return (
     <>
       <BrowserRouter>
