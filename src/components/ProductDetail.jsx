@@ -159,7 +159,15 @@ const ProductDetail = () => {
     }
   }, [ordered]);
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column", 
+        justifyContent: 'space-between',
+        height: '80vh',
+       gap:1
+      }}      
+    >
       {product && (
         <Box>
           <Typography sx={{ color: "grey", fontWeight: "bold", mt: 2 }}>
@@ -168,15 +176,24 @@ const ProductDetail = () => {
         </Box>
       )}
       {product && (
-        <Grid container direction={"column"}>
-          <Grid size={{ xs: 12, md: 4 }} pt={2}>
-            <img src={product?.imageUrl} style={{ width: "100%" }} />
+        <Grid
+          container
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={'center'}
+          
+          p={1}
+        >
+          <Grid >
+            <img
+              src={product?.imageUrl}
+              style={{ width: "100%", borderRadius: 10, height: "400px" }}
+            />
             <Grid
               display={"flex"}
               flexDirection={"column"}
               gap={1}
               mb={2}
-              size={{ xs: 12, md: 4 }}
             >
               <Typography sx={{ color: "grey" }}>
                 <span style={{ fontWeight: "bold", color: "black" }}>
@@ -241,7 +258,9 @@ const ProductDetail = () => {
                         {size}
                         <Typography variant="caption" color="grey">
                           {"\u20B9"}
-                          {product.gender==="beauty" && product.prices ? product?.prices[parseInt(size)]: product?.price}
+                          {product.gender === "beauty" && product.prices
+                            ? product?.prices[parseInt(size)]
+                            : product?.price}
                         </Typography>
                       </Box>
                     </Button>
@@ -251,48 +270,49 @@ const ProductDetail = () => {
             ) : (
               <Typography variant="subtitle"> Size: Free Size</Typography>
             )}
-            <Grid mt={2} display={"flex"} gap={1}>
-              <Button onClick={() => handleFav(product)}>
-                {user?.wishlist?.some((x) => x.id == product?.id) ? (
-                  <FavoriteIcon sx={{ color: "red" }} />
-                ) : (
-                  <FavoriteBorderIcon sx={{ color: "black" }} />
-                )}
-              </Button>
-              <Button
-                variant="contained"
-                color="black"
-                fullWidth
-                onClick={handleBag}
-                sx={{ color: "white", backgroundColor: "black" }}
-                size="small"
-              >
-                Add to Bag
-              </Button>
-              <Button
-                variant="contained"
-                color="black"
-                fullWidth
-                onClick={() => {
-                  if (!user) {
-                    navigate("/profile");
-                    return;
-                  }
-                  if (product.availableSizes.length > 0) {
-                    selectedSize ? setBuy(true) : setDialog(true);
-                  } else {
-                    setBuy(true);
-                  }
-                }}
-                size="small"
-                sx={{ color: "white", backgroundColor: "black" }}
-              >
-                Buy now
-              </Button>
-            </Grid>
           </Grid>
         </Grid>
       )}
+
+      <Grid mt={2} display={"flex"} justifyContent={'center'} gap={1} >
+        <Button onClick={() => handleFav(product)}>
+          {user?.wishlist?.some((x) => x.id == product?.id) ? (
+            <FavoriteIcon sx={{ color: "red" }} />
+          ) : (
+            <FavoriteBorderIcon sx={{ color: "black" }} />
+          )}
+        </Button>
+        <Button
+          variant="contained"
+          color="black"
+          fullWidth
+          onClick={handleBag}
+          sx={{ color: "white", backgroundColor: "black" }}
+          size="small"
+        >
+          Add to Bag
+        </Button>
+        <Button
+          variant="contained"
+          color="black"
+          fullWidth
+          onClick={() => {
+            if (!user) {
+              navigate("/profile");
+              return;
+            }
+            if (product.availableSizes.length > 0) {
+              selectedSize ? setBuy(true) : setDialog(true);
+            } else {
+              setBuy(true);
+            }
+          }}
+          size="small"
+          sx={{ color: "white", backgroundColor: "black" }}
+        >
+          Buy now
+        </Button>
+      </Grid>
       <Dialog open={dialog} onClose={() => setDialog(false)}>
         <DialogContent>
           <Typography>Please select a size to continue.</Typography>
