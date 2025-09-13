@@ -445,8 +445,7 @@ const Bag = () => {
               textTransform: "none",
               backgroundColor: "black",
               color: "white",
-              mt: 2,
-              mb:1
+              my: 1,
             }}
             onClick={sendEmail}
             loading={loading}
