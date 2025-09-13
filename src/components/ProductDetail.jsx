@@ -86,15 +86,15 @@ const ProductDetail = () => {
     }
     const fav = {
       ...user,
-      wishlist: user.wishlist.some((x) => x.id === product.id)
-        ? user.wishlist
-        : [...user.wishlist, product],
+      wishlist: user?.wishlist.some((x) => x.id === product.id)
+        ? user?.wishlist
+        : [...user?.wishlist, product],
     };
     localSet(fav);
-    setTimeout(()=>setLike(false),2000)
+    setTimeout(() => setLike(false), 1000);
   };
 
-  console.log(like)
+  console.log(like);
 
   const handleSize = (s) => {
     setSelectedSize(s);
@@ -202,7 +202,7 @@ const ProductDetail = () => {
           alignItems={"center"}
         >
           <Grid
-            sx={{ position: "relative", width: "100%"}}
+            sx={{ position: "relative", width: "100%" }}
             size={{ xs: 12, md: 4 }}
           >
             <img
@@ -216,16 +216,15 @@ const ProductDetail = () => {
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  opacity: like ? 1 : 0,
-                  transition: "opacity 0.5s ease-in-out",
+                  transform:like?"translate(-50%, -50%) scale(1)":"translate(-50%, -50%) scale(0.3)",
+                  transition: "transform 0.9s ease",
                   color: "red",
                   fontSize: "60px",
                   pointerEvents: "none",
-                  border:'1px solid white',
-                  borderRadius:'50%',
-                  backgroundColor:'white',
-                  padding:1
+                  border: "1px solid white",
+                  borderRadius: "50%",
+                  backgroundColor: "white",
+                  padding: 1,
                 }}
               />
             )}
