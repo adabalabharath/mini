@@ -40,7 +40,6 @@ useEffect(() => {
         console.log("useeffect logging out")
         logout();
       }
-      console.log()
     }
   };
   checkLogin();

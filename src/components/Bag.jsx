@@ -66,7 +66,6 @@ const Bag = () => {
           : a,
       0
     );
-    console.log(original);
 
     let extra = original > 0 ? original + 3899 : 0;
     setMrp(extra);

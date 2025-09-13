@@ -31,7 +31,6 @@ const Page = ({ products }) => {
   const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showSkeleton, setShowSkeleton] = useState(true);
-  console.log(products)
   useEffect(() => {
     let timer;
 

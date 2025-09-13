@@ -79,7 +79,6 @@ const ProductDetail = () => {
   };
 
   const handleFavLike = (product) => {
-    console.log("Double-click detected!", product);
     setLike(true);
     if (!user) {
       navigate("/profile");
@@ -93,8 +92,6 @@ const ProductDetail = () => {
     localSet(fav);
     setTimeout(() => setLike(false), 1000);
   };
-
-  console.log(like);
 
   const handleSize = (s) => {
     setSelectedSize(s);
@@ -321,7 +318,7 @@ const ProductDetail = () => {
         </Grid>
       )}
       {product && !showSkeleton && (
-        <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1}>
+        <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1} mb={1}>
           <Button onClick={() => handleFav(product)}>
             {user?.wishlist?.some((x) => x.id == product?.id) ? (
               <FavoriteIcon sx={{ color: "red" }} />

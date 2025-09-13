@@ -26,7 +26,6 @@ const Orders = () => {
       const remove={...user,orders:user.orders.filter(x=>x.id!==item.id)}
       localSet(remove)
     }
-    console.log(products)
   return products.length ?(
     <Grid container>
       <Typography sx={{fontWeight:"bold",m:1}}>Your Orders</Typography>
