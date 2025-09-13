@@ -90,8 +90,11 @@ const ProductDetail = () => {
         ? user.wishlist
         : [...user.wishlist, p],
     };
+    console.log(fav);
     localSet(fav);
-    setTimeout(()=>setLike(false),1000);
+    setTimeout(() => {
+      setLike(false);
+    }, 1000);
   };
 
   const handleSize = (s) => {
@@ -193,72 +196,83 @@ const ProductDetail = () => {
         </Box>
       )}
       {product && (
-       
-          <Grid container display={"flex"} flexDirection={"column"} alignItems={'center'} >
-            <Grid
-              sx={{ position: "relative", width: "100%", maxHeight: "400px" }}
-              size={{xs:12,md:4}}
-            >
-              <img
-                src={product?.imageUrl}
-                style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
-                onDoubleClick={() => handleFavLike(product)}
+        <Grid
+          container
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+        >
+          <Grid
+            sx={{ position: "relative", width: "100%", maxHeight: "400px" }}
+            size={{ xs: 12, md: 4 }}
+          >
+            <img
+              src={product?.imageUrl}
+              style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
+              onDoubleClick={() => console.log("Double-clicked!")}
+            />
+            {user && like && (
+              <FavoriteIcon
+                sx={{
+                  position: "absolute",
+                  top: "40%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  opacity: like ? 1 : 0,
+                  transition: "opacity 0.5s ease",
+                  color: "red",
+                  fontSize: "50px",
+                  pointerEvents: "none",
+                }}
               />
-              {(user&&like) && (
-                <FavoriteIcon
-                  sx={{
-                    position: "absolute",
-                    top: "40%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    opacity: like ? 1 : 0,
-                    transition:'opacity 0.5s ease',
-                    color: "red",
-                    fontSize: "50px",
-                    pointerEvents: "none",
-                  }}
-                />
-              )}
-            </Grid>
+            )}
+          </Grid>
 
-            <Grid display={"flex"} flexDirection={"column"} gap={1} mb={2} size={{xs:12,md:4}} alignSelf={'flex-start'}>
-              <Typography sx={{ color: "grey" }}>
-                <span style={{ fontWeight: "bold", color: "black" }}>
-                  {product?.brand}
-                </span>{" "}
-                {product?.gender == "male"
-                  ? "Men " + product?.productName
-                  : product.gender == "female"
-                  ? "Women " + product?.productName
-                  : product?.productName}
-              </Typography>
+          <Grid
+            display={"flex"}
+            flexDirection={"column"}
+            gap={1}
+            mb={2}
+            size={{ xs: 12, md: 4 }}
+            alignSelf={"flex-start"}
+          >
+            <Typography sx={{ color: "grey" }}>
+              <span style={{ fontWeight: "bold", color: "black" }}>
+                {product?.brand}
+              </span>{" "}
+              {product?.gender == "male"
+                ? "Men " + product?.productName
+                : product.gender == "female"
+                ? "Women " + product?.productName
+                : product?.productName}
+            </Typography>
 
-              <Typography sx={{ fontWeight: "bold" }} variant="button">
-                <span style={{ color: "grey", fontWeight: "lighter" }}>
-                  MRP{" "}
-                  <s>
-                    {"\u20B9"}
-                    {product?.price + 2000}&nbsp;
-                  </s>
-                </span>{" "}
-                {"\u20B9"}
-                {product?.price}
-              </Typography>
+            <Typography sx={{ fontWeight: "bold" }} variant="button">
+              <span style={{ color: "grey", fontWeight: "lighter" }}>
+                MRP{" "}
+                <s>
+                  {"\u20B9"}
+                  {product?.price + 2000}&nbsp;
+                </s>
+              </span>{" "}
+              {"\u20B9"}
+              {product?.price}
+            </Typography>
 
-              <Typography
-                sx={{ fontWeight: "bold", color: "red" }}
-                variant="caption "
-              >
-                Only Few Left!
-              </Typography>
-            </Grid>
-            
-            {product?.availableSizes.length ? (
-              <>
-                {" "}
-                <Grid alignSelf={'flex-start'}>
+            <Typography
+              sx={{ fontWeight: "bold", color: "red" }}
+              variant="caption "
+            >
+              Only Few Left!
+            </Typography>
+          </Grid>
+
+          {product?.availableSizes.length ? (
+            <>
+              {" "}
+              <Grid alignSelf={"flex-start"}>
                 <Typography>Select a Size</Typography>
-                <Grid  flexWrap={"wrap"} >
+                <Grid flexWrap={"wrap"}>
                   {product?.availableSizes.map((size) => (
                     <Button
                       key={size}
@@ -294,15 +308,14 @@ const ProductDetail = () => {
                     </Button>
                   ))}
                 </Grid>
-                </Grid>
-              </>
-            ) : (
-               <Grid alignSelf={'flex-start'}>
-              <Typography variant="subtitle"> Size: Free Size</Typography>
               </Grid>
-            )}
-          </Grid>
-       
+            </>
+          ) : (
+            <Grid alignSelf={"flex-start"}>
+              <Typography variant="subtitle"> Size: Free Size</Typography>
+            </Grid>
+          )}
+        </Grid>
       )}
 
       <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1}>
