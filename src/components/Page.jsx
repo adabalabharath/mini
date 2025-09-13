@@ -315,7 +315,7 @@ const Page = ({ products }) => {
                   setSizeDrawer(false);
                   setOpen(true);
                 }}
-                sx={{ backgroundColor: "black", color: "white" }}
+                sx={{ backgroundColor: "black", color: "white",mb:1 }}
               >
                 Done
               </Button>

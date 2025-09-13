@@ -154,6 +154,7 @@ const Orders = () => {
                   display="flex"
                   flexDirection={"row"}
                   justifyContent={"space-evenly"}
+                  mb={1}
                 >
                   <Button
                     color="black"

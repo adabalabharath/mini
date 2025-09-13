@@ -352,7 +352,7 @@ const Bag = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Box display="flex" flexDirection={"row"}>
+                <Box display="flex" flexDirection={"row"} mb={1}>
                   <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
@@ -446,6 +446,7 @@ const Bag = () => {
               backgroundColor: "black",
               color: "white",
               mt: 2,
+              mb:1
             }}
             onClick={sendEmail}
             loading={loading}
