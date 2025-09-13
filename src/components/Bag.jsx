@@ -214,7 +214,7 @@ const Bag = () => {
           products.length +
           " items selected"}
       </Typography>
-      <Grid container>
+      <Grid container direction={'column'} minHeight={'50vh'} justifyContent={'space-between'}>
         {products.map((x) => {
           return (
             <>
