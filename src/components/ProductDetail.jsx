@@ -321,46 +321,48 @@ const ProductDetail = () => {
           )}
         </Grid>
       )}
+      {product && !showSkeleton && (
+        <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1}>
+          <Button onClick={() => handleFav(product)}>
+            {user?.wishlist?.some((x) => x.id == product?.id) ? (
+              <FavoriteIcon sx={{ color: "red" }} />
+            ) : (
+              <FavoriteBorderIcon sx={{ color: "black" }} />
+            )}
+          </Button>
+          <Button
+            variant="contained"
+            color="black"
+            fullWidth
+            onClick={handleBag}
+            sx={{ color: "white", backgroundColor: "black" }}
+            size="small"
+          >
+            Add to Bag
+          </Button>
+          <Button
+            variant="contained"
+            color="black"
+            fullWidth
+            onClick={() => {
+              if (!user) {
+                navigate("/profile");
+                return;
+              }
+              if (product.availableSizes.length > 0) {
+                selectedSize ? setBuy(true) : setDialog(true);
+              } else {
+                setBuy(true);
+              }
+            }}
+            size="small"
+            sx={{ color: "white", backgroundColor: "black" }}
+          >
+            Buy now
+          </Button>
+        </Grid>
+      )}
 
-      <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1}>
-        <Button onClick={() => handleFav(product)}>
-          {user?.wishlist?.some((x) => x.id == product?.id) ? (
-            <FavoriteIcon sx={{ color: "red" }} />
-          ) : (
-            <FavoriteBorderIcon sx={{ color: "black" }} />
-          )}
-        </Button>
-        <Button
-          variant="contained"
-          color="black"
-          fullWidth
-          onClick={handleBag}
-          sx={{ color: "white", backgroundColor: "black" }}
-          size="small"
-        >
-          Add to Bag
-        </Button>
-        <Button
-          variant="contained"
-          color="black"
-          fullWidth
-          onClick={() => {
-            if (!user) {
-              navigate("/profile");
-              return;
-            }
-            if (product.availableSizes.length > 0) {
-              selectedSize ? setBuy(true) : setDialog(true);
-            } else {
-              setBuy(true);
-            }
-          }}
-          size="small"
-          sx={{ color: "white", backgroundColor: "black" }}
-        >
-          Buy now
-        </Button>
-      </Grid>
       <Dialog open={dialog} onClose={() => setDialog(false)}>
         <DialogContent>
           <Typography>Please select a size to continue.</Typography>
