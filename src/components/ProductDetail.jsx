@@ -204,7 +204,7 @@ const ProductDetail = () => {
                 style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
                 onDoubleClick={() => handleFavLike(product)}
               />
-              {like && (
+              {(user&&like) && (
                 <FavoriteIcon
                   sx={{
                     position: "absolute",
@@ -297,7 +297,9 @@ const ProductDetail = () => {
                 </Grid>
               </>
             ) : (
+               <Grid alignSelf={'flex-start'}>
               <Typography variant="subtitle"> Size: Free Size</Typography>
+              </Grid>
             )}
           </Grid>
        
