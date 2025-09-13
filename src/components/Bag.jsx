@@ -178,13 +178,13 @@ const Bag = () => {
     const updatedUser = {
       ...user,
       bag:  user.bag.filter((x) => {
-        if (!product.availableSizes.length || user.wishlist.some(x=>x.id===product.id)) {
-           x.id !== product.id;
+        if (user.wishlist.some(x=>x.id===product.id) || !product.availableSizes.length ) {
+          return x.id !== product.id;
         }
-         !(x.id == product.id && x.selectedSize == product.selectedSize);
+         return !(x.id == product.id && x.selectedSize == product.selectedSize);
       }),
       wishlist: user.wishlist.some((x) => x.id === product.id)
-        ? x
+        ? user.wishlist
         : [...user.wishlist, product],
     };
     localSet(updatedUser);
