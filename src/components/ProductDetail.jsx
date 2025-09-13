@@ -164,7 +164,7 @@ const ProductDetail = () => {
         display: "flex",
         flexDirection: "column", 
         justifyContent: 'space-between',
-        height: '80vh',
+        height: '90vh',
        gap:1
       }}      
     >
@@ -181,13 +181,12 @@ const ProductDetail = () => {
           display={"flex"}
           flexDirection={"column"}
           alignItems={'center'}
-          
           p={1}
         >
           <Grid >
             <img
               src={product?.imageUrl}
-              style={{ width: "100%", borderRadius: 10, height: "400px" }}
+              style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
             />
             <Grid
               display={"flex"}
