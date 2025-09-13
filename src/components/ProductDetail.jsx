@@ -88,14 +88,13 @@ const ProductDetail = () => {
       ...user,
       wishlist: user.wishlist.some((x) => x.id === product.id)
         ? user.wishlist
-        : [...user.wishlist, p],
+        : [...user.wishlist, product],
     };
-    console.log(fav);
     localSet(fav);
-    setTimeout(() => {
-      setLike(false);
-    }, 1000);
+    setTimeout(()=>setLike(false),2000)
   };
+
+  console.log(like)
 
   const handleSize = (s) => {
     setSelectedSize(s);
@@ -215,11 +214,11 @@ const ProductDetail = () => {
               <FavoriteIcon
                 sx={{
                   position: "absolute",
-                  top: "40%",
+                  top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   opacity: like ? 1 : 0,
-                  transition: "opacity 0.5s ease",
+                  transition: "opacity 0.5s ease-in-out",
                   color: "red",
                   fontSize: "50px",
                   pointerEvents: "none",
