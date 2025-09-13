@@ -209,7 +209,7 @@ const ProductDetail = () => {
             <img
               src={product?.imageUrl}
               style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
-              onDoubleClick={() => console.log("Double-clicked!")}
+              onDoubleClick={() => handleFavClick(product)}
             />
             {user && like && (
               <FavoriteIcon
