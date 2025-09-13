@@ -202,7 +202,7 @@ const ProductDetail = () => {
           alignItems={"center"}
         >
           <Grid
-            sx={{ position: "relative", width: "100%", maxHeight: "400px" }}
+            sx={{ position: "relative", width: "100%"}}
             size={{ xs: 12, md: 4 }}
           >
             <img
@@ -220,8 +220,9 @@ const ProductDetail = () => {
                   opacity: like ? 1 : 0,
                   transition: "opacity 0.5s ease-in-out",
                   color: "red",
-                  fontSize: "50px",
+                  fontSize: "70px",
                   pointerEvents: "none",
+                  border:'1px solid white'
                 }}
               />
             )}
