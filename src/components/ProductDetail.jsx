@@ -220,9 +220,12 @@ const ProductDetail = () => {
                   opacity: like ? 1 : 0,
                   transition: "opacity 0.5s ease-in-out",
                   color: "red",
-                  fontSize: "70px",
+                  fontSize: "60px",
                   pointerEvents: "none",
-                  border:'1px solid white'
+                  border:'1px solid white',
+                  borderRadius:'50%',
+                  backgroundColor:'white',
+                  padding:1
                 }}
               />
             )}
