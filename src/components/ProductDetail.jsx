@@ -183,7 +183,7 @@ const ProductDetail = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "80vh",
+        height: "90vh",
       }}
     >
       {product && (

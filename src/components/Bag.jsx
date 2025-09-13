@@ -177,10 +177,7 @@ const Bag = () => {
     const updatedUser = {
       ...user,
       bag: user.bag.filter((x) => {
-        if (
-          user.wishlist.some((x) => x.id === product.id) ||
-          !product.availableSizes.length
-        ) {
+        if (!product.availableSizes.length) {
           return x.id !== product.id;
         }
         return !(x.id == product.id && x.selectedSize == product.selectedSize);
@@ -214,7 +211,12 @@ const Bag = () => {
           products.length +
           " items selected"}
       </Typography>
-      <Grid container direction={'column'} minHeight={'50vh'} justifyContent={'space-between'}>
+      <Grid
+        container
+        direction={"column"}
+        minHeight={"40vh"}
+        justifyContent={"space-between"}
+      >
         {products.map((x) => {
           return (
             <>
@@ -259,8 +261,8 @@ const Bag = () => {
                           sx={{ fontSize: 14, height: 36, paddingY: 0.5 }}
                           onChange={(e) => handleChange(e, x)}
                         >
-                          {x.availableSizes.map((size) => {
-                            return <MenuItem value={size}>{size}</MenuItem>;
+                          {x.availableSizes.map((size,i) => {
+                            return <MenuItem key={i} value={size}>{size}</MenuItem>;
                           })}
                         </Select>
                       </FormControl>
