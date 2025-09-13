@@ -174,14 +174,16 @@ const Bag = () => {
   };
 
   const handleMove = (product) => {
-
     const updatedUser = {
       ...user,
-      bag:  user.bag.filter((x) => {
-        if (user.wishlist.some(x=>x.id===product.id) || !product.availableSizes.length ) {
+      bag: user.bag.filter((x) => {
+        if (
+          user.wishlist.some((x) => x.id === product.id) ||
+          !product.availableSizes.length
+        ) {
           return x.id !== product.id;
         }
-         return !(x.id == product.id && x.selectedSize == product.selectedSize);
+        return !(x.id == product.id && x.selectedSize == product.selectedSize);
       }),
       wishlist: user.wishlist.some((x) => x.id === product.id)
         ? user.wishlist
