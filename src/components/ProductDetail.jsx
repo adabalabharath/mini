@@ -32,6 +32,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [buy, setBuy] = useState(false);
+  const [like, setLike] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const [showSkeleton, setShowSkeleton] = useState(true);
@@ -71,10 +72,26 @@ const ProductDetail = () => {
     const fav = {
       ...user,
       wishlist: user?.wishlist?.some((x) => x?.id === p.id)
+        ? user.wishlist.filter((x) => x.id !== p.id)
+        : [...user.wishlist, p],
+    };
+    localSet(fav);
+  };
+
+  const handleFavLike = (product) => {
+    console.log("Double-click detected!", product);
+    setLike(true);
+    if (!user) {
+      navigate("/profile");
+    }
+    const fav = {
+      ...user,
+      wishlist: user.wishlist.some((x) => x.id === product.id)
         ? user.wishlist
         : [...user.wishlist, p],
     };
     localSet(fav);
+    setTimeout(()=>setLike(false),1000);
   };
 
   const handleSize = (s) => {
@@ -162,11 +179,11 @@ const ProductDetail = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "column", 
-        justifyContent: 'space-between',
-        height: '90vh',
-       gap:1
-      }}      
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "90vh",
+        gap: 1,
+      }}
     >
       {product && (
         <Box>
@@ -176,24 +193,35 @@ const ProductDetail = () => {
         </Box>
       )}
       {product && (
-        <Grid
-          container
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={'center'}
-          p={1}
-        >
-          <Grid >
-            <img
-              src={product?.imageUrl}
-              style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
-            />
+       
+          <Grid container display={"flex"} flexDirection={"column"} alignItems={'center'} >
             <Grid
-              display={"flex"}
-              flexDirection={"column"}
-              gap={1}
-              mb={2}
+              sx={{ position: "relative", width: "100%", maxHeight: "400px" }}
+              size={{xs:12,md:4}}
             >
+              <img
+                src={product?.imageUrl}
+                style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
+                onDoubleClick={() => handleFavLike(product)}
+              />
+              {like && (
+                <FavoriteIcon
+                  sx={{
+                    position: "absolute",
+                    top: "40%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    opacity: like ? 1 : 0,
+                    transition:'opacity 0.5s ease',
+                    color: "red",
+                    fontSize: "50px",
+                    pointerEvents: "none",
+                  }}
+                />
+              )}
+            </Grid>
+
+            <Grid display={"flex"} flexDirection={"column"} gap={1} mb={2} size={{xs:12,md:4}} alignSelf={'flex-start'}>
               <Typography sx={{ color: "grey" }}>
                 <span style={{ fontWeight: "bold", color: "black" }}>
                   {product?.brand}
@@ -224,12 +252,13 @@ const ProductDetail = () => {
                 Only Few Left!
               </Typography>
             </Grid>
-
+            
             {product?.availableSizes.length ? (
               <>
                 {" "}
+                <Grid alignSelf={'flex-start'}>
                 <Typography>Select a Size</Typography>
-                <Grid display={"flex"} flexWrap={"wrap"}>
+                <Grid  flexWrap={"wrap"} >
                   {product?.availableSizes.map((size) => (
                     <Button
                       key={size}
@@ -265,15 +294,16 @@ const ProductDetail = () => {
                     </Button>
                   ))}
                 </Grid>
+                </Grid>
               </>
             ) : (
               <Typography variant="subtitle"> Size: Free Size</Typography>
             )}
           </Grid>
-        </Grid>
+       
       )}
 
-      <Grid mt={2} display={"flex"} justifyContent={'center'} gap={1} >
+      <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1}>
         <Button onClick={() => handleFav(product)}>
           {user?.wishlist?.some((x) => x.id == product?.id) ? (
             <FavoriteIcon sx={{ color: "red" }} />
