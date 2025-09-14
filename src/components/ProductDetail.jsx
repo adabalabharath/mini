@@ -217,7 +217,7 @@ const ProductDetail = () => {
                     : "translate(-50%, -50%) scale(0.3)",
                   transition: "transform 0.9s ease",
                   color: "red",
-                  fontSize: "60px",
+                  fontSize: "50px",
                   pointerEvents: "none",
                   border: "1px solid white",
                   borderRadius: "50%",

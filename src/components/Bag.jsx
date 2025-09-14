@@ -216,12 +216,13 @@ const Bag = () => {
         minHeight={"40vh"}
         justifyContent={"space-between"}
       >
-        {products.map((x) => {
+        {products.map((x,i) => {
           return (
             <>
               <Grid
                 sx={{ display: "flex", p: 2, position: "relative" }}
                 size={{ xs: 12, md: 3 }}
+                key={i}
               >
                 <Checkbox
                   checked={x.selected}
