@@ -313,7 +313,7 @@ const Profile = () => {
                   justifyContent: "flex-start",
                 }}
                 size="large"
-                //href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
+                href="tel:+919949362719"
               >
                 <PhoneIcon sx={{ mr: 1 }} />
                 Contact Us
