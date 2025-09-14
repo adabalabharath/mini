@@ -264,7 +264,7 @@ const Profile = () => {
               </Typography>
             </Box>
             <Box display={"flex"} flexDirection={"column"} gap={2}>
-              <Link to="/wishlist">
+              <Link to="/wishlist" com>
                 <Button
                   fullWidth
                   sx={{
