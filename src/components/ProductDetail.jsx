@@ -11,7 +11,6 @@ import { AuthContext } from "./AuthProvider";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import { addToBag } from "../customHook/addToBagHook";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Drawer from "@mui/material/Drawer";

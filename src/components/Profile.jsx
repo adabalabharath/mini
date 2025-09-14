@@ -20,10 +20,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import SellIcon from "@mui/icons-material/Sell";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from '@mui/icons-material/Email';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
   email: Yup.string().email("Invalid email").required("Required"),
@@ -272,7 +274,7 @@ const Profile = () => {
                   }}
                   size="large"
                 >
-                  <FavoriteBorderIcon sx={{ mr: 1 }} />
+                  <FavoriteIcon sx={{ mr: 1 }} />
                   Wishlist
                 </Button>
               </Link>
@@ -317,6 +319,19 @@ const Profile = () => {
               >
                 <PhoneIcon sx={{ mr: 1 }} />
                 Contact Us
+              </Button>
+              <Button
+                fullWidth
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+                  justifyContent: "flex-start",
+                }}
+                size="large"
+                href="mailto:minimyntra078@gmail.com?subject=Hello&body=This%20is%20my%20message"
+              >
+                <EmailIcon sx={{ mr: 1 }} />
+                Email Us
               </Button>
 
               <Button
