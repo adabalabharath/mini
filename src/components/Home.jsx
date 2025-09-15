@@ -68,7 +68,7 @@ const Home = () => {
               alt="for him"
               style={{
                 width: "100%",
-               
+
                 height: "300px",
               }}
             />
@@ -84,24 +84,22 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
       >
-       
-          <Link to={"/shop/men"}>
-            <img
-              src={mens}
-              alt="clothing"
-              style={{
-                width:"1200px",
-                height: "400px",
-                borderRadius: 10,
-                transition: "all 0.1s ease",
-                 boxShadow:Hover==="men"? '50px':0,
-                border:Hover==="men"?'5px solid black':0
-              }}
-              onMouseEnter={() => setHover("men")}
-              onMouseLeave={() => setHover("menLeave")}
-            />
-          </Link>
-        
+        <Link to={"/shop/men"}>
+          <img
+            src={mens}
+            alt="clothing"
+            style={{
+              width: "1200px",
+              height: "400px",
+              borderRadius: 10,
+              transition: "all 0.1s ease",
+              boxShadow: Hover === "men" ? "50px" : 0,
+              border: Hover === "men" ? "5px solid black" : 0,
+            }}
+            onMouseEnter={() => setHover("men")}
+            onMouseLeave={() => setHover("menLeave")}
+          />
+        </Link>
       </Grid>
 
       <Typography
@@ -133,7 +131,6 @@ const Home = () => {
               style={{
                 width: "100%",
                 height: "300px",
-               
               }}
             />
           </Link>
@@ -147,24 +144,22 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
       >
-       
-          <Link to={"/shop/women"}>
-            <img
-              src={women}
-              alt="clothing"
-              style={{
-                width:"1200px",
-                height: "400px",
-                borderRadius: 10,
-                transition: "all 0.1s ease",
-                 boxShadow:Hover==="women"? '50px':0,
-                border:Hover==="women"?'5px solid black':0
-              }}
-              onMouseEnter={() => setHover("women")}
-              onMouseLeave={() => setHover("womenLeave")}
-            />
-          </Link>
-      
+        <Link to={"/shop/women"}>
+          <img
+            src={women}
+            alt="clothing"
+            style={{
+              width: "1200px",
+              height: "400px",
+              borderRadius: 10,
+              transition: "all 0.1s ease",
+              boxShadow: Hover === "women" ? "50px" : 0,
+              border: Hover === "women" ? "5px solid black" : 0,
+            }}
+            onMouseEnter={() => setHover("women")}
+            onMouseLeave={() => setHover("womenLeave")}
+          />
+        </Link>
       </Grid>
 
       <Typography
@@ -209,24 +204,22 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
       >
-        
-          <Link to={"/shop/kids"}>
-            <img
-              src={kidsSection}
-              alt="clothing"
-              style={{
-                width:"1200px",
-                height: "400px",
-                borderRadius: 10,
-                transition: "all 0.1s ease",
-                 boxShadow:Hover==="kids"? '50px':0,
-                border:Hover==="kids"?'5px solid black':0
-              }}
-              onMouseEnter={() => setHover("kids")}
-              onMouseLeave={() => setHover("kidsLeave")}
-            />
-          </Link>
-       
+        <Link to={"/shop/kids"}>
+          <img
+            src={kidsSection}
+            alt="clothing"
+            style={{
+              width: "1200px",
+              height: "400px",
+              borderRadius: 10,
+              transition: "all 0.1s ease",
+              boxShadow: Hover === "kids" ? "50px" : 0,
+              border: Hover === "kids" ? "5px solid black" : 0,
+            }}
+            onMouseEnter={() => setHover("kids")}
+            onMouseLeave={() => setHover("kidsLeave")}
+          />
+        </Link>
       </Grid>
 
       <Typography
@@ -257,7 +250,7 @@ const Home = () => {
               alt="for home"
               style={{
                 width: "100%",
-               
+
                 height: "300px",
               }}
             />{" "}
@@ -272,24 +265,22 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
       >
-       
-          <Link to={"/shop/home"}>
-            <img
-              src={homeSection}
-              alt="clothing"
-              style={{
-                width:"1200px",
-                height: "400px",
-                borderRadius: 10,
-                transition: "all 0.1s ease",
-                boxShadow:Hover==="home"? '50px':0,
-                border:Hover==="home"?'5px solid black':0
-              }}
-              onMouseEnter={() => setHover("home")}
-              onMouseLeave={() => setHover("homeLeave")}
-            />
-          </Link>
-        
+        <Link to={"/shop/home"}>
+          <img
+            src={homeSection}
+            alt="clothing"
+            style={{
+              width: "1200px",
+              height: "400px",
+              borderRadius: 10,
+              transition: "all 0.1s ease",
+              boxShadow: Hover === "home" ? "50px" : 0,
+              border: Hover === "home" ? "5px solid black" : 0,
+            }}
+            onMouseEnter={() => setHover("home")}
+            onMouseLeave={() => setHover("homeLeave")}
+          />
+        </Link>
       </Grid>
 
       <Typography
@@ -321,7 +312,7 @@ const Home = () => {
               alt="for beauty"
               style={{
                 width: "100%",
-               
+
                 height: "300px",
               }}
             />
@@ -336,24 +327,22 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
       >
-       
-          <Link to={"/shop/beauty"}>
-            <img
-              src={beautySection}
-              alt="clothing"
-              style={{
-                width:"1200px",
-                height: "400px",
-                borderRadius: 10,
-                transition: "all 0.1s ease",
-                boxShadow:Hover==="beauty"? '50px':0,
-                border:Hover==="beauty"?'5px solid black':0
-              }}
-              onMouseEnter={() => setHover("beauty")}
-              onMouseLeave={() => setHover("beautyLeave")}
-            />
-          </Link>
-       
+        <Link to={"/shop/beauty"}>
+          <img
+            src={beautySection}
+            alt="clothing"
+            style={{
+              width: "1200px",
+              height: "400px",
+              borderRadius: 10,
+              transition: "all 0.1s ease",
+              boxShadow: Hover === "beauty" ? "50px" : 0,
+              border: Hover === "beauty" ? "5px solid black" : 0,
+            }}
+            onMouseEnter={() => setHover("beauty")}
+            onMouseLeave={() => setHover("beautyLeave")}
+          />
+        </Link>
       </Grid>
     </div>
   );
