@@ -9,7 +9,7 @@ import women from "../../public/images/women.jpg";
 import kidsSection from "../../public/images/kidsSection.webp";
 import homeSection from "../../public/images/homeSection.png";
 import beautySection from "../../public/images/beautySection.jpg";
-import forHim from "../../public/images/forhim.png";
+import forHim from "../../public/images/forHim.png";
 import forHer from "../../public/images/forHer.png";
 import forThem from "../../public/images/kids.png";
 import forHome from "../../public/images/home.png";
@@ -21,10 +21,6 @@ const Home = () => {
     <div>
       <Box
         sx={{
-          xs: "90%",
-          sm: "70%",
-          md: "60%",
-          lg: "40%",
           margin: "auto",
           mt: 2,
         }}
@@ -93,10 +89,10 @@ const Home = () => {
             src={mens}
             alt="clothing"
             style={{
-              width: "1400px",
+              width: "1200px",
               maxHeight: "400px",
+
               borderRadius: 10,
-              transition: "all 0.1s ease",
               boxShadow: Hover === "men" ? "50px" : 0,
               border: Hover === "men" ? "5px solid black" : 0,
             }}
@@ -153,8 +149,9 @@ const Home = () => {
             src={women}
             alt="clothing"
             style={{
-              width: "1400px",
+              width: "1200px",
               maxHeight: "400px",
+
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "women" ? "50px" : 0,
@@ -213,7 +210,7 @@ const Home = () => {
             src={kidsSection}
             alt="clothing"
             style={{
-              width: "1400px",
+              width: "1200px",
               maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
@@ -274,7 +271,7 @@ const Home = () => {
             src={homeSection}
             alt="clothing"
             style={{
-              width: "1400px",
+              width: "1200px",
               maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
@@ -336,7 +333,7 @@ const Home = () => {
             src={beautySection}
             alt="clothing"
             style={{
-              width: "1400px",
+              width: "1200px",
               maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
