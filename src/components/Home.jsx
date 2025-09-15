@@ -73,7 +73,6 @@ const Home = () => {
               alt="for him"
               style={{
                 width: "100%",
-
                 height: "300px",
               }}
             />
@@ -94,8 +93,8 @@ const Home = () => {
             src={mens}
             alt="clothing"
             style={{
-              width: "1200px",
-              height: "400px",
+              width: "1400px",
+              maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "men" ? "50px" : 0,
@@ -154,8 +153,8 @@ const Home = () => {
             src={women}
             alt="clothing"
             style={{
-              width: "1200px",
-              height: "400px",
+              width: "1400px",
+              maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "women" ? "50px" : 0,
@@ -214,8 +213,8 @@ const Home = () => {
             src={kidsSection}
             alt="clothing"
             style={{
-              width: "1200px",
-              height: "400px",
+              width: "1400px",
+              maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "kids" ? "50px" : 0,
@@ -275,8 +274,8 @@ const Home = () => {
             src={homeSection}
             alt="clothing"
             style={{
-              width: "1200px",
-              height: "400px",
+              width: "1400px",
+              maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "home" ? "50px" : 0,
@@ -337,8 +336,8 @@ const Home = () => {
             src={beautySection}
             alt="clothing"
             style={{
-              width: "1200px",
-              height: "400px",
+              width: "1400px",
+              maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "beauty" ? "50px" : 0,

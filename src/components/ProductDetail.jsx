@@ -211,7 +211,10 @@ const ProductDetail = () => {
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  transition: "all 0.3s ease",
+                  transform:
+                    "translate(-50%, -50%) scale(" + (like ? 1.2 : 0) + ")",
+                  opacity: like ? 1 : 0,
+                  transition: "transform 0.4s ease, opacity 0.4s ease",
                   color: "red",
                   fontSize: "50px",
                   pointerEvents: "none",
