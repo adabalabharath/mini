@@ -9,6 +9,11 @@ import women from "../../public/images/women.jpg";
 import kidsSection from "../../public/images/kidsSection.webp";
 import homeSection from "../../public/images/homeSection.png";
 import beautySection from "../../public/images/beautySection.jpg";
+import forHim from "../../public/images/forhim.png";
+import forHer from "../../public/images/forHer.png";
+import forThem from "../../public/images/kids.png";
+import forHome from "../../public/images/home.png";
+import forBeauty from "../../public/images/beauty.png";
 
 const Home = () => {
   const [Hover, setHover] = useState("");
@@ -64,7 +69,7 @@ const Home = () => {
           <Link to={"/shop/men"}>
             {" "}
             <img
-              src={mens}
+              src={forHim}
               alt="for him"
               style={{
                 width: "100%",
@@ -126,7 +131,7 @@ const Home = () => {
           <Link to={"/shop/women"}>
             {" "}
             <img
-              src={women}
+              src={forHer}
               alt="for her"
               style={{
                 width: "100%",
@@ -186,7 +191,7 @@ const Home = () => {
           <Link to={"/shop/kids"}>
             {" "}
             <img
-              src={kidsSection}
+              src={forThem}
               alt="for kids"
               style={{
                 width: "100%",
@@ -246,7 +251,7 @@ const Home = () => {
           <Link to={"/shop/home"}>
             {" "}
             <img
-              src={homeSection}
+              src={forHome}
               alt="for home"
               style={{
                 width: "100%",
@@ -308,7 +313,7 @@ const Home = () => {
           <Link to={"/shop/beauty"}>
             {" "}
             <img
-              src={beautySection}
+              src={forBeauty}
               alt="for beauty"
               style={{
                 width: "100%",
