@@ -44,7 +44,6 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -61,7 +60,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item>
+        <Grid item  border={3} borderRadius={1}>
           <Link to={"/shop/men"}>
             {" "}
             <img
@@ -91,7 +90,6 @@ const Home = () => {
             style={{
               width: "1200px",
               maxHeight: "400px",
-
               borderRadius: 10,
               boxShadow: Hover === "men" ? "50px" : 0,
               border: Hover === "men" ? "5px solid black" : 0,
@@ -122,7 +120,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item>
+        <Grid item  border={3} borderRadius={1}>
           <Link to={"/shop/women"}>
             {" "}
             <img
@@ -151,7 +149,6 @@ const Home = () => {
             style={{
               width: "1200px",
               maxHeight: "400px",
-
               borderRadius: 10,
               transition: "all 0.1s ease",
               boxShadow: Hover === "women" ? "50px" : 0,
@@ -167,7 +164,6 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -183,7 +179,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item>
+        <Grid item  border={3} borderRadius={1}>
           <Link to={"/shop/kids"}>
             {" "}
             <img
@@ -227,7 +223,6 @@ const Home = () => {
         variant="h6"
         sx={{
           m: 2,
-
           fontWeight: "bold",
           alignItems: "center",
           textAlign: "center",
@@ -243,7 +238,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item>
+        <Grid item  border={3} borderRadius={1}>
           <Link to={"/shop/home"}>
             {" "}
             <img
@@ -251,7 +246,6 @@ const Home = () => {
               alt="for home"
               style={{
                 width: "100%",
-
                 height: "300px",
               }}
             />{" "}
@@ -305,7 +299,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item>
+        <Grid item border={3} borderRadius={1}>
           <Link to={"/shop/beauty"}>
             {" "}
             <img
@@ -313,7 +307,6 @@ const Home = () => {
               alt="for beauty"
               style={{
                 width: "100%",
-
                 height: "300px",
               }}
             />

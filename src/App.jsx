@@ -37,7 +37,7 @@ useEffect(() => {
     if (loggedTime) {
       const elapsed = now - parseInt(loggedTime, 10);
       if (elapsed >= 30 * 60 * 1000) { 
-        console.log("useeffect logging out")
+        console.log("logging out")
         logout();
       }
     }
