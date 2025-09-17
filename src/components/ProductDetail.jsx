@@ -185,7 +185,7 @@ const ProductDetail = () => {
     >
       {product && (
         <Box>
-          <Typography sx={{ color: "grey", fontWeight: "bold", mt: 2 }}>
+          <Typography sx={{ color: "grey", fontWeight: "bold", my: 1 }}>
             {path}
           </Typography>
         </Box>
