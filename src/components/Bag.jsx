@@ -227,7 +227,7 @@ const Bag = () => {
                 />
                 <img
                   src={x.imageUrl}
-                  style={{ width: "40%", borderRadius: 10 }}
+                  style={{ width: "40%", borderRadius: 10,height:'210px' }}
                 />
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
@@ -388,7 +388,7 @@ const Bag = () => {
           );
         })}
       </Box>
-      <Grid container direction={"column"} px={1}>
+      <Grid container direction={"column"} p={1}>
         <Grid item xs={12}>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {`Price Details (${products.reduce(
@@ -437,7 +437,7 @@ const Bag = () => {
                 textTransform: "none",
                 backgroundColor: "black",
                 color: "white",
-                my: 1,
+                my: 2,
               }}
               onClick={sendEmail}
               fullWidth
