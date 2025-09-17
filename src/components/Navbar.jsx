@@ -48,12 +48,13 @@ const Navbar = () => {
   const navigation = useNavigate();
   return (
     <AppBar
-      position="static"
+      position="fixed"
       color="default"
       sx={{
         backgroundColor: "white",
         boxShadow: "none",
         borderBottom: "1px solid #e0e0e0",
+        
       }}
     >
       <Toolbar

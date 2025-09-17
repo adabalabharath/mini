@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import home from "../../public/images/e-commerce-online-shopping-doodle-hand-drawn-icon-set-outline-drawing-e-commerce-online-shopping-line-clipart-symbol-collection-395304571.webp";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -14,15 +14,21 @@ import forHer from "../../public/images/forHer.png";
 import forThem from "../../public/images/kids.png";
 import forHome from "../../public/images/home.png";
 import forBeauty from "../../public/images/beauty.png";
+import { clearFilters } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [Hover, setHover] = useState("");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearFilters);
+  }, []);
   return (
     <div>
       <Box
         sx={{
           margin: "auto",
-          mt: 2,
+          mt: 10,
         }}
       >
         <img
@@ -60,7 +66,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item  border={3} borderRadius={1}>
+        <Grid item border={3} borderRadius={1}>
           <Link to={"/shop/men"}>
             {" "}
             <img
@@ -120,7 +126,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item  border={3} borderRadius={1}>
+        <Grid item border={3} borderRadius={1}>
           <Link to={"/shop/women"}>
             {" "}
             <img
@@ -179,7 +185,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item  border={3} borderRadius={1}>
+        <Grid item border={3} borderRadius={1}>
           <Link to={"/shop/kids"}>
             {" "}
             <img
@@ -238,7 +244,7 @@ const Home = () => {
         m={2}
         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
       >
-        <Grid item  border={3} borderRadius={1}>
+        <Grid item border={3} borderRadius={1}>
           <Link to={"/shop/home"}>
             {" "}
             <img

@@ -179,7 +179,8 @@ const ProductDetail = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "90vh",
+        pb:12,
+        mt:10
       }}
     >
       {product && (
@@ -317,7 +318,19 @@ const ProductDetail = () => {
         </Grid>
       )}
       {product && !showSkeleton && (
-        <Grid mt={2} display={"flex"} justifyContent={"center"} gap={1} mb={1}>
+        <Box
+    sx={{
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      width: "100%",
+      backgroundColor: "white",
+      zIndex: 1000, // stays above details
+      boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
+      p: 1,
+    }}
+  >
+        <Grid  display={"flex"} justifyContent={"center"} gap={1} >
           <Button onClick={() => handleFav(product)}>
             {user?.wishlist?.some((x) => x.id == product?.id) ? (
               <FavoriteIcon sx={{ color: "red" }} />
@@ -356,6 +369,7 @@ const ProductDetail = () => {
             Buy now
           </Button>
         </Grid>
+        </Box>
       )}
 
       <Dialog open={dialog} onClose={() => setDialog(false)}>

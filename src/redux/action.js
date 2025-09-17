@@ -25,7 +25,7 @@ export const genderFilter=(gender)=>(dispatch)=>{
     return dispatch({type:"SET_GENDER_FILTER",payload: gender});
 }
 
-export const clearFilters=()=>(dispatch)=>{
+export const clearFilters=(dispatch)=>{
     return dispatch({type:"CLEAR_FILTERS"});
 }
 

@@ -89,7 +89,7 @@ const Page = ({ products }) => {
   };
 
   return (
-    <Grid container sx={{ mt: 2, justifyContent: "space-between" }}>
+    <Grid container sx={{ mt: 2, justifyContent: "space-between",mt:10 }}>
       <Grid size={2.5} sx={{ display: { xs: "none", md: "block" } }}>
         <Filters />
       </Grid>

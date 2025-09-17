@@ -203,20 +203,20 @@ const Bag = () => {
   };
 
   return products.length ? (
-    <>
-      <Typography sx={{ p: 2, fontWeight: "bold" }}>
-        {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
-          "/" +
-          products.length +
-          " items selected"}
-      </Typography>
+    <Box mt={10}>
       <Grid
         container
         direction={"column"}
         minHeight={"40vh"}
         justifyContent={"space-between"}
       >
-        {products.map((x,i) => {
+        <Typography sx={{ p: 1, fontWeight: "bold" }}>
+          {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
+            "/" +
+            products.length +
+            " items selected"}
+        </Typography>
+        {products.map((x, i) => {
           return (
             <>
               <Grid
@@ -261,8 +261,12 @@ const Bag = () => {
                           sx={{ fontSize: 14, height: 36, paddingY: 0.5 }}
                           onChange={(e) => handleChange(e, x)}
                         >
-                          {x.availableSizes.map((size,i) => {
-                            return <MenuItem key={i} value={size}>{size}</MenuItem>;
+                          {x.availableSizes.map((size, i) => {
+                            return (
+                              <MenuItem key={i} value={size}>
+                                {size}
+                              </MenuItem>
+                            );
                           })}
                         </Select>
                       </FormControl>
@@ -288,7 +292,11 @@ const Bag = () => {
                         >
                           {Array.from({ length: 10 }, (_, i) => i + 1).map(
                             (size) => {
-                              return <MenuItem value={size}>{size}</MenuItem>;
+                              return (
+                                <MenuItem value={size} key={i}>
+                                  {size}
+                                </MenuItem>
+                              );
                             }
                           )}
                         </Select>
@@ -385,116 +393,69 @@ const Bag = () => {
           );
         })}
       </Grid>
-      <Grid>
-        <Typography
-          variant="subtitle1"
-          sx={{ fontWeight: "bold" }}
-        >{`Price Details (${products.reduce(
-          (a, b) => (b.selected ? a + 1 : a),
-          0
-        )} items) `}</Typography>
-        <Divider sx={{ px: 2 }} />
-        <Box display={"flex"} justifyContent={"space-between"} py={2}>
-          <Typography variant="caption">Total MRP</Typography>
-          <Typography variant="caption">
-            {" "}
-            {"\u20B9"}
-            {mrp}
+      <Grid container direction={"column"} p={1}>
+        <Grid item xs={12}>
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+            {`Price Details (${products.reduce(
+              (a, b) => (b.selected ? a + 1 : a),
+              0
+            )} items) `}
           </Typography>
-        </Box>
-        <Box display={"flex"} justifyContent={"space-between"} py={2}>
-          <Typography variant="caption">Discount on MRP</Typography>
-          <Typography variant="caption" color="green">
-            {" "}
-            {"\u20B9"}
-            {discMrp}
-          </Typography>
-        </Box>
+          <Divider sx={{ my: 1 }} />
 
-        <Box display={"flex"} justifyContent={"space-between"} py={2}>
-          <Typography variant="caption">Shipping</Typography>
-          <Typography variant="caption">
-            {" "}
-            {shipping == 0 ? "\u20B9" + 0 : "\u20B9" + shipping}
-          </Typography>
-        </Box>
-        <Box display={"flex"} justifyContent={"space-between"} py={2}>
-          <Typography variant="caption">GST</Typography>
-          <Typography variant="caption">
-            {" "}
-            {"\u20B9"}
-            {tax}
-          </Typography>
-        </Box>
-        <Divider sx={{ px: 2 }} />
+          {/* Price Details */}
+          <Box display="flex" justifyContent="space-between" py={1}>
+            <Typography variant="caption">Total MRP</Typography>
+            <Typography variant="caption">₹{mrp}</Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between" py={1}>
+            <Typography variant="caption">Discount on MRP</Typography>
+            <Typography variant="caption" color="green">
+              -₹{discMrp}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between" py={1}>
+            <Typography variant="caption">Shipping</Typography>
+            <Typography variant="caption">
+              {shipping === 0 ? "₹0" : `₹${shipping}`}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between" py={1}>
+            <Typography variant="caption">GST</Typography>
+            <Typography variant="caption">₹{tax}</Typography>
+          </Box>
+          <Divider sx={{ my: 1 }} />
+          <Box display="flex" justifyContent="space-between" py={1}>
+            <Typography variant="caption">Total</Typography>
+            <Typography variant="caption">
+              ₹{mrp > 0 ? mrp - discMrp + tax + shipping : 0}
+            </Typography>
+          </Box>
+        </Grid>
 
-        <Box display={"flex"} justifyContent={"space-between"} py={2}>
-          <Typography variant="caption">Total</Typography>
-          <Typography variant="caption">
-            {" "}
-            {"\u20B9"}
-            {mrp > 0 ? mrp - discMrp + tax + shipping : 0}
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid sx={{ display: "flex", justifyContent: "center" }}>
-        {products.length > 0 && (
-          <Button
-            variant="contained"
-            sx={{
-              textTransform: "none",
-              backgroundColor: "black",
-              color: "white",
-              my: 2,
-            }}
-            onClick={sendEmail}
-            loading={loading}
-            fullWidth
-            disabled={
-              products.reduce((a, b) => (b.selected ? a + 1 : a), 0) < 1
-            }
-          >
-            Place Order
-          </Button>
-        )}
-        <Dialog
-          open={dialog}
-          keepMounted
-          onClose={() => {
-            setDialog(false), setOrdered(true);
-          }}
-          aria-describedby="alert-dialog-slide-description"
-          sx={{ height: "100%" }}
-        >
-          <DialogContent>
-            <img src={orderPlaced} style={{ width: "100%", py: 0 }} />
-          </DialogContent>
-          <DialogActions
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              mb: 2,
-              height: "50%",
-            }}
-          >
+        {/* Place Order Button */}
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+          {products.length > 0 && (
             <Button
               variant="contained"
               sx={{
-                alignItems: "center",
+                textTransform: "none",
                 backgroundColor: "black",
-                border: "1px solid green",
                 color: "white",
+                my: 1,
               }}
-              onClick={() => {
-                setDialog(false), setOrdered(true);
-              }}
+              onClick={sendEmail}
+              fullWidth
+              disabled={
+                products.reduce((a, b) => (b.selected ? a + 1 : a), 0) < 1
+              }
             >
-              OK
+              Place Order
             </Button>
-          </DialogActions>
-        </Dialog>
+          )}
+        </Grid>
       </Grid>
-    </>
+    </Box>
   ) : !products.length && showSkeleton ? (
     <>
       <Grid container size={12} rowSpacing={5} columnSpacing={3}>

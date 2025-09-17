@@ -133,7 +133,7 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <Grid container justifyContent={"center"}>
+    <Grid container justifyContent={"center"} mt={10}>
       <Grid size={{ xs: 12, md: 8 }}>
         {!user ? (
           <Card
