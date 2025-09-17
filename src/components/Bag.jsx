@@ -207,7 +207,6 @@ const Bag = () => {
       <Grid
         container
         direction={"column"}
-        minHeight={"40vh"}
         justifyContent={"space-between"}
       >
         <Typography sx={{ p: 1, fontWeight: "bold" }}>
@@ -220,7 +219,7 @@ const Bag = () => {
           return (
             <>
               <Grid
-                sx={{ display: "flex", p: 2, position: "relative" }}
+                sx={{ display: "flex", p:2, position: "relative" }}
                 size={{ xs: 12, md: 3 }}
                 key={i}
               >
@@ -393,7 +392,7 @@ const Bag = () => {
           );
         })}
       </Grid>
-      <Grid container direction={"column"} p={1}>
+      <Grid container direction={"column"} px={1}>
         <Grid item xs={12}>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {`Price Details (${products.reduce(

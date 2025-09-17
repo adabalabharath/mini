@@ -330,7 +330,7 @@ const ProductDetail = () => {
       p: 1,
     }}
   >
-        <Grid  display={"flex"} justifyContent={"center"} gap={1} >
+        <Grid  display={"flex"} justifyContent={"center"} gap={1} px={1}>
           <Button onClick={() => handleFav(product)}>
             {user?.wishlist?.some((x) => x.id == product?.id) ? (
               <FavoriteIcon sx={{ color: "red" }} />
