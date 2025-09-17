@@ -203,12 +203,8 @@ const Bag = () => {
   };
 
   return products.length ? (
-    <Box mt={10}>
-      <Grid
-        container
-        direction={"column"}
-        justifyContent={"space-between"}
-      >
+    <Box display="flex" flexDirection="column" height="90vh" mt={10}>
+      <Box overflow="auto">
         <Typography sx={{ p: 1, fontWeight: "bold" }}>
           {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
             "/" +
@@ -219,7 +215,7 @@ const Bag = () => {
           return (
             <>
               <Grid
-                sx={{ display: "flex", p:2, position: "relative" }}
+                sx={{ display: "flex", p: 2, position: "relative" }}
                 size={{ xs: 12, md: 3 }}
                 key={i}
               >
@@ -391,7 +387,7 @@ const Bag = () => {
             </>
           );
         })}
-      </Grid>
+      </Box>
       <Grid container direction={"column"} px={1}>
         <Grid item xs={12}>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
