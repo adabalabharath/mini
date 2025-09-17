@@ -227,7 +227,7 @@ const Bag = () => {
                 />
                 <img
                   src={x.imageUrl}
-                  style={{ width: "40%", borderRadius: 10,height:'210px' }}
+                  style={{ width: "40%", borderRadius: 10,height:'225px' }}
                 />
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
@@ -437,7 +437,7 @@ const Bag = () => {
                 textTransform: "none",
                 backgroundColor: "black",
                 color: "white",
-                my: 2,
+                my: 1,
               }}
               onClick={sendEmail}
               fullWidth
