@@ -189,7 +189,7 @@ const ProductDetail = () => {
             {path}
           </Typography>
           <Typography variant="caption">
-            ** Double tap on image to add to wishlist **
+            ** Double tap on the image to add to wishlist **
           </Typography>
         </Box>
       )}
@@ -473,10 +473,9 @@ const ProductDetail = () => {
           setConfirmed(false), setOrdered(true);
         }}
         aria-describedby="alert-dialog-slide-description"
-        sx={{ height: "100%" }}
       >
         <DialogContent>
-          <img src={orderPlaced} style={{ width: "100%", p: 0 }} />
+          <img src={orderPlaced} style={{ width: "100%",height:'300px', p: 0 }} />
         </DialogContent>
         <DialogActions
           sx={{

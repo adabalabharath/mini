@@ -19,19 +19,20 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from "./AuthProvider";
 import Autocomplete from "@mui/material/Autocomplete";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import SellIcon from "@mui/icons-material/Sell";
+import { ListItemButton } from "@mui/material";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
-const settings = ["Profile", "Wishlist", "Bag","Orders"];
+const settings = ["Profile", "Wishlist", "Bag", "Orders"];
 const settingsIcons = [
   <PersonIcon />,
   <FavoriteBorderIcon />,
   <LocalMallIcon />,
-  <SellIcon/>
+  <SellIcon />,
 ];
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -54,7 +55,6 @@ const Navbar = () => {
         backgroundColor: "white",
         boxShadow: "none",
         borderBottom: "1px solid #e0e0e0",
-        
       }}
     >
       <Toolbar
@@ -164,21 +164,28 @@ const Navbar = () => {
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
           >
-            {/* Top Menu */}
             <List>
               {settings.map((p, i) => (
-                <ListItem button key={i} component={Link} to={p.toLowerCase()}>
+                <ListItemButton key={i} component={Link} to={p.toLowerCase()}>
                   {i == 2 ? (
-                    <ListItemIcon>
-                      <Badge badgeContent={user?.bag?.length} color="primary">
+                    <ListItemIcon sx={{color:'black'}}>
+                      <Badge
+                        badgeContent={user?.bag?.length}
+                        sx={{
+                          "& .MuiBadge-badge": {
+                            backgroundColor: "black",
+                            color: "white", 
+                          },
+                        }}
+                      >
                         {settingsIcons[i]}
                       </Badge>
                     </ListItemIcon>
                   ) : (
-                    <ListItemIcon>{settingsIcons[i]}</ListItemIcon>
+                    <ListItemIcon sx={{color:'black'}}>{settingsIcons[i]}</ListItemIcon>
                   )}
                   <ListItemText primary={p} sx={{ color: "black" }} />
-                </ListItem>
+                </ListItemButton>
               ))}
             </List>
 
@@ -249,7 +256,12 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              <Badge badgeContent={user?.bag?.length} color="secondary">
+              <Badge badgeContent={user?.bag?.length} sx={{
+                          "& .MuiBadge-badge": {
+                            backgroundColor: "black",
+                            color: "white", 
+                          },
+                        }}>
                 <LocalMallIcon />
               </Badge>
               <Typography variant="caption">Bag</Typography>
@@ -261,19 +273,31 @@ const Navbar = () => {
             onClose={() => setLogoutDialog(false)}
             sx={{ borderRadius: 5 }}
           >
-            <DialogContent><Typography>Are you sure, you want to Logout?</Typography></DialogContent>
+            <DialogContent>
+              <Typography>Are you sure, you want to Logout?</Typography>
+            </DialogContent>
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
               <Button
                 onClick={() => {
                   logout(user), setLogoutDialog(false);
                 }}
-                sx={{mb:2,backgroundColor:'black',color:'white',textTransform:'none'}}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "black",
+                  color: "white",
+                  textTransform: "none",
+                }}
               >
                 Yes
               </Button>
               <Button
                 onClick={() => setLogoutDialog(false)}
-                sx={{mb:2,backgroundColor:'black',color:'white',textTransform:'none'}}
+                sx={{
+                  mb: 2,
+                  backgroundColor: "black",
+                  color: "white",
+                  textTransform: "none",
+                }}
               >
                 No
               </Button>
