@@ -97,6 +97,8 @@ const Bag = () => {
     }
   }, [ordered]);
 
+  console.log(ordered);
+
   const sendEmail = () => {
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
@@ -118,7 +120,10 @@ const Bag = () => {
       tax,
       total: orderTotal + shipping + tax,
     };
+    console.log("Before setLoading");
     setLoading(true);
+    console.log("After setLoading");
+
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard
@@ -227,7 +232,7 @@ const Bag = () => {
                 />
                 <img
                   src={x.imageUrl}
-                  style={{ width: "40%", borderRadius: 10,height:'225px' }}
+                  style={{ width: "40%", borderRadius: 10, height: "225px" }}
                 />
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
@@ -444,11 +449,48 @@ const Bag = () => {
               disabled={
                 products.reduce((a, b) => (b.selected ? a + 1 : a), 0) < 1
               }
+              loading={loading}
             >
               Place Order
             </Button>
           )}
         </Grid>
+        <Dialog
+          open={dialog}
+          keepMounted
+          onClose={() => {
+            setDialog(false), setOrdered(true);
+          }}
+          aria-describedby="alert-dialog-slide-description"
+          sx={{ height: "100%" }}
+        >
+          <DialogContent>
+            <img src={orderPlaced} style={{ width: "100%", py: 0 }} />
+          </DialogContent>
+          <DialogActions
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              mb: 2,
+              height: "50%",
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                alignItems: "center",
+                backgroundColor: "black",
+                border: "1px solid green",
+                color: "white",
+              }}
+              onClick={() => {
+                setDialog(false), setOrdered(true);
+              }}
+            >
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     </Box>
   ) : !products.length && showSkeleton ? (

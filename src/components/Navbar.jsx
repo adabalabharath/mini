@@ -265,7 +265,7 @@ const Navbar = () => {
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
               <Button
                 onClick={() => {
-                  logout(), setLogoutDialog(false);
+                  logout(user), setLogoutDialog(false);
                 }}
                 sx={{mb:2,backgroundColor:'black',color:'white',textTransform:'none'}}
               >

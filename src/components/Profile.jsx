@@ -23,7 +23,7 @@ import SellIcon from "@mui/icons-material/Sell";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from '@mui/icons-material/Email';
+import EmailIcon from "@mui/icons-material/Email";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const schema = Yup.object({
@@ -58,6 +58,8 @@ const Profile = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname;
   const { login, user, logout, localSet } = useContext(AuthContext);
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  console.log(users);
   const {
     register,
     handleSubmit,
@@ -103,7 +105,7 @@ const Profile = () => {
       localStorage.setItem("loginTime", loginTime);
       login(user);
       navigate(from, { replace: true });
-       console.log("logout timer started",new Date()) 
+      console.log("logout timer started", new Date());
     } else {
       setWrongCred(true);
     }
@@ -389,7 +391,7 @@ const Profile = () => {
           <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               onClick={() => {
-                logout(), setLogoutDialog(false);
+                logout(user), setLogoutDialog(false);
               }}
               sx={{
                 textTransform: "none",
