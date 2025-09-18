@@ -21,14 +21,24 @@ const Orders = () => {
   useEffect(() => {
     setProducts(user?.orders);
   }, [user]);
+
   const handleRemove = (item) => {
     setRemove(false);
     const remove = {
       ...user,
-      orders: user.orders.filter((x) => x.id !== item.id),
+      orders: user.orders.filter((x) =>
+        x.selectedSize
+          ? !(
+              x.id === item.id &&
+              x.selectedSize == item.selectedSize &&
+              x.orderedTime === item.orderedTime
+            )
+          : !(x.id === item.id && x.orderedTime === item.orderedTime)
+      ),
     };
     localSet(remove);
   };
+  console.log(products);
   return products.length ? (
     <Box mt={10}>
       <Typography sx={{ fontWeight: "bold", m: 1 }}>Your Orders</Typography>
@@ -42,10 +52,10 @@ const Orders = () => {
                 key={x.id}
               >
                 <Link to={`/productId/${x.id}`}>
-                <img
-                  src={x.imageUrl}
-                  style={{ width: "100%", borderRadius: 10, height: "225px" }}
-                />
+                  <img
+                    src={x.imageUrl}
+                    style={{ width: "100%", borderRadius: 10, height: "225px" }}
+                  />
                 </Link>
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
@@ -109,7 +119,7 @@ const Orders = () => {
                   <Typography sx={{ my: 3, fontWeight: "bold" }}>
                     {" "}
                     {"\u20B9"}
-                    {x.price * x.qty}
+                    {x.qty ? x.price * x.qty : x.price * 1}
                   </Typography>
                   <Button
                     sx={{

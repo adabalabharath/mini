@@ -91,8 +91,14 @@ const Bag = () => {
       const remaining = {
         ...user,
         bag: user.bag.filter((x) => !x.selected),
-        orders: [...user.orders, ...user.bag.filter((x) => x.selected)],
+        orders: [
+          ...user.orders,
+          ...user.bag
+            .filter((x) => x.selected)
+            .map((x) => ({ ...x, orderedTime: Date.now() })),
+        ],
       };
+      console.log(remaining);
       localSet(remaining);
     }
   }, [ordered]);
@@ -226,10 +232,10 @@ const Bag = () => {
                   onChange={() => handleCheckOut(x)}
                 />
                 <Link to={`/productId/${x.id}`}>
-                <img
-                  src={x.imageUrl}
-                  style={{ width: "100%", borderRadius: 10, height: "225px" }}
-                />
+                  <img
+                    src={x.imageUrl}
+                    style={{ width: "100%", borderRadius: 10, height: "225px" }}
+                  />
                 </Link>
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
@@ -458,10 +464,13 @@ const Bag = () => {
           onClose={() => {
             setDialog(false), setOrdered(true);
           }}
-          aria-describedby="alert-dialog-slide-description"  
+          aria-describedby="alert-dialog-slide-description"
         >
-          <DialogContent sx={{p:1}}>
-            <img src={orderPlaced} style={{ width: "100%",height:"300px",py:0}} />
+          <DialogContent sx={{ p: 1 }}>
+            <img
+              src={orderPlaced}
+              style={{ width: "100%", height: "300px", py: 0 }}
+            />
           </DialogContent>
           <DialogActions
             sx={{

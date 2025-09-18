@@ -164,12 +164,15 @@ const ProductDetail = () => {
         alert("Failed to send email.");
       });
   };
+  console.log(ordered);
   useEffect(() => {
     if (ordered) {
+      const orderSet = { ...product, qty: 1, selectedSize, selected: true,orderedTime: Date.now()};
       const remaining = {
         ...user,
-        orders: [...user.orders, product],
+        orders: [...user.orders, orderSet],
       };
+      console.log(remaining)
       localSet(remaining);
     }
   }, [ordered]);
@@ -179,12 +182,12 @@ const ProductDetail = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        pb:12,
-        mt:10
+        pb: 12,
+        mt: 10,
       }}
     >
       {product && (
-        <Box display={'flex'} flexDirection={'column'}>
+        <Box display={"flex"} flexDirection={"column"}>
           <Typography sx={{ color: "grey", fontWeight: "bold", my: 1 }}>
             {path}
           </Typography>
@@ -322,56 +325,56 @@ const ProductDetail = () => {
       )}
       {product && !showSkeleton && (
         <Box
-    sx={{
-      position: "fixed",
-      bottom: 0,
-      left: 0,
-      width: "100%",
-      backgroundColor: "white",
-      zIndex: 1000, // stays above details
-      boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
-      p: 1,
-    }}
-  >
-        <Grid  display={"flex"} justifyContent={"center"} gap={1} px={1}>
-          <Button onClick={() => handleFav(product)}>
-            {user?.wishlist?.some((x) => x.id == product?.id) ? (
-              <FavoriteIcon sx={{ color: "red" }} />
-            ) : (
-              <FavoriteBorderIcon sx={{ color: "black" }} />
-            )}
-          </Button>
-          <Button
-            variant="contained"
-            color="black"
-            fullWidth
-            onClick={handleBag}
-            sx={{ color: "white", backgroundColor: "black" }}
-            size="small"
-          >
-            Add to Bag
-          </Button>
-          <Button
-            variant="contained"
-            color="black"
-            fullWidth
-            onClick={() => {
-              if (!user) {
-                navigate("/profile");
-                return;
-              }
-              if (product.availableSizes.length > 0) {
-                selectedSize ? setBuy(true) : setDialog(true);
-              } else {
-                setBuy(true);
-              }
-            }}
-            size="small"
-            sx={{ color: "white", backgroundColor: "black" }}
-          >
-            Buy now
-          </Button>
-        </Grid>
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            backgroundColor: "white",
+            zIndex: 1000, // stays above details
+            boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
+            p: 1,
+          }}
+        >
+          <Grid display={"flex"} justifyContent={"center"} gap={1} px={1}>
+            <Button onClick={() => handleFav(product)}>
+              {user?.wishlist?.some((x) => x.id == product?.id) ? (
+                <FavoriteIcon sx={{ color: "red" }} />
+              ) : (
+                <FavoriteBorderIcon sx={{ color: "black" }} />
+              )}
+            </Button>
+            <Button
+              variant="contained"
+              color="black"
+              fullWidth
+              onClick={handleBag}
+              sx={{ color: "white", backgroundColor: "black" }}
+              size="small"
+            >
+              Add to Bag
+            </Button>
+            <Button
+              variant="contained"
+              color="black"
+              fullWidth
+              onClick={() => {
+                if (!user) {
+                  navigate("/profile");
+                  return;
+                }
+                if (product.availableSizes.length > 0) {
+                  selectedSize ? setBuy(true) : setDialog(true);
+                } else {
+                  setBuy(true);
+                }
+              }}
+              size="small"
+              sx={{ color: "white", backgroundColor: "black" }}
+            >
+              Buy now
+            </Button>
+          </Grid>
         </Box>
       )}
 
@@ -475,7 +478,10 @@ const ProductDetail = () => {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <img src={orderPlaced} style={{ width: "100%",height:'300px', p: 0 }} />
+          <img
+            src={orderPlaced}
+            style={{ width: "100%", height: "300px", p: 0 }}
+          />
         </DialogContent>
         <DialogActions
           sx={{
@@ -491,7 +497,7 @@ const ProductDetail = () => {
               alignItems: "center",
               border: "1px solid green",
               color: "white",
-              backgroundColor:'black'
+              backgroundColor: "black",
             }}
             onClick={() => {
               setConfirmed(false), setOrdered(true);
