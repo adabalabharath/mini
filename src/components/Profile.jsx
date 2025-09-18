@@ -58,8 +58,6 @@ const Profile = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname;
   const { login, user, logout, localSet } = useContext(AuthContext);
-  const users = JSON.parse(localStorage.getItem("users") || "[]");
-  console.log(users);
   const {
     register,
     handleSubmit,

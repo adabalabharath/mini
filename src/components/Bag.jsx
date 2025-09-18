@@ -97,8 +97,6 @@ const Bag = () => {
     }
   }, [ordered]);
 
-  console.log(ordered);
-
   const sendEmail = () => {
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
@@ -120,10 +118,7 @@ const Bag = () => {
       tax,
       total: orderTotal + shipping + tax,
     };
-    console.log("Before setLoading");
     setLoading(true);
-    console.log("After setLoading");
-
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard

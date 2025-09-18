@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = (user) => {
-    console.log(user)
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const addDetailsTo=users.map(x=>x?.email==user?.email ? {...x,bag:user.bag,wishlist:user.wishlist,orders:user.orders,profile:user.profile}:x)
     localStorage.setItem("users",JSON.stringify(addDetailsTo))
