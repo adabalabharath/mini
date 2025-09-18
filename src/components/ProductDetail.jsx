@@ -184,9 +184,12 @@ const ProductDetail = () => {
       }}
     >
       {product && (
-        <Box>
+        <Box display={'flex'} flexDirection={'column'}>
           <Typography sx={{ color: "grey", fontWeight: "bold", my: 1 }}>
             {path}
+          </Typography>
+          <Typography variant="caption">
+            ** Double tap on image to add to wishlist **
           </Typography>
         </Box>
       )}
@@ -488,7 +491,8 @@ const ProductDetail = () => {
             sx={{
               alignItems: "center",
               border: "1px solid green",
-              color: "green",
+              color: "white",
+              backgroundColor:'black'
             }}
             onClick={() => {
               setConfirmed(false), setOrdered(true);
