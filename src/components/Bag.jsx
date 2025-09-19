@@ -54,6 +54,7 @@ const Bag = () => {
     //const prods = filtersHook("", user?.bag, filters);
     setProducts(user.bag);
   }, [user?.bag, filters]);
+  console.log(products)
 
   useEffect(() => {
     let original = products.reduce(
@@ -106,20 +107,29 @@ const Bag = () => {
   const sendEmail = () => {
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
-    const orders = selected.map((item) => ({
-      name: item.productName,
-      units: item.qty,
-      size: item.selectedSize ? item.selectedSize : "Free Size",
-      price: item.prices
-        ? item.prices[parseInt(item.selectedSize)] * item.qty
-        : item.price * item.qty,
-      image: item.imageUrl,
-    }));
+    const ordersHtml = selected
+      .map(
+        (item) => `
+      <div style="margin-bottom: 10px;">
+        <img src="${item.imageUrl}" alt="${item.productName}" width="100" />
+        <p><strong>${item.productName}</strong></p>
+        <p>Units: ${item.qty}</p>
+        <p>Size: ${item.selectedSize || "Free Size"}</p>
+        <p>Price: ₹${
+          item.prices
+            ? item.prices[parseInt(item.selectedSize)] * item.qty
+            : item.price * item.qty
+        }</p>
+      </div>
+    `
+      )
+      .join("");
+
     const templateParams = {
       userName: user?.name,
       email: user?.email,
       order_id: Date.now(),
-      orders,
+      orders:ordersHtml,
       shipping,
       tax,
       total: orderTotal + shipping + tax,
