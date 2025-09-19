@@ -106,47 +106,23 @@ const Bag = () => {
   const sendEmail = () => {
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
-    const ordersHtml = selected
-      .map(
-        (item) => `
-      <table style="width: 100%; border-collapse: collapse;">
-        <tbody>
-          <tr style="vertical-align: top;">
-            <td style="padding: 24px 8px 0 4px; display: inline-block; width: max-content;">
-              <img style="height: 64px;" src="${item.imageUrl}" alt="${
-          item.productName
-        }" height="64px">
-            </td>
-            <td style="padding: 24px 8px 0 8px; width: 100%;">
-              <div>${item.productName}</div>
-              <div style="font-size: 14px; color: #888; padding-top: 4px;">
-                QTY: ${item.qty} &nbsp; SIZE: ${
-          item.selectedSize || "Free Size"
-        }
-              </div>
-            </td>
-            <td style="padding: 24px 4px 0 0; white-space: nowrap;">
-              <strong>₹${
-                item.prices
-                  ? item.prices[parseInt(item.selectedSize)] * item.qty
-                  : item.price * item.qty
-              }</strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `
-      )
-      .join("");
+    const orders = selected.map((item) => ({
+      name: item.productName,
+      units: item.qty,
+      size: item.selectedSize ? item.selectedSize : "Free Size",
+      price: item.prices
+        ? item.prices[parseInt(item.selectedSize)] * item.qty
+        : item.price * item.qty,
+      image: item.imageUrl,
+    }));
     const templateParams = {
       userName: user?.name,
       email: user?.email,
       order_id: Date.now(),
-      orders: ordersHtml,
+      orders,
       shipping,
       tax,
       total: orderTotal + shipping + tax,
-      logo: "https://localhost:5173/images/logo.jpeg",
     };
     setLoading(true);
     emailjs
