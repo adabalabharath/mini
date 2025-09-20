@@ -340,7 +340,7 @@
     "price": 6999,
     "color": "white",
     "availableSizes": [6, 7, 8, 9, 10, 11, 12],
-    "images":["/images/puma1.avif","/images/pum15.2.avif"]
+    "images":["/images/puma1.avif","/images/puma1.2.avif"]
   },
   {
     "id": "PUMA-SHOE-002",
@@ -472,7 +472,7 @@
     "price": 2899,
     "color":"grey",
     "availableSizes": [6, 7, 8, 9, 10, 11],
-     "images":["/images/levis1.jpg","/images/levis1.2.jpg"]
+     "images":["/images/levis1.jpeg","/images/levis1.2.jpg"]
   },
   {
     "id": "LEVIS-SHOE-002",
@@ -551,7 +551,7 @@
     "price": 4495,
     "color":"white",
     "availableSizes": [7, 8, 9, 10, 11, 12],
-    "images":["/images/crocs2.jpeg","/images/crocs2.2.jpg"]
+    "images":["/images/crocs2.jpg","/images/crocs2.2.jpg"]
   },
   {
     "id": "CROCS-SHOE-003",
