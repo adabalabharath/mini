@@ -16,7 +16,7 @@ import kidsSection from "../../public/images/kidsSection.webp";
 import kidsSection2 from "../../public/images/kidSection2.jpg";
 import kidsSection3 from "../../public/images/kidSection3.jpg";
 import homeSection from "../../public/images/homeSection.png";
-import beautySection from "../../public/images/beautySection.jpg";
+import beautySection from "../../public/images/beautySection.png";
 import forHim from "../../public/images/forHim.png";
 import forHer from "../../public/images/forHer.png";
 import forThem from "../../public/images/kids.png";
@@ -342,7 +342,7 @@ const Home = () => {
               maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
-              border:"3px solid black",
+              border:"2px solid black",
               boxShadow: Hover === "home" ? "50px" : 0,
               
             }}
@@ -399,14 +399,14 @@ const Home = () => {
             src={beautySection}
             alt="clothing"
             style={{
-              width: "1100px",
+              width: "100%",
               maxWidth:'1100px',
               maxHeight: "400px",
               borderRadius: 10,
                objectFit: "cover", 
               transition: "all 0.1s ease",
-              boxShadow: Hover === "beauty" ? "50px" : 0,
-              border: Hover === "beauty" ? "5px solid black" : 0,
+              // boxShadow: Hover === "beauty" ? "50px" : 0,
+              // border: Hover === "beauty" ? "5px solid black" : 0,
             }}
             onMouseEnter={() => setHover("beauty")}
             onMouseLeave={() => setHover("beautyLeave")}
