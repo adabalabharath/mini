@@ -234,9 +234,8 @@ const ProductDetail = () => {
     >
       {product && (
         <Box display={"flex"} flexDirection={"column"}>
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            sx={{ color: "grey", fontWeight: "bold", fontSize: "10px" }}
+          <Breadcrumbs separator='/'
+            sx={{ color: "grey", fontWeight: "bold", fontSize: "12px",my:1 }}
           >
             <Link
               to="/"
@@ -246,7 +245,7 @@ const ProductDetail = () => {
                 color: "grey",
               }}
             >
-              / Home
+              Home
             </Link>
 
             {product.gender === "male" && (
@@ -346,13 +345,14 @@ const ProductDetail = () => {
                 slidesPerView={1}
                 pagination={{ clickable: true }}
                 modules={[Pagination]}
+                onDoubleClick={()=>handleFavLike(product)}
               >
                 {product.images.map((x) => (
                   <SwiperSlide>
                     <Box
                       component="img"
                       src={x}
-                      onDoubleClick={() => handleFavLike(product)}
+                      
                       sx={{
                         width: "100%",
                         borderRadius: 2,
@@ -369,12 +369,13 @@ const ProductDetail = () => {
                 slidesPerView={1}
                 pagination={{ clickable: true }}
                 modules={[Pagination]}
+                onDoubleClick={() => handleFavLike(product)}
               >
                 <SwiperSlide>
                   <Box
                     component="img"
                     src={product?.imageUrl}
-                    onDoubleClick={() => handleFavLike(product)}
+                    
                     sx={{
                       width: "100%",
                       borderRadius: 2,
@@ -401,7 +402,7 @@ const ProductDetail = () => {
                         maxHeight: "400px",
                         objectFit: "cover",
                       }}
-                      onDoubleClick={() => handleFavLike(product)}
+                     
                     />
 
                     {/* Centered text overlay */}
