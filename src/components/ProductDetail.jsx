@@ -18,6 +18,46 @@ import Divider from "@mui/material/Divider";
 import orderPlaced from "../../public/images/orderPlaced.jpeg";
 import emailjs from "emailjs-com";
 import Skeleton from "@mui/material/Skeleton";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Pagination } from "swiper/modules";
+import logo from "../../public/images/logo.jpeg";
+import "swiper/css/pagination";
+import { Breadcrumbs } from "@mui/material";
+
+const terms = [
+  {
+    heading: "100% Original Products",
+    points: [
+      "Pay on delivery might be available.",
+      "Easy 10 days returns and exchanges.",
+    ],
+  },
+  // {
+  //   heading: "BEST OFFERS",
+  //   points: [
+  //     "Best Price: Rs. 146.",
+  //     "Applicable on orders above Rs. 150 (only on first purchase).",
+  //     "Coupon code: BFF50. Coupon Discount: 50% off (Your total saving: Rs. 503).",
+  //   ],
+  // },
+  {
+    heading: "Bank Discounts",
+    points: [
+      "10% Discount on ICICI Bank Credit & Debit Cards. Min Spend ₹3500, Max Discount ₹1000.",
+      "10% Discount on Axis Bank Credit Card. Min Spend ₹3500, Max Discount ₹1000.",
+      "10% Discount on Kotak Bank Credit Cards. Min Spend ₹3500, Max Discount ₹1000.",
+    ],
+  },
+  {
+    heading: "Cashback",
+    points: [
+      "Assured Flat ₹20 Cashback. Min Spend ₹750, Max Discount ₹120.",
+      "10% Discount on IDFC FIRST SWYP Credit Card. Min Spend ₹850, Max Discount ₹350.",
+    ],
+  },
+];
+
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -76,7 +116,7 @@ const ProductDetail = () => {
     };
     localSet(fav);
   };
-
+  console.log(like);
   const handleFavLike = (product) => {
     setLike(true);
     if (!user) {
@@ -167,12 +207,18 @@ const ProductDetail = () => {
   console.log(ordered);
   useEffect(() => {
     if (ordered) {
-      const orderSet = { ...product, qty: 1, selectedSize, selected: true,orderedTime: Date.now()};
+      const orderSet = {
+        ...product,
+        qty: 1,
+        selectedSize,
+        selected: true,
+        orderedTime: Date.now(),
+      };
       const remaining = {
         ...user,
         orders: [...user.orders, orderSet],
       };
-      console.log(remaining)
+      console.log(remaining);
       localSet(remaining);
     }
   }, [ordered]);
@@ -188,9 +234,89 @@ const ProductDetail = () => {
     >
       {product && (
         <Box display={"flex"} flexDirection={"column"}>
-          <Typography sx={{ color: "grey", fontWeight: "bold", my: 1 }}>
-            {path}
-          </Typography>
+          <Breadcrumbs
+            aria-label="breadcrumb"
+            sx={{ color: "grey", fontWeight: "bold", fontSize: "10px" }}
+          >
+            <Link
+              to="/"
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "grey",
+              }}
+            >
+              / Home
+            </Link>
+
+            {product.gender === "male" && (
+              <Link
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+                to={"/shop/men"}
+              >
+                Men
+              </Link>
+            )}
+            {product.gender === "female" && (
+              <Link
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+                to={"/shop/women"}
+              >
+                Women
+              </Link>
+            )}
+            {product.gender === "others" && (
+              <Link
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+                to={"/shop/kids"}
+              >
+                Kids
+              </Link>
+            )}
+            {product.gender === "beauty" && (
+              <Link
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+                to={"/shop/beauty"}
+              >
+                Beauty
+              </Link>
+            )}
+            {product.gender === "home" && (
+              <Link
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+                to={"/shop/home"}
+              >
+                Home Appliances
+              </Link>
+            )}
+            <Typography
+              color="text.primary"
+              variant="caption"
+              fontWeight={"bold"}
+            >
+              {product.productName}
+            </Typography>
+          </Breadcrumbs>
           <Typography variant="caption">
             ** Double tap on the image to add to wishlist **
           </Typography>
@@ -200,18 +326,103 @@ const ProductDetail = () => {
         <Grid
           container
           display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
+          flexDirection={{ xs: "column", md: "row" }}
+          justifyContent={{ md: "space-evenly" }}
+          py={1}
         >
           <Grid
-            sx={{ position: "relative", width: "100%" }}
+            container
+            sx={{
+              position: "relative",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
             size={{ xs: 12, md: 4 }}
           >
-            <img
-              src={product?.imageUrl}
-              style={{ width: "100%", borderRadius: 10, maxHeight: "400px" }}
-              onDoubleClick={() => handleFavLike(product)}
-            />
+            {product.images ? (
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                pagination={{ clickable: true }}
+                modules={[Pagination]}
+              >
+                {product.images.map((x) => (
+                  <SwiperSlide>
+                    <Box
+                      component="img"
+                      src={x}
+                      onDoubleClick={() => handleFavLike(product)}
+                      sx={{
+                        width: "100%",
+                        borderRadius: 2,
+
+                        height: { xs: "400px", md: "80vh" },
+                      }}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                pagination={{ clickable: true }}
+                modules={[Pagination]}
+              >
+                <SwiperSlide>
+                  <Box
+                    component="img"
+                    src={product?.imageUrl}
+                    onDoubleClick={() => handleFavLike(product)}
+                    sx={{
+                      width: "100%",
+                      borderRadius: 2,
+
+                      height: { xs: "400px", md: "80vh" },
+                    }}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Box
+                    sx={{
+                      flexDirection: "column",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={logo}
+                      style={{
+                        width: "100%",
+                        borderRadius: 10,
+                        maxHeight: "400px",
+                        objectFit: "cover",
+                      }}
+                      onDoubleClick={() => handleFavLike(product)}
+                    />
+
+                    {/* Centered text overlay */}
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        background: "rgba(0,0,0,0.5)", // optional dark background
+                        px: 2,
+                        py: 1,
+                        borderRadius: 2,
+                      }}
+                    >
+                      Sorry, Adding images is still in progress
+                    </Typography>
+                  </Box>
+                </SwiperSlide>
+              </Swiper>
+            )}
             {user && like && (
               <FavoriteIcon
                 sx={{
@@ -229,98 +440,176 @@ const ProductDetail = () => {
                   borderRadius: "50%",
                   backgroundColor: "white",
                   padding: 1,
+                  zIndex: 1100,
                 }}
               />
             )}
           </Grid>
-
-          <Grid
+          <Box
             display={"flex"}
             flexDirection={"column"}
-            gap={1}
-            mb={2}
-            size={{ xs: 12, md: 4 }}
-            alignSelf={"flex-start"}
+            justifyContent={"center"}
           >
-            <Typography sx={{ color: "grey" }}>
-              <span style={{ fontWeight: "bold", color: "black" }}>
-                {product?.brand}
-              </span>{" "}
-              {product?.gender == "male"
-                ? "Men " + product?.productName
-                : product.gender == "female"
-                ? "Women " + product?.productName
-                : product?.productName}
-            </Typography>
-
-            <Typography sx={{ fontWeight: "bold" }} variant="button">
-              <span style={{ color: "grey", fontWeight: "lighter" }}>
-                MRP{" "}
-                <s>
-                  {"\u20B9"}
-                  {product?.price + 2000}&nbsp;
-                </s>
-              </span>{" "}
-              {"\u20B9"}
-              {product?.price}
-            </Typography>
-
-            <Typography
-              sx={{ fontWeight: "bold", color: "red" }}
-              variant="caption "
+            <Grid
+              display={"flex"}
+              flexDirection={"column"}
+              gap={1}
+              mb={2}
+              size={{ xs: 12, md: 12 }}
+              alignSelf={"flex-start"}
             >
-              Only Few Left!
-            </Typography>
-          </Grid>
+              <Typography sx={{ color: "grey" }}>
+                <span style={{ fontWeight: "bold", color: "black" }}>
+                  {product?.brand}
+                </span>{" "}
+                {product?.gender == "male"
+                  ? "Men " + product?.productName
+                  : product.gender == "female"
+                  ? "Women " + product?.productName
+                  : product?.productName}
+              </Typography>
 
-          {product?.availableSizes.length ? (
-            <>
-              {" "}
-              <Grid alignSelf={"flex-start"}>
-                <Typography>Select a Size</Typography>
-                <Grid flexWrap={"wrap"}>
-                  {product?.availableSizes.map((size) => (
-                    <Button
-                      key={size}
-                      variant={selectedSize === size ? "contained" : "outlined"}
-                      size="small"
-                      sx={{
-                        borderRadius: "30%",
-                        minWidth: 30,
-                        minHeight: 30,
-                        borderColor: "black",
-                        mt: 1,
-                        mr: 1,
+              <Typography sx={{ fontWeight: "bold" }} variant="button">
+                <span style={{ color: "grey", fontWeight: "lighter" }}>
+                  MRP{" "}
+                  <s>
+                    {"\u20B9"}
+                    {product?.price + 2000}&nbsp;
+                  </s>
+                </span>{" "}
+                {"\u20B9"}
+                {product?.price}
+              </Typography>
 
-                        border: "1px solid grey",
-
-                        textTransform: "none",
-                        color: selectedSize == size ? "white" : "black",
-                        backgroundColor: selectedSize == size && "black",
-                      }}
-                      onClick={() => {
-                        handleSize(size);
-                      }}
-                    >
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        {size}
-                        <Typography variant="caption" color="grey">
-                          {"\u20B9"}
-                          {product.gender === "beauty" && product.prices
-                            ? product?.prices[parseInt(size)]
-                            : product?.price}
-                        </Typography>
-                      </Box>
-                    </Button>
-                  ))}
-                </Grid>
-              </Grid>
-            </>
-          ) : (
-            <Grid alignSelf={"flex-start"}>
-              <Typography variant="subtitle"> Size: Free Size</Typography>
+              <Typography
+                sx={{ fontWeight: "bold", color: "red" }}
+                variant="caption "
+              >
+                Only Few Left!
+              </Typography>
             </Grid>
-          )}
+
+            {product?.availableSizes.length ? (
+              <>
+                {" "}
+                <Grid alignSelf={"flex-start"}>
+                  <Typography>Select a Size</Typography>
+                  <Grid flexWrap={"wrap"}>
+                    {product?.availableSizes.map((size) => (
+                      <Button
+                        key={size}
+                        variant={
+                          selectedSize === size ? "contained" : "outlined"
+                        }
+                        size="small"
+                        sx={{
+                          borderRadius: "30%",
+                          minWidth: 30,
+                          minHeight: 30,
+                          borderColor: "black",
+                          mt: 1,
+                          mr: 1,
+
+                          border: "1px solid grey",
+
+                          textTransform: "none",
+                          color: selectedSize == size ? "white" : "black",
+                          backgroundColor: selectedSize == size && "black",
+                        }}
+                        onClick={() => {
+                          handleSize(size);
+                        }}
+                      >
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          {size}
+                          <Typography variant="caption" color="grey">
+                            {"\u20B9"}
+                            {product.gender === "beauty" && product.prices
+                              ? product?.prices[parseInt(size)]
+                              : product?.price}
+                          </Typography>
+                        </Box>
+                      </Button>
+                    ))}
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <Grid alignSelf={"flex-start"}>
+                <Typography variant="subtitle"> Size: Free Size</Typography>
+              </Grid>
+            )}
+            <Box
+              sx={{
+                width: "100%",
+                p: 1,
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              <Grid display={"flex"} justifyContent={"center"} gap={1} my={1}>
+                <Button onClick={() => handleFav(product)}>
+                  {user?.wishlist?.some((x) => x.id == product?.id) ? (
+                    <FavoriteIcon sx={{ color: "red" }} />
+                  ) : (
+                    <FavoriteBorderIcon sx={{ color: "black" }} />
+                  )}
+                </Button>
+                <Button
+                  variant="contained"
+                  color="black"
+                  fullWidth
+                  onClick={handleBag}
+                  sx={{ color: "white", backgroundColor: "black" }}
+                  size="small"
+                >
+                  Add to Bag
+                </Button>
+                <Button
+                  variant="contained"
+                  color="black"
+                  fullWidth
+                  onClick={() => {
+                    if (!user) {
+                      navigate("/profile");
+                      return;
+                    }
+                    if (product.availableSizes.length > 0) {
+                      selectedSize ? setBuy(true) : setDialog(true);
+                    } else {
+                      setBuy(true);
+                    }
+                  }}
+                  size="small"
+                  sx={{ color: "white", backgroundColor: "black" }}
+                >
+                  Buy now
+                </Button>
+              </Grid>
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              {terms.map((section, idx) => (
+                <Box key={idx} sx={{ mb: 2 }}>
+                  {/* Heading */}
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontWeight: "bold", mb: 0.5 }}
+                  >
+                    {section.heading}
+                  </Typography>
+                  {/* Points */}
+                  {section.points.map((point, i) => (
+                    <Typography
+                      key={i}
+                      variant="body2"
+                      sx={{ ml: 2, color: "grey.800", lineHeight: 1.6 }}
+                    >
+                      • {point}
+                    </Typography>
+                  ))}
+                </Box>
+              ))}
+            </Box>
+          </Box>
         </Grid>
       )}
       {product && !showSkeleton && (
@@ -334,6 +623,7 @@ const ProductDetail = () => {
             zIndex: 1000, // stays above details
             boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
             p: 1,
+            display: { md: "none", xs: "block" },
           }}
         >
           <Grid display={"flex"} justifyContent={"center"} gap={1} px={1}>
