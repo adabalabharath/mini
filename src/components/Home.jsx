@@ -111,7 +111,7 @@ const Home = () => {
           modules={[Pagination, Autoplay]}
           onSwiper={(swiper) => (menSwipeRef.current = swiper)}
           autoplay={false}
-          style={{ width: "100%", maxWidth: "1200px", borderRadius: 10 }}
+          style={{ width: "100%", maxWidth: "1100px", borderRadius: 10 }}
           loop={true}
         >
           {menImages.map((x, i) => (
@@ -189,7 +189,7 @@ const Home = () => {
           modules={[Pagination, Autoplay]}
           onSwiper={(swiper) => (womenSwipeRef.current = swiper)}
           autoplay={false}
-          style={{ width: "100%", maxWidth: "1200px", borderRadius: 10 }}
+          style={{ width: "100%", maxWidth: "1100px", borderRadius: 10 }}
           loop={true}
         >
           {womenImages.map((x, i) => (
@@ -266,7 +266,7 @@ const Home = () => {
           modules={[Pagination, Autoplay]}
           onSwiper={(swiper) => (kidSwipeRef.current = swiper)}
           autoplay={false}
-          style={{ width: "100%", maxWidth: "1200px", borderRadius: 10 }}
+          style={{ width: "100%", maxWidth: "1100px", borderRadius: 10 }}
           loop={true}
         >
           {kidImages.map((x, i) => (
@@ -336,12 +336,15 @@ const Home = () => {
             src={homeSection}
             alt="clothing"
             style={{
-              width: "1200px",
+             
+              width:'100%',
+              maxWidth:'1100px',
               maxHeight: "400px",
               borderRadius: 10,
               transition: "all 0.1s ease",
+              border:"3px solid black",
               boxShadow: Hover === "home" ? "50px" : 0,
-              border: Hover === "home" ? "5px solid black" : 0,
+              
             }}
             onMouseEnter={() => setHover("home")}
             onMouseLeave={() => setHover("homeLeave")}
@@ -385,7 +388,7 @@ const Home = () => {
       </Grid>
       <Grid
         container
-        spacing={3}
+      
         justifyContent="center"
         alignItems="center"
         m={2}
@@ -396,9 +399,11 @@ const Home = () => {
             src={beautySection}
             alt="clothing"
             style={{
-              width: "1200px",
+              width: "1100px",
+              maxWidth:'1100px',
               maxHeight: "400px",
               borderRadius: 10,
+               objectFit: "cover", 
               transition: "all 0.1s ease",
               boxShadow: Hover === "beauty" ? "50px" : 0,
               border: Hover === "beauty" ? "5px solid black" : 0,
