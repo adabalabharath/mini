@@ -149,7 +149,7 @@ const Page = ({ products }) => {
             ))}
           </Grid>
         ) : products.length > 0 ? (
-          <Grid container size={12} rowSpacing={5} columnSpacing={3}>
+          <Grid container size={12} rowGap={{md:8,xs:5}} columnSpacing={3}>
             {products?.map((product) => (
               <Grid
                 size={{
