@@ -89,7 +89,7 @@ const Page = ({ products }) => {
   };
 
   return (
-    <Grid container sx={{ mt: 2, justifyContent: "space-between",mt:10 }}>
+    <Grid container sx={{ mt: 2, justifyContent: "space-between", mt: 10 }}>
       <Grid size={2.5} sx={{ display: { xs: "none", md: "block" } }}>
         <Filters />
       </Grid>
@@ -149,7 +149,7 @@ const Page = ({ products }) => {
             ))}
           </Grid>
         ) : products.length > 0 ? (
-          <Grid container size={12} rowGap={{md:8,xs:5}} columnSpacing={3}>
+          <Grid container size={12} rowGap={{ md: 8, xs: 5 }}>
             {products?.map((product) => (
               <Grid
                 size={{
@@ -159,12 +159,11 @@ const Page = ({ products }) => {
                 }}
                 key={product.id}
                 sx={{
-                  border: "1px solid white",
                   p: 2,
                   maxHeight: 530,
-                  height:'100%',
-                  flexWrap: "wrap",
+                  height: "100%",
                   position: "relative",
+                  
                 }}
               >
                 <Link
@@ -183,20 +182,21 @@ const Page = ({ products }) => {
                       alt={product.productName}
                       style={{
                         width: "100%",
-                        height: '220px',
+                        height: "220px",
                         borderRadius: 8,
                       }}
                     />
                   </Box>
                   <Grid
                     container
-                    height={'50%'}
+                    height={"50%"}
                     direction={"column"}
                     justifyContent={"space-around"}
                     wrap="noWrap"
+                    // border={1}
                   >
-                    <Grid >
-                      <Typography variant="h6" fontWeight={"fantasy"} noWrap >
+                    <Grid>
+                      <Typography variant="h6" fontWeight={"fantasy"} noWrap>
                         {product.brand}
                       </Typography>
                     </Grid>
@@ -207,7 +207,8 @@ const Page = ({ products }) => {
                               .split(" ")
                               .slice(0, 4)
                               .join(" ") + "..."
-                          : product.productName} */}{product.productName}
+                          : product.productName} */}
+                        {product.productName}
                       </Typography>
                     </Grid>
                     <Grid>
@@ -227,7 +228,7 @@ const Page = ({ products }) => {
                       </Typography>
                     </Grid>
                     <Grid>
-                      <Typography variant="subtitle1">
+                      <Typography variant="subtitle1" fontSize={'16px'}>
                         {"\u20B9"}
                         {product.price}{" "}
                         <sup style={{ color: "light-black" }}>00</sup>
@@ -314,7 +315,7 @@ const Page = ({ products }) => {
                   setSizeDrawer(false);
                   setOpen(true);
                 }}
-                sx={{ backgroundColor: "black", color: "white",mb:2 }}
+                sx={{ backgroundColor: "black", color: "white", mb: 2 }}
               >
                 Done
               </Button>

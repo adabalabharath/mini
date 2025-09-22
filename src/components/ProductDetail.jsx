@@ -329,6 +329,7 @@ const ProductDetail = () => {
           flexDirection={{ xs: "column",sm:"column", md: "row" }}
           justifyContent={{ md: "space-evenly" }}
           py={1}
+          
         >
           <Grid
             container
@@ -466,7 +467,7 @@ const ProductDetail = () => {
                   : product?.productName}
               </Typography>
 
-              <Typography sx={{ fontWeight: "bold" }} variant="button">
+              <Typography sx={{ fontWeight: "bold" }} variant="button" >
                 <span style={{ color: "grey", fontWeight: "lighter" }}>
                   MRP{" "}
                   <s>
@@ -474,8 +475,10 @@ const ProductDetail = () => {
                     {product?.price + 2000}&nbsp;
                   </s>
                 </span>{" "}
+                <span style={{fontSize:'18px'}}>
                 {"\u20B9"}
                 {product?.price}
+                </span>
               </Typography>
 
               <Typography
