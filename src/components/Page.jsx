@@ -161,7 +161,8 @@ const Page = ({ products }) => {
                 sx={{
                   border: "1px solid white",
                   p: 2,
-                  height: 500,
+                  maxHeight: 530,
+                  height:'100%',
                   flexWrap: "wrap",
                   position: "relative",
                 }}
@@ -182,32 +183,31 @@ const Page = ({ products }) => {
                       alt={product.productName}
                       style={{
                         width: "100%",
-                        height: 220,
-
+                        height: '220px',
                         borderRadius: 8,
                       }}
                     />
                   </Box>
                   <Grid
                     container
-                    height={200}
+                    height={'50%'}
                     direction={"column"}
-                    justifyContent={"space-evenly"}
-                    flexWrap={"wrap"}
+                    justifyContent={"space-around"}
+                    wrap="noWrap"
                   >
-                    <Grid>
-                      <Typography variant="h6" fontWeight={"fantasy"}>
+                    <Grid >
+                      <Typography variant="h6" fontWeight={"fantasy"} noWrap >
                         {product.brand}
                       </Typography>
                     </Grid>
                     <Grid>
                       <Typography variant="subtitle2">
-                        {product.productName.split(" ").length >= 3
+                        {/* {product.productName.split(" ").length >= 3
                           ? product.productName
                               .split(" ")
                               .slice(0, 4)
                               .join(" ") + "..."
-                          : product.productName}
+                          : product.productName} */}{product.productName}
                       </Typography>
                     </Grid>
                     <Grid>

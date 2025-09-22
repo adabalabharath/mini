@@ -52,6 +52,9 @@ const Navbar = () => {
       position="fixed"
       color="default"
       sx={{
+        display: "flex",
+
+        justifyContent: "space-between",
         backgroundColor: "white",
         boxShadow: "none",
         borderBottom: "1px solid #e0e0e0",
@@ -60,13 +63,17 @@ const Navbar = () => {
       <Toolbar
         sx={{
           display: "flex",
-          alignItems: "center",
+          gap: 2,
           justifyContent: "space-between",
         }}
       >
         {/* Logo */}
         <Box
-          sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
           onClick={() => navigation("/")}
         >
           <img
@@ -88,7 +95,16 @@ const Navbar = () => {
         </Box>
 
         {/* Nav Pages */}
-        <Box sx={{ gap: 3, display: { xs: "none", sm: "none", md: "flex" } }}>
+        <Box
+          sx={{
+            gap: 3,
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "flex",
+            },
+          }}
+        >
           {pages.map((p, i) => (
             <Link
               to={`/shop/${p.toLowerCase()}`}
@@ -103,7 +119,7 @@ const Navbar = () => {
         </Box>
 
         {/* Search Bar */}
-        <Box sx={{ flex: 1, mx: 1, maxWidth: 400 }}>
+        <Box sx={{ flex: 1, maxWidth: 400 }}>
           <Autocomplete
             freeSolo
             options={search ? options.map((p) => p.productName) : []}
@@ -147,10 +163,11 @@ const Navbar = () => {
             )}
           />
         </Box>
-        <Button onClick={() => setDrawerOpen(true)}>
-          <MenuIcon
-            sx={{ display: { xs: "block", md: "none", color: "black" } }}
-          />
+        <Button
+          onClick={() => setDrawerOpen(true)}
+          sx={{ display: { xs: "block", md: "none", color: "black" } }}
+        >
+          <MenuIcon />
         </Button>
         <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
           <Box
@@ -168,13 +185,13 @@ const Navbar = () => {
               {settings.map((p, i) => (
                 <ListItemButton key={i} component={Link} to={p.toLowerCase()}>
                   {i == 2 ? (
-                    <ListItemIcon sx={{color:'black'}}>
+                    <ListItemIcon sx={{ color: "black" }}>
                       <Badge
                         badgeContent={user?.bag?.length}
                         sx={{
                           "& .MuiBadge-badge": {
                             backgroundColor: "black",
-                            color: "white", 
+                            color: "white",
                           },
                         }}
                       >
@@ -182,7 +199,9 @@ const Navbar = () => {
                       </Badge>
                     </ListItemIcon>
                   ) : (
-                    <ListItemIcon sx={{color:'black'}}>{settingsIcons[i]}</ListItemIcon>
+                    <ListItemIcon sx={{ color: "black" }}>
+                      {settingsIcons[i]}
+                    </ListItemIcon>
                   )}
                   <ListItemText primary={p} sx={{ color: "black" }} />
                 </ListItemButton>
@@ -256,12 +275,15 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              <Badge badgeContent={user?.bag?.length} sx={{
-                          "& .MuiBadge-badge": {
-                            backgroundColor: "black",
-                            color: "white", 
-                          },
-                        }}>
+              <Badge
+                badgeContent={user?.bag?.length}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "black",
+                    color: "white",
+                  },
+                }}
+              >
                 <LocalMallIcon />
               </Badge>
               <Typography variant="caption">Bag</Typography>
