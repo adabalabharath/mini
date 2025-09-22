@@ -234,8 +234,9 @@ const ProductDetail = () => {
     >
       {product && (
         <Box display={"flex"} flexDirection={"column"}>
-          <Breadcrumbs separator='/'
-            sx={{ color: "grey", fontWeight: "bold", fontSize: "12px",my:1 }}
+          <Breadcrumbs
+            separator="/"
+            sx={{ color: "grey", fontWeight: "bold", fontSize: "12px", my: 1 }}
           >
             <Link
               to="/"
@@ -325,7 +326,7 @@ const ProductDetail = () => {
         <Grid
           container
           display={"flex"}
-          flexDirection={{ xs: "column", md: "row" }}
+          flexDirection={{ xs: "column",sm:"column", md: "row" }}
           justifyContent={{ md: "space-evenly" }}
           py={1}
         >
@@ -345,19 +346,17 @@ const ProductDetail = () => {
                 slidesPerView={1}
                 pagination={{ clickable: true }}
                 modules={[Pagination]}
-                onDoubleClick={()=>handleFavLike(product)}
+                onDoubleClick={() => handleFavLike(product)}
               >
                 {product.images.map((x) => (
                   <SwiperSlide>
                     <Box
                       component="img"
                       src={x}
-                      
                       sx={{
                         width: "100%",
                         borderRadius: 2,
-
-                        height: { xs: "400px", md: "80vh" },
+                       maxHeight: { xs: "400px", md: "80vh" },
                       }}
                     />
                   </SwiperSlide>
@@ -375,11 +374,9 @@ const ProductDetail = () => {
                   <Box
                     component="img"
                     src={product?.imageUrl}
-                    
                     sx={{
                       width: "100%",
                       borderRadius: 2,
-
                       height: { xs: "400px", md: "80vh" },
                     }}
                   />
@@ -402,7 +399,6 @@ const ProductDetail = () => {
                         maxHeight: "400px",
                         objectFit: "cover",
                       }}
-                     
                     />
 
                     {/* Centered text overlay */}
@@ -456,7 +452,7 @@ const ProductDetail = () => {
               flexDirection={"column"}
               gap={1}
               mb={2}
-              size={{ xs: 12, md: 12 }}
+              size={{ xs: 12}}
               alignSelf={"flex-start"}
             >
               <Typography sx={{ color: "grey" }}>
