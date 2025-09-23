@@ -218,7 +218,7 @@ const Bag = () => {
 
   return products.length ? (
     <Box display="flex" flexDirection="column" height="90vh" mt={10}>
-      {user.defaultAddress.name && <Box display={"flex"} justifyContent={"space-between"}>
+      {user?.defaultAddress?.name && <Box display={"flex"} justifyContent={"space-between"}>
         <Box display="flex" flexDirection="column" flexWrap={'nowrap'}>
           <Typography
             variant="caption"
