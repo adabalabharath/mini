@@ -16,6 +16,7 @@ import { setProducts } from "./redux/action";
 import ProductDetail from "./components/ProductDetail";
 import Orders from "./components/Orders";
 import { AuthContext } from "./components/AuthProvider";
+import AddAddress from "./components/AddAddress";
 
 function App() {
   const {user,logout}=useContext(AuthContext)
@@ -71,6 +72,7 @@ useEffect(() => {
           />
           <Route path="/product/:name" element={<ProductDetail />} />
           <Route path="/productId/:id" element={<ProductDetail />} />
+          <Route path="/add-address" element={<PrivateRoute><AddAddress/></PrivateRoute>}/>
           <Route
             path="/wishlist"
             element={

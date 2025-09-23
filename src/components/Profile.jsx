@@ -83,6 +83,8 @@ const Profile = () => {
       wishlist: [],
       bag: [],
       orders: [],
+      address:[],
+      defaultAddress:{},
       profile: "",
     };
 

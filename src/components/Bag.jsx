@@ -17,7 +17,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -37,6 +37,8 @@ const Bag = () => {
   const [loading, setLoading] = useState(false);
   const { user, localSet } = useContext(AuthContext);
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const [address, setAddress] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     let timer;
 
@@ -104,6 +106,10 @@ const Bag = () => {
   }, [ordered]);
 
   const sendEmail = () => {
+    if (!user?.address?.length) {
+      navigate("/add-address", { state: { from: location.pathname } });
+      return;
+    }
     const orderTotal = mrp - 3899;
     const selected = products.filter((x) => x.selected);
     const orders = selected.map((item) => ({
@@ -208,8 +214,32 @@ const Bag = () => {
     setRemove(false);
   };
 
+  console.log(user)
+
   return products.length ? (
     <Box display="flex" flexDirection="column" height="90vh" mt={10}>
+      {user.defaultAddress.name && <Box display={"flex"} justifyContent={"space-between"}>
+        <Box display="flex" flexDirection="column" flexWrap={'nowrap'}>
+          <Typography
+            variant="caption"
+            sx={{ fontWeight: "bold"}}
+          >
+            Deliver to : {user?.defaultAddress?.name} ,
+            {user?.defaultAddress?.pincode}
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{ fontWeight: "bold", color: "gray" , maxWidth: {xs:250,md:'100%'}}}
+            noWrap
+          >
+            {user?.defaultAddress?.houseNumber},{user?.defaultAddress?.locality}
+            ,{user?.defaultAddress?.town},{user?.defaultAddress?.district},{user?.defaultAddress?.state}
+          </Typography>
+        </Box>
+        <Button sx={{ textTransform: "none", fontWeight: "bold" }} disabled>
+          Change
+        </Button>
+      </Box>}
       <Box overflow="auto">
         <Typography sx={{ p: 1, fontWeight: "bold" }}>
           {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
@@ -496,6 +526,16 @@ const Bag = () => {
             </Button>
           </DialogActions>
         </Dialog>
+        <Drawer
+          open={address}
+          onClose={() => setAddress(false)}
+          anchor="bottom"
+        >
+          <Typography>Please select an address</Typography>
+          {user?.address?.map((x) => {
+            return <Box></Box>;
+          })}
+        </Drawer>
       </Grid>
     </Box>
   ) : !products.length && showSkeleton ? (
