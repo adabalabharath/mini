@@ -146,22 +146,21 @@ const Bag = () => {
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-    setDialog(true);
-    // emailjs
-    //   .send(
-    //     "service_z8t1myy", // from EmailJS dashboard
-    //     "template_54rmibg", // from EmailJS dashboard
-    //     templateParams,
-    //     "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-    //   )
-    //   .then(() => {
-    //     setDialog(true);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     alert("Failed to send email.");
-    //   });
+    emailjs
+      .send(
+        "service_z8t1myy", // from EmailJS dashboard
+        "template_54rmibg", // from EmailJS dashboard
+        templateParams,
+        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+      )
+      .then(() => {
+        setDialog(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to send email.");
+      });
   };
 
   const handleChange = (event, product) => {
