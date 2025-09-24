@@ -172,10 +172,16 @@ const ProductDetail = () => {
     }
   };
 
-  const handleBuyNow=()=>{
-    const now={...user,bag:[...user.bag,{...product,selectedSize, qty: 1, selected: true,buyNow:true}]}
+  const handleBuyNow = () => {
+    const now = {
+      ...user,
+      bag: [
+        ...user.bag,
+        { ...product, selectedSize, qty: 1, selected: true, buyNow: true },
+      ],
+    };
     localSet(now);
-  }
+  };
 
   // const sendEmail = () => {
   //   const templateParams = {
@@ -350,7 +356,7 @@ const ProductDetail = () => {
                 modules={[Pagination]}
                 onDoubleClick={() => handleFavLike(product)}
               >
-                {product.images.map((x,i) => (
+                {product.images.map((x, i) => (
                   <SwiperSlide key={i}>
                     <Box
                       component="img"
@@ -575,6 +581,9 @@ const ProductDetail = () => {
                       return;
                     }
                     if (product.availableSizes.length > 0) {
+                      if (!user.address.length) {
+                        navigate("/add-address");
+                      }
                       if (selectedSize) {
                         handleBuyNow();
                         navigate("/bag", { state: { directBuy: true } });
@@ -661,12 +670,15 @@ const ProductDetail = () => {
                   return;
                 }
                 if (product.availableSizes.length > 0) {
-                if (selectedSize) {
-                        handleBuyNow();
-                        navigate("/bag", { state: { directBuy: true } });
-                      } else {
-                        setDialog(true);
-                      }
+                  if (!user.address.length) {
+                    navigate("/add-address");
+                  }
+                  if (selectedSize) {
+                    handleBuyNow();
+                    navigate("/bag", { state: { directBuy: true } });
+                  } else {
+                    setDialog(true);
+                  }
                 } else {
                   setBuy(true);
                 }

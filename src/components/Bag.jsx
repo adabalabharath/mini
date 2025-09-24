@@ -102,35 +102,22 @@ const Bag = () => {
   }, [products]);
 
   useEffect(() => {
-  if (ordered) {
-    const remaining = {
-      ...user,
-      bag: user.bag.filter((x) =>
-        product ? !(x.selected && x.buyNow) : !x.selected
-      ),
-      orders: [
-        ...user.orders,
-        ...user.bag
-          .filter((x) => (product ? x.selected && x.buyNow : x.selected))
-          .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
-      ],
-    };
-    localSet(remaining);
-  }
-}, [ordered]);
-
-
-  useEffect(() => {
-    return () => {
-      if (product && !ordered) {
-        const removeBuyNow = {
-          ...user,
-          bag: user.bag.filter((x) => !x.buyNow),
-        };
-        localSet(removeBuyNow);
-      }
-    };
-  }, []);
+    if (ordered) {
+      const remaining = {
+        ...user,
+        bag: user.bag.filter((x) =>
+          product ? !(x.selected && x.buyNow) : !x.selected
+        ),
+        orders: [
+          ...user.orders,
+          ...user.bag
+            .filter((x) => (product ? x.selected && x.buyNow : x.selected))
+            .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
+        ],
+      };
+      localSet(remaining);
+    }
+  }, [ordered]);
 
   const sendEmail = () => {
     if (!user?.address?.length) {
@@ -159,21 +146,22 @@ const Bag = () => {
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-    emailjs
-      .send(
-        "service_z8t1myy", // from EmailJS dashboard
-        "template_54rmibg", // from EmailJS dashboard
-        templateParams,
-        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-      )
-      .then(() => {
-        setDialog(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to send email.");
-      });
+    setDialog(true);
+    // emailjs
+    //   .send(
+    //     "service_z8t1myy", // from EmailJS dashboard
+    //     "template_54rmibg", // from EmailJS dashboard
+    //     templateParams,
+    //     "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+    //   )
+    //   .then(() => {
+    //     setDialog(true);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     alert("Failed to send email.");
+    //   });
   };
 
   const handleChange = (event, product) => {
@@ -381,21 +369,21 @@ const Bag = () => {
                       ? x?.prices[parseInt(x.selectedSize)] * x.qty
                       : x.price * x.qty}
                   </Typography>
-                  {!product && (
-                    <Button
-                      sx={{
-                        textTransform: "none",
-                        border: 1,
-                        color: "black",
-                      }}
-                      fullWidth
-                      onClick={() => {
-                        setSelectedProduct(x), setRemove(true);
-                      }}
-                    >
-                      Remove
-                    </Button>
-                  )}
+
+                  <Button
+                    sx={{
+                      textTransform: "none",
+                      border: 1,
+                      color: "black",
+                    }}
+                    fullWidth
+                    onClick={() => {
+                      setSelectedProduct(x), setRemove(true);
+                    }}
+                    disabled={product}
+                  >
+                    Remove
+                  </Button>
                 </Box>
               </Grid>
               <Drawer
@@ -432,16 +420,16 @@ const Bag = () => {
                   </Box>
                 </Grid>
                 <Box display="flex" flexDirection={"row"} mb={2}>
-                  {!product && (
-                    <Button
-                      color="black"
-                      onClick={() => handleRemove(selectedProduct)}
-                      sx={{ textTransform: "none" }}
-                      fullWidth
-                    >
-                      Remove
-                    </Button>
-                  )}
+                  <Button
+                    color="black"
+                    onClick={() => handleRemove(selectedProduct)}
+                    sx={{ textTransform: "none" }}
+                    fullWidth
+                    disabled={product}
+                  >
+                    Remove
+                  </Button>
+
                   <Button
                     variant="contained"
                     sx={{
