@@ -245,7 +245,7 @@ const Bag = () => {
   };
 
   return products.length ? (
-    <Box display="flex" flexDirection="column" height="90vh" mt={10}>
+    <Box display="flex" flexDirection="column" height="90vh" mt={10} >
       {user?.defaultAddress?.name && (
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box display="flex" flexDirection="column" flexWrap={"nowrap"}>
@@ -274,7 +274,7 @@ const Bag = () => {
           </Button>
         </Box>
       )}
-      <Box overflow="auto">
+      <Box overflow="auto" pb={40}>
         <Typography sx={{ p: 1, fontWeight: "bold" }}>
           {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
             "/" +
@@ -460,7 +460,14 @@ const Bag = () => {
           );
         })}
       </Box>
-      <Grid container direction={"column"} p={1}>
+      <Grid container direction={"column"} p={1} pb={0} position="fixed"
+    bottom={0}
+    left={0}
+    width="100%"
+    bgcolor="white"
+    boxShadow="0 -2px 8px rgba(0,0,0,0.1)"
+    zIndex={1000}
+    >
         <Grid item xs={12}>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {`Price Details (${products.reduce(
@@ -509,7 +516,7 @@ const Bag = () => {
                 textTransform: "none",
                 backgroundColor: "black",
                 color: "white",
-                my: 1,
+                mt: 1,
               }}
               onClick={sendEmail}
               fullWidth
