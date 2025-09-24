@@ -119,10 +119,10 @@ const Bag = () => {
 
   useEffect(() => {
     return () => {
-      if (product&&!ordered) {
+      if (product && !ordered) {
         const removeBuyNow = {
           ...user,
-          bag: user.bag.filter((x) => x.buyNow==false),
+          bag: user.bag.filter((x) => x.buyNow == false),
         };
         localSet(removeBuyNow);
       }
@@ -156,22 +156,22 @@ const Bag = () => {
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-    setDialog(true);
-    // emailjs
-    //   .send(
-    //     "service_z8t1myy", // from EmailJS dashboard
-    //     "template_54rmibg", // from EmailJS dashboard
-    //     templateParams,
-    //     "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-    //   )
-    //   .then(() => {
-    //     setDialog(true);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     alert("Failed to send email.");
-    //   });
+
+    emailjs
+      .send(
+        "service_z8t1myy", // from EmailJS dashboard
+        "template_54rmibg", // from EmailJS dashboard
+        templateParams,
+        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+      )
+      .then(() => {
+        setDialog(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to send email.");
+      });
   };
 
   const handleChange = (event, product) => {
@@ -245,7 +245,7 @@ const Bag = () => {
   };
 
   return products.length ? (
-    <Box display="flex" flexDirection="column" height="90vh" mt={10} >
+    <Box display="flex" flexDirection="column" height="90vh" mt={10}>
       {user?.defaultAddress?.name && (
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box display="flex" flexDirection="column" flexWrap={"nowrap"}>
@@ -379,19 +379,21 @@ const Bag = () => {
                       ? x?.prices[parseInt(x.selectedSize)] * x.qty
                       : x.price * x.qty}
                   </Typography>
-                  {!product && <Button
-                    sx={{
-                      textTransform: "none",
-                      border: 1,
-                      color: "black",
-                    }}
-                    fullWidth
-                    onClick={() => {
-                      setSelectedProduct(x), setRemove(true);
-                    }}
-                  >
-                    Remove
-                  </Button>}
+                  {!product && (
+                    <Button
+                      sx={{
+                        textTransform: "none",
+                        border: 1,
+                        color: "black",
+                      }}
+                      fullWidth
+                      onClick={() => {
+                        setSelectedProduct(x), setRemove(true);
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  )}
                 </Box>
               </Grid>
               <Drawer
@@ -428,14 +430,16 @@ const Bag = () => {
                   </Box>
                 </Grid>
                 <Box display="flex" flexDirection={"row"} mb={2}>
-                 {!product && <Button
-                    color="black"
-                    onClick={() => handleRemove(selectedProduct)}
-                    sx={{ textTransform: "none" }}
-                    fullWidth
-                  >
-                    Remove
-                  </Button>}
+                  {!product && (
+                    <Button
+                      color="black"
+                      onClick={() => handleRemove(selectedProduct)}
+                      sx={{ textTransform: "none" }}
+                      fullWidth
+                    >
+                      Remove
+                    </Button>
+                  )}
                   <Button
                     variant="contained"
                     sx={{
@@ -460,14 +464,18 @@ const Bag = () => {
           );
         })}
       </Box>
-      <Grid container direction={"column"} p={1} position="fixed"
-    bottom={0}
-    left={0}
-    width="100%"
-    bgcolor="white"
-    boxShadow="0 -2px 8px rgba(0,0,0,0.1)"
-    zIndex={1000}
-    >
+      <Grid
+        container
+        direction={"column"}
+        p={1}
+        position="fixed"
+        bottom={0}
+        left={0}
+        width="100%"
+        bgcolor="white"
+        boxShadow="0 -2px 8px rgba(0,0,0,0.1)"
+        zIndex={1000}
+      >
         <Grid item xs={12}>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {`Price Details (${products.reduce(
@@ -589,7 +597,7 @@ const Bag = () => {
             >
               <Typography>Select an address</Typography>
               <Button
-                sx={{ textTransform: "none",color:'black' }}
+                sx={{ textTransform: "none", color: "black" }}
                 onClick={() => navigate("/add-address")}
               >
                 {" "}
@@ -610,7 +618,7 @@ const Bag = () => {
                         : "",
 
                     textAlign: "left",
-                    borderRadius:3
+                    borderRadius: 3,
                   }}
                   key={x.name}
                   onClick={() => setSelectedAddress(x)}
