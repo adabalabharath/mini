@@ -460,7 +460,7 @@ const Bag = () => {
           );
         })}
       </Box>
-      <Grid container direction={"column"} p={1} pb={0} position="fixed"
+      <Grid container direction={"column"} p={1} position="fixed"
     bottom={0}
     left={0}
     width="100%"
@@ -516,7 +516,7 @@ const Bag = () => {
                 textTransform: "none",
                 backgroundColor: "black",
                 color: "white",
-                mt: 1,
+                my: 1,
               }}
               onClick={sendEmail}
               fullWidth
