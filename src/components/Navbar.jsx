@@ -187,7 +187,7 @@ const Navbar = () => {
                   {i == 2 ? (
                     <ListItemIcon sx={{ color: "black" }}>
                       <Badge
-                        badgeContent={user?.bag?.length}
+                        badgeContent={user?.bag?.filter(x=>!x.buyNow).length}
                         sx={{
                           "& .MuiBadge-badge": {
                             backgroundColor: "black",
@@ -276,7 +276,7 @@ const Navbar = () => {
               }}
             >
               <Badge
-                badgeContent={user?.bag?.length}
+                badgeContent={user?.bag?.filter(x=>!x.buyNow).length}
                 sx={{
                   "& .MuiBadge-badge": {
                     backgroundColor: "black",

@@ -85,6 +85,7 @@ const Profile = () => {
       orders: [],
       address:[],
       defaultAddress:{},
+      buyNow:'',
       profile: "",
     };
 

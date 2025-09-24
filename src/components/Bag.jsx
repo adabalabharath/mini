@@ -17,7 +17,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -39,8 +39,13 @@ const Bag = () => {
   const { user, localSet } = useContext(AuthContext);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [address, setAddress] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState(user?.defaultAddress || {});
+  const [selectedAddress, setSelectedAddress] = useState(
+    user?.defaultAddress || {}
+  );
   const navigate = useNavigate();
+  const location = useLocation();
+  const product = location?.state?.directBuy;
+
   useEffect(() => {
     let timer;
 
@@ -54,10 +59,16 @@ const Bag = () => {
 
     return () => clearTimeout(timer);
   }, [products]);
+
   useEffect(() => {
-    //const prods = filtersHook("", user?.bag, filters);
-    setProducts(user.bag);
-  }, [user?.bag, filters]);
+    if (product) {
+      const buyNow = user.bag.filter((x) => x?.buyNow);
+      setProducts(buyNow);
+    } else {
+      const normalBag = user.bag.filter((x) => !x?.buyNow);
+      setProducts(normalBag);
+    }
+  }, [user?.bag, location?.state, filters]);
 
   useEffect(() => {
     let original = products.reduce(
@@ -99,13 +110,24 @@ const Bag = () => {
           ...user.orders,
           ...user.bag
             .filter((x) => x.selected)
-            .map((x) => ({ ...x, orderedTime: Date.now(),selectedAddress })),
+            .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
         ],
       };
-      console.log(remaining);
       localSet(remaining);
     }
   }, [ordered]);
+
+  useEffect(() => {
+    return () => {
+      if (product&&!ordered) {
+        const removeBuyNow = {
+          ...user,
+          bag: user.bag.filter((x) => x.buyNow==false),
+        };
+        localSet(removeBuyNow);
+      }
+    };
+  }, []);
 
   const sendEmail = () => {
     if (!user?.address?.length) {
@@ -130,25 +152,26 @@ const Bag = () => {
       orders,
       shipping,
       tax,
-      address:selectedAddress,
+      address: selectedAddress,
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-    emailjs
-      .send(
-        "service_z8t1myy", // from EmailJS dashboard
-        "template_54rmibg", // from EmailJS dashboard
-        templateParams,
-        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-      )
-      .then(() => {
-        setDialog(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to send email.");
-      });
+    setDialog(true);
+    // emailjs
+    //   .send(
+    //     "service_z8t1myy", // from EmailJS dashboard
+    //     "template_54rmibg", // from EmailJS dashboard
+    //     templateParams,
+    //     "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+    //   )
+    //   .then(() => {
+    //     setDialog(true);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     alert("Failed to send email.");
+    //   });
   };
 
   const handleChange = (event, product) => {
@@ -221,19 +244,13 @@ const Bag = () => {
     navigate("/add-address", { state: { address: x } });
   };
 
-
-  console.log(user);
-
   return products.length ? (
     <Box display="flex" flexDirection="column" height="90vh" mt={10}>
       {user?.defaultAddress?.name && (
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box display="flex" flexDirection="column" flexWrap={"nowrap"}>
             <Typography variant="caption" sx={{ fontWeight: "bold" }}>
-              Deliver to :{" "}
-              { selectedAddress.name}
-              ,
-              {selectedAddress.pincode}
+              Deliver to : {selectedAddress.name},{selectedAddress.pincode}
             </Typography>
             <Typography
               variant="caption"
@@ -244,14 +261,8 @@ const Bag = () => {
               }}
               noWrap
             >
-              {selectedAddress.houseNumber}
-              ,
-              {selectedAddress.locality}
-              ,
-              {selectedAddress.town}
-              ,
-              {selectedAddress.district}
-              ,
+              {selectedAddress.houseNumber},{selectedAddress.locality},
+              {selectedAddress.town},{selectedAddress.district},
               {selectedAddress.state}
             </Typography>
           </Box>
@@ -368,7 +379,7 @@ const Bag = () => {
                       ? x?.prices[parseInt(x.selectedSize)] * x.qty
                       : x.price * x.qty}
                   </Typography>
-                  <Button
+                  {!product && <Button
                     sx={{
                       textTransform: "none",
                       border: 1,
@@ -380,7 +391,7 @@ const Bag = () => {
                     }}
                   >
                     Remove
-                  </Button>
+                  </Button>}
                 </Box>
               </Grid>
               <Drawer
@@ -417,14 +428,14 @@ const Bag = () => {
                   </Box>
                 </Grid>
                 <Box display="flex" flexDirection={"row"} mb={2}>
-                  <Button
+                 {!product && <Button
                     color="black"
                     onClick={() => handleRemove(selectedProduct)}
                     sx={{ textTransform: "none" }}
                     fullWidth
                   >
                     Remove
-                  </Button>
+                  </Button>}
                   <Button
                     variant="contained"
                     sx={{
@@ -519,20 +530,26 @@ const Bag = () => {
           }}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogContent sx={{ p: 2,backgroundColor:"whitesmoke" }}>
+          <DialogContent sx={{ p: 2, backgroundColor: "whitesmoke" }}>
             <img
               src={orderPlaced}
-              style={{ width: "100%", maxHeight: "190px", color:'white'}}
+              style={{ width: "100%", maxHeight: "190px", color: "white" }}
             />
-            <Typography variant="subtitle1" textAlign={'center'} fontWeight={'bold'}>Order Placed Successfully,thank you</Typography>
+            <Typography
+              variant="subtitle1"
+              textAlign={"center"}
+              fontWeight={"bold"}
+            >
+              Order Placed Successfully,thank you
+            </Typography>
           </DialogContent>
           <DialogActions
             sx={{
               display: "flex",
               justifyContent: "center",
-              
+
               height: "50%",
-              backgroundColor:"whitesmoke" 
+              backgroundColor: "whitesmoke",
             }}
           >
             <Button
@@ -609,7 +626,7 @@ const Bag = () => {
                         </span>
                       )}
                     <Box display={"flex"}>
-                      <PlaceIcon fontSize="medium" sx={{color:'black'}}/>
+                      <PlaceIcon fontSize="medium" sx={{ color: "black" }} />
                       <Typography sx={{ fontWeight: "bold", color: "black" }}>
                         {x.name}{" "}
                         {user.defaultAddress?.name == x.name &&
@@ -627,10 +644,24 @@ const Bag = () => {
                       {x.houseNumber}, {x.locality}, {x.town}, {x.district},{" "}
                       {x.state} - {x.pincode}
                     </Typography>
-                    {selectedAddress.name === x.name && selectedAddress.houseNumber===x.houseNumber&& <Box display={"flex"} gap={2} mt={1}>
-                      <Button variant="outlined" sx={{textTransform:'none'}} disabled>Delivering Here</Button>
-                      <Button sx={{textTransform:'none',color:'black'}} onClick={()=>handleEdit(x)}>Edit</Button>
-                    </Box>}
+                    {selectedAddress.name === x.name &&
+                      selectedAddress.houseNumber === x.houseNumber && (
+                        <Box display={"flex"} gap={2} mt={1}>
+                          <Button
+                            variant="outlined"
+                            sx={{ textTransform: "none" }}
+                            disabled
+                          >
+                            Delivering Here
+                          </Button>
+                          <Button
+                            sx={{ textTransform: "none", color: "black" }}
+                            onClick={() => handleEdit(x)}
+                          >
+                            Edit
+                          </Button>
+                        </Box>
+                      )}
                   </Box>
                 </Button>
               );

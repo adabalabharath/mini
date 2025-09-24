@@ -38,18 +38,17 @@ const Orders = () => {
     };
     localSet(remove);
   };
-  console.log(products);
   return products.length ? (
     <Box mt={10}>
       <Typography sx={{ fontWeight: "bold", m: 1 }}>Your Orders</Typography>
       <Grid container>
-        {products.map((x) => {
+        {products.map((x,i) => {
           return (
-            <>
+            <React.Fragment key={i}>
               <Grid
                 sx={{ display: "flex", p: 2, position: "relative" }}
                 size={{ xs: 12, md: 3 }}
-                key={x.id}
+                
               >
                 <Link to={`/productId/${x.id}`}>
                   <img
@@ -204,7 +203,7 @@ const Orders = () => {
                   <CloseIcon />
                 </IconButton>
               </Drawer>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid>

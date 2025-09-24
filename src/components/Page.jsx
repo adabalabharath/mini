@@ -192,7 +192,7 @@ const Page = ({ products }) => {
                     height={"50%"}
                     direction={"column"}
                     justifyContent={"space-around"}
-                    wrap="noWrap"
+                    wrap="nowrap"
                     // border={1}
                   >
                     <Grid>

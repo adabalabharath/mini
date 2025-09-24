@@ -38,7 +38,6 @@ const AddAddress = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const addressToEdit = location.state?.address;
-  console.log('edit',addressToEdit);
   const {
     register,
     handleSubmit,
@@ -50,13 +49,11 @@ const AddAddress = () => {
 
   const onSubmit = (data) => {
     const finalData = { ...data, id: addressToEdit ? data.id : Date.now() };
-    console.log(finalData);
     const newAddress = {
       ...user,
       address: user.address.some(x=>x.id===finalData.id)? user.address.map(x=>x.id===finalData.id?finalData:x) :[...user.address,finalData],
       defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
-    console.log(newAddress);
     localSet(newAddress);
     navigate('/bag');
   };

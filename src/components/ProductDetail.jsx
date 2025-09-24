@@ -116,7 +116,6 @@ const ProductDetail = () => {
     };
     localSet(fav);
   };
-  console.log(like);
   const handleFavLike = (product) => {
     setLike(true);
     if (!user) {
@@ -173,38 +172,42 @@ const ProductDetail = () => {
     }
   };
 
-  const sendEmail = () => {
-    const templateParams = {
-      userName: user?.name,
-      email: user?.email,
-      order_id: Date.now(),
-      name: product?.productName,
-      units: 1,
-      size: product?.availableSizes.length ? selectedSize : "Free Size",
-      price: product.price,
-      shipping: product?.price > 1200 ? 0 : 50,
-      tax: 100,
-      total: product.price + (product?.price > 1200 ? 0 : 50) + 100,
-    };
-    setLoading(true);
-    emailjs
-      .send(
-        "service_z8t1myy", // from EmailJS dashboard
-        "template_k9v5i2a", // from EmailJS dashboard
-        templateParams,
-        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-      )
-      .then(() => {
-        setBuy(false);
-        setConfirmed(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to send email.");
-      });
-  };
-  console.log(ordered);
+  const handleBuyNow=()=>{
+    const now={...user,bag:[...user.bag,{...product,selectedSize, qty: 1, selected: true,buyNow:true}]}
+    localSet(now);
+  }
+
+  // const sendEmail = () => {
+  //   const templateParams = {
+  //     userName: user?.name,
+  //     email: user?.email,
+  //     order_id: Date.now(),
+  //     name: product?.productName,
+  //     units: 1,
+  //     size: product?.availableSizes.length ? selectedSize : "Free Size",
+  //     price: product.price,
+  //     shipping: product?.price > 1200 ? 0 : 50,
+  //     tax: 100,
+  //     total: product.price + (product?.price > 1200 ? 0 : 50) + 100,
+  //   };
+  //   setLoading(true);
+  //   emailjs
+  //     .send(
+  //       "service_z8t1myy", // from EmailJS dashboard
+  //       "template_k9v5i2a", // from EmailJS dashboard
+  //       templateParams,
+  //       "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+  //     )
+  //     .then(() => {
+  //       setBuy(false);
+  //       setConfirmed(true);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       alert("Failed to send email.");
+  //     });
+  // };
   useEffect(() => {
     if (ordered) {
       const orderSet = {
@@ -218,7 +221,6 @@ const ProductDetail = () => {
         ...user,
         orders: [...user.orders, orderSet],
       };
-      console.log(remaining);
       localSet(remaining);
     }
   }, [ordered]);
@@ -326,10 +328,9 @@ const ProductDetail = () => {
         <Grid
           container
           display={"flex"}
-          flexDirection={{ xs: "column",sm:"column", md: "row" }}
+          flexDirection={{ xs: "column", sm: "column", md: "row" }}
           justifyContent={{ md: "space-evenly" }}
           py={1}
-          
         >
           <Grid
             container
@@ -349,15 +350,15 @@ const ProductDetail = () => {
                 modules={[Pagination]}
                 onDoubleClick={() => handleFavLike(product)}
               >
-                {product.images.map((x) => (
-                  <SwiperSlide>
+                {product.images.map((x,i) => (
+                  <SwiperSlide key={i}>
                     <Box
                       component="img"
                       src={x}
                       sx={{
                         width: "100%",
                         borderRadius: 2,
-                       maxHeight: { xs: "400px", md: "80vh" },
+                        maxHeight: { xs: "400px", md: "80vh" },
                       }}
                     />
                   </SwiperSlide>
@@ -453,7 +454,7 @@ const ProductDetail = () => {
               flexDirection={"column"}
               gap={1}
               mb={2}
-              size={{ xs: 12}}
+              size={{ xs: 12 }}
               alignSelf={"flex-start"}
             >
               <Typography sx={{ color: "grey" }}>
@@ -467,7 +468,7 @@ const ProductDetail = () => {
                   : product?.productName}
               </Typography>
 
-              <Typography sx={{ fontWeight: "bold" }} variant="button" >
+              <Typography sx={{ fontWeight: "bold" }} variant="button">
                 <span style={{ color: "grey", fontWeight: "lighter" }}>
                   MRP{" "}
                   <s>
@@ -475,9 +476,9 @@ const ProductDetail = () => {
                     {product?.price + 2000}&nbsp;
                   </s>
                 </span>{" "}
-                <span style={{fontSize:'18px'}}>
-                {"\u20B9"}
-                {product?.price}
+                <span style={{ fontSize: "18px" }}>
+                  {"\u20B9"}
+                  {product?.price}
                 </span>
               </Typography>
 
@@ -574,9 +575,15 @@ const ProductDetail = () => {
                       return;
                     }
                     if (product.availableSizes.length > 0) {
-                      selectedSize ? setBuy(true) : setDialog(true);
+                      if (selectedSize) {
+                        handleBuyNow();
+                        navigate("/bag", { state: { directBuy: true } });
+                      } else {
+                        setDialog(true);
+                      }
                     } else {
                       setBuy(true);
+                      navigate("/bag", { state: { directBuy: product } });
                     }
                   }}
                   size="small"
@@ -654,7 +661,12 @@ const ProductDetail = () => {
                   return;
                 }
                 if (product.availableSizes.length > 0) {
-                  selectedSize ? setBuy(true) : setDialog(true);
+                if (selectedSize) {
+                        handleBuyNow();
+                        navigate("/bag", { state: { directBuy: true } });
+                      } else {
+                        setDialog(true);
+                      }
                 } else {
                   setBuy(true);
                 }
@@ -698,7 +710,7 @@ const ProductDetail = () => {
           Successfully Added to Bag
         </Alert>
       </Snackbar>
-      <Drawer open={buy} anchor="bottom" onClose={() => setBuy(false)}>
+      {/* <Drawer open={buy} anchor="bottom" onClose={() => setBuy(false)}>
         <Grid container p={2} direction={"column"}>
           <Box display={"flex"} justifyContent={"space-between"} py={2}>
             <Typography variant="caption">Total MRP</Typography>
@@ -758,7 +770,7 @@ const ProductDetail = () => {
             Place Order
           </Button>
         </Grid>
-      </Drawer>
+      </Drawer> */}
       <Dialog
         open={confirmed}
         keepMounted
@@ -767,18 +779,24 @@ const ProductDetail = () => {
         }}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogContent sx={{ p: 2,backgroundColor:'whitesmoke',}}>
+        <DialogContent sx={{ p: 2, backgroundColor: "whitesmoke" }}>
           <img
             src={orderPlaced}
-           style={{ width: "100%", maxHeight: "190px"}}
+            style={{ width: "100%", maxHeight: "190px" }}
           />
-          <Typography variant="subtitle1" textAlign={'center'} fontWeight={'bold'}>Order Placed Successfully,thank you</Typography>
+          <Typography
+            variant="subtitle1"
+            textAlign={"center"}
+            fontWeight={"bold"}
+          >
+            Order Placed Successfully,thank you
+          </Typography>
         </DialogContent>
         <DialogActions
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundColor:'whitesmoke',
+            backgroundColor: "whitesmoke",
             height: "50%",
           }}
         >
