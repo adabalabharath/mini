@@ -23,6 +23,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import orderPlaced from "../../public/images/orderPlaced.jpeg";
 import Skeleton from "@mui/material/Skeleton";
+import PlaceIcon from "@mui/icons-material/Place";
 const Bag = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -38,6 +39,7 @@ const Bag = () => {
   const { user, localSet } = useContext(AuthContext);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [address, setAddress] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(user?.defaultAddress || {});
   const navigate = useNavigate();
   useEffect(() => {
     let timer;
@@ -97,7 +99,7 @@ const Bag = () => {
           ...user.orders,
           ...user.bag
             .filter((x) => x.selected)
-            .map((x) => ({ ...x, orderedTime: Date.now() })),
+            .map((x) => ({ ...x, orderedTime: Date.now(),selectedAddress })),
         ],
       };
       console.log(remaining);
@@ -107,7 +109,7 @@ const Bag = () => {
 
   const sendEmail = () => {
     if (!user?.address?.length) {
-      navigate("/add-address", { state: { from: location.pathname } });
+      navigate("/add-address");
       return;
     }
     const orderTotal = mrp - 3899;
@@ -128,6 +130,7 @@ const Bag = () => {
       orders,
       shipping,
       tax,
+      address:selectedAddress,
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
@@ -214,32 +217,52 @@ const Bag = () => {
     setRemove(false);
   };
 
-  console.log(user)
+  const handleEdit = (x) => {
+    navigate("/add-address", { state: { address: x } });
+  };
+
+
+  console.log(user);
 
   return products.length ? (
     <Box display="flex" flexDirection="column" height="90vh" mt={10}>
-      {user?.defaultAddress?.name && <Box display={"flex"} justifyContent={"space-between"}>
-        <Box display="flex" flexDirection="column" flexWrap={'nowrap'}>
-          <Typography
-            variant="caption"
-            sx={{ fontWeight: "bold"}}
+      {user?.defaultAddress?.name && (
+        <Box display={"flex"} justifyContent={"space-between"}>
+          <Box display="flex" flexDirection="column" flexWrap={"nowrap"}>
+            <Typography variant="caption" sx={{ fontWeight: "bold" }}>
+              Deliver to :{" "}
+              { selectedAddress.name}
+              ,
+              {selectedAddress.pincode}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                fontWeight: "bold",
+                color: "gray",
+                maxWidth: { xs: 250, md: "100%" },
+              }}
+              noWrap
+            >
+              {selectedAddress.houseNumber}
+              ,
+              {selectedAddress.locality}
+              ,
+              {selectedAddress.town}
+              ,
+              {selectedAddress.district}
+              ,
+              {selectedAddress.state}
+            </Typography>
+          </Box>
+          <Button
+            sx={{ textTransform: "none", fontWeight: "bold" }}
+            onClick={() => setAddress(true)}
           >
-            Deliver to : {user?.defaultAddress?.name} ,
-            {user?.defaultAddress?.pincode}
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{ fontWeight: "bold", color: "gray" , maxWidth: {xs:250,md:'100%'}}}
-            noWrap
-          >
-            {user?.defaultAddress?.houseNumber},{user?.defaultAddress?.locality}
-            ,{user?.defaultAddress?.town},{user?.defaultAddress?.district},{user?.defaultAddress?.state}
-          </Typography>
+            Change
+          </Button>
         </Box>
-        <Button sx={{ textTransform: "none", fontWeight: "bold" }} disabled>
-          Change
-        </Button>
-      </Box>}
+      )}
       <Box overflow="auto">
         <Typography sx={{ p: 1, fontWeight: "bold" }}>
           {products.reduce((x, y) => (y.selected ? x + 1 : x), 0) +
@@ -530,11 +553,87 @@ const Bag = () => {
           open={address}
           onClose={() => setAddress(false)}
           anchor="bottom"
+          PaperProps={{ sx: { borderRadius: "16px 16px 0 0", p: 2 } }}
         >
-          <Typography>Please select an address</Typography>
-          {user?.address?.map((x) => {
-            return <Box></Box>;
-          })}
+          <Box display={"flex"} flexDirection={"column"} p={2}>
+            <Box
+              display={"flex"}
+              flexDirection={"row"}
+              justifyContent={"space-between"}
+            >
+              <Typography>Select an address</Typography>
+              <Button
+                sx={{ textTransform: "none" }}
+                onClick={() => navigate("/add-address")}
+              >
+                {" "}
+                + Add new
+              </Button>
+            </Box>
+            {user?.address?.map((x) => {
+              return (
+                <Button
+                  sx={{
+                    m: 1,
+                    boxShadow: 3,
+                    textTransform: "none",
+                    border:
+                      x.name === selectedAddress.name &&
+                      x.houseNumber === selectedAddress.houseNumber
+                        ? "2px solid black"
+                        : "",
+
+                    textAlign: "left",
+                  }}
+                  key={x.name}
+                  onClick={() => setSelectedAddress(x)}
+                >
+                  <Box
+                    display={"flex"}
+                    flexDirection={"column"}
+                    justifyContent={"flex-start"}
+                    p={1}
+                  >
+                    {x.name === selectedAddress.name &&
+                      x.houseNumber === selectedAddress.houseNumber && (
+                        <span
+                          style={{
+                            color: "green",
+                            fontWeight: "bold",
+                            alignSelf: "flex-start",
+                          }}
+                        >
+                          Currently selected
+                        </span>
+                      )}
+                    <Box display={"flex"}>
+                      <PlaceIcon fontSize="medium" sx={{color:'black'}}/>
+                      <Typography sx={{ fontWeight: "bold", color: "black" }}>
+                        {x.name}{" "}
+                        {user.defaultAddress?.name == x.name &&
+                          user.defaultAddress?.pincode == x.pincode &&
+                          user.defaultAddress?.houseNumber == x.houseNumber && (
+                            <span
+                              style={{ color: "green", fontWeight: "bold" }}
+                            >
+                              (Default)
+                            </span>
+                          )}
+                      </Typography>
+                    </Box>
+                    <Typography variant="caption" color="black">
+                      {x.houseNumber}, {x.locality}, {x.town}, {x.district},{" "}
+                      {x.state} - {x.pincode}
+                    </Typography>
+                    {selectedAddress.name === x.name && selectedAddress.houseNumber===x.houseNumber&& <Box display={"flex"} gap={2} mt={1}>
+                      <Button variant="outlined" sx={{textTransform:'none'}} disabled>Delivering Here</Button>
+                      <Button sx={{textTransform:'none',color:'black'}} onClick={()=>handleEdit(x)}>Edit</Button>
+                    </Box>}
+                  </Box>
+                </Button>
+              );
+            })}
+          </Box>
         </Drawer>
       </Grid>
     </Box>

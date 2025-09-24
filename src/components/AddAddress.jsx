@@ -37,25 +37,28 @@ const AddAddress = () => {
   const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const prevUrl = location.state?.from || "/";
-
+  const addressToEdit = location.state?.address;
+  console.log('edit',addressToEdit);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: addressToEdit || {},
   });
 
   const onSubmit = (data) => {
-    const finalData = { ...data, defaultAddress };
+    const finalData = { ...data, id: addressToEdit ? data.id : Date.now() };
+    console.log(finalData);
     const newAddress = {
       ...user,
-      address: [...user?.address, finalData],
-      defaultAddress: defaultAddress && data,
+      address: user.address.some(x=>x.id===finalData.id)? user.address.map(x=>x.id===finalData.id?finalData:x) :[...user.address,finalData],
+      defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
+    console.log(newAddress);
     localSet(newAddress);
-    navigate(prevUrl);
+    navigate('/bag');
   };
 
   return (
@@ -67,7 +70,7 @@ const AddAddress = () => {
       pb={{ xs: 12, md: 0 }}
     >
       <Typography variant="subtitle1" fontWeight="bold">
-        Add New Address
+        {addressToEdit ? "Edit Address" : "Add New Address"}
       </Typography>
 
       {/* Contact Details */}
@@ -78,6 +81,7 @@ const AddAddress = () => {
           gap: 1,
           p: 2,
           boxShadow: 3,
+          borderRadius: 3,
         }}
       >
         <Typography>Contact Details</Typography>
@@ -103,6 +107,7 @@ const AddAddress = () => {
           gap: 1,
           p: 2,
           boxShadow: 3,
+          borderRadius: 3,
         }}
       >
         <Typography>Address</Typography>
@@ -154,6 +159,7 @@ const AddAddress = () => {
             <Checkbox
               checked={defaultAddress}
               onChange={() => setDefaultAddress((prev) => !prev)}
+              color="black"
             />
           }
           label="Mark this as my default address"
@@ -179,6 +185,7 @@ const AddAddress = () => {
             sx={{ textTransform: "none", borderColor: "black", color: "black" }}
             variant="outlined"
             fullWidth
+            onClick={() => navigate('/bag')}
           >
             Cancel
           </Button>
@@ -192,7 +199,7 @@ const AddAddress = () => {
             fullWidth
             onClick={handleSubmit(onSubmit)}
           >
-            Save
+            {addressToEdit ? "Save changes" : "Save"}
           </Button>
         </Box>
       </Box>
