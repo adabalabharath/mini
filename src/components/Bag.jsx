@@ -589,7 +589,7 @@ const Bag = () => {
             >
               <Typography>Select an address</Typography>
               <Button
-                sx={{ textTransform: "none" }}
+                sx={{ textTransform: "none",color:'black' }}
                 onClick={() => navigate("/add-address")}
               >
                 {" "}
@@ -610,6 +610,7 @@ const Bag = () => {
                         : "",
 
                     textAlign: "left",
+                    borderRadius:3
                   }}
                   key={x.name}
                   onClick={() => setSelectedAddress(x)}
