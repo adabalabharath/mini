@@ -21,7 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import orderPlaced from "../../public/images/orderPlaced.jpeg";
+import orderPlaced from "../../public/images/submited.gif";
 import Skeleton from "@mui/material/Skeleton";
 import PlaceIcon from "@mui/icons-material/Place";
 const Bag = () => {
@@ -519,18 +519,20 @@ const Bag = () => {
           }}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogContent sx={{ p: 1 }}>
+          <DialogContent sx={{ p: 2,backgroundColor:"whitesmoke" }}>
             <img
               src={orderPlaced}
-              style={{ width: "100%", height: "300px", py: 0 }}
+              style={{ width: "100%", maxHeight: "190px", color:'white'}}
             />
+            <Typography variant="subtitle1" textAlign={'center'} fontWeight={'bold'}>Order Placed Successfully,thank you</Typography>
           </DialogContent>
           <DialogActions
             sx={{
               display: "flex",
               justifyContent: "center",
-              mb: 2,
+              
               height: "50%",
+              backgroundColor:"whitesmoke" 
             }}
           >
             <Button

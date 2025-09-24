@@ -15,7 +15,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
-import orderPlaced from "../../public/images/orderPlaced.jpeg";
+import orderPlaced from "../../public/images/submited.gif";
 import emailjs from "emailjs-com";
 import Skeleton from "@mui/material/Skeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -767,17 +767,18 @@ const ProductDetail = () => {
         }}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogContent>
+        <DialogContent sx={{ p: 2,backgroundColor:'whitesmoke',}}>
           <img
             src={orderPlaced}
-            style={{ width: "100%", height: "300px", p: 0 }}
+           style={{ width: "100%", maxHeight: "190px"}}
           />
+          <Typography variant="subtitle1" textAlign={'center'} fontWeight={'bold'}>Order Placed Successfully,thank you</Typography>
         </DialogContent>
         <DialogActions
           sx={{
             display: "flex",
             justifyContent: "center",
-            mb: 2,
+            backgroundColor:'whitesmoke',
             height: "50%",
           }}
         >
