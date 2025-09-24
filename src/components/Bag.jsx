@@ -102,27 +102,30 @@ const Bag = () => {
   }, [products]);
 
   useEffect(() => {
-    if (ordered) {
-      const remaining = {
-        ...user,
-        bag: user.bag.filter((x) => !x.selected),
-        orders: [
-          ...user.orders,
-          ...user.bag
-            .filter((x) => x.selected)
-            .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
-        ],
-      };
-      localSet(remaining);
-    }
-  }, [ordered]);
+  if (ordered) {
+    const remaining = {
+      ...user,
+      bag: user.bag.filter((x) =>
+        product ? !(x.selected && x.buyNow) : !x.selected
+      ),
+      orders: [
+        ...user.orders,
+        ...user.bag
+          .filter((x) => (product ? x.selected && x.buyNow : x.selected))
+          .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
+      ],
+    };
+    localSet(remaining);
+  }
+}, [ordered]);
+
 
   useEffect(() => {
     return () => {
       if (product && !ordered) {
         const removeBuyNow = {
           ...user,
-          bag: user.bag.filter((x) => x.buyNow == false),
+          bag: user.bag.filter((x) => !x.buyNow),
         };
         localSet(removeBuyNow);
       }
@@ -156,7 +159,6 @@ const Bag = () => {
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-
     emailjs
       .send(
         "service_z8t1myy", // from EmailJS dashboard
