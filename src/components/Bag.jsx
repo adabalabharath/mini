@@ -46,8 +46,6 @@ const Bag = () => {
   const location = useLocation();
   const product = location?.state?.directBuy;
 
-  console.log(user.buyNow)
-
   useEffect(() => {
     let timer;
 
@@ -65,15 +63,18 @@ const Bag = () => {
   useEffect(() => {
     if (product) {
       const buyNow = user.buyNow;
-      setProducts([buyNow]);
+      if (buyNow) {
+        setProducts([buyNow]);
+      } else {
+        setProducts([]);
+      }
     } else {
-      // const normalBag = user.bag.filter((x) => !x?.buyNow);
       setProducts(user?.bag);
     }
-  }, [user?.bag, location?.state, filters,user?.buyNow]);
+  }, [user?.bag, location?.state, filters, user?.buyNow]);
 
   useEffect(() => {
-    let original = products.reduce(
+    let original = products?.reduce(
       (a, b) =>
         b.selected
           ? a +
@@ -105,25 +106,52 @@ const Bag = () => {
 
   useEffect(() => {
     if (ordered) {
-      const remaining = {
-        ...user,
-        bag: user.bag.filter((x) =>
-          product ? !(x.selected && x.buyNow) : !x.selected
-        ),
-        orders: [
-          ...user.orders,
-          ...user.bag
-            .filter((x) => (product ? x.selected && x.buyNow : x.selected))
-            .map((x) => ({ ...x, orderedTime: Date.now(), selectedAddress })),
-        ],
-      };
+      let remaining;
+
+      if (product) {
+        // 🛒 Single-product "Buy Now" case
+        if (user.buyNow) {
+          remaining = {
+            ...user,
+            orders: [
+              ...user.orders,
+              {
+                ...user.buyNow,
+                orderedTime: Date.now(),
+                selectedAddress,
+              },
+            ],
+            buyNow: "",
+          };
+        } else {
+          remaining = { ...user, buyNow: "" }; // fallback if no buyNow
+        }
+      } else if (!product) {
+        // 🛍️ Normal bag checkout
+        const selectedItems = user.bag.filter((x) => x.selected);
+
+        remaining = {
+          ...user,
+          bag: user.bag.filter((x) => !x.selected),
+          orders: [
+            ...user.orders,
+            ...selectedItems.map((x) => ({
+              ...x,
+              orderedTime: Date.now(),
+              selectedAddress,
+            })),
+          ],
+        };
+      }
+
       localSet(remaining);
     }
   }, [ordered]);
-
   const sendEmail = () => {
     if (!user?.address?.length) {
-      navigate("/add-address", { state: { path: location.pathname } });
+      navigate("/add-address", {
+        state: { path: location.pathname, directBuy: product },
+      });
       return;
     }
     const orderTotal = mrp - 3899;
@@ -148,21 +176,22 @@ const Bag = () => {
       total: orderTotal + shipping + tax,
     };
     setLoading(true);
-    emailjs
-      .send(
-        "service_z8t1myy", // from EmailJS dashboard
-        "template_54rmibg", // from EmailJS dashboard
-        templateParams,
-        "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
-      )
-      .then(() => {
-        setDialog(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to send email.");
-      });
+    setDialog(true);
+    // emailjs
+    //   .send(
+    //     "service_z8t1myy", // from EmailJS dashboard
+    //     "template_54rmibg", // from EmailJS dashboard
+    //     templateParams,
+    //     "RlzD4i2llX_Q8d6TV" // from EmailJS dashboard
+    //   )
+    //   .then(() => {
+    //     setDialog(true);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     alert("Failed to send email.");
+    //   });
   };
 
   const handleChange = (event, product) => {
@@ -233,7 +262,7 @@ const Bag = () => {
 
   const handleEdit = (x) => {
     navigate("/add-address", {
-      state: { address: x, path: location.pathname },
+      state: { address: x, path: location.pathname, directBuy: product },
     });
   };
 
@@ -321,9 +350,9 @@ const Bag = () => {
                 <Box px={2}>
                   <Typography sx={{ fontWeight: "bold" }}>{x.brand}</Typography>
                   <Typography>
-                    {x.productName.split(" ").slice(0, 4).join(" ") + "..."}
+                    {x.productName?.split(" ").slice(0, 4).join(" ") + "..."}
                   </Typography>
-                  {x.availableSizes.length ? (
+                  {x.availableSizes?.length ? (
                     <Box display={"flex"} gap={2}>
                       <FormControl
                         sx={{
@@ -623,7 +652,7 @@ const Bag = () => {
                 sx={{ textTransform: "none", color: "black" }}
                 onClick={() =>
                   navigate("/add-address", {
-                    state: { path: location.pathname },
+                    state: { path: location.pathname, directBuy: product },
                   })
                 }
               >

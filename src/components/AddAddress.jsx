@@ -59,7 +59,7 @@ const AddAddress = () => {
       defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
     localSet(newAddress);
-    navigate(path);
+    navigate(path,{state:{directBuy:location.state?.directBuy}});
   };
 
   useEffect(() => {
@@ -193,7 +193,7 @@ const AddAddress = () => {
             sx={{ textTransform: "none", borderColor: "black", color: "black" }}
             variant="outlined"
             fullWidth
-            onClick={() => navigate(path)}
+            onClick={() => navigate(path,{state:{directBuy:location.state?.directBuy}})}
           >
             Cancel
           </Button>
@@ -222,7 +222,7 @@ const AddAddress = () => {
         <Button
           sx={{ textTransform: "none", borderColor: "black", color: "black" }}
           variant="outlined"
-          onClick={() => navigate(path)}
+          onClick={() => navigate(path,{state:{directBuy:location.state?.directBuy}})}
         >
           Cancel
         </Button>
