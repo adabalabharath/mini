@@ -51,7 +51,9 @@ const AddAddress = () => {
     const finalData = { ...data, id: addressToEdit ? data.id : Date.now() };
     const newAddress = {
       ...user,
-      address: user.address.some(x=>x.id===finalData.id)? user.address.map(x=>x.id===finalData.id?finalData:x) :[...user.address,finalData],
+      address: user.address.some((x) => x.id === finalData.id)
+        ? user.address.map((x) => (x.id === finalData.id ? finalData : x))
+        : [...user.address, finalData],
       defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
     localSet(newAddress);
@@ -66,7 +68,7 @@ const AddAddress = () => {
       gap={3}
       pb={{ xs: 12, md: 0 }}
     >
-      <Typography variant="subtitle1" fontWeight="bold">
+      <Typography variant="subtitle1" fontWeight="bold" textAlign={'center'}>
         {addressToEdit ? "Edit Address" : "Add New Address"}
       </Typography>
 
@@ -182,7 +184,7 @@ const AddAddress = () => {
             sx={{ textTransform: "none", borderColor: "black", color: "black" }}
             variant="outlined"
             fullWidth
-            onClick={() => navigate(location.state.path)}
+            onClick={() => navigate(location.state?.path)}
           >
             Cancel
           </Button>
@@ -211,7 +213,7 @@ const AddAddress = () => {
         <Button
           sx={{ textTransform: "none", borderColor: "black", color: "black" }}
           variant="outlined"
-          onClick={()=>navigate(location.state.path)}
+          onClick={() => navigate(location.state.path)}
         >
           Cancel
         </Button>
@@ -224,7 +226,7 @@ const AddAddress = () => {
           variant="contained"
           onClick={handleSubmit(onSubmit)}
         >
-         {addressToEdit ? "Save changes" : "Save"}
+          {addressToEdit ? "Save changes" : "Save"}
         </Button>
       </Box>
     </Box>

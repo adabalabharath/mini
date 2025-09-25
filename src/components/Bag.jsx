@@ -587,7 +587,7 @@ const Bag = () => {
               <Typography>Select an address</Typography>
               <Button
                 sx={{ textTransform: "none", color: "black" }}
-                onClick={() => navigate("/add-address")}
+                onClick={() => navigate("/add-address",{state:{path:location.pathname}})}
               >
                 {" "}
                 + Add new
