@@ -46,6 +46,8 @@ const Bag = () => {
   const location = useLocation();
   const product = location?.state?.directBuy;
 
+  console.log(user.buyNow)
+
   useEffect(() => {
     let timer;
 
@@ -62,13 +64,13 @@ const Bag = () => {
 
   useEffect(() => {
     if (product) {
-      const buyNow = user.bag.filter((x) => x?.buyNow);
-      setProducts(buyNow);
+      const buyNow = user.buyNow;
+      setProducts([buyNow]);
     } else {
-      const normalBag = user.bag.filter((x) => !x?.buyNow);
-      setProducts(normalBag);
+      // const normalBag = user.bag.filter((x) => !x?.buyNow);
+      setProducts(user?.bag);
     }
-  }, [user?.bag, location?.state, filters]);
+  }, [user?.bag, location?.state, filters,user?.buyNow]);
 
   useEffect(() => {
     let original = products.reduce(
@@ -121,7 +123,7 @@ const Bag = () => {
 
   const sendEmail = () => {
     if (!user?.address?.length) {
-      navigate("/add-address",{state:{path:location.pathname}});
+      navigate("/add-address", { state: { path: location.pathname } });
       return;
     }
     const orderTotal = mrp - 3899;
@@ -230,7 +232,33 @@ const Bag = () => {
   };
 
   const handleEdit = (x) => {
-    navigate("/add-address", { state: { address: x ,path:location.pathname} });
+    navigate("/add-address", {
+      state: { address: x, path: location.pathname },
+    });
+  };
+
+  const handleBuyNowQty = (event, product) => {
+    const newBuyNowQty = {
+      ...product,
+      qty: event.target.value,
+    };
+    const newBuyNowUser = {
+      ...user,
+      buyNow: newBuyNowQty,
+    };
+    localSet(newBuyNowUser);
+  };
+
+  const handleBuyNowSize = (event, product) => {
+    const newBuyNowSize = {
+      ...product,
+      selectedSize: event.target.value,
+    };
+    const newBuyNowUser = {
+      ...user,
+      buyNow: newBuyNowSize,
+    };
+    localSet(newBuyNowUser);
   };
 
   return products.length ? (
@@ -315,7 +343,11 @@ const Bag = () => {
                           label="Age"
                           color="black"
                           sx={{ fontSize: 14, height: 36, paddingY: 0.5 }}
-                          onChange={(e) => handleChange(e, x)}
+                          onChange={(e) =>
+                            product
+                              ? handleBuyNowSize(e, x)
+                              : handleChange(e, x)
+                          }
                         >
                           {x.availableSizes.map((size, i) => {
                             return (
@@ -344,7 +376,9 @@ const Bag = () => {
                           label="Age"
                           color="black"
                           sx={{ fontSize: 14, height: 36, paddingY: 0.5 }}
-                          onChange={(e) => handleQty(e, x)}
+                          onChange={(e) =>
+                            product ? handleBuyNowQty(e, x) : handleQty(e, x)
+                          }
                         >
                           {Array.from({ length: 10 }, (_, i) => i + 1).map(
                             (size) => {
@@ -587,7 +621,11 @@ const Bag = () => {
               <Typography>Select an address</Typography>
               <Button
                 sx={{ textTransform: "none", color: "black" }}
-                onClick={() => navigate("/add-address",{state:{path:location.pathname}})}
+                onClick={() =>
+                  navigate("/add-address", {
+                    state: { path: location.pathname },
+                  })
+                }
               >
                 {" "}
                 + Add new

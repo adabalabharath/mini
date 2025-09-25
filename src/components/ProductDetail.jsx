@@ -176,10 +176,7 @@ const ProductDetail = () => {
   const handleBuyNow = () => {
     const now = {
       ...user,
-      bag: [
-        ...user.bag,
-        { ...product, selectedSize, qty: 1, selected: true, buyNow: true },
-      ],
+      buyNow:{ ...product, selectedSize, qty: 1, selected: true },
     };
     localSet(now);
   };
