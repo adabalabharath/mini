@@ -55,7 +55,7 @@ const AddAddress = () => {
       defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
     localSet(newAddress);
-    navigate('/bag');
+    navigate(location.state.path);
   };
 
   return (
@@ -182,7 +182,7 @@ const AddAddress = () => {
             sx={{ textTransform: "none", borderColor: "black", color: "black" }}
             variant="outlined"
             fullWidth
-            onClick={() => navigate('/bag')}
+            onClick={() => navigate(location.state.path)}
           >
             Cancel
           </Button>
@@ -211,6 +211,7 @@ const AddAddress = () => {
         <Button
           sx={{ textTransform: "none", borderColor: "black", color: "black" }}
           variant="outlined"
+          onClick={()=>navigate(location.state.path)}
         >
           Cancel
         </Button>
@@ -223,7 +224,7 @@ const AddAddress = () => {
           variant="contained"
           onClick={handleSubmit(onSubmit)}
         >
-          Save
+         {addressToEdit ? "Save changes" : "Save"}
         </Button>
       </Box>
     </Box>

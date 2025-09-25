@@ -121,7 +121,7 @@ const Bag = () => {
 
   const sendEmail = () => {
     if (!user?.address?.length) {
-      navigate("/add-address");
+      navigate("/add-address",{state:{path:location.pathname}});
       return;
     }
     const orderTotal = mrp - 3899;

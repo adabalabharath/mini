@@ -73,6 +73,7 @@ const ProductDetail = () => {
   const [buy, setBuy] = useState(false);
   const [like, setLike] = useState(false);
   const location = useLocation();
+  console.log(location.pathname)
   const navigate = useNavigate();
   const [showSkeleton, setShowSkeleton] = useState(true);
   useEffect(() => {
@@ -579,11 +580,10 @@ const ProductDetail = () => {
                     if (!user) {
                       navigate("/profile");
                       return;
-                    }
-                    if (product.availableSizes.length > 0) {
-                      if (!user.address.length) {
-                        navigate("/add-address");
-                      }
+                    } else if (!user.address.length) {
+                      navigate("/add-address",{state:{path:location.pathname}});
+                      return;
+                    } else if (product.availableSizes.length > 0) {
                       if (selectedSize) {
                         handleBuyNow();
                         navigate("/bag", { state: { directBuy: true } });
@@ -668,11 +668,10 @@ const ProductDetail = () => {
                 if (!user) {
                   navigate("/profile");
                   return;
-                }
-                if (product.availableSizes.length > 0) {
-                  if (!user.address.length) {
-                    navigate("/add-address");
-                  }
+                } else if (!user.address.length) {
+                  navigate("/add-address",{state:{path:location.pathname}});
+                  return;
+                } else if (product.availableSizes.length > 0) {
                   if (selectedSize) {
                     handleBuyNow();
                     navigate("/bag", { state: { directBuy: true } });
