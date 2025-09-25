@@ -10,12 +10,13 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { AuthContext } from "./AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import PlaceIcon from "@mui/icons-material/Place";
 
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
@@ -34,6 +35,7 @@ const schema = Yup.object({
 
 const AddAddress = () => {
   const [defaultAddress, setDefaultAddress] = useState(true);
+  const [path, setPath] = useState("");
   const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,20 +59,27 @@ const AddAddress = () => {
       defaultAddress: defaultAddress ? finalData : user.defaultAddress,
     };
     localSet(newAddress);
-    navigate(location.state.path);
+    navigate(path);
   };
+
+  useEffect(() => {
+    setPath(location.state?.path);
+  }, [location.state?.path]);
 
   return (
     <Box
-      mt={10}
+      mt={12}
       display="flex"
       flexDirection="column"
       gap={3}
       pb={{ xs: 12, md: 0 }}
     >
-      <Typography variant="subtitle1" fontWeight="bold" textAlign={'center'}>
-        {addressToEdit ? "Edit Address" : "Add New Address"}
-      </Typography>
+      <Box display="flex" alignItems="center">
+        <PlaceIcon fontSize="small" sx={{ color: "black" }} />
+        <Typography variant="subtitle1" fontWeight="bold">
+          {addressToEdit ? "Edit Address" : "Add New Address"}
+        </Typography>
+      </Box>
 
       {/* Contact Details */}
       <Card
@@ -184,7 +193,7 @@ const AddAddress = () => {
             sx={{ textTransform: "none", borderColor: "black", color: "black" }}
             variant="outlined"
             fullWidth
-            onClick={() => navigate(location.state?.path)}
+            onClick={() => navigate(path)}
           >
             Cancel
           </Button>
@@ -213,7 +222,7 @@ const AddAddress = () => {
         <Button
           sx={{ textTransform: "none", borderColor: "black", color: "black" }}
           variant="outlined"
-          onClick={() => navigate(location.state.path)}
+          onClick={() => navigate(path)}
         >
           Cancel
         </Button>

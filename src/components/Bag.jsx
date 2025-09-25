@@ -230,7 +230,7 @@ const Bag = () => {
   };
 
   const handleEdit = (x) => {
-    navigate("/add-address", { state: { address: x } });
+    navigate("/add-address", { state: { address: x ,path:location.pathname} });
   };
 
   return products.length ? (
