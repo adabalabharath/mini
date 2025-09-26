@@ -167,7 +167,17 @@ const Navbar = () => {
           onClick={() => setDrawerOpen(true)}
           sx={{ display: { xs: "block", md: "none", color: "black" } }}
         >
-          <MenuIcon />
+          <Badge
+            badgeContent={user?.bag?.length}
+            sx={{
+              "& .MuiBadge-badge": {
+                backgroundColor: "black",
+                color: "white",
+              },
+            }}
+          >
+            <MenuIcon />
+          </Badge>
         </Button>
         <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
           <Box
@@ -187,7 +197,7 @@ const Navbar = () => {
                   {i == 2 ? (
                     <ListItemIcon sx={{ color: "black" }}>
                       <Badge
-                        badgeContent={user?.bag?.filter(x=>!x.buyNow).length}
+                        badgeContent={user?.bag?.length}
                         sx={{
                           "& .MuiBadge-badge": {
                             backgroundColor: "black",
@@ -276,7 +286,7 @@ const Navbar = () => {
               }}
             >
               <Badge
-                badgeContent={user?.bag?.filter(x=>!x.buyNow).length}
+                badgeContent={user?.bag?.length}
                 sx={{
                   "& .MuiBadge-badge": {
                     backgroundColor: "black",
