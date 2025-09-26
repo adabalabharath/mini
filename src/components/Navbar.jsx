@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import miniLogo from "../../public/images/logo.jpeg";
+import miniLogo from "../../public/images/miniLogo.jpg";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";

@@ -25,6 +25,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const schema = Yup.object({
   name: Yup.string().min(3, "Minimum three letters required"),
@@ -53,6 +55,10 @@ const Profile = () => {
   const [wrongCred, setWrongCred] = useState(false);
   const [exists, setExists] = useState(false);
   const [logoutDialog, setLogoutDialog] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordValue, setPasswordValue] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,9 +89,9 @@ const Profile = () => {
       wishlist: [],
       bag: [],
       orders: [],
-      address:[],
-      defaultAddress:{},
-      buyNow:'',
+      address: [],
+      defaultAddress: {},
+      buyNow: "",
       profile: "",
     };
 
@@ -134,7 +140,6 @@ const Profile = () => {
       setSignUp(false);
     } else setSignUp(true);
   }, [user]);
-
   return (
     <Grid container justifyContent={"center"} mt={10}>
       <Grid size={{ xs: 12, md: 8 }}>
@@ -178,21 +183,63 @@ const Profile = () => {
               <TextField
                 fullWidth
                 label={"password"}
-                sx={{ mb: 2 }}
                 {...register("password")}
                 error={!!errors.password}
                 helperText={errors.password?.message}
-                type="password"
+                onChange={(e) => setPasswordValue(e.target.value)}
+                value={passwordValue}
+                type={showPassword ? "text" : "password"}
+                sx={{
+                    "& input::-ms-reveal, & input::-ms-clear": {
+                      display: "none",
+                    },
+                    mb:2
+                  }}
+                InputProps={{
+                  endAdornment:
+                    passwordValue.length > 0 ? (
+                      <Box
+                        onClick={() => setShowPassword(!showPassword)}
+                        sx={{ cursor: "pointer",justifyContent:'center',alignItems:'center' }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </Box>
+                    ) : null,
+                }}
               />
               {signUp && (
                 <TextField
                   fullWidth
                   label={"confirm password"}
-                  sx={{ mb: 2 }}
+                 
                   {...register("confirmPassword")}
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword?.message}
-                  type="password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  type={showConfirmPassword ? "text" : "password"}
+                  sx={{
+                    "& input::-ms-reveal, & input::-ms-clear": {
+                      display: "none",
+                    },
+                    mb:2
+                  }}
+                  InputProps={{
+                    endAdornment:
+                      confirmPassword.length > 0 ? (
+                        <Box
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                          sx={{ cursor: "pointer",justifyContent:'center',alignItems:'center' }}
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </Box>
+                      ) : null,
+                  }}
                 />
               )}
               <button
