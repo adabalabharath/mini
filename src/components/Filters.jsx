@@ -32,8 +32,6 @@ const Filters = () => {
     dispatch(priceFilter(newValue));
   };
 
-  console.log(price)
-
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
       ? gender.filter((x) => x != g)
