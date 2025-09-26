@@ -13,15 +13,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
 import orderPlaced from "../../public/images/submited.gif";
-import emailjs from "emailjs-com";
 import Skeleton from "@mui/material/Skeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-import logo from "../../public/images/logo.jpeg";
+import logo from "../../public/images/miniLogo.jpg";
 import "swiper/css/pagination";
 import { Breadcrumbs } from "@mui/material";
 
