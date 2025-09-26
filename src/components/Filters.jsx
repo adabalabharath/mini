@@ -24,13 +24,15 @@ import Button from "@mui/material/Button";
 const Filters = () => {
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size, sort } = state;
-  const [value, setValue] = useState([price.start || 0, price.end || 1000]);
+  const [value, setValue] = useState([price.start || 0, price.end || 10000  ]);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
+
+  console.log(price)
 
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
@@ -56,8 +58,8 @@ const Filters = () => {
   };
 
   const clearAll = () => {
-    setValue([0, 1000]);
-    dispatch(clearFilters());
+    setValue([0, 10000]);
+    dispatch(clearFilters);
   };
   const sortOrder = (order) => {
     dispatch(sortProducts(order));
@@ -128,6 +130,7 @@ const Filters = () => {
           disabled={
             gender.length == 0 &&
             price.start == null &&
+            price.end==null&&
             rating == null &&
             size.length == 0
           }
