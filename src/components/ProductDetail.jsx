@@ -828,11 +828,11 @@ const ProductDetail = () => {
       {showSkeleton ? (
         <>
           <Grid>
-            <Skeleton variant="text" width="95%" height={30} sx={{pt:1}}/>
+            
             <Skeleton
               variant="rectangular"
               width="100%"
-              height={350}
+              height={400}
               sx={{ borderRadius: 5 }}
             />
             <Skeleton variant="text" width="60%" height={30} />
