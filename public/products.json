@@ -10,7 +10,7 @@
     "price": 419,
     "color": "maroon",
     "availableSizes": ["S", "M", "L", "XL"],
-    "images":["/images/rdstr-1.jpg","/images/rdstr-1.2.jpg"]
+    "images": ["/images/rdstr-1.jpg", "/images/rdstr-1.2.jpg"]
   },
   {
     "id": "ROADSTER-TSHIRT-002",
@@ -23,7 +23,7 @@
     "price": 499,
     "color": "black",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/rdstrblk-2.jpg","/images/rdstr-2.2.jpg"]
+    "images": ["/images/rdstrblk-2.jpg", "/images/rdstr-2.2.jpg"]
   },
   {
     "id": "ROADSTER-TSHIRT-003",
@@ -36,7 +36,7 @@
     "price": 599,
     "color": "white",
     "availableSizes": ["S", "M", "XL"],
-    "images":["/images/rdstr-3.jpg","/images/rdstr-3.2.jpg"]
+    "images": ["/images/rdstr-3.jpg", "/images/rdstr-3.2.jpg"]
   },
   {
     "id": "ROADSTER-TSHIRT-004",
@@ -49,7 +49,7 @@
     "price": 640,
     "color": "blue",
     "availableSizes": ["L", "XL"],
-    "images":["/images/rdstr-4.webp","/images/rdstr-4.2.webp"]
+    "images": ["/images/rdstr-4.webp", "/images/rdstr-4.2.webp"]
   },
   {
     "id": "ROADSTER-TSHIRT-005",
@@ -62,7 +62,7 @@
     "price": 370,
     "color": "yellow",
     "availableSizes": ["S", "M"],
-    "images":["/images/rdstr-5.webp","/images/rdstr-5.2.avif"]
+    "images": ["/images/rdstr-5.webp", "/images/rdstr-5.2.avif"]
   },
 
   {
@@ -76,7 +76,7 @@
     "price": 799,
     "color": "red",
     "availableSizes": ["S", "M", "L", "XL"],
-    "images":["/images/wrogn5.webp","/images/wrogn5.2.webp"]
+    "images": ["/images/wrogn5.webp", "/images/wrogn5.2.webp"]
   },
   {
     "id": "WROGN-TSHIRT-002",
@@ -89,7 +89,7 @@
     "price": 777,
     "color": "white",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/wrogn4.webp","/images/wrogn4.2.webp"]
+    "images": ["/images/wrogn4.webp", "/images/wrogn4.2.webp"]
   },
   {
     "id": "WROGN-TSHIRT-003",
@@ -102,7 +102,7 @@
     "price": 655,
     "color": "blue",
     "availableSizes": ["L", "XL", "XXL"],
-    "images":["/images/wrogn3.webp","/images/wrogn3.2.webp"]
+    "images": ["/images/wrogn3.webp", "/images/wrogn3.2.webp"]
   },
   {
     "id": "WROGN-TSHIRT-004",
@@ -115,7 +115,7 @@
     "price": 570,
     "color": "green",
     "availableSizes": ["S", "XL"],
-    "images":["/images/wrogn2.webp","/images/wrogn2.2.webp"]
+    "images": ["/images/wrogn2.webp", "/images/wrogn2.2.webp"]
   },
   {
     "id": "WROGN-TSHIRT-005",
@@ -128,7 +128,7 @@
     "price": 830,
     "color": "black",
     "availableSizes": ["M", "L"],
-    "images":["/images/wrogn-1.webp","/images/wrogn1.2.webp"]
+    "images": ["/images/wrogn-1.webp", "/images/wrogn1.2.webp"]
   },
 
   {
@@ -142,7 +142,7 @@
     "price": 1799,
     "color": "opaque",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/mh1.jpg","/images/mh1.2.jpg"]
+    "images": ["/images/mh1.jpg", "/images/mh1.2.jpg"]
   },
   {
     "id": "MASTSHIRT-002",
@@ -155,7 +155,7 @@
     "price": 1999,
     "color": "multi",
     "availableSizes": ["L", "XL"],
-    "images":["/images/mh2.jpg","/images/mh2.2.jpg"]
+    "images": ["/images/mh2.jpg", "/images/mh2.2.jpg"]
   },
   {
     "id": "MASTSHIRT-003",
@@ -168,7 +168,7 @@
     "price": 1499,
     "color": "white",
     "availableSizes": ["S", "M", "XL"],
-    "images":["/images/mh3.jpg","/images/mh3.2.png"]
+    "images": ["/images/mh3.jpg", "/images/mh3.2.png"]
   },
   {
     "id": "MASTSHIRT-004",
@@ -181,7 +181,7 @@
     "price": 2199,
     "color": "brown",
     "availableSizes": ["M", "L"],
-    "images":["/images/mh4.jpg","/images/mh4.2.jpg"]
+    "images": ["/images/mh4.jpg", "/images/mh4.2.jpg"]
   },
   {
     "id": "MASTSHIRT-005",
@@ -194,7 +194,7 @@
     "price": 2099,
     "color": "green",
     "availableSizes": ["L", "XL"],
-    "images":["/images/mh5.jpg","/images/mh5.2.png"]
+    "images": ["/images/mh5.jpg", "/images/mh5.2.png"]
   },
 
   {
@@ -208,7 +208,7 @@
     "price": 494,
     "color": "black",
     "availableSizes": ["S", "M", "L", "XL"],
-     "images":["/images/hrx1.jpg","/images/hrx1.2.png"]
+    "images": ["/images/hrx1.jpg", "/images/hrx1.2.png"]
   },
   {
     "id": "HRX-TSHIRT-002",
@@ -221,7 +221,7 @@
     "price": 224,
     "color": "red",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/hrx2.jpg","/images/hrx2.2.png"]
+    "images": ["/images/hrx2.jpg", "/images/hrx2.2.png"]
   },
   {
     "id": "HRX-TSHIRT-003",
@@ -234,7 +234,7 @@
     "price": 674,
     "color": "blue",
     "availableSizes": ["L", "XL"],
-     "images":["/images/hrx3.webp","/images/hrx3.2.png"]
+    "images": ["/images/hrx3.webp", "/images/hrx3.2.png"]
   },
   {
     "id": "HRX-TSHIRT-004",
@@ -247,7 +247,7 @@
     "price": 439,
     "color": "black",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/hrx4.jpg","/images/hrx4.2.jpg"]
+    "images": ["/images/hrx4.jpg", "/images/hrx4.2.jpg"]
   },
   {
     "id": "HRX-TSHIRT-005",
@@ -260,7 +260,7 @@
     "price": 389,
     "color": "red",
     "availableSizes": ["L", "XL"],
-    "images":["/images/hrx5.jpg","/images/hrx5.2.png"]
+    "images": ["/images/hrx5.jpg", "/images/hrx5.2.png"]
   },
 
   {
@@ -274,7 +274,7 @@
     "price": 839,
     "color": "green",
     "availableSizes": ["S", "M", "L"],
-    "images":["/images/hn1.jpg","/images/hn1.2.webp"]
+    "images": ["/images/hn1.jpg", "/images/hn1.2.webp"]
   },
   {
     "id": "HEREANDNOW-SHIRT-002",
@@ -287,7 +287,7 @@
     "price": 799,
     "color": "blue",
     "availableSizes": ["M", "L", "XL"],
-    "images":["/images/hn2.jpg","/images/hn2.2.png"]
+    "images": ["/images/hn2.jpg", "/images/hn2.2.png"]
   },
   {
     "id": "HEREANDNOW-SHIRT-003",
@@ -300,7 +300,7 @@
     "price": 1039,
     "color": "black",
     "availableSizes": ["L", "XL"],
-    "images":["/images/hn3.jpg","/images/hn3.2.png"]
+    "images": ["/images/hn3.jpg", "/images/hn3.2.png"]
   },
   {
     "id": "HEREANDNOW-SHIRT-004",
@@ -313,7 +313,7 @@
     "price": 839,
     "color": "red",
     "availableSizes": ["M", "L"],
-    "images":["/images/hn4.jpg","/images/hn4.2.png"]
+    "images": ["/images/hn4.jpg", "/images/hn4.2.png"]
   },
   {
     "id": "HEREANDNOW-SHIRT-005",
@@ -326,7 +326,7 @@
     "price": 1199,
     "color": "brown",
     "availableSizes": ["S", "M", "L", "XL"],
-    "images":["/images/hn5.jpg","/images/hn5.2.png"]
+    "images": ["/images/hn5.jpg", "/images/hn5.2.png"]
   },
 
   {
@@ -340,7 +340,7 @@
     "price": 6999,
     "color": "white",
     "availableSizes": [6, 7, 8, 9, 10, 11, 12],
-    "images":["/images/puma1.avif","/images/puma1.2.avif"]
+    "images": ["/images/puma1.avif", "/images/puma1.2.avif"]
   },
   {
     "id": "PUMA-SHOE-002",
@@ -353,7 +353,7 @@
     "price": 6299,
     "color": "black",
     "availableSizes": [7, 8, 9, 10, 11],
-    "images":["/images/puma2.jpg","/images/puma2.2.png"]
+    "images": ["/images/puma2.jpg", "/images/puma2.2.png"]
   },
   {
     "id": "PUMA-SHOE-003",
@@ -366,7 +366,7 @@
     "price": 4499,
     "color": "black",
     "availableSizes": [6, 7, 8, 10, 12],
-    "images":["/images/puma3.avif","/images/puma3.2.png"]
+    "images": ["/images/puma3.avif", "/images/puma3.2.png"]
   },
   {
     "id": "PUMA-SHOE-004",
@@ -379,7 +379,7 @@
     "price": 5499,
     "color": "blue",
     "availableSizes": [7, 8, 9, 11, 12],
-    "images":["/images/puma4.avif","/images/puma4.2.png"]
+    "images": ["/images/puma4.avif", "/images/puma4.2.png"]
   },
   {
     "id": "PUMA-SHOE-005",
@@ -392,21 +392,21 @@
     "price": 3599,
     "color": "blue",
     "availableSizes": [6, 8, 9, 10, 11],
-     "images":["/images/puma5.avif","/images/puma5.2.webp"]
+    "images": ["/images/puma5.avif", "/images/puma5.2.webp"]
   },
 
   {
     "id": "SKECHERS-SHOE-001",
     "productName": "Skechers Go Walk Max Charcoal",
     "gender": "male",
-   "imageUrl": "/images/skecher1.jpg",
+    "imageUrl": "/images/skecher1.jpg",
     "brand": "Skechers",
     "type": "shoes",
     "rating": 4.8,
     "price": 3999,
-    "color":"charcoal",
+    "color": "charcoal",
     "availableSizes": [7, 8, 9, 10, 11, 12],
-     "images":["/images/skecher1.jpg","/images/skecher1.2.jpg"]
+    "images": ["/images/skecher1.jpg", "/images/skecher1.2.jpg"]
   },
   {
     "id": "SKECHERS-SHOE-002",
@@ -417,22 +417,22 @@
     "type": "shoes",
     "rating": 4.6,
     "price": 5299,
-    "color":"black",
+    "color": "black",
     "availableSizes": [6, 7, 8, 9, 10],
-    "images":["/images/skecher2.jpg","/images/skecher2.2.jpg"]
+    "images": ["/images/skecher2.jpg", "/images/skecher2.2.jpg"]
   },
   {
     "id": "SKECHERS-SHOE-003",
     "productName": "Skechers D'Lites White Black",
     "gender": "male",
-   "imageUrl": "/images/skecher3.png",
+    "imageUrl": "/images/skecher3.png",
     "brand": "Skechers",
     "type": "shoes",
     "rating": 4.5,
     "price": 4999,
-     "color":"white",
+    "color": "white",
     "availableSizes": [8, 9, 10, 11, 12],
-     "images":["/images/skecher3.png","/images/skecher3.2.webp"]
+    "images": ["/images/skecher3.png", "/images/skecher3.2.webp"]
   },
   {
     "id": "SKECHERS-SHOE-004",
@@ -443,9 +443,9 @@
     "type": "shoes",
     "rating": 4.7,
     "price": 6999,
-     "color":"yellow",
+    "color": "yellow",
     "availableSizes": [7, 8, 9, 10, 12],
-     "images":["/images/skecher4.jpeg","/images/skecher4.2.jpg"]
+    "images": ["/images/skecher4.jpeg", "/images/skecher4.2.jpg"]
   },
   {
     "id": "SKECHERS-SHOE-005",
@@ -456,9 +456,9 @@
     "type": "shoes",
     "rating": 4.4,
     "price": 5999,
-     "color":"blue",
+    "color": "blue",
     "availableSizes": [6, 8, 9, 10, 11],
-     "images":["/images/skecher5.jpg","/images/skecher5.2.png"]
+    "images": ["/images/skecher5.jpg", "/images/skecher5.2.png"]
   },
 
   {
@@ -470,22 +470,22 @@
     "type": "shoes",
     "rating": 4.3,
     "price": 2899,
-    "color":"grey",
+    "color": "grey",
     "availableSizes": [6, 7, 8, 9, 10, 11],
-     "images":["/images/levis1.jpeg","/images/levis1.2.jpg"]
+    "images": ["/images/levis1.jpeg", "/images/levis1.2.jpg"]
   },
   {
     "id": "LEVIS-SHOE-002",
     "productName": "Levis High Ankle Black Shoes",
     "gender": "male",
-   "imageUrl": "/images/levis2.jpeg",
+    "imageUrl": "/images/levis2.jpeg",
     "brand": "Levis",
     "type": "shoes",
     "rating": 4.1,
     "price": 3299,
-     "color":"black",
+    "color": "black",
     "availableSizes": [7, 8, 9, 11, 12],
-     "images":["/images/levis2.jpeg","/images/levis2.2.avif"]
+    "images": ["/images/levis2.jpeg", "/images/levis2.2.avif"]
   },
   {
     "id": "LEVIS-SHOE-003",
@@ -496,9 +496,9 @@
     "type": "shoes",
     "rating": 4.0,
     "price": 2599,
-     "color":"white",
+    "color": "white",
     "availableSizes": [6, 8, 9, 10, 12],
-     "images":["/images/levis3.jpeg","/images/levis3.2.webp"]
+    "images": ["/images/levis3.jpeg", "/images/levis3.2.webp"]
   },
   {
     "id": "LEVIS-SHOE-004",
@@ -509,9 +509,9 @@
     "type": "shoes",
     "rating": 4.5,
     "price": 3199,
-     "color":"black",
+    "color": "black",
     "availableSizes": [8, 9, 10, 12],
-     "images":["/images/levis4.jpeg","/images/levis4.2.webp"]
+    "images": ["/images/levis4.jpeg", "/images/levis4.2.webp"]
   },
   {
     "id": "LEVIS-SHOE-005",
@@ -522,9 +522,9 @@
     "type": "shoes",
     "rating": 4.4,
     "price": 2799,
-     "color":"brown",
+    "color": "brown",
     "availableSizes": [6, 7, 8, 9, 11, 12],
-    "images":["/images/levis5.jpg","/images/levis5.2.webp"]
+    "images": ["/images/levis5.jpg", "/images/levis5.2.webp"]
   },
 
   {
@@ -536,9 +536,9 @@
     "type": "shoes",
     "rating": 4.7,
     "price": 3999,
-    "color":"blue",
+    "color": "blue",
     "availableSizes": [6, 7, 8, 9, 10, 11, 12],
-    "images":["/images/crocs1.jpeg","/images/crocs1.2.jpg"]
+    "images": ["/images/crocs1.jpeg", "/images/crocs1.2.jpg"]
   },
   {
     "id": "CROCS-SHOE-002",
@@ -549,22 +549,22 @@
     "type": "shoes",
     "rating": 4.3,
     "price": 4495,
-    "color":"white",
+    "color": "white",
     "availableSizes": [7, 8, 9, 10, 11, 12],
-    "images":["/images/crocs2.jpg","/images/crocs2.2.jpg"]
+    "images": ["/images/crocs2.jpg", "/images/crocs2.2.jpg"]
   },
   {
     "id": "CROCS-SHOE-003",
     "productName": "Crocs Swiftwater Black Sandals",
     "gender": "male",
-   "imageUrl": "/images/crocs3.jpeg",
+    "imageUrl": "/images/crocs3.jpeg",
     "brand": "Crocs",
     "type": "shoes",
     "rating": 4.5,
     "price": 3499,
-    "color":"black",
+    "color": "black",
     "availableSizes": [6, 8, 9, 12],
-    "images":["/images/crocs3.jpeg","/images/crocs3.2.webp"]
+    "images": ["/images/crocs3.jpeg", "/images/crocs3.2.webp"]
   },
   {
     "id": "CROCS-SHOE-004",
@@ -575,9 +575,9 @@
     "type": "shoes",
     "rating": 4.6,
     "price": 4199,
-    "color":"white",
+    "color": "white",
     "availableSizes": [6, 7, 9, 10, 12],
-    "images":["/images/crocs4.jpeg","/images/crocs4.2.webp"]
+    "images": ["/images/crocs4.jpeg", "/images/crocs4.2.webp"]
   },
   {
     "id": "CROCS-SHOE-005",
@@ -588,9 +588,9 @@
     "type": "shoes",
     "rating": 4.6,
     "price": 3995,
-    "color":"black",
+    "color": "black",
     "availableSizes": [7, 8, 9, 10, 12],
-    "images":["/images/crocs5.jpeg","/images/crocs5.2.webp"]
+    "images": ["/images/crocs5.jpeg", "/images/crocs5.2.webp"]
   },
 
   {
@@ -1368,7 +1368,7 @@
     "price": 3295,
     "availableSizes": [36, 37, 38, 39, 40]
   },
-  
+
   {
     "id": "KSH001",
     "productName": "Nike Kids Running Shoes",
@@ -1378,7 +1378,8 @@
     "type": "shoes",
     "rating": 4.5,
     "price": 2200,
-    "availableSizes": [28, 29, 30, 31, 32]
+    "availableSizes": [28, 29, 30, 31, 32],
+    "images": ["/images/kids1.jpeg", "/images/kids1.2.jpeg"]
   },
   {
     "id": "KSH002",
@@ -1389,7 +1390,8 @@
     "type": "shoes",
     "rating": 4.3,
     "price": 1999,
-    "availableSizes": [30, 31, 32, 33, 34]
+    "availableSizes": [30, 31, 32, 33, 34],
+    "images": ["/images/kids2.jpeg", "/images/kids2.2.jpeg"]
   },
   {
     "id": "KFR001",
@@ -1400,7 +1402,8 @@
     "type": "frock",
     "rating": 4.6,
     "price": 1850,
-    "availableSizes": ["S", "M", "L"]
+    "availableSizes": ["S", "M", "L"],
+    "images": ["/images/kids3.jpeg", "/images/kids3.2.jpeg"]
   },
   {
     "id": "KFR002",
@@ -1411,7 +1414,8 @@
     "type": "frock",
     "rating": 4.4,
     "price": 1499,
-    "availableSizes": ["S", "M", "L", "XL"]
+    "availableSizes": ["S", "M", "L", "XL"],
+    "images": ["/images/kids4.jpg", "/images/kids4.2.jpeg"]
   },
   {
     "id": "KSW001",
@@ -1422,7 +1426,8 @@
     "type": "sportswear",
     "rating": 4.5,
     "price": 2100,
-    "availableSizes": ["S", "M", "L"]
+    "availableSizes": ["S", "M", "L"],
+    "images": ["/images/kids5.jpeg", "/images/kids52.jpeg"]
   },
   {
     "id": "KSW002",
@@ -1433,7 +1438,8 @@
     "type": "sportswear",
     "rating": 4.2,
     "price": 2500,
-    "availableSizes": ["M", "L", "XL"]
+    "availableSizes": ["M", "L", "XL"],
+    "images": ["/images/kids6.jpeg", "/images/kids6.2.jpeg"]
   },
   {
     "id": "KTS001",
@@ -1444,7 +1450,8 @@
     "type": "tshirt",
     "rating": 4.7,
     "price": 899,
-    "availableSizes": ["S", "M", "L"]
+    "availableSizes": ["S", "M", "L"],
+    "images": ["/images/kids7.jpeg", "/images/kids7.2.jpeg"]
   },
   {
     "id": "KTS002",
@@ -1455,7 +1462,8 @@
     "type": "tshirt",
     "rating": 4.6,
     "price": 950,
-    "availableSizes": ["S", "M", "L", "XL"]
+    "availableSizes": ["S", "M", "L", "XL"],
+    "images": ["/images/kids8.jpeg", "/images/kids8.2.jpeg"]
   },
   {
     "id": "KSHR001",
@@ -1466,7 +1474,8 @@
     "type": "shorts",
     "rating": 4.3,
     "price": 1200,
-    "availableSizes": ["S", "M", "L"]
+    "availableSizes": ["S", "M", "L"],
+    "images": ["/images/kids9.jpeg", "/images/kids9.2.jpeg"]
   },
   {
     "id": "KSHR002",
@@ -1477,7 +1486,8 @@
     "type": "shorts",
     "rating": 4.4,
     "price": 1100,
-    "availableSizes": ["S", "M", "L", "XL"]
+    "availableSizes": ["S", "M", "L", "XL"],
+    "images": ["/images/kids10.jpeg", "/images/kids10.2.jpeg"]
   },
   {
     "id": "KTS003",
@@ -1488,7 +1498,8 @@
     "type": "tshirt",
     "rating": 4.8,
     "price": 999,
-    "availableSizes": ["S", "M", "L", "XL"]
+    "availableSizes": ["S", "M", "L", "XL"],
+    "images": ["/images/kids11.jpeg", "/images/kids11.2.jpeg"]
   },
   {
     "id": "KSW003",
@@ -1499,7 +1510,8 @@
     "type": "sportswear",
     "rating": 4.5,
     "price": 2300,
-    "availableSizes": ["S", "M", "L"]
+    "availableSizes": ["S", "M", "L"],
+    "images": ["/images/kids12.jpeg", "/images/kids12.2.jpeg"]
   },
 
   {
@@ -1511,7 +1523,8 @@
     "type": "refrigerator",
     "rating": 4.6,
     "price": 28990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home1.jpeg", "/images/home1.2.jpeg"]
   },
   {
     "id": "HA002",
@@ -1522,7 +1535,8 @@
     "type": "washing machine",
     "rating": 4.5,
     "price": 31990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home2.jpeg", "/images/home2.2.jpeg"]
   },
   {
     "id": "HA003",
@@ -1533,7 +1547,8 @@
     "type": "mixer grinder",
     "rating": 4.3,
     "price": 4999,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home3.jpeg", "/images/home3.2.jpeg"]
   },
   {
     "id": "HA004",
@@ -1544,7 +1559,8 @@
     "type": "toaster",
     "rating": 4.2,
     "price": 1799,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home4.jpeg", "/images/home4.2.jpeg"]
   },
   {
     "id": "HA005",
@@ -1555,7 +1571,8 @@
     "type": "microwave oven",
     "rating": 4.5,
     "price": 12990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home5.jpeg", "/images/home5.2.jpeg"]
   },
   {
     "id": "HA006",
@@ -1566,7 +1583,8 @@
     "type": "water purifier",
     "rating": 4.4,
     "price": 10990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home6.jpeg", "/images/home6.2.jpeg"]
   },
   {
     "id": "HA007",
@@ -1577,7 +1595,8 @@
     "type": "vacuum cleaner",
     "rating": 4.7,
     "price": 44990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home7.jpeg", "/images/home7.2.jpeg"]
   },
   {
     "id": "HA008",
@@ -1599,7 +1618,8 @@
     "type": "ceiling fan",
     "rating": 4.2,
     "price": 2599,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home9.jpeg", "/images/home9.2.jpeg"]
   },
   {
     "id": "HA010",
@@ -1610,7 +1630,8 @@
     "type": "air conditioner",
     "rating": 4.6,
     "price": 34990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home10.jpeg", "/images/home10.2.jpeg"]
   },
   {
     "id": "HA011",
@@ -1621,7 +1642,8 @@
     "type": "microwave oven",
     "rating": 4.1,
     "price": 7990,
-    "availableSizes": []
+    "availableSizes": [],
+    "images": ["/images/home11.jpeg", "/images/home11.2.jpeg"]
   },
   {
     "id": "HA012",
@@ -1632,9 +1654,9 @@
     "type": "iron",
     "rating": 4.3,
     "price": 1699,
-    "availableSizes": []
-  }
-,
+    "availableSizes": [],
+    "images": ["/images/home12.jpeg", "/images/home12.2.jpeg"]
+  },
   {
     "id": "BEA001",
     "productName": "L'Oreal Paris Revitalift Face Serum",
@@ -1645,7 +1667,7 @@
     "rating": 4.7,
     "price": 1299,
     "availableSizes": ["30ml", "50ml"],
-    "prices":{"30":1299,"50":1700}
+    "prices": { "30": 1299, "50": 1700 }
   },
   {
     "id": "BEA002",
@@ -1668,7 +1690,7 @@
     "rating": 4.6,
     "price": 899,
     "availableSizes": ["50ml", "100ml"],
-    "prices":{"50":899,"100":1400}
+    "prices": { "50": 899, "100": 1400 }
   },
   {
     "id": "BEA004",
@@ -1702,7 +1724,7 @@
     "rating": 4.7,
     "price": 2000,
     "availableSizes": ["50ml", "125ml"],
-    "prices":{"50":2000,"100":4000}
+    "prices": { "50": 2000, "100": 4000 }
   },
   {
     "id": "BEA007",
@@ -1770,6 +1792,4 @@
     "price": 3500,
     "availableSizes": ["30ml"]
   }
-
-
 ]

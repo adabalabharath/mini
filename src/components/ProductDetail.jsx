@@ -848,7 +848,7 @@ const ProductDetail = () => {
             position={"fixed"}
             bottom={0}
             left="0"
-            height={50}
+            height={70}
             justifyContent={"space-evenly"}
           >
             <Skeleton variant="text" width="10%" />
