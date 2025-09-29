@@ -53,6 +53,7 @@ const loginSchema = Yup.object({
 const Profile = () => {
   const [signUp, setSignUp] = useState(true);
   const [wrongCred, setWrongCred] = useState(false);
+  const [signupSuccess,setSignupSuccess]=useState(false)
   const [exists, setExists] = useState(false);
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -99,6 +100,7 @@ const Profile = () => {
     localStorage.setItem("users", JSON.stringify(users));
     dispatch({ type: "ADD_USER", payload: newUser });
     setSignUp(false);
+    setSignupSuccess(true)
   };
 
   const handleLogin = (data) => {
@@ -411,6 +413,21 @@ const Profile = () => {
             sx={{ width: "100%" }}
           >
             wrong credentials
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={signupSuccess}
+          autoHideDuration={3000}
+          onClose={() => setSignupSuccess(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setSignupSuccess(false)}
+            severity="success"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            Signed up successfully
           </Alert>
         </Snackbar>
         <Snackbar
