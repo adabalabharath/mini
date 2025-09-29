@@ -34,16 +34,12 @@ const Page = ({ products }) => {
   useEffect(() => {
     let timer;
 
-    if (!products.length) {
-      timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 3000);
-    } else {
+    timer = setTimeout(() => {
       setShowSkeleton(false);
-    }
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [products]);
+  }, []);
 
   const handleCart = (item) => {
     if (item.availableSizes.length > 0) {
@@ -111,7 +107,7 @@ const Page = ({ products }) => {
             },
           }}
         >
-          {products.length > 0 && (
+          {products.length > 0 && !showSkeleton && (
             <Button
               variant="filled"
               fullWidth
@@ -131,7 +127,7 @@ const Page = ({ products }) => {
           </Drawer>
         </Grid>
 
-        {!products.length && showSkeleton ? (
+        {showSkeleton ? (
           <Grid container size={12} rowSpacing={5} columnSpacing={3}>
             {/* Skeleton loaders for when data is loading */}
             {[...Array(18)].map((_, index) => (
@@ -163,7 +159,6 @@ const Page = ({ products }) => {
                   maxHeight: 530,
                   height: "100%",
                   position: "relative",
-                  
                 }}
               >
                 <Link
@@ -228,7 +223,7 @@ const Page = ({ products }) => {
                       </Typography>
                     </Grid>
                     <Grid>
-                      <Typography variant="subtitle1" fontSize={'16px'}>
+                      <Typography variant="subtitle1" fontSize={"16px"}>
                         {"\u20B9"}
                         {product.price}{" "}
                         <sup style={{ color: "light-black" }}>00</sup>

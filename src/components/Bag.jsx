@@ -49,16 +49,12 @@ const Bag = () => {
   useEffect(() => {
     let timer;
 
-    if (!products) {
-      timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 3000);
-    } else {
+    timer = setTimeout(() => {
       setShowSkeleton(false);
-    }
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [products]);
+  }, []);
 
   useEffect(() => {
     if (product) {
@@ -289,7 +285,7 @@ const Bag = () => {
     localSet(newBuyNowUser);
   };
 
-  return products.length ? (
+  return products.length && !showSkeleton ? (
     <Box display="flex" flexDirection="column" height="90vh" mt={10}>
       {user?.defaultAddress?.name && (
         <Box display={"flex"} justifyContent={"space-between"}>
@@ -741,18 +737,23 @@ const Bag = () => {
         </Drawer>
       </Grid>
     </Box>
-  ) : !products.length && showSkeleton ? (
+  ) : showSkeleton ? (
     <>
-      <Grid container size={12} rowSpacing={5} columnSpacing={3}>
+      <Grid  container size={12} rowSpacing={3} columnSpacing={3}  mt={10}>
         {/* Skeleton loaders for when data is loading */}
-        {[...Array(18)].map((_, index) => (
-          <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
-            <Box sx={{ p: 2, border: "1px solid white", position: "relative" }}>
-              <Skeleton variant="rectangular" width="100%" height={220} />
-              <Skeleton variant="text" width="60%" height={30} />
-              <Skeleton variant="text" width="50%" />
+        {[...Array(12)].map((_, index) => (
+          <Grid key={index} size={{ xs: 12, sm: 12, md: 3 }}>
+            <Box sx={{ p: 2,display:'flex',justifyContent:'space-between'}}>
+              <Skeleton variant="rectangular" width={'40%'} height={'225px'} />
+              <Box display={'flex'} flexDirection={'column'} width='50%' justifyContent={'space-evenly'} height={'225px'} >
+              <Skeleton variant="text" width="100%" height={40} />
+              <Skeleton variant="text" width="100%" height={50} />
+              <Box display={'flex'} justifyContent={'space-evenly'} height='20%'>
               <Skeleton variant="text" width="30%" />
-              <Skeleton variant="text" width="40%" />
+              <Skeleton variant="text" width="30%" />
+              </Box>
+              <Skeleton variant="text" width="100%" height={50}/>
+              </Box>
             </Box>
           </Grid>
         ))}

@@ -70,22 +70,17 @@ const ProductDetail = () => {
   const [buy, setBuy] = useState(false);
   const [like, setLike] = useState(false);
   const location = useLocation();
-  console.log(location.pathname)
   const navigate = useNavigate();
   const [showSkeleton, setShowSkeleton] = useState(true);
   useEffect(() => {
     let timer;
 
-    if (!product) {
-      timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 3000);
-    } else {
+    timer = setTimeout(() => {
       setShowSkeleton(false);
-    }
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [product]);
+  }, []);
   useEffect(() => {
     const detail = products.find((x) => {
       if (params.id) {
@@ -173,7 +168,7 @@ const ProductDetail = () => {
   const handleBuyNow = () => {
     const now = {
       ...user,
-      buyNow:{ ...product, selectedSize, qty: 1, selected: true },
+      buyNow: { ...product, selectedSize, qty: 1, selected: true },
     };
     localSet(now);
   };
@@ -235,454 +230,463 @@ const ProductDetail = () => {
         mt: 10,
       }}
     >
-      {product && (
-        <Box display={"flex"} flexDirection={"column"}>
-          <Breadcrumbs
-            separator="/"
-            sx={{ color: "grey", fontWeight: "bold", fontSize: "12px", my: 1 }}
-          >
-            <Link
-              to="/"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
+      {product && !showSkeleton && (
+        <>
+          <Box display={"flex"} flexDirection={"column"}>
+            <Breadcrumbs
+              separator="/"
+              sx={{
                 color: "grey",
+                fontWeight: "bold",
+                fontSize: "12px",
+                my: 1,
               }}
             >
-              Home
-            </Link>
+              <Link
+                to="/"
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "grey",
+                }}
+              >
+                Home
+              </Link>
 
-            {product.gender === "male" && (
-              <Link
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "grey",
-                }}
-                to={"/shop/men"}
+              {product.gender === "male" && (
+                <Link
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: "grey",
+                  }}
+                  to={"/shop/men"}
+                >
+                  Men
+                </Link>
+              )}
+              {product.gender === "female" && (
+                <Link
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: "grey",
+                  }}
+                  to={"/shop/women"}
+                >
+                  Women
+                </Link>
+              )}
+              {product.gender === "others" && (
+                <Link
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: "grey",
+                  }}
+                  to={"/shop/kids"}
+                >
+                  Kids
+                </Link>
+              )}
+              {product.gender === "beauty" && (
+                <Link
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: "grey",
+                  }}
+                  to={"/shop/beauty"}
+                >
+                  Beauty
+                </Link>
+              )}
+              {product.gender === "home" && (
+                <Link
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: "grey",
+                  }}
+                  to={"/shop/home"}
+                >
+                  Home Appliances
+                </Link>
+              )}
+              <Typography
+                color="text.primary"
+                variant="caption"
+                fontWeight={"bold"}
               >
-                Men
-              </Link>
-            )}
-            {product.gender === "female" && (
-              <Link
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "grey",
-                }}
-                to={"/shop/women"}
-              >
-                Women
-              </Link>
-            )}
-            {product.gender === "others" && (
-              <Link
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "grey",
-                }}
-                to={"/shop/kids"}
-              >
-                Kids
-              </Link>
-            )}
-            {product.gender === "beauty" && (
-              <Link
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "grey",
-                }}
-                to={"/shop/beauty"}
-              >
-                Beauty
-              </Link>
-            )}
-            {product.gender === "home" && (
-              <Link
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "grey",
-                }}
-                to={"/shop/home"}
-              >
-                Home Appliances
-              </Link>
-            )}
-            <Typography
-              color="text.primary"
-              variant="caption"
-              fontWeight={"bold"}
-            >
-              {product.productName}
+                {product.productName}
+              </Typography>
+            </Breadcrumbs>
+            <Typography variant="caption">
+              ** Double tap on the image to add to wishlist **
             </Typography>
-          </Breadcrumbs>
-          <Typography variant="caption">
-            ** Double tap on the image to add to wishlist **
-          </Typography>
-        </Box>
-      )}
-      {product && (
-        <Grid
-          container
-          display={"flex"}
-          flexDirection={{ xs: "column", sm: "column", md: "row" }}
-          justifyContent={{ md: "space-evenly" }}
-          py={1}
-        >
+          </Box>
           <Grid
             container
-            sx={{
-              position: "relative",
-              width: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            size={{ xs: 12, md: 4 }}
+            display={"flex"}
+            flexDirection={{ xs: "column", sm: "column", md: "row" }}
+            justifyContent={{ md: "space-evenly" }}
+            py={1}
           >
-            {product.images ? (
-              <Swiper
-                spaceBetween={10}
-                slidesPerView={1}
-                pagination={{ clickable: true }}
-                modules={[Pagination]}
-                onDoubleClick={() => handleFavLike(product)}
-              >
-                {product.images.map((x, i) => (
-                  <SwiperSlide key={i}>
+            <Grid
+              container
+              sx={{
+                position: "relative",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              size={{ xs: 12, md: 4 }}
+            >
+              {product.images ? (
+                <Swiper
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{ clickable: true }}
+                  modules={[Pagination]}
+                  onDoubleClick={() => handleFavLike(product)}
+                >
+                  {product.images.map((x, i) => (
+                    <SwiperSlide key={i}>
+                      <Box
+                        component="img"
+                        src={x}
+                        sx={{
+                          width: "100%",
+                          borderRadius: 2,
+                          maxHeight: { xs: "400px", md: "80vh" },
+                        }}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <Swiper
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{ clickable: true }}
+                  modules={[Pagination]}
+                  onDoubleClick={() => handleFavLike(product)}
+                >
+                  <SwiperSlide>
                     <Box
                       component="img"
-                      src={x}
+                      src={product?.imageUrl}
                       sx={{
                         width: "100%",
                         borderRadius: 2,
-                        maxHeight: { xs: "400px", md: "80vh" },
+                        height: { xs: "400px", md: "80vh" },
                       }}
                     />
                   </SwiperSlide>
-                ))}
-              </Swiper>
-            ) : (
-              <Swiper
-                spaceBetween={10}
-                slidesPerView={1}
-                pagination={{ clickable: true }}
-                modules={[Pagination]}
-                onDoubleClick={() => handleFavLike(product)}
-              >
-                <SwiperSlide>
-                  <Box
-                    component="img"
-                    src={product?.imageUrl}
-                    sx={{
-                      width: "100%",
-                      borderRadius: 2,
-                      height: { xs: "400px", md: "80vh" },
-                    }}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Box
-                    sx={{
-                      flexDirection: "column",
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={logo}
-                      style={{
-                        width: "100%",
-                        borderRadius: 10,
-                        maxHeight: "400px",
-                        objectFit: "cover",
-                      }}
-                    />
-
-                    {/* Centered text overlay */}
-                    <Typography
-                      variant="subtitle1"
+                  <SwiperSlide>
+                    <Box
                       sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        textAlign: "center",
-                        background: "rgba(0,0,0,0.5)", // optional dark background
-                        px: 2,
-                        py: 1,
-                        borderRadius: 2,
+                        flexDirection: "column",
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
-                      Sorry, Adding images is still in progress
-                    </Typography>
-                  </Box>
-                </SwiperSlide>
-              </Swiper>
-            )}
-            {user && like && (
-              <FavoriteIcon
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform:
-                    "translate(-50%, -50%) scale(" + (like ? 1.2 : 0) + ")",
-                  opacity: like ? 1 : 0,
-                  transition: "transform 0.4s ease, opacity 0.4s ease",
-                  color: "red",
-                  fontSize: "50px",
-                  pointerEvents: "none",
-                  border: "1px solid white",
-                  borderRadius: "50%",
-                  backgroundColor: "white",
-                  padding: 1,
-                  zIndex: 1100,
-                }}
-              />
-            )}
-          </Grid>
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-          >
-            <Grid
-              display={"flex"}
-              flexDirection={"column"}
-              gap={1}
-              mb={2}
-              size={{ xs: 12 }}
-              alignSelf={"flex-start"}
-            >
-              <Typography sx={{ color: "grey" }}>
-                <span style={{ fontWeight: "bold", color: "black" }}>
-                  {product?.brand}
-                </span>{" "}
-                {product?.gender == "male"
-                  ? "Men " + product?.productName
-                  : product.gender == "female"
-                  ? "Women " + product?.productName
-                  : product?.productName}
-              </Typography>
-
-              <Typography sx={{ fontWeight: "bold" }} variant="button">
-                <span style={{ color: "grey", fontWeight: "lighter" }}>
-                  MRP{" "}
-                  <s>
-                    {"\u20B9"}
-                    {product?.price + 2000}&nbsp;
-                  </s>
-                </span>{" "}
-                <span style={{ fontSize: "18px" }}>
-                  {"\u20B9"}
-                  {product?.price}
-                </span>
-              </Typography>
-
-              <Typography
-                sx={{ fontWeight: "bold", color: "red" }}
-                variant="caption "
-              >
-                Only Few Left!
-              </Typography>
-            </Grid>
-
-            {product?.availableSizes.length ? (
-              <>
-                {" "}
-                <Grid alignSelf={"flex-start"}>
-                  <Typography>Select a Size</Typography>
-                  <Grid flexWrap={"wrap"}>
-                    {product?.availableSizes.map((size) => (
-                      <Button
-                        key={size}
-                        variant={
-                          selectedSize === size ? "contained" : "outlined"
-                        }
-                        size="small"
-                        sx={{
-                          borderRadius: "30%",
-                          minWidth: 30,
-                          minHeight: 30,
-                          borderColor: "black",
-                          mt: 1,
-                          mr: 1,
-
-                          border: "1px solid grey",
-
-                          textTransform: "none",
-                          color: selectedSize == size ? "white" : "black",
-                          backgroundColor: selectedSize == size && "black",
+                      <img
+                        src={logo}
+                        style={{
+                          width: "100%",
+                          borderRadius: 10,
+                          maxHeight: "400px",
+                          objectFit: "cover",
                         }}
-                        onClick={() => {
-                          handleSize(size);
+                      />
+
+                      {/* Centered text overlay */}
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          textAlign: "center",
+                          background: "rgba(0,0,0,0.5)", // optional dark background
+                          px: 2,
+                          py: 1,
+                          borderRadius: 2,
                         }}
                       >
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          {size}
-                          <Typography variant="caption" color="grey">
-                            {"\u20B9"}
-                            {product.gender === "beauty" && product.prices
-                              ? product?.prices[parseInt(size)]
-                              : product?.price}
-                          </Typography>
-                        </Box>
-                      </Button>
-                    ))}
-                  </Grid>
-                </Grid>
-              </>
-            ) : (
-              <Grid alignSelf={"flex-start"}>
-                <Typography variant="subtitle"> Size: Free Size</Typography>
-              </Grid>
-            )}
-            <Box
-              sx={{
-                width: "100%",
-                p: 1,
-                display: { xs: "none", md: "block" },
-              }}
-            >
-              <Grid display={"flex"} justifyContent={"center"} gap={1} my={1}>
-                <Button onClick={() => handleFav(product)}>
-                  {user?.wishlist?.some((x) => x.id == product?.id) ? (
-                    <FavoriteIcon sx={{ color: "red" }} />
-                  ) : (
-                    <FavoriteBorderIcon sx={{ color: "black" }} />
-                  )}
-                </Button>
-                <Button
-                  variant="contained"
-                  color="black"
-                  fullWidth
-                  onClick={handleBag}
-                  sx={{ color: "white", backgroundColor: "black" }}
-                  size="small"
-                >
-                  Add to Bag
-                </Button>
-                <Button
-                  variant="contained"
-                  color="black"
-                  fullWidth
-                  onClick={() => {
-                    if (!user) {
-                      navigate("/profile");
-                      return;
-                    } else if (!user.address.length) {
-                      navigate("/add-address",{state:{path:location.pathname}});
-                      return;
-                    } else if (product.availableSizes.length > 0) {
-                      if (selectedSize) {
-                        handleBuyNow();
-                        navigate("/bag", { state: { directBuy: true } });
-                      } else {
-                        setDialog(true);
-                      }
-                    } else {
-                      setBuy(true);
-                      navigate("/bag", { state: { directBuy: product } });
-                    }
-                  }}
-                  size="small"
-                  sx={{ color: "white", backgroundColor: "black" }}
-                >
-                  Buy now
-                </Button>
-              </Grid>
-            </Box>
-            <Box sx={{ mt: 2 }}>
-              {terms.map((section, idx) => (
-                <Box key={idx} sx={{ mb: 2 }}>
-                  {/* Heading */}
-                  <Typography
-                    variant="subtitle2"
-                    sx={{ fontWeight: "bold", mb: 0.5 }}
-                  >
-                    {section.heading}
-                  </Typography>
-                  {/* Points */}
-                  {section.points.map((point, i) => (
-                    <Typography
-                      key={i}
-                      variant="body2"
-                      sx={{ ml: 2, color: "grey.800", lineHeight: 1.6 }}
-                    >
-                      • {point}
-                    </Typography>
-                  ))}
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Grid>
-      )}
-      {product && !showSkeleton && (
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            backgroundColor: "white",
-            zIndex: 1000, // stays above details
-            boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
-            p: 1,
-            display: { md: "none", xs: "block" },
-          }}
-        >
-          <Grid display={"flex"} justifyContent={"center"} gap={1} px={1}>
-            <Button onClick={() => handleFav(product)}>
-              {user?.wishlist?.some((x) => x.id == product?.id) ? (
-                <FavoriteIcon sx={{ color: "red" }} />
-              ) : (
-                <FavoriteBorderIcon sx={{ color: "black" }} />
+                        Sorry, Adding images is still in progress
+                      </Typography>
+                    </Box>
+                  </SwiperSlide>
+                </Swiper>
               )}
-            </Button>
-            <Button
-              variant="contained"
-              color="black"
-              fullWidth
-              onClick={handleBag}
-              sx={{ color: "white", backgroundColor: "black" }}
-              size="small"
+              {user && like && (
+                <FavoriteIcon
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform:
+                      "translate(-50%, -50%) scale(" + (like ? 1.2 : 0) + ")",
+                    opacity: like ? 1 : 0,
+                    transition: "transform 0.4s ease, opacity 0.4s ease",
+                    color: "red",
+                    fontSize: "50px",
+                    pointerEvents: "none",
+                    border: "1px solid white",
+                    borderRadius: "50%",
+                    backgroundColor: "white",
+                    padding: 1,
+                    zIndex: 1100,
+                  }}
+                />
+              )}
+            </Grid>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
             >
-              Add to Bag
-            </Button>
-            <Button
-              variant="contained"
-              color="black"
-              fullWidth
-              onClick={() => {
-                if (!user) {
-                  navigate("/profile");
-                  return;
-                } else if (!user.address.length) {
-                  navigate("/add-address",{state:{path:location.pathname}});
-                  return;
-                } else if (product.availableSizes.length > 0) {
-                  if (selectedSize) {
-                    handleBuyNow();
-                    navigate("/bag", { state: { directBuy: true } });
-                  } else {
-                    setDialog(true);
-                  }
-                } else {
-                  setBuy(true);
-                }
-              }}
-              size="small"
-              sx={{ color: "white", backgroundColor: "black" }}
-            >
-              Buy now
-            </Button>
+              <Grid
+                display={"flex"}
+                flexDirection={"column"}
+                gap={1}
+                mb={2}
+                size={{ xs: 12 }}
+                alignSelf={"flex-start"}
+              >
+                <Typography sx={{ color: "grey" }}>
+                  <span style={{ fontWeight: "bold", color: "black" }}>
+                    {product?.brand}
+                  </span>{" "}
+                  {product?.gender == "male"
+                    ? "Men " + product?.productName
+                    : product.gender == "female"
+                    ? "Women " + product?.productName
+                    : product?.productName}
+                </Typography>
+
+                <Typography sx={{ fontWeight: "bold" }} variant="button">
+                  <span style={{ color: "grey", fontWeight: "lighter" }}>
+                    MRP{" "}
+                    <s>
+                      {"\u20B9"}
+                      {product?.price + 2000}&nbsp;
+                    </s>
+                  </span>{" "}
+                  <span style={{ fontSize: "18px" }}>
+                    {"\u20B9"}
+                    {product?.price}
+                  </span>
+                </Typography>
+
+                <Typography
+                  sx={{ fontWeight: "bold", color: "red" }}
+                  variant="caption "
+                >
+                  Only Few Left!
+                </Typography>
+              </Grid>
+
+              {product?.availableSizes.length ? (
+                <>
+                  {" "}
+                  <Grid alignSelf={"flex-start"}>
+                    <Typography>Select a Size</Typography>
+                    <Grid flexWrap={"wrap"}>
+                      {product?.availableSizes.map((size) => (
+                        <Button
+                          key={size}
+                          variant={
+                            selectedSize === size ? "contained" : "outlined"
+                          }
+                          size="small"
+                          sx={{
+                            borderRadius: "30%",
+                            minWidth: 30,
+                            minHeight: 30,
+                            borderColor: "black",
+                            mt: 1,
+                            mr: 1,
+
+                            border: "1px solid grey",
+
+                            textTransform: "none",
+                            color: selectedSize == size ? "white" : "black",
+                            backgroundColor: selectedSize == size && "black",
+                          }}
+                          onClick={() => {
+                            handleSize(size);
+                          }}
+                        >
+                          <Box
+                            sx={{ display: "flex", flexDirection: "column" }}
+                          >
+                            {size}
+                            <Typography variant="caption" color="grey">
+                              {"\u20B9"}
+                              {product.gender === "beauty" && product.prices
+                                ? product?.prices[parseInt(size)]
+                                : product?.price}
+                            </Typography>
+                          </Box>
+                        </Button>
+                      ))}
+                    </Grid>
+                  </Grid>
+                </>
+              ) : (
+                <Grid alignSelf={"flex-start"}>
+                  <Typography variant="subtitle"> Size: Free Size</Typography>
+                </Grid>
+              )}
+              <Box
+                sx={{
+                  width: "100%",
+                  p: 1,
+                  display: { xs: "none", md: "block" },
+                }}
+              >
+                <Grid display={"flex"} justifyContent={"center"} gap={1} my={1}>
+                  <Button onClick={() => handleFav(product)}>
+                    {user?.wishlist?.some((x) => x.id == product?.id) ? (
+                      <FavoriteIcon sx={{ color: "red" }} />
+                    ) : (
+                      <FavoriteBorderIcon sx={{ color: "black" }} />
+                    )}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="black"
+                    fullWidth
+                    onClick={handleBag}
+                    sx={{ color: "white", backgroundColor: "black" }}
+                    size="small"
+                  >
+                    Add to Bag
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="black"
+                    fullWidth
+                    onClick={() => {
+                      if (!user) {
+                        navigate("/profile");
+                        return;
+                      } else if (!user.address.length) {
+                        navigate("/add-address", {
+                          state: { path: location.pathname },
+                        });
+                        return;
+                      } else if (product.availableSizes.length > 0) {
+                        if (selectedSize) {
+                          handleBuyNow();
+                          navigate("/bag", { state: { directBuy: true } });
+                        } else {
+                          setDialog(true);
+                        }
+                      } else {
+                        setBuy(true);
+                        navigate("/bag", { state: { directBuy: product } });
+                      }
+                    }}
+                    size="small"
+                    sx={{ color: "white", backgroundColor: "black" }}
+                  >
+                    Buy now
+                  </Button>
+                </Grid>
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                {terms.map((section, idx) => (
+                  <Box key={idx} sx={{ mb: 2 }}>
+                    {/* Heading */}
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ fontWeight: "bold", mb: 0.5 }}
+                    >
+                      {section.heading}
+                    </Typography>
+                    {/* Points */}
+                    {section.points.map((point, i) => (
+                      <Typography
+                        key={i}
+                        variant="body2"
+                        sx={{ ml: 2, color: "grey.800", lineHeight: 1.6 }}
+                      >
+                        • {point}
+                      </Typography>
+                    ))}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
           </Grid>
-        </Box>
+          <Box
+            sx={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              backgroundColor: "white",
+              zIndex: 1000, // stays above details
+              boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
+              p: 1,
+              display: { md: "none", xs: "block" },
+            }}
+          >
+            <Grid display={"flex"} justifyContent={"center"} gap={1} px={1}>
+              <Button onClick={() => handleFav(product)}>
+                {user?.wishlist?.some((x) => x.id == product?.id) ? (
+                  <FavoriteIcon sx={{ color: "red" }} />
+                ) : (
+                  <FavoriteBorderIcon sx={{ color: "black" }} />
+                )}
+              </Button>
+              <Button
+                variant="contained"
+                color="black"
+                fullWidth
+                onClick={handleBag}
+                sx={{ color: "white", backgroundColor: "black" }}
+                size="small"
+              >
+                Add to Bag
+              </Button>
+              <Button
+                variant="contained"
+                color="black"
+                fullWidth
+                onClick={() => {
+                  if (!user) {
+                    navigate("/profile");
+                    return;
+                  } else if (!user.address.length) {
+                    navigate("/add-address", {
+                      state: { path: location.pathname },
+                    });
+                    return;
+                  } else if (product.availableSizes.length > 0) {
+                    if (selectedSize) {
+                      handleBuyNow();
+                      navigate("/bag", { state: { directBuy: true } });
+                    } else {
+                      setDialog(true);
+                    }
+                  } else {
+                    setBuy(true);
+                  }
+                }}
+                size="small"
+                sx={{ color: "white", backgroundColor: "black" }}
+              >
+                Buy now
+              </Button>
+            </Grid>
+          </Box>
+        </>
       )}
 
       <Dialog open={dialog} onClose={() => setDialog(false)}>
@@ -821,22 +825,36 @@ const ProductDetail = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      {!product && showSkeleton ? (
+      {showSkeleton ? (
         <>
           <Grid>
-            <Skeleton variant="rectangular" width="100%" height={220} />
+            <Skeleton variant="text" width="95%" height={30} sx={{pt:1}}/>
+            <Skeleton
+              variant="rectangular"
+              width="100%"
+              height={350}
+              sx={{ borderRadius: 5 }}
+            />
             <Skeleton variant="text" width="60%" height={30} />
             <Skeleton variant="text" width="50%" />
             <Skeleton variant="text" width="30%" />
             <Skeleton variant="text" width="40%" />
+            <Skeleton variant="text" width="100%" height={30} />
+            <Skeleton variant="text" width="100%" height={30} />
           </Grid>
-          <Grid>
-            <Skeleton variant="rectangular" width="100%" height={220} />
-            <Skeleton variant="text" width="60%" height={30} />
-            <Skeleton variant="text" width="50%" />
-            <Skeleton variant="text" width="30%" />
+          <Box
+            display={"flex"}
+            width="100%"
+            position={"fixed"}
+            bottom={0}
+            left="0"
+            height={50}
+            justifyContent={"space-evenly"}
+          >
+            <Skeleton variant="text" width="10%" />
             <Skeleton variant="text" width="40%" />
-          </Grid>
+            <Skeleton variant="text" width="40%" />
+          </Box>
         </>
       ) : (
         !product &&
