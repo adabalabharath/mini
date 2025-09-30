@@ -140,12 +140,12 @@ const Page = ({ products }) => {
         </Grid>
 
         {showSkeleton ? (
-          <Grid container size={12} rowSpacing={5} columnSpacing={3}>
+          <Grid container size={12} rowSpacing={0} columnSpacing={3} maxHeight={'90vh'}>
             {/* Skeleton loaders for when data is loading */}
             {[...Array(12)].map((_, index) => (
               <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
                 <Box
-                  sx={{ p: 2, border: "1px solid white", position: "relative" }}
+                  sx={{ p: 2, position: "relative"}}
                 >
                   <Skeleton variant="rectangular" width="100%" height={220} />
                   <Skeleton variant="text" width="60%" height={30} />
@@ -342,7 +342,9 @@ const Page = ({ products }) => {
                   Successfully Added to Bag
                 </Alert>
               </Snackbar>
+              <Box sx={{ width: '100%'}}>
               <Grid
+                container
                 justifyContent="center"
                 size={12}
                 sx={{ display: { xs: "none", md: "flex" }, mb: 3 }}
@@ -393,12 +395,14 @@ const Page = ({ products }) => {
                   Next
                 </Button>
               </Grid>
+              </Box>
+              <Box sx={{ width: '100%'}}>
               <Grid
                 justifyContent="center"
                 size={12}
                 sx={{ display: { xs: "flex", md: "none" }, mb: 3 }}
                 gap={1}
-                mb={6}
+                
               >
                 <Button
                   variant="contained"
@@ -453,6 +457,7 @@ const Page = ({ products }) => {
                   Next
                 </Button>
               </Grid>
+              </Box>
             </Grid>
           </>
         ) : products.length == 0 ? (
