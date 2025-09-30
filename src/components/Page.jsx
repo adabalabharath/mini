@@ -140,13 +140,17 @@ const Page = ({ products }) => {
         </Grid>
 
         {showSkeleton ? (
-          <Grid container size={12} rowSpacing={0} columnSpacing={3} maxHeight={'90vh'}>
+          <Grid
+            container
+            size={12}
+            rowSpacing={0}
+            columnSpacing={3}
+            maxHeight={"90vh"}
+          >
             {/* Skeleton loaders for when data is loading */}
             {[...Array(12)].map((_, index) => (
               <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
-                <Box
-                  sx={{ p: 2, position: "relative"}}
-                >
+                <Box sx={{ p: 2, position: "relative" }}>
                   <Skeleton variant="rectangular" width="100%" height={220} />
                   <Skeleton variant="text" width="60%" height={30} />
                   <Skeleton variant="text" width="50%" />
@@ -342,82 +346,84 @@ const Page = ({ products }) => {
                   Successfully Added to Bag
                 </Alert>
               </Snackbar>
-              <Box sx={{ width: '100%'}}>
-              <Grid
-                container
-                justifyContent="center"
-                size={12}
-                sx={{ display: { xs: "none", md: "flex" }, mb: 3 }}
-                gap={1}
-                mb={6}
-              >
-                <Button
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                  }}
-                  onClick={() => setPage((prev) => prev - 1)}
-                  disabled={page === 1}
-                >
-                  Prev
-                </Button>
-
-                {[...Array(totalPages)].map((_, i) => {
-                  const pageNum = i + 1;
-                  return (
-                    <Button
-                      key={pageNum}
-                      onClick={() => setPage(pageNum)}
-                      variant={pageNum === page ? "contained" : ""}
-                      sx={{
-                        textTransform: "none",
-                        backgroundColor: pageNum === page ? "black" : "white",
-                        color: pageNum === page ? "white" : "black",
-                      }}
+              {totalPages != 1 && (
+                <>
+                  <Box sx={{ width: "100%" }}>
+                    <Grid
+                      container
+                      justifyContent="center"
+                      size={12}
+                      sx={{ display: { xs: "none", md: "flex" }, mb: 3 }}
+                      gap={1}
+                      mb={6}
                     >
-                      {pageNum}
-                    </Button>
-                  );
-                })}
+                      <Button
+                        variant="contained"
+                        sx={{
+                          textTransform: "none",
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={() => setPage((prev) => prev - 1)}
+                        disabled={page === 1}
+                      >
+                        Prev
+                      </Button>
 
-                <Button
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                  }}
-                  onClick={() => setPage((prev) => prev + 1)}
-                  disabled={page === totalPages}
-                >
-                  Next
-                </Button>
-              </Grid>
-              </Box>
-              <Box sx={{ width: '100%'}}>
-              <Grid
-                justifyContent="center"
-                size={12}
-                sx={{ display: { xs: "flex", md: "none" }, mb: 3 }}
-                gap={1}
-                
-              >
-                <Button
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                  }}
-                  onClick={() => setPage((prev) => prev - 1)}
-                  disabled={page === 1}
-                >
-                  Prev
-                </Button>
+                      {[...Array(totalPages)].map((_, i) => {
+                        const pageNum = i + 1;
+                        return (
+                          <Button
+                            key={pageNum}
+                            onClick={() => setPage(pageNum)}
+                            variant={pageNum === page ? "contained" : ""}
+                            sx={{
+                              textTransform: "none",
+                              backgroundColor:
+                                pageNum === page ? "black" : "white",
+                              color: pageNum === page ? "white" : "black",
+                            }}
+                          >
+                            {pageNum}
+                          </Button>
+                        );
+                      })}
 
-                {/* {[...Array(totalPages)].map((_, i) => {
+                      <Button
+                        variant="contained"
+                        sx={{
+                          textTransform: "none",
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={() => setPage((prev) => prev + 1)}
+                        disabled={page === totalPages}
+                      >
+                        Next
+                      </Button>
+                    </Grid>
+                  </Box>
+                  <Box sx={{ width: "100%" }}>
+                    <Grid
+                      justifyContent="center"
+                      size={12}
+                      sx={{ display: { xs: "flex", md: "none" }, mb: 3 }}
+                      gap={1}
+                    >
+                      <Button
+                        variant="contained"
+                        sx={{
+                          textTransform: "none",
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={() => setPage((prev) => prev - 1)}
+                        disabled={page === 1}
+                      >
+                        Prev
+                      </Button>
+
+                      {/* {[...Array(totalPages)].map((_, i) => {
                   const pageNum = i + 1;
                   return (
                     <Button
@@ -434,30 +440,32 @@ const Page = ({ products }) => {
                     </Button>
                   );
                 })} */}
-                <Button
-                  sx={{
-                    textTransform: "none",
-                    borderColor: "black",
-                    color: "black",
-                  }}
-                >
-                  {page}
-                </Button>
+                      <Button
+                        sx={{
+                          textTransform: "none",
+                          borderColor: "black",
+                          color: "black",
+                        }}
+                      >
+                        {page}
+                      </Button>
 
-                <Button
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "black",
-                    color: "white",
-                  }}
-                  onClick={() => setPage((prev) => prev + 1)}
-                  disabled={page === totalPages}
-                >
-                  Next
-                </Button>
-              </Grid>
-              </Box>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          textTransform: "none",
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={() => setPage((prev) => prev + 1)}
+                        disabled={page === totalPages}
+                      >
+                        Next
+                      </Button>
+                    </Grid>
+                  </Box>
+                </>
+              )}
             </Grid>
           </>
         ) : products.length == 0 ? (
