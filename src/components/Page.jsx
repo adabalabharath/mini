@@ -25,19 +25,20 @@ const Page = ({ products }) => {
   const [sizeDrawer, setSizeDrawer] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [paginatedProds, setPaginatedProds] = useState([]);
   const [open, setOpen] = useState(false);
-  const isLoading = useSelector((store) => store.isLoading);
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const [fav, setFav] = useState(false);
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(products.length / 12);
   const { user, localSet } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [showSkeleton, setShowSkeleton] = useState(true);
+
   useEffect(() => {
     let timer;
-
     timer = setTimeout(() => {
       setShowSkeleton(false);
     }, 2000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -84,8 +85,19 @@ const Page = ({ products }) => {
     localSet(updatedUser);
   };
 
+  useEffect(() => {
+    const startIndex = (page - 1) * 12;
+    const endIndex = page * 12;
+    const prods = products.slice(startIndex, endIndex);
+    setPaginatedProds(prods);
+    const scrollAfter1 = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
+    return () => clearTimeout(scrollAfter1);
+  }, [page, products]);
+
   return (
-    <Grid container sx={{ mt: 2, justifyContent: "space-between", mt: 10 }}>
+    <Grid container sx={{ justifyContent: "space-between", mt: 10 }}>
       <Grid size={2.5} sx={{ display: { xs: "none", md: "block" } }}>
         <Filters />
       </Grid>
@@ -130,7 +142,7 @@ const Page = ({ products }) => {
         {showSkeleton ? (
           <Grid container size={12} rowSpacing={5} columnSpacing={3}>
             {/* Skeleton loaders for when data is loading */}
-            {[...Array(18)].map((_, index) => (
+            {[...Array(12)].map((_, index) => (
               <Grid key={index} size={{ xs: 6, sm: 6, md: 2 }}>
                 <Box
                   sx={{ p: 2, border: "1px solid white", position: "relative" }}
@@ -145,111 +157,228 @@ const Page = ({ products }) => {
             ))}
           </Grid>
         ) : products.length > 0 ? (
-          <Grid container size={12} rowGap={{ md: 8, xs: 5 }}>
-            {products?.map((product) => (
-              <Grid
-                size={{
-                  xs: 6,
-                  sm: 6,
-                  md: 2,
-                }}
-                key={product.id}
-                sx={{
-                  p: 2,
-                  maxHeight: 530,
-                  height: "100%",
-                  position: "relative",
-                }}
-              >
-                <Link
-                  to={`/productId/${product.id}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
+          <>
+            <Grid container size={12} rowGap={{ md: 8, xs: 5 }}>
+              {paginatedProds?.map((product) => (
+                <Grid
+                  size={{
+                    xs: 6,
+                    sm: 6,
+                    md: 2,
+                  }}
+                  key={product.id}
+                  sx={{
+                    p: 2,
+                    maxHeight: 530,
+                    height: "100%",
+                    position: "relative",
+                  }}
                 >
-                  <Box
-                    sx={{
-                      position: "relative",
-                      width: "100%",
-                      pointerEvents: fav ? "auto" : "none",
-                    }}
+                  <Link
+                    to={`/productId/${product.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <img
-                      src={product.imageUrl}
-                      alt={product.productName}
-                      style={{
+                    <Box
+                      sx={{
+                        position: "relative",
                         width: "100%",
-                        height: "220px",
-                        borderRadius: 8,
+                        pointerEvents: fav ? "auto" : "none",
                       }}
-                    />
-                  </Box>
-                  <Grid
-                    container
-                    height={"50%"}
-                    direction={"column"}
-                    justifyContent={"space-around"}
-                    wrap="nowrap"
-                    // border={1}
-                  >
-                    <Grid>
-                      <Typography variant="h6" fontWeight={"fantasy"} noWrap>
-                        {product.brand}
-                      </Typography>
-                    </Grid>
-                    <Grid>
-                      <Typography variant="subtitle2">
-                        {/* {product.productName.split(" ").length >= 3
+                    >
+                      <img
+                        src={product.imageUrl}
+                        alt={product.productName}
+                        style={{
+                          width: "100%",
+                          height: "220px",
+                          borderRadius: 8,
+                        }}
+                      />
+                    </Box>
+                    <Grid
+                      container
+                      height={"50%"}
+                      direction={"column"}
+                      justifyContent={"space-around"}
+                      wrap="nowrap"
+                      // border={1}
+                    >
+                      <Grid>
+                        <Typography variant="h6" fontWeight={"fantasy"} noWrap>
+                          {product.brand}
+                        </Typography>
+                      </Grid>
+                      <Grid>
+                        <Typography variant="subtitle2">
+                          {/* {product.productName.split(" ").length >= 3
                           ? product.productName
                               .split(" ")
                               .slice(0, 4)
                               .join(" ") + "..."
                           : product.productName} */}
-                        {product.productName}
-                      </Typography>
+                          {product.productName}
+                        </Typography>
+                      </Grid>
+                      <Grid>
+                        <Typography variant="caption">
+                          <Rating
+                            value={product.rating}
+                            precision={0.1}
+                            readOnly
+                            size="small"
+                            sx={{
+                              "& .MuiRating-iconFilled": {
+                                color: "black",
+                              },
+                            }}
+                          />
+                          {`(${product.rating})`}
+                        </Typography>
+                      </Grid>
+                      <Grid>
+                        <Typography variant="subtitle1" fontSize={"16px"}>
+                          {"\u20B9"}
+                          {product.price}{" "}
+                          <sup style={{ color: "light-black" }}>00</sup>
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid>
-                      <Typography variant="caption">
-                        <Rating
-                          value={product.rating}
-                          precision={0.1}
-                          readOnly
-                          size="small"
-                          sx={{
-                            "& .MuiRating-iconFilled": {
-                              color: "black",
-                            },
-                          }}
-                        />
-                        {`(${product.rating})`}
-                      </Typography>
-                    </Grid>
-                    <Grid>
-                      <Typography variant="subtitle1" fontSize={"16px"}>
-                        {"\u20B9"}
-                        {product.price}{" "}
-                        <sup style={{ color: "light-black" }}>00</sup>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Link>
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    right: 20,
-                    top: 20,
-                    minWidth: "auto",
-                    padding: "4px",
-                    backgroundColor: "white",
-                    borderRadius: "50%",
-                    "&:hover": { backgroundColor: "#f5f5f5" },
+                  </Link>
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      right: 20,
+                      top: 20,
+                      minWidth: "auto",
+                      padding: "4px",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      "&:hover": { backgroundColor: "#f5f5f5" },
+                    }}
+                    onClick={() => handleFav(product)}
+                  >
+                    {user?.wishlist?.find((x) => x.id == product.id) ? (
+                      <FavoriteIcon sx={{ color: "red" }} />
+                    ) : (
+                      <FavoriteBorderIcon sx={{ color: "black" }} />
+                    )}
+                  </IconButton>
+
+                  <Button
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      backgroundColor: "black",
+                      color: "white",
+                      my: 1,
+                    }}
+                    fullWidth
+                    onClick={() => {
+                      !user
+                        ? navigate("/profile")
+                        : product.availableSizes.length > 0
+                        ? (setSelectedProduct(product), setSizeDrawer(true))
+                        : handleCart(product);
+                    }}
+                    //disabled={user?.bag?.find((x) => x.id == product.id)}
+                  >
+                    Add to Bag
+                  </Button>
+                </Grid>
+              ))}
+              <Drawer
+                anchor="bottom"
+                open={sizeDrawer}
+                onClose={() => setSizeDrawer(false)}
+              >
+                <Typography sx={{ p: 2, fontWeight: "bold" }}>
+                  Select a size
+                </Typography>
+                <Box sx={{ display: "flex", gap: 2, px: 2, pb: 2 }}>
+                  {selectedProduct?.availableSizes?.map((size) => (
+                    <Button
+                      key={size}
+                      variant={selectedSize === size ? "contained" : "outlined"}
+                      size="small"
+                      sx={{
+                        borderRadius: "50%",
+                        minWidth: 40,
+                        minHeight: 40,
+                        borderColor: "black",
+                        color: selectedSize == size ? "white" : "black",
+                        backgroundColor: selectedSize == size && "black",
+                      }}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </Button>
+                  ))}
+                </Box>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  disabled={!selectedSize}
+                  onClick={() => {
+                    handleCart(selectedProduct);
+                    setSizeDrawer(false);
+                    setOpen(true);
                   }}
-                  onClick={() => handleFav(product)}
+                  sx={{ backgroundColor: "black", color: "white", mb: 2 }}
                 >
-                  {user?.wishlist?.find((x) => x.id == product.id) ? (
-                    <FavoriteIcon sx={{ color: "red" }} />
-                  ) : (
-                    <FavoriteBorderIcon sx={{ color: "black" }} />
-                  )}
-                </IconButton>
+                  Done
+                </Button>
+              </Drawer>
+              <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                onClose={() => setOpen(false)}
+              >
+                <Alert
+                  onClose={() => setOpen(false)}
+                  severity="success"
+                  variant="filled"
+                  sx={{ width: "100%" }}
+                >
+                  Successfully Added to Bag
+                </Alert>
+              </Snackbar>
+              <Grid
+                justifyContent="center"
+                size={12}
+                sx={{ display: { xs: "none", md: "flex" }, mb: 3 }}
+                gap={1}
+                mb={6}
+              >
+                <Button
+                  variant="contained"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "black",
+                    color: "white",
+                  }}
+                  onClick={() => setPage((prev) => prev - 1)}
+                  disabled={page === 1}
+                >
+                  Prev
+                </Button>
+
+                {[...Array(totalPages)].map((_, i) => {
+                  const pageNum = i + 1;
+                  return (
+                    <Button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      variant={pageNum === page ? "contained" : ""}
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: pageNum === page ? "black" : "white",
+                        color: pageNum === page ? "white" : "black",
+                      }}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
 
                 <Button
                   variant="contained"
@@ -257,79 +386,75 @@ const Page = ({ products }) => {
                     textTransform: "none",
                     backgroundColor: "black",
                     color: "white",
-                    my: 1,
                   }}
-                  fullWidth
-                  onClick={() => {
-                    !user
-                      ? navigate("/profile")
-                      : product.availableSizes.length > 0
-                      ? (setSelectedProduct(product), setSizeDrawer(true))
-                      : handleCart(product);
-                  }}
-                  //disabled={user?.bag?.find((x) => x.id == product.id)}
+                  onClick={() => setPage((prev) => prev + 1)}
+                  disabled={page === totalPages}
                 >
-                  Add to Bag
+                  Next
                 </Button>
               </Grid>
-            ))}
-            <Drawer
-              anchor="bottom"
-              open={sizeDrawer}
-              onClose={() => setSizeDrawer(false)}
-            >
-              <Typography sx={{ p: 2, fontWeight: "bold" }}>
-                Select a size
-              </Typography>
-              <Box sx={{ display: "flex", gap: 2, px: 2, pb: 2 }}>
-                {selectedProduct?.availableSizes?.map((size) => (
-                  <Button
-                    key={size}
-                    variant={selectedSize === size ? "contained" : "outlined"}
-                    size="small"
-                    sx={{
-                      borderRadius: "50%",
-                      minWidth: 40,
-                      minHeight: 40,
-                      borderColor: "black",
-                      color: selectedSize == size ? "white" : "black",
-                      backgroundColor: selectedSize == size && "black",
-                    }}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </Button>
-                ))}
-              </Box>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={!selectedSize}
-                onClick={() => {
-                  handleCart(selectedProduct);
-                  setSizeDrawer(false);
-                  setOpen(true);
-                }}
-                sx={{ backgroundColor: "black", color: "white", mb: 2 }}
+              <Grid
+                justifyContent="center"
+                size={12}
+                sx={{ display: { xs: "flex", md: "none" }, mb: 3 }}
+                gap={1}
+                mb={6}
               >
-                Done
-              </Button>
-            </Drawer>
-            <Snackbar
-              open={open}
-              autoHideDuration={3000}
-              onClose={() => setOpen(false)}
-            >
-              <Alert
-                onClose={() => setOpen(false)}
-                severity="success"
-                variant="filled"
-                sx={{ width: "100%" }}
-              >
-                Successfully Added to Bag
-              </Alert>
-            </Snackbar>
-          </Grid>
+                <Button
+                  variant="contained"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "black",
+                    color: "white",
+                  }}
+                  onClick={() => setPage((prev) => prev - 1)}
+                  disabled={page === 1}
+                >
+                  Prev
+                </Button>
+
+                {/* {[...Array(totalPages)].map((_, i) => {
+                  const pageNum = i + 1;
+                  return (
+                    <Button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      variant={pageNum === page ? "contained" : ""}
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: pageNum === page ? "black" : "white",
+                        color: pageNum === page ? "white" : "black",
+                      }}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })} */}
+                <Button
+                  sx={{
+                    textTransform: "none",
+                    borderColor: "black",
+                    color: "black",
+                  }}
+                >
+                  {page}
+                </Button>
+
+                <Button
+                  variant="contained"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "black",
+                    color: "white",
+                  }}
+                  onClick={() => setPage((prev) => prev + 1)}
+                  disabled={page === totalPages}
+                >
+                  Next
+                </Button>
+              </Grid>
+            </Grid>
+          </>
         ) : products.length == 0 ? (
           <Box
             sx={{
