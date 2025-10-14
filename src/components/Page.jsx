@@ -132,7 +132,7 @@ const Page = ({ products, highestPrice }) => {
             onClose={() => setDrawerFilters(false)}
             sx={{ display: { xs: "block", md: "none" } }}
           >
-            <Filters />
+            <Filters highest={highestPrice}/>
           </Drawer>
         </Grid>
 
