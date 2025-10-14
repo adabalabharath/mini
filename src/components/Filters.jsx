@@ -21,16 +21,20 @@ import {
 import { useSearchParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 
-const Filters = () => {
+const Filters = ({highest}) => {
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size, sort } = state;
-  const [value, setValue] = useState([price.start || 0, price.end || 10000  ]);
+  const [value, setValue] = useState([price.start || 0, price.end || highest]);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(priceFilter(newValue));
   };
+
+  useEffect(()=>{
+    setValue([price.start ?? 0, price.end ?? highest])
+  },[highest,price.start,price.end])
 
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
@@ -56,7 +60,7 @@ const Filters = () => {
   };
 
   const clearAll = () => {
-    setValue([0, 10000]);
+    setValue([0, highest]);
     dispatch(clearFilters);
   };
   const sortOrder = (order) => {
@@ -95,7 +99,6 @@ const Filters = () => {
       { replace: true }
     );
   };
-
   useEffect(() => {
     applyFilters();
   }, [state]);
@@ -193,7 +196,7 @@ const Filters = () => {
           value={value}
           min={0}
           step={1000}
-          max={10000}
+          max={highest}
           size="small"
           onChange={handleChange}
           valueLabelDisplay="on"
@@ -250,7 +253,7 @@ const Filters = () => {
       </Box>
       <Grid item container direction="column" spacing={1}>
         <RadioGroup value={value} onChange={handlePriceChange}>
-          <FormControlLabel
+          {(highest>2000) && <FormControlLabel
             value={2000}
             control={
               <Radio
@@ -262,8 +265,8 @@ const Filters = () => {
               />
             }
             label={<Typography variant="caption">upto 2000</Typography>}
-          />
-          <FormControlLabel
+          />}
+          {(highest>5000) && <FormControlLabel
             value={5000}
             control={
               <Radio
@@ -273,7 +276,8 @@ const Filters = () => {
               />
             }
             label={<Typography variant="caption">upto 5000</Typography>}
-          />
+          />}
+          {(highest>7000) && 
           <FormControlLabel
             value={7000}
             control={
@@ -284,8 +288,8 @@ const Filters = () => {
               />
             }
             label={<Typography variant="caption">upto 7000</Typography>}
-          />
-          <FormControlLabel
+          />}
+          {(highest>10000) && <FormControlLabel
             value={10000}
             control={
               <Radio
@@ -295,7 +299,7 @@ const Filters = () => {
               />
             }
             label={<Typography variant="caption">upto 10000</Typography>}
-          />
+          />}
         </RadioGroup>
       </Grid>
 

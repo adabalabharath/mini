@@ -12,15 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AuthContext } from "./AuthProvider";
-import NoItems from "./NoItems";
 import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
-import { useSelector } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { addToBag } from "../customHook/addToBagHook";
 
-const Page = ({ products }) => {
+const Page = ({ products, highestPrice }) => {
   const [drawerFilters, setDrawerFilters] = useState(false);
   const [sizeDrawer, setSizeDrawer] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -89,6 +85,7 @@ const Page = ({ products }) => {
     const startIndex = (page - 1) * 12;
     const endIndex = page * 12;
     const prods = products.slice(startIndex, endIndex);
+
     setPaginatedProds(prods);
     const scrollAfter1 = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -99,7 +96,7 @@ const Page = ({ products }) => {
   return (
     <Grid container sx={{ justifyContent: "space-between", mt: 10 }}>
       <Grid size={2.5} sx={{ display: { xs: "none", md: "block" } }}>
-        <Filters />
+        <Filters highest={highestPrice} />
       </Grid>
       <Grid
         size={{ xs: 12, sm: 12, md: 9.5 }}

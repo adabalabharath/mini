@@ -5,16 +5,21 @@ import Page from "./Page";
 const ShopWomen = () => {
   const [femaleProducts, setFemaleProducts] = useState([]);
   const data = useSelector((store) => store.products);
+  const [highestPrice, setHighestPrice] = useState();
   const filters = useSelector((store) => store.filters);
   useEffect(() => {
-    const women = filtersHook("female", data, filters);
-    setFemaleProducts(women);
+    const prods = filtersHook("female", data, filters);
+    setFemaleProducts(prods);
+    const maxPriceProducts = filtersHook("female", data, filters, true);
+    const maxPrice = maxPriceProducts.length
+      ? Math.max(...maxPriceProducts.map((p) => p.price))
+      : 0;
+    setHighestPrice(maxPrice);
   }, [data, filters]);
-
 
   return (
     <>
-    <Page products={femaleProducts}/>
+      <Page products={femaleProducts} highestPrice={highestPrice}/>
     </>
   );
 };

@@ -21,7 +21,6 @@ const Orders = () => {
   useEffect(() => {
     setProducts(user?.orders);
   }, [user]);
-  console.log(products)
   const handleRemove = (item) => {
     setRemove(false);
     const remove = {

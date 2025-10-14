@@ -1,4 +1,4 @@
-export const filtersHook = (gen, data, filters) => {
+export const filtersHook = (gen, data, filters,ignorePrice = false) => {
   let filtered = gen ? data.filter(
     (x) =>
       x.gender===gen
@@ -8,10 +8,12 @@ export const filtersHook = (gen, data, filters) => {
     filtered = data.filter((x) => filters.gender.includes(x.gender));
   }
 
-  if (filters.price?.start !== null && filters.price?.end) {
-    filtered = filtered.filter(
-      (x) => x.price >= filters.price.start && x.price <= filters.price.end
-    );
+  if (!ignorePrice) {
+    if (filters.price.start != null && filters.price.end != null) {
+      filtered = filtered.filter(
+        x => x.price >= filters.price.start && x.price <= filters.price.end
+      );
+    }
   }
 
   filtered =
