@@ -58,7 +58,6 @@ const Profile = () => {
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordValue, setPasswordValue] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [noEmail, setNoEmail] = useState(false);
   const dispatch = useDispatch();
@@ -74,6 +73,8 @@ const Profile = () => {
   } = useForm({
     resolver: yupResolver(signUp ? schema : loginSchema),
   });
+  const passwordValue = watch("password");  
+
 
   const handleSignup = (data) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -163,7 +164,6 @@ const Profile = () => {
           >
             <form
               onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)}
-              autoComplete="off"
             >
               <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                 {signUp ? "Sign Up" : "Login to continue"}
@@ -202,7 +202,7 @@ const Profile = () => {
                 }}
                 InputProps={{
                   endAdornment:
-                    watch("password")?.length > 0 ? (
+                    passwordValue?.length > 0 ? (
                       <Box
                         onClick={() => setShowPassword(!showPassword)}
                         sx={{ cursor: "pointer" }}
