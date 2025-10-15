@@ -60,6 +60,7 @@ const Profile = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [noEmail, setNoEmail] = useState(false);
+  const [userTyped, setUserTyped] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -73,8 +74,7 @@ const Profile = () => {
   } = useForm({
     resolver: yupResolver(signUp ? schema : loginSchema),
   });
-  const passwordValue = watch("password");  
-
+  const passwordValue = watch("password");
 
   const handleSignup = (data) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -163,7 +163,13 @@ const Profile = () => {
             }}
           >
             <form
-              onSubmit={handleSubmit(signUp ? handleSignup : handleLogin)}
+              onSubmit={(e) => {
+                if (!userTyped) {
+                  e.preventDefault(); 
+                  return;
+                }
+                handleSubmit(signUp ? handleSignup : handleLogin)(e);
+              }}
             >
               <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                 {signUp ? "Sign Up" : "Login to continue"}
@@ -192,6 +198,7 @@ const Profile = () => {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 {...register("password")}
+                onInput={() => setUserTyped(true)}
                 error={!!errors.password}
                 helperText={errors.password?.message}
                 sx={{
