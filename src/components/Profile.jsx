@@ -122,7 +122,7 @@ const Profile = () => {
     const userExists = users.some((u) => u.email === data.email);
     if (!userExists) {
       setNoEmail(true);
-    } else {
+    } else if(users.some(x=>x.email==data.email && x.password!=data.password)) {
       setWrongCred(true);
     }
   };
