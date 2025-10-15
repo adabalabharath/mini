@@ -60,6 +60,7 @@ const Profile = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [noEmail,setNoEmail]=useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -115,8 +116,10 @@ const Profile = () => {
       login(user);
       navigate(from, { replace: true });
       console.log("logout timer started", new Date());
-    } else {
-      setWrongCred(true);
+    } else if(users.find(x=>x.email!==data.email)) {
+      setNoEmail(true);
+    }else{
+      setWrongCred(true)
     }
   };
 
@@ -189,6 +192,7 @@ const Profile = () => {
                 error={!!errors.password}
                 helperText={errors.password?.message}
                 onChange={(e) => setPasswordValue(e.target.value)}
+                autoComplete='password'
                 value={passwordValue}
                 type={showPassword ? "text" : "password"}
                 sx={{
@@ -413,6 +417,21 @@ const Profile = () => {
             sx={{ width: "100%" }}
           >
             wrong credentials
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={noEmail}
+          autoHideDuration={3000}
+          onClose={() => setNoEmail(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setNoEmail(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            Email does not exists,Please sign up
           </Alert>
         </Snackbar>
         <Snackbar

@@ -104,8 +104,8 @@ const ProductDetail = () => {
     const fav = {
       ...user,
       wishlist: user?.wishlist?.some((x) => x?.id === p.id)
-        ? user.wishlist.filter((x) => x.id !== p.id)
-        : [...user.wishlist, p],
+        ? user?.wishlist.filter((x) => x.id !== p.id)
+        : [...user?.wishlist, p],
     };
     localSet(fav);
   };
