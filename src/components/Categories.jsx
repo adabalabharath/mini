@@ -10,8 +10,9 @@ import {
   Tooltip,
   Zoom,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
 
 const images = [
   { url: "/images/mens.jpg", nav: "/shop/men", tooltip: "Men" },
@@ -27,12 +28,13 @@ const images = [
     nav: "/shop/beauty",
     tooltip: "Beauty Products",
   },
-  { url: "/images/miniNew.png", nav: "/", tooltip: "Mini" }
+  { url: "/images/mini.gif", nav: "/profile", tooltip: "Login to shop" },
 ];
 
 const CategoryCard = () => {
   const [checked, setChecked] = useState(false);
   const [hover, setHover] = useState(null);
+  const {user}=useContext(AuthContext)
   const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => setChecked(true), 300); // delay animation
@@ -46,7 +48,7 @@ const CategoryCard = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        backgroundColor: "whitesmoke",
+
         borderRadius: 5,
         display: { md: "block", xs: "none" },
       }}
@@ -64,7 +66,7 @@ const CategoryCard = () => {
             sx={{
               fontFamily: "fantasy",
               color: "#222",
-              
+
               textAlign: "center",
             }}
           >
@@ -84,67 +86,67 @@ const CategoryCard = () => {
             place!
           </Typography>
 
-
           <CardActions sx={{ mt: 2 }}>
             <Grid
               container
               sx={{ height: "100%", flexWrap: "wrap" }}
               spacing={4}
-              justifyContent={'center'}
-              alignItems={'center'}
+              justifyContent={"center"}
+              alignItems={"center"}
               m={3}
             >
               {images.map((x, i) => (
                 <Grid item xs={3}>
-                  <Button
-                    onClick={() => navigate(x.nav)}
-                    onMouseEnter={() => setHover(i)}
-                    sx={{
-                      "&:hover img": {
-                        transform: "scale(1.08)", // zoom in slightly
-                      },
-                      transition: "0.3s",
+                  <Tooltip
+                    title={x.tooltip=='Login to shop' && user?'Go to Bag':x.tooltip}
+                    arrow
+                    slots={{
+                      transition: Zoom,
                     }}
-                    disabled={x.tooltip=='Mini'}
+                    componentsProps={{
+                      tooltip: {
+                        sx: {
+                          backgroundColor: "#fff",
+                          color: "black",
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          padding: "8px 12px",
+                          borderRadius: "8px",
+                          boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
+                        },
+                      },
+                      arrow: {
+                        sx: {
+                          color: "#dfdfdf",
+                        },
+                      },
+                    }}
                   >
-                    <Tooltip
-                      title={x.tooltip}
-                      arrow
-                      slots={{
-                        transition: Zoom,
-                      }}
-                      componentsProps={{
-                        tooltip: {
-                          sx: {
-                            backgroundColor: "#fff",
-                            color: "black",
-                            fontSize: "14px",
-                            fontWeight: 500,
-                            padding: "8px 12px",
-                            borderRadius: "8px",
-                            boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
-                          },
+                    <Button
+                      onClick={() => navigate(x.tooltip=='Login to shop' && user?'/bag':x.nav)}
+                      onMouseEnter={() => setHover(i)}
+                      sx={{
+                        "&:hover img": {
+                          transform: "scale(1.08)", // zoom in slightly
                         },
-                        arrow: {
-                          sx: {
-                            color: "#fff",
-                          },
-                        },
+                        transition: "0.3s",
                       }}
                     >
                       <img
-                        key={i}
                         src={x.url}
-                        alt={`image-${i}`}
+                        alt={x.tooltip}
                         style={{
                           width: "380px",
-                          height: 200,
+                          height: "200px",
                           borderRadius: 10,
                           transition: "transform 0.5s ease-in-out",
+                          border: `1px solid ${
+                            x.tooltip === "Home Appliances" ? "#555" : "white"
+                          }`,
                         }}
                       />
-                    </Tooltip>
-                  </Button>
+                    </Button>
+                  </Tooltip>
                 </Grid>
               ))}
             </Grid>
