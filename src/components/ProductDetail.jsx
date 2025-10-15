@@ -386,9 +386,9 @@ const ProductDetail = () => {
                   <SwiperSlide>
                     <Box
                       sx={{
+                        display: "flex",
                         flexDirection: "column",
                         width: "100%",
-                        display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                       }}
@@ -398,7 +398,7 @@ const ProductDetail = () => {
                         style={{
                           width: "100%",
                           borderRadius: 10,
-                          maxHeight: "400px",
+                          maxHeight: "300px",
                           objectFit: "cover",
                         }}
                       />
