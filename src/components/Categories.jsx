@@ -89,14 +89,14 @@ const CategoryCard = () => {
           <CardActions sx={{ mt: 2 }}>
             <Grid
               container
-              sx={{ height: "100%", flexWrap: "wrap" }}
-              spacing={4}
+              sx={{ height: "100%" }}
+              gap={6}
               justifyContent={"center"}
               alignItems={"center"}
-              m={3}
+             
             >
               {images.map((x, i) => (
-                <Grid item xs={3}>
+                <Grid size={3}>
                   <Tooltip
                     title={x.tooltip=='Login to shop' && user?'Go to Bag':x.tooltip}
                     arrow
@@ -127,7 +127,7 @@ const CategoryCard = () => {
                       onMouseEnter={() => setHover(i)}
                       sx={{
                         "&:hover img": {
-                          transform: "scale(1.08)", // zoom in slightly
+                          transform: "scale(1.08)", 
                         },
                         transition: "0.3s",
                       }}
