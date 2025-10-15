@@ -27,6 +27,7 @@ const images = [
     nav: "/shop/beauty",
     tooltip: "Beauty Products",
   },
+  { url: "/images/miniNew.png", nav: "/", tooltip: "Mini" }
 ];
 
 const CategoryCard = () => {
@@ -47,6 +48,7 @@ const CategoryCard = () => {
         position: "relative",
         backgroundColor: "whitesmoke",
         borderRadius: 5,
+        display: { md: "block", xs: "none" },
       }}
     >
       <Slide
@@ -82,23 +84,15 @@ const CategoryCard = () => {
             place!
           </Typography>
 
-          <Typography
-            sx={{
-              mx: 1,
-              color: "#000",
-              fontSize: "15px",
-              fontWeight: 500,
-              
-            }}
-          >
-            Click on the sections below to start shopping.
-          </Typography>
 
           <CardActions sx={{ mt: 2 }}>
             <Grid
               container
               sx={{ height: "100%", flexWrap: "wrap" }}
-              spacing={5}
+              spacing={4}
+              justifyContent={'center'}
+              alignItems={'center'}
+              m={3}
             >
               {images.map((x, i) => (
                 <Grid item xs={3}>
@@ -111,6 +105,7 @@ const CategoryCard = () => {
                       },
                       transition: "0.3s",
                     }}
+                    disabled={x.tooltip=='Mini'}
                   >
                     <Tooltip
                       title={x.tooltip}
@@ -142,7 +137,7 @@ const CategoryCard = () => {
                         src={x.url}
                         alt={`image-${i}`}
                         style={{
-                          width: "400px",
+                          width: "380px",
                           height: 200,
                           borderRadius: 10,
                           transition: "transform 0.5s ease-in-out",
