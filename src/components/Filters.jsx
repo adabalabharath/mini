@@ -21,7 +21,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 
-const Filters = ({highest}) => {
+const Filters = ({ highest }) => {
   const state = useSelector((store) => store.filters);
   const { price, rating, gender, size, sort } = state;
   const [value, setValue] = useState([price.start || 0, price.end || highest]);
@@ -32,9 +32,9 @@ const Filters = ({highest}) => {
     dispatch(priceFilter(newValue));
   };
 
-  useEffect(()=>{
-    setValue([price.start ?? 0, price.end ?? highest])
-  },[highest,price.start,price.end])
+  useEffect(() => {
+    setValue([price.start ?? 0, price.end ?? highest]);
+  }, [highest, price.start, price.end]);
 
   const handleGenderChange = (g) => {
     const genders = gender.includes(g)
@@ -131,7 +131,7 @@ const Filters = ({highest}) => {
           disabled={
             gender.length == 0 &&
             price.start == null &&
-            price.end==null&&
+            price.end == null &&
             rating == null &&
             size.length == 0
           }
@@ -191,7 +191,7 @@ const Filters = ({highest}) => {
       <Typography variant="body2" sx={{ fontWeight: "bold" }}>
         Price range
       </Typography>
-      <Box sx={{ m: 2 }}>
+      <Box sx={{ m: 2, px: 1 }}>
         <Slider
           value={value}
           min={0}
@@ -253,53 +253,60 @@ const Filters = ({highest}) => {
       </Box>
       <Grid item container direction="column" spacing={1}>
         <RadioGroup value={value} onChange={handlePriceChange}>
-          {(highest>2000) && <FormControlLabel
-            value={2000}
-            control={
-              <Radio
-                size="small"
-                checked={price?.end === 2000 ? true : false}
-                sx={{
-                  "&.Mui-checked": { color: "black" },
-                }}
-              />
-            }
-            label={<Typography variant="caption">upto 2000</Typography>}
-          />}
-          {(highest>5000) && <FormControlLabel
-            value={5000}
-            control={
-              <Radio
-                size="small"
-                checked={price?.end === 5000 ? true : false}
-                sx={{ "&.Mui-checked": { color: "black" } }}
-              />
-            }
-            label={<Typography variant="caption">upto 5000</Typography>}
-          />}
-          {(highest>7000) && 
-          <FormControlLabel
-            value={7000}
-            control={
-              <Radio
-                size="small"
-                checked={price?.end === 7000 ? true : false}
-                sx={{ "&.Mui-checked": { color: "black" } }}
-              />
-            }
-            label={<Typography variant="caption">upto 7000</Typography>}
-          />}
-          {(highest>10000) && <FormControlLabel
-            value={10000}
-            control={
-              <Radio
-                size="small"
-                checked={price?.end === 10000 ? true : false}
-                sx={{ "&.Mui-checked": { color: "black" } }}
-              />
-            }
-            label={<Typography variant="caption">upto 10000</Typography>}
-          />}
+          {highest > 2000 && (
+            <FormControlLabel
+              value={2000}
+              control={
+                <Radio
+                  size="small"
+                  checked={price?.end === 2000 ? true : false}
+                  sx={{
+                    "&.Mui-checked": { color: "black" },
+                  }}
+                />
+              }
+              label={<Typography variant="caption">upto 2000</Typography>}
+            />
+          )}
+          {highest > 5000 && (
+            <FormControlLabel
+              value={5000}
+              control={
+                <Radio
+                  size="small"
+                  checked={price?.end === 5000 ? true : false}
+                  sx={{ "&.Mui-checked": { color: "black" } }}
+                />
+              }
+              label={<Typography variant="caption">upto 5000</Typography>}
+            />
+          )}
+          {highest > 7000 && (
+            <FormControlLabel
+              value={7000}
+              control={
+                <Radio
+                  size="small"
+                  checked={price?.end === 7000 ? true : false}
+                  sx={{ "&.Mui-checked": { color: "black" } }}
+                />
+              }
+              label={<Typography variant="caption">upto 7000</Typography>}
+            />
+          )}
+          {highest > 10000 && (
+            <FormControlLabel
+              value={10000}
+              control={
+                <Radio
+                  size="small"
+                  checked={price?.end === 10000 ? true : false}
+                  sx={{ "&.Mui-checked": { color: "black" } }}
+                />
+              }
+              label={<Typography variant="caption">upto 10000</Typography>}
+            />
+          )}
         </RadioGroup>
       </Grid>
 

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import miniLogo from "../../public/images/miniLogo.jpg";
+import miniLogo from "../../public/images/miniNew.png";
+import miniMobile from "../../public/images/miniMobile.png"
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -73,18 +74,19 @@ const Navbar = () => {
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
+            display:{xs:'none',md:'flex'}
           }}
           onClick={() => navigation("/")}
         >
           <img
-            style={{ height: "70px", width: "80px" }}
+            style={{ height: "70px", width: "80px"}}
             src={miniLogo}
             alt="mini-logo"
           />
           <Typography
             variant="h6"
             sx={{
-              ml: 1,
+             
               display: { xs: "none", md: "flex" },
               fontFamily: "fantasy",
               fontWeight: 700,
@@ -92,6 +94,22 @@ const Navbar = () => {
           >
             MINI
           </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            display:{xs:'flex',md:'none'}
+          }}
+          onClick={() => navigation("/")}
+        >
+          <img
+            style={{ height: "70px", width: "80px"}}
+            src={miniMobile}
+            alt="mini-logo"
+          />
+          
         </Box>
 
         {/* Nav Pages */}

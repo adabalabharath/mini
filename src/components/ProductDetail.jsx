@@ -18,7 +18,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-import logo from "../../public/images/miniLogo.jpg";
+import logo from "../../public/images/miniNew.png";
 import "swiper/css/pagination";
 import { Breadcrumbs } from "@mui/material";
 
