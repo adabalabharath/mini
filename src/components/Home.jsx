@@ -17,15 +17,16 @@ import { Button } from "@mui/material";
 import Categories from "./Categories";
 
 const Home = () => {
-  const [shopNow, setShopNow] = useState(true);
-
+  const [shopNow, setShopNow] = useState(localStorage.getItem('welcome')||'true');
   const dispatch = useDispatch();
+  console.log(shopNow)
   useEffect(() => {
     dispatch(clearFilters);
+    return ()=> localStorage.setItem('welcome',false)
   }, []);
   return (
     <div>
-      {shopNow ? (
+      {shopNow=='true' ? (
         <Box
           sx={{
             margin: "auto",
