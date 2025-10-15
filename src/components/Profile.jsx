@@ -53,14 +53,14 @@ const loginSchema = Yup.object({
 const Profile = () => {
   const [signUp, setSignUp] = useState(true);
   const [wrongCred, setWrongCred] = useState(false);
-  const [signupSuccess,setSignupSuccess]=useState(false)
+  const [signupSuccess, setSignupSuccess] = useState(false);
   const [exists, setExists] = useState(false);
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [noEmail,setNoEmail]=useState(false)
+  const [noEmail, setNoEmail] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,6 +69,7 @@ const Profile = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signUp ? schema : loginSchema),
@@ -101,7 +102,7 @@ const Profile = () => {
     localStorage.setItem("users", JSON.stringify(users));
     dispatch({ type: "ADD_USER", payload: newUser });
     setSignUp(false);
-    setSignupSuccess(true)
+    setSignupSuccess(true);
   };
 
   const handleLogin = (data) => {
@@ -116,10 +117,10 @@ const Profile = () => {
       login(user);
       navigate(from, { replace: true });
       console.log("logout timer started", new Date());
-    } else if(users.find(x=>x.email!==data.email)) {
+    } else if (users.find((x) => x.email !== data.email)) {
       setNoEmail(true);
-    }else{
-      setWrongCred(true)
+    } else {
+      setWrongCred(true);
     }
   };
 
@@ -187,37 +188,35 @@ const Profile = () => {
               />
               <TextField
                 fullWidth
-                label={"password"}
+                label="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 {...register("password")}
                 error={!!errors.password}
                 helperText={errors.password?.message}
-                onChange={(e) => setPasswordValue(e.target.value)}
-                autoComplete='password'
-                value={passwordValue}
-                type={showPassword ? "text" : "password"}
                 sx={{
-                    "& input::-ms-reveal, & input::-ms-clear": {
-                      display: "none",
-                    },
-                    mb:2
-                  }}
+                  "& input::-ms-reveal, & input::-ms-clear": {
+                    display: "none",
+                  },
+                  mb: 2,
+                }}
                 InputProps={{
                   endAdornment:
-                    passwordValue.length > 0 ? (
+                    watch("password")?.length > 0 ? (
                       <Box
                         onClick={() => setShowPassword(!showPassword)}
-                        sx={{ cursor: "pointer",justifyContent:'center',alignItems:'center' }}
+                        sx={{ cursor: "pointer" }}
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </Box>
                     ) : null,
                 }}
               />
+
               {signUp && (
                 <TextField
                   fullWidth
                   label={"confirm password"}
-                 
                   {...register("confirmPassword")}
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword?.message}
@@ -227,7 +226,7 @@ const Profile = () => {
                     "& input::-ms-reveal, & input::-ms-clear": {
                       display: "none",
                     },
-                    mb:2
+                    mb: 2,
                   }}
                   InputProps={{
                     endAdornment:
@@ -236,7 +235,11 @@ const Profile = () => {
                           onClick={() =>
                             setShowConfirmPassword(!showConfirmPassword)
                           }
-                          sx={{ cursor: "pointer",justifyContent:'center',alignItems:'center' }}
+                          sx={{
+                            cursor: "pointer",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
                         >
                           {showConfirmPassword ? (
                             <VisibilityOff />
