@@ -118,7 +118,9 @@ const Profile = () => {
       login(user);
       navigate(from, { replace: true });
       console.log("logout timer started", new Date());
-    } else if (users.find((x) => x.email !== data.email)) {
+    }
+    const userExists = users.some((u) => u.email === data.email);
+    if (!userExists) {
       setNoEmail(true);
     } else {
       setWrongCred(true);
@@ -164,10 +166,6 @@ const Profile = () => {
           >
             <form
               onSubmit={(e) => {
-                if (!userTyped) {
-                  e.preventDefault(); 
-                  return;
-                }
                 handleSubmit(signUp ? handleSignup : handleLogin)(e);
               }}
             >
@@ -177,7 +175,7 @@ const Profile = () => {
               {signUp && (
                 <TextField
                   fullWidth
-                  label={"name"}
+                  label={"Name"}
                   sx={{ mb: 2 }}
                   {...register("name")}
                   error={!!errors.name}
@@ -186,7 +184,7 @@ const Profile = () => {
               )}
               <TextField
                 fullWidth
-                label={"email"}
+                label={"Email"}
                 sx={{ mb: 2 }}
                 {...register("email")}
                 error={!!errors.email}
@@ -194,7 +192,7 @@ const Profile = () => {
               />
               <TextField
                 fullWidth
-                label="password"
+                label="Password"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 {...register("password")}
@@ -223,7 +221,7 @@ const Profile = () => {
               {signUp && (
                 <TextField
                   fullWidth
-                  label={"confirm password"}
+                  label={"Confirm Password"}
                   {...register("confirmPassword")}
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword?.message}
