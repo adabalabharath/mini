@@ -92,11 +92,11 @@ const Home = () => {
               display: { md: "none", xs: "block" },
             }}
           >
-            {/* <img
+            <img
               src={home}
               alt="myntra"
               style={{ width: "100%", maxHeight: "300px" }}
-            /> */}
+            />
           </Box>
           <Typography
             variant="h4"
@@ -125,7 +125,7 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={1}>
+            <Grid item border={3} borderRadius={4}>
               <Link to={"/shop/men"}>
                 {" "}
                 <img
@@ -134,6 +134,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
+                    borderRadius:'20px'
                   }}
                 />
               </Link>
@@ -157,7 +158,7 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={1}>
+            <Grid item border={3} borderRadius={4}>
               <Link to={"/shop/women"}>
                 {" "}
                 <img
@@ -166,6 +167,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
+                    borderRadius:'20px'
                   }}
                 />
               </Link>
@@ -189,7 +191,7 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={1}>
+            <Grid item border={3} borderRadius={4}>
               <Link to={"/shop/kids"}>
                 {" "}
                 <img
@@ -198,6 +200,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
+                    borderRadius:'20px'
                   }}
                 />
               </Link>
@@ -221,7 +224,7 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={1}>
+            <Grid item border={3} borderRadius={4}>
               <Link to={"/shop/home"}>
                 {" "}
                 <img
@@ -230,6 +233,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
+                    borderRadius:'20px'
                   }}
                 />{" "}
               </Link>
@@ -254,7 +258,7 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={1}>
+            <Grid item border={3} borderRadius={4}>
               <Link to={"/shop/beauty"}>
                 {" "}
                 <img
@@ -263,6 +267,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
+                    borderRadius:'20px'
                   }}
                 />
               </Link>
