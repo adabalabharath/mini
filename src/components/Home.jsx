@@ -92,11 +92,11 @@ const Home = () => {
               display: { md: "none", xs: "block" },
             }}
           >
-            <img
+            {/* <img
               src={home}
               alt="myntra"
               style={{ width: "100%", maxHeight: "300px" }}
-            />
+            /> */}
           </Box>
           <Typography
             variant="h4"
