@@ -34,7 +34,7 @@ const Page = ({ products, highestPrice }) => {
     let timer;
     timer = setTimeout(() => {
       setShowSkeleton(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -503,4 +503,4 @@ const Page = ({ products, highestPrice }) => {
   );
 };
 
-export default Page;
+export default React.memo(Page);
