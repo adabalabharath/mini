@@ -9,7 +9,7 @@ const ShopKids = () => {
   const [highestPrice, setHighestPrice] = useState();
   const filters = useSelector((store) => store.filters);
   const filteredProducts = useMemo(() => {
-      return filtersHook("kids", data, filters);
+      return filtersHook("others", data, filters);
     }, [data, filters]);
   
     const maxPrice = useMemo(() => {

@@ -4,6 +4,13 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { AuthProvider } from "./components/AuthProvider.jsx";
 
+import { onCLS, onINP, onLCP } from 'web-vitals';
+
+onCLS(console.log);
+onINP(console.log);
+onLCP(console.log);
+
+
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <AuthProvider>
