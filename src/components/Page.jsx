@@ -173,6 +173,10 @@ const Page = ({ products, highestPrice }) => {
                     maxHeight: 530,
                     height: "100%",
                     position: "relative",
+                    transition:'all 1s ease',
+                    '&:hover':{
+                      transform:'scale(1.05)',
+                    }
                   }}
                 >
                   <Link

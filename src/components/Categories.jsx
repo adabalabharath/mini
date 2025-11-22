@@ -37,8 +37,9 @@ const CategoryCard = () => {
   const {user}=useContext(AuthContext)
   const navigate = useNavigate();
   useEffect(() => {
-    const timer = setTimeout(() => setChecked(true), 300); // delay animation
-    return () => clearTimeout(timer);
+    // const timer = setTimeout(() => setChecked(true), 300); // delay animation
+    // return () => clearTimeout(timer);
+    setChecked(true)
   }, []);
 
   return (
@@ -58,7 +59,7 @@ const CategoryCard = () => {
         in={checked}
         mountOnEnter
         unmountOnExit
-        timeout={1200}
+        timeout={2000}
       >
         <CardContent sx={{ p: 2, color: "white", textAlign: "left" }}>
           <Typography
