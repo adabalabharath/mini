@@ -109,7 +109,7 @@ const Home = () => {
       )}
       {
         <Box
-          display={{ md: "none", xs: "flex" }}
+          display={{ md: "none", xs: "flex",sm:'none' }}
           sx={{ flexDirection: "column" }}
         >
           {" "}
@@ -164,8 +164,8 @@ const Home = () => {
                   alt="for him"
                   style={{
                     width: "100%",
-                    maxWidth: '500px',
-                    height: "300px",
+                    maxWidth: '370px',
+                    height: "200px",
                     borderRadius: '20px'
                   }}
                 />
@@ -198,8 +198,8 @@ const Home = () => {
                   alt="for her"
                   style={{
                     width: "100%",
-                    maxWidth: '500px',
-                    height: "300px",
+                    maxWidth: '370px',
+                    height: "200px",
                     borderRadius: '20px'
                   }}
                 />
@@ -232,8 +232,8 @@ const Home = () => {
                   alt="for kids"
                   style={{
                     width: "100%",
-                    maxWidth: '500px',
-                    height: "300px",
+                    maxWidth: '370px',
+                    height: "200px",
                     borderRadius: '20px'
                   }}
                 />
@@ -266,8 +266,8 @@ const Home = () => {
                   alt="for home"
                   style={{
                     width: "100%",
-                    maxWidth: '500px',
-                    height: "300px",
+                    maxWidth: '370px',
+                    height: "200px",
                     borderRadius: '20px'
                   }}
                 />{" "}
@@ -301,8 +301,8 @@ const Home = () => {
                   alt="for beauty"
                   style={{
                     width: "100%",
-                    maxWidth: '500px',
-                    height: "300px",
+                    maxWidth: '370px',
+                    height: "200px",
                     borderRadius: '20px'
                   }}
                 />

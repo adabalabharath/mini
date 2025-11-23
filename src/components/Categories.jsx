@@ -49,7 +49,7 @@ const CategoryCard = () => {
         alignItems: "center",
         position: "relative",
         borderRadius: 5,
-        display: { md: "block", xs: "none" },
+        display: { md: "block", xs: "none",sm:'block' },
       }}
     >
       <Slide
@@ -65,7 +65,6 @@ const CategoryCard = () => {
             sx={{
               fontFamily: "fantasy",
               color: "#222",
-
               textAlign: "center",
             }}
           >
