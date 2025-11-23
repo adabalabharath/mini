@@ -49,7 +49,7 @@ const CategoryCard = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        backgroundColor:'whitesmoke',
+        //backgroundColor:'whitesmoke',
         borderRadius: 5,
         display: { md: "block", xs: "none" },
       }}
