@@ -33,8 +33,7 @@ const images = [
 
 const CategoryCard = () => {
   const [checked, setChecked] = useState(false);
-  const [hover, setHover] = useState(null);
-  const {user}=useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const navigate = useNavigate();
   useEffect(() => {
     // const timer = setTimeout(() => setChecked(true), 300); // delay animation
@@ -49,7 +48,6 @@ const CategoryCard = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        //backgroundColor:'whitesmoke',
         borderRadius: 5,
         display: { md: "block", xs: "none" },
       }}
@@ -93,57 +91,69 @@ const CategoryCard = () => {
               sx={{ height: "100%" }}
               justifyContent={"center"}
               alignItems={"center"}
-             
+
             >
               {images.map((x, i) => (
                 <Grid size={3} m={2}>
-                  <Tooltip
-                    title={x.tooltip=='Login to shop' && user?'Go to Bag':x.tooltip}
-                    arrow
-                    
-                    componentsProps={{
-                      tooltip: {
-                        sx: {
-                          backgroundColor: "#fff",
-                          color: "black",
-                          fontSize: "14px",
-                          fontWeight: 500,
-                          padding: "8px 12px",
-                          borderRadius: "8px",
-                          boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
-                        },
-                      },
-                      arrow: {
-                        sx: {
-                          color: "#dfdfdf",
-                        },
-                      },
-                    }}
-                  >
                     <Button
-                      onClick={() => navigate(x.tooltip=='Login to shop' && user?'/bag':x.nav)}
-                      onMouseEnter={() => setHover(i)}
+                      onClick={() => navigate(x.tooltip == 'Login to shop' && user ? '/bag' : x.nav)}
                       sx={{
                         "&:hover img": {
-                          transform: "scale(1.08)", 
+                          transform: "scale(1.08)",
+                          boxShadow:3,
                         },
                         transition: "0.3s",
-                        
+
                       }}
                     >
-                      <img
-                        src={x.url}
-                        alt={x.tooltip}
-                        style={{
-                          width: "100%",
-                          height: "200px",
-                          borderRadius: 10,
-                          transition: "transform 0.5s ease-in-out",
-                          
-                        }}
-                      />
+                      <Box sx={{
+                        position: 'relative',
+                        display:'inline-block',
+                        '&::before':{
+                           content: `"${x.tooltip == 'Login to shop' && user ? 'Go to Bag' : x.tooltip}"`,
+                           opacity:0,
+                           position: 'absolute',
+                           bottom: 10,
+                           left: 0,
+                           color:'black',
+                           transition:'1s',
+                           fontWeight:600,
+                           textShadow:10,
+                           zIndex:3,
+                           m:2
+                        },
+                        '&::after': {
+                          content: '""',
+                          backgroundColor: 'black',
+                          height: '1px',
+                          width: '0%',
+                          position: 'absolute',
+                          bottom: 10,
+                          left: 0,
+                          transition: '1s',
+                          borderRadius: 20,
+                          m:2
+                        },
+                        '&:hover::before': {
+                          opacity: 1
+                        },
+                        '&:hover::after': {
+                          width: '90%'
+                        },
+
+                      }}>
+                        <img
+                          src={x.url}
+                          alt={x.tooltip}
+                          style={{
+                            width: "100%",
+                            height: "200px",
+                            borderRadius: 10,
+                            transition: "transform 0.5s ease-in-out",
+                          }}
+                        />
+                      </Box>
                     </Button>
-                  </Tooltip>
                 </Grid>
               ))}
             </Grid>
