@@ -101,9 +101,7 @@ const CategoryCard = () => {
                   <Tooltip
                     title={x.tooltip=='Login to shop' && user?'Go to Bag':x.tooltip}
                     arrow
-                    slots={{
-                      transition: Zoom,
-                    }}
+                    
                     componentsProps={{
                       tooltip: {
                         sx: {

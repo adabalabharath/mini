@@ -17,7 +17,7 @@ import { Button } from "@mui/material";
 import Categories from "./Categories";
 
 const Home = () => {
-  const [shopNow, setShopNow] = useState(localStorage.getItem('welcome')||'true');
+  const [shopNow, setShopNow] = useState(localStorage.getItem('welcome') || 'true');
   const dispatch = useDispatch();
   console.log(shopNow)
   useEffect(() => {
@@ -26,7 +26,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-      {shopNow=='true' ? (
+      {shopNow == 'true' ? (
         <Box
           sx={{
             margin: "auto",
@@ -57,23 +57,49 @@ const Home = () => {
                 mt: 2,
                 fontFamily: "fantasy",
                 color: "black",
+                animation: 'animeDown 3s ease-out',
+                "@keyframes animeDown": {
+                  '0%': {
+                    opacity: 0,
+                    transform: 'translateY(-50px)'
+                  },
+
+                  '100%': {
+                    opacity: 1,
+                    transform: 'translate(0)'
+                  }
+                }
               }}
             >
               Welcome to Mini
             </Typography>
             <Typography
               variant="h6"
-              sx={{ textAlign: "center", mt: 2, color: "black" }}
+              sx={{ textAlign: "center", mt: 2, color: "black", animation: 'animeDown 3s ease-out' }}
             >
               Your one-stop shop for fashion and lifestyle products
             </Typography>
             <Button
               variant="contained"
-              sx={{ px: 4, py: 1, m: 3, backgroundColor: "black" }}
+              sx={{
+                px: 4, py: 1, m: 3, backgroundColor: "black", animation: 'anime 3s ease-out',
+                "@keyframes anime": {
+                  '0%': {
+                    opacity: 0,
+                    transform: 'translateY(80px)'
+                  },
+
+                  '100%': {
+                    opacity: 1,
+                    transform: 'translate(0)'
+                  }
+                }
+              }}
               onClick={() => setShopNow(false)}
             >
               Shop Now
             </Button>
+
           </Box>
         </Box>
       ) : (
@@ -134,7 +160,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    borderRadius:'20px'
+                    borderRadius: '20px'
                   }}
                 />
               </Link>
@@ -167,7 +193,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    borderRadius:'20px'
+                    borderRadius: '20px'
                   }}
                 />
               </Link>
@@ -200,7 +226,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    borderRadius:'20px'
+                    borderRadius: '20px'
                   }}
                 />
               </Link>
@@ -233,7 +259,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    borderRadius:'20px'
+                    borderRadius: '20px'
                   }}
                 />{" "}
               </Link>
@@ -267,7 +293,7 @@ const Home = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    borderRadius:'20px'
+                    borderRadius: '20px'
                   }}
                 />
               </Link>
