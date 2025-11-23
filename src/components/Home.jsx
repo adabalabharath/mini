@@ -4,15 +4,14 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import forHim from "../../public/images/forHim.png";
-import forHer from "../../public/images/forHer.png";
-import forThem from "../../public/images/kids.png";
-import forHome from "../../public/images/home.png";
-import forBeauty from "../../public/images/beauty.png";
 import homePage from "../../public/images/MiniMall.png";
 import { clearFilters } from "../redux/action";
 import { useDispatch } from "react-redux";
-
+import men from '/images/mens.jpg';
+import women from '/images/women.jpg';
+import kids from '/images/kids.jpg';
+import homeSection from '/images/homeSection.jpg';
+import beauty from '/images/beautySection.jpg';
 import { Button } from "@mui/material";
 import Categories from "./Categories";
 
@@ -22,7 +21,7 @@ const Home = () => {
   console.log(shopNow)
   useEffect(() => {
     dispatch(clearFilters);
-    return ()=> localStorage.setItem('welcome',false)
+    return () => localStorage.setItem('welcome', false)
   }, []);
   return (
     <div>
@@ -38,7 +37,10 @@ const Home = () => {
           <img
             src={homePage}
             alt="myntra"
-            style={{ width: "100%", maxHeight: "90vh", borderRadius: 5 }}
+            style={{
+              width: "100%",
+              maxHeight: "90vh", borderRadius: 5
+            }}
           />
           <Box
             sx={{
@@ -121,7 +123,10 @@ const Home = () => {
             <img
               src={home}
               alt="myntra"
-              style={{ width: "100%", maxHeight: "300px" }}
+              style={{
+                width: "100%",
+                maxHeight: "300px"
+              }}
             />
           </Box>
           <Typography
@@ -136,7 +141,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m: 2,
+              m:1,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -151,14 +156,15 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={4}>
+            <Grid item xs={12} borderRadius={4}>
               <Link to={"/shop/men"}>
                 {" "}
                 <img
-                  src={forHim}
+                  src={men}
                   alt="for him"
                   style={{
                     width: "100%",
+                    maxWidth: '500px',
                     height: "300px",
                     borderRadius: '20px'
                   }}
@@ -169,7 +175,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m: 2,
+              m:1,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -184,14 +190,15 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={4}>
+            <Grid item xs={12} borderRadius={4}>
               <Link to={"/shop/women"}>
                 {" "}
                 <img
-                  src={forHer}
+                  src={women}
                   alt="for her"
                   style={{
                     width: "100%",
+                    maxWidth: '500px',
                     height: "300px",
                     borderRadius: '20px'
                   }}
@@ -202,7 +209,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m: 2,
+              m:1,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -217,14 +224,15 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={4}>
+            <Grid item xs={12} borderRadius={4}>
               <Link to={"/shop/kids"}>
                 {" "}
                 <img
-                  src={forThem}
+                  src={kids}
                   alt="for kids"
                   style={{
                     width: "100%",
+                    maxWidth: '500px',
                     height: "300px",
                     borderRadius: '20px'
                   }}
@@ -235,7 +243,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m: 2,
+              m:1,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -250,14 +258,15 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={4}>
+            <Grid item xs={12} borderRadius={4}>
               <Link to={"/shop/home"}>
                 {" "}
                 <img
-                  src={forHome}
+                  src={homeSection}
                   alt="for home"
                   style={{
                     width: "100%",
+                    maxWidth: '500px',
                     height: "300px",
                     borderRadius: '20px'
                   }}
@@ -268,7 +277,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m: 2,
+              m:1,
 
               fontWeight: "bold",
               alignItems: "center",
@@ -284,14 +293,15 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item border={3} borderRadius={4}>
+            <Grid item xs={12} borderRadius={4}>
               <Link to={"/shop/beauty"}>
                 {" "}
                 <img
-                  src={forBeauty}
+                  src={beauty}
                   alt="for beauty"
                   style={{
                     width: "100%",
+                    maxWidth: '500px',
                     height: "300px",
                     borderRadius: '20px'
                   }}

@@ -50,11 +50,9 @@ const Navbar = () => {
   const navigation = useNavigate();
   return (
     <AppBar
-      position="fixed"
       color="default"
       sx={{
         display: "flex",
-
         justifyContent: "space-between",
         backgroundColor: "white",
         boxShadow: "none",
