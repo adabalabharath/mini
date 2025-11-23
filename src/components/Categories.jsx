@@ -17,14 +17,14 @@ import { AuthContext } from "./AuthProvider";
 const images = [
   { url: "/images/mens.jpg", nav: "/shop/men", tooltip: "Men" },
   { url: "/images/women.jpg", nav: "/shop/women", tooltip: "Women" },
-  { url: "/images/kidsSection.webp", nav: "/shop/kids", tooltip: "Kids" },
+  { url: "/images/kids.jpg", nav: "/shop/kids", tooltip: "Kids" },
   {
-    url: "/images/homeSection.png",
+    url: "/images/homeSection.jpg",
     nav: "/shop/home",
     tooltip: "Home Appliances",
   },
   {
-    url: "/images/beautySection.png",
+    url: "/images/beautySection.jpg",
     nav: "/shop/beauty",
     tooltip: "Beauty Products",
   },
@@ -49,7 +49,7 @@ const CategoryCard = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-
+        backgroundColor:'whitesmoke',
         borderRadius: 5,
         display: { md: "block", xs: "none" },
       }}
@@ -87,17 +87,16 @@ const CategoryCard = () => {
             place!
           </Typography>
 
-          <CardActions sx={{ mt: 2 }}>
+          <CardActions>
             <Grid
               container
               sx={{ height: "100%" }}
-              gap={6}
               justifyContent={"center"}
               alignItems={"center"}
              
             >
               {images.map((x, i) => (
-                <Grid size={3}>
+                <Grid size={3} m={2}>
                   <Tooltip
                     title={x.tooltip=='Login to shop' && user?'Go to Bag':x.tooltip}
                     arrow
@@ -129,19 +128,18 @@ const CategoryCard = () => {
                           transform: "scale(1.08)", 
                         },
                         transition: "0.3s",
+                        
                       }}
                     >
                       <img
                         src={x.url}
                         alt={x.tooltip}
                         style={{
-                          width: "380px",
+                          width: "100%",
                           height: "200px",
                           borderRadius: 10,
                           transition: "transform 0.5s ease-in-out",
-                          border: `1px solid ${
-                            x.tooltip === "Home Appliances" ? "#555" : "white"
-                          }`,
+                          
                         }}
                       />
                     </Button>
