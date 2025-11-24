@@ -109,7 +109,7 @@ const Home = () => {
       )}
       {
         <Box
-          display={{ md: "none", xs: "flex",sm:'none' }}
+          display={{ md: "none", xs: "flex", sm: 'none' }}
           sx={{ flexDirection: "column" }}
         >
           {" "}
@@ -136,12 +136,12 @@ const Home = () => {
             Welcome to Mini
           </Typography>
           <Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>
-            Your one-stop shop for fashion and lifestyle products
+            Your one-stop shop for fashion and lifestyle products!
           </Typography>
           <Typography
             variant="h6"
             sx={{
-              m:1,
+              mt: 2,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -175,7 +175,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m:1,
+              mt: 2,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -209,7 +209,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m:1,
+              mt: 2,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -243,7 +243,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m:1,
+              mt: 2,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
@@ -277,8 +277,7 @@ const Home = () => {
           <Typography
             variant="h6"
             sx={{
-              m:1,
-
+              mt: 2,
               fontWeight: "bold",
               alignItems: "center",
               textAlign: "center",
