@@ -20,7 +20,7 @@ export const useInView = () => {
 
 export const useSlideUp = (visible) => ({
     opacity: visible ? 1 : 0,
-    animation: visible && 'slideup 2s ease',
+    animation: visible && 'slideup 3s ease',
     '@keyframes slideup': {
         '0%': {
             transform: 'translateX(-400px)'
