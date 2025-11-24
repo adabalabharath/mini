@@ -34,10 +34,6 @@ const images = [
 const CategoryCard = () => {
   const { user } = useContext(AuthContext)
   const navigate = useNavigate();
-  useEffect(() => {
-    setChecked(true)
-  }, []);
-
   return (
     <Card
       sx={{
