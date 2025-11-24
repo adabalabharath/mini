@@ -58,18 +58,18 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname == '/') {
       setValue(false)
-    }else if(location.pathname == '/profile'){
+    } else if (location.pathname == '/profile') {
       setValue(false)
     } else {
       const text = location?.pathname?.split('/')[2]
-      if(text){
-      const arr = text?.split('')
-      const cap = arr[0]?.toUpperCase() + arr?.slice(1, arr.length).join('')
-      const index = pages.findIndex(p => p == cap)
-      if (!index < 0) setValue(index)
+      if (text) {
+        const arr = text?.split('')
+        const cap = arr[0]?.toUpperCase() + arr?.slice(1, arr.length).join('')
+        const index = pages.findIndex(p => p == cap)
+        if (index>=0) setValue(index)
       }
     }
-  }, [location])
+  }, [location.pathname])
   return (
     <AppBar
       color="default"

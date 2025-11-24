@@ -15,10 +15,23 @@ import beauty from '/images/beautySection.jpg';
 import { Button } from "@mui/material";
 import Categories from "./Categories";
 
+const after = (content, top, left, color) => {
+  let afterContent = {
+    content: `"${content}"`,
+    color,
+    position: 'absolute',
+    textShadow: "5px 5px 10px rgba(0, 0, 0, 0.5)",
+    fontSize:'22px',
+    fontWeight:800,
+    top,
+    left,
+  }
+  return afterContent
+}
+
 const Home = () => {
   const [shopNow, setShopNow] = useState(localStorage.getItem('welcome') || 'true');
   const dispatch = useDispatch();
-  console.log(shopNow)
   useEffect(() => {
     dispatch(clearFilters);
     return () => localStorage.setItem('welcome', false)
@@ -79,7 +92,7 @@ const Home = () => {
               variant="h6"
               sx={{ textAlign: "center", mt: 2, color: "black", animation: 'animeDown 3s ease-out' }}
             >
-              Your one-stop shop for fashion and lifestyle products
+              Your one-stop shop for fashion and lifestyle products!
             </Typography>
             <Button
               variant="contained"
@@ -138,25 +151,18 @@ const Home = () => {
           <Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>
             Your one-stop shop for fashion and lifestyle products!
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            Men
-          </Typography>
+
           <Grid
             container
             justifyContent="center"
             alignItems="center"
-            m={2}
-            sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
+            m={3}
+            sx={{ display: { xs: "flex", sm: "flex", md: "none" }, }}
           >
-            <Grid item xs={12} borderRadius={4}>
+            <Grid size={12} borderRadius={4} sx={{
+              position: "relative",
+              '&::after':after("Men's wear",65,20,'white')
+            }}>
               <Link to={"/shop/men"}>
                 {" "}
                 <img
@@ -166,23 +172,13 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px'
+                    borderRadius: '20px',
                   }}
                 />
               </Link>
             </Grid>
           </Grid>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            Women
-          </Typography>
+
           <Grid
             container
             justifyContent="center"
@@ -190,7 +186,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item xs={12} borderRadius={4}>
+            <Grid size={12} borderRadius={4} sx={{
+              position: "relative",
+              '&::after': after("Women's wear",67,20,'white')
+            }}>
               <Link to={"/shop/women"}>
                 {" "}
                 <img
@@ -206,17 +205,6 @@ const Home = () => {
               </Link>
             </Grid>
           </Grid>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            Kids
-          </Typography>
           <Grid
             container
             justifyContent="center"
@@ -224,7 +212,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item xs={12} borderRadius={4}>
+            <Grid size={12} borderRadius={4} sx={{
+              position: "relative",
+              '&::after': after("Kids wear",67,20,'white')
+            }}>
               <Link to={"/shop/kids"}>
                 {" "}
                 <img
@@ -240,17 +231,6 @@ const Home = () => {
               </Link>
             </Grid>
           </Grid>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            Home
-          </Typography>
           <Grid
             container
             justifyContent="center"
@@ -258,7 +238,12 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item xs={12} borderRadius={4}>
+            <Grid size={12} borderRadius={4} 
+            sx={{
+              position: "relative",
+              '&::after':after("Home Appliances",65,20,'white')
+            }}
+            >
               <Link to={"/shop/home"}>
                 {" "}
                 <img
@@ -274,17 +259,6 @@ const Home = () => {
               </Link>
             </Grid>
           </Grid>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            Beauty
-          </Typography>
           <Grid
             container
             justifyContent="center"
@@ -292,7 +266,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid item xs={12} borderRadius={4}>
+            <Grid size={12} borderRadius={4} sx={{
+              position: "relative",
+              '&::after':after("Beauty Products",65,20,'white')
+            }}>
               <Link to={"/shop/beauty"}>
                 {" "}
                 <img
