@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import miniLogo from "../../public/images/miniNew.png";
 import miniMobile from "../../public/images/miniMobile.png"
@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
@@ -26,7 +26,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import SellIcon from "@mui/icons-material/Sell";
-import { ListItemButton } from "@mui/material";
+import { ListItemButton, Tab, Tabs } from "@mui/material";
 const pages = ["Men", "Women", "Kids", "Home", "Beauty"];
 const settings = ["Profile", "Wishlist", "Bag", "Orders"];
 const settingsIcons = [
@@ -41,6 +41,12 @@ const Navbar = () => {
   const [logoutDialog, setLogoutDialog] = useState(false);
   const { logout, user } = useContext(AuthContext);
   const products = useSelector((store) => store.products);
+  const [value, setValue] = React.useState(false);
+  const location = useLocation()
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const options = products.filter((x) =>
     x.productName.toLowerCase().includes(search)
   );
@@ -48,6 +54,22 @@ const Navbar = () => {
     setDrawerOpen(open);
   };
   const navigation = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname == '/') {
+      setValue(false)
+    }else if(location.pathname == '/profile'){
+      setValue(false)
+    } else {
+      const text = location?.pathname?.split('/')[2]
+      if(text){
+      const arr = text?.split('')
+      const cap = arr[0]?.toUpperCase() + arr?.slice(1, arr.length).join('')
+      const index = pages.findIndex(p => p == cap)
+      if (!index < 0) setValue(index)
+      }
+    }
+  }, [location])
   return (
     <AppBar
       color="default"
@@ -69,22 +91,21 @@ const Navbar = () => {
         {/* Logo */}
         <Box
           sx={{
-            display: "flex",
             alignItems: "center",
             cursor: "pointer",
-            display:{xs:'none',md:'flex'}
+            display: { xs: 'none', md: 'flex' }
           }}
           onClick={() => navigation("/")}
         >
           <img
-            style={{ height: "70px", width: "80px"}}
+            style={{ height: "70px", width: "80px" }}
             src={miniLogo}
             alt="mini-logo"
           />
           <Typography
             variant="h6"
             sx={{
-             
+
               display: { xs: "none", md: "flex" },
               fontFamily: "fantasy",
               fontWeight: 700,
@@ -95,19 +116,18 @@ const Navbar = () => {
         </Box>
         <Box
           sx={{
-            display: "flex",
             alignItems: "center",
             cursor: "pointer",
-            display:{xs:'flex',md:'none'}
+            display: { xs: 'flex', md: 'none' }
           }}
           onClick={() => navigation("/")}
         >
           <img
-            style={{ height: "70px", width: "80px"}}
+            style={{ height: "70px", width: "80px" }}
             src={miniMobile}
             alt="mini-logo"
           />
-          
+
         </Box>
 
         {/* Nav Pages */}
@@ -121,17 +141,58 @@ const Navbar = () => {
             },
           }}
         >
-          {pages.map((p, i) => (
-            <Link
-              to={`/shop/${p.toLowerCase()}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-              key={i}
-            >
-              <Typography sx={{ cursor: "pointer" }} variant="subtitle1">
-                {p}
-              </Typography>
-            </Link>
-          ))}
+          <Tabs value={value} onChange={handleChange} TabIndicatorProps={{
+            style: {
+              backgroundColor: "#000",
+              height: 2,
+            },
+          }}>
+            {pages.map((p, i) => (
+              <Tab
+                key={i}
+                label={p}
+                value={i}
+                component={Link}
+                to={`/shop/${p.toLowerCase()}`}
+
+                sx={{
+                  textTransform: "none",
+
+                  color: '#000',
+                  "&.Mui-selected": {
+                    color: "#000",
+                    fontWeight: 700,
+                    borderBottom: 0
+                  },
+
+                  "&:hover": {
+                    color: "#000",
+
+                  },
+                  //      position:'relative',
+                  // '&::after':{
+                  //       content:'""',
+                  //       width:'100%',
+                  //       height:'0%',
+                  //       bottom:0,
+                  //       left:0,
+                  //       position:"absolute",
+                  //       opacity:0,
+                  //       background: "linear-gradient(to top, #000, white)",
+                  //       mX:2,
+                  //       transition:'0.7s'
+
+                  //     },
+                  //    '&:hover::after':{
+                  //       opacity:0.3,
+                  //       height:'80%'
+                  //    }   
+
+                }}
+
+              />
+            ))}
+          </Tabs>
         </Box>
 
         {/* Search Bar */}
