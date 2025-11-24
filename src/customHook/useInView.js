@@ -9,7 +9,7 @@ export const useInView = () => {
                 setVisible(true)
                 observer.unobserve(ref.current)
             } 
-        }, { threshold: 0.4 })
+        }, { threshold: 0.2 })
         observer.observe(ref.current)
         return () => observer.disconnect()
     }, [])
