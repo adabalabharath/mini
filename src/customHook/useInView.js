@@ -23,7 +23,8 @@ export const useSlideUp = (visible) => ({
     animation: visible && 'slideup 3s ease',
     '@keyframes slideup': {
         '0%': {
-            transform: 'translateX(-400px)'
+
+            transform: 'translateX(-400px) scale(1.1)'
         },
         '100%': {
             transform: 'translate(0)'
