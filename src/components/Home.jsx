@@ -14,6 +14,7 @@ import homeSection from '/images/homeSection.jpg';
 import beauty from '/images/beautySection.jpg';
 import { Button } from "@mui/material";
 import Categories from "./Categories";
+import { useInView, useSlideUp } from './../customHook/useInView';
 
 const after = (content, top, left, color) => {
   let afterContent = {
@@ -21,21 +22,31 @@ const after = (content, top, left, color) => {
     color,
     position: 'absolute',
     textShadow: "5px 5px 10px rgba(0, 0, 0, 0.5)",
-    fontSize:'22px',
-    fontWeight:800,
+    fontSize: '22px',
+    fontWeight: 800,
     top,
     left,
   }
   return afterContent
 }
 
+const slideUp = {
+
+}
+
 const Home = () => {
   const [shopNow, setShopNow] = useState(localStorage.getItem('welcome') || 'true');
   const dispatch = useDispatch();
+  const [menRef, menVisible] = useInView()
+  const [womenRef, womenVisible] = useInView()
+  const [kidRef, kidVisible] = useInView()
+  const [homeRef, homeVisible] = useInView()
+  const [beautyRef, beautyVisible] = useInView()
   useEffect(() => {
     dispatch(clearFilters);
     return () => localStorage.setItem('welcome', false)
   }, []);
+
   return (
     <div>
       {shopNow == 'true' ? (
@@ -158,10 +169,12 @@ const Home = () => {
             alignItems="center"
             m={3}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" }, }}
+
           >
-            <Grid size={12} borderRadius={4} sx={{
+            <Grid size={12} borderRadius={4} ref={menRef} sx={{
               position: "relative",
-              '&::after':after("Men's wear",65,20,'white')
+              ...(useSlideUp(menVisible)),
+              '&::after': after("Men's wear", 65, 20, 'white')
             }}>
               <Link to={"/shop/men"}>
                 {" "}
@@ -186,9 +199,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid size={12} borderRadius={4} sx={{
+            <Grid size={12} borderRadius={4} ref={womenRef} sx={{
+              ...(useSlideUp(womenVisible)),
               position: "relative",
-              '&::after': after("Women's wear",67,20,'white')
+              '&::after': after("Women's wear", 67, 20, 'white')
             }}>
               <Link to={"/shop/women"}>
                 {" "}
@@ -212,9 +226,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid size={12} borderRadius={4} sx={{
+            <Grid size={12} borderRadius={4} ref={kidRef} sx={{
+              ...(useSlideUp(kidVisible)),
               position: "relative",
-              '&::after': after("Kids wear",67,20,'white')
+              '&::after': after("Kids wear", 67, 20, 'white')
             }}>
               <Link to={"/shop/kids"}>
                 {" "}
@@ -238,11 +253,12 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid size={12} borderRadius={4} 
-            sx={{
-              position: "relative",
-              '&::after':after("Home Appliances",65,20,'white')
-            }}
+            <Grid size={12} borderRadius={4} ref={homeRef}
+              sx={{
+                ...(useSlideUp(homeVisible)),
+                position: "relative",
+                '&::after': after("Home Appliances", 65, 20, 'white')
+              }}
             >
               <Link to={"/shop/home"}>
                 {" "}
@@ -266,9 +282,10 @@ const Home = () => {
             m={2}
             sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
           >
-            <Grid size={12} borderRadius={4} sx={{
+            <Grid size={12} borderRadius={4} ref={beautyRef} sx={{
+              ...(useSlideUp(beautyVisible)),
               position: "relative",
-              '&::after':after("Beauty Products",65,20,'white')
+              '&::after': after("Beauty Products", 65, 20, 'white')
             }}>
               <Link to={"/shop/beauty"}>
                 {" "}

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Zoom,
 } from "@mui/material";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import homePage from "../../public/images/MiniMall.png";
@@ -32,12 +32,9 @@ const images = [
 ];
 
 const CategoryCard = () => {
-  const [checked, setChecked] = useState(false);
   const { user } = useContext(AuthContext)
   const navigate = useNavigate();
   useEffect(() => {
-    // const timer = setTimeout(() => setChecked(true), 300); // delay animation
-    // return () => clearTimeout(timer);
     setChecked(true)
   }, []);
 
@@ -51,14 +48,18 @@ const CategoryCard = () => {
         borderRadius: 5,
         display: { md: "block", xs: "none", sm: 'block' },
       }}
+
     >
-      <CardContent sx={{
-      animation: 'slideUp 2s ease',
+      <CardContent
+      sx={{ 
+        animation:'slideUp 2s ease',
         '@keyframes slideUp': {
           '0%': {
+            opacity:0,
             transform: 'translateY(100%)'
           },
           '100%': {
+            opacity:1,
             transform: 'translateY(0)'
           }
         },
