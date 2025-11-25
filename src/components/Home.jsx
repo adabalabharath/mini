@@ -16,7 +16,7 @@ import { Button } from "@mui/material";
 import Categories from "./Categories";
 import { useInView, useSlideUp } from './../customHook/useInView';
 
-const after = (content, top, left, color) => {
+const after = (content, top, left, color,visible) => {
   let afterContent = {
     content: `"${content}"`,
     color,
@@ -26,6 +26,8 @@ const after = (content, top, left, color) => {
     fontWeight: 800,
     top,
     left,
+    opacity:0,
+    animation:visible && 'textAnime 4s ease forwards'
   }
   return afterContent
 }
@@ -129,7 +131,7 @@ const Home = () => {
           </Box>
         </Box>
       ) : (
-        <Categories />
+        <Categories/>
       )}
       {
         <Box
@@ -174,7 +176,20 @@ const Home = () => {
             <Grid size={12} borderRadius={4} ref={menRef} sx={{
               position: "relative",
               ...(useSlideUp(menVisible)),
-              '&::after': after("Men's wear", 65, 20, 'white')
+              '&::after': after("Men's wear", 65, 20, 'white',menVisible),
+              '@keyframes textAnime': {
+                '0%': {
+                  transform: 'translateY(100px)'
+                },
+                // '80%': {
+                //   transform: 'translateY(-15px)'
+                // },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translate(0)'
+                }
+              }
+
             }}>
               <Link to={"/shop/men"}>
                 {" "}
@@ -202,7 +217,7 @@ const Home = () => {
             <Grid size={12} borderRadius={4} ref={womenRef} sx={{
               ...(useSlideUp(womenVisible)),
               position: "relative",
-              '&::after': after("Women's wear", 67, 20, 'white')
+              '&::after': after("Women's wear", 67, 20, 'white',womenVisible)
             }}>
               <Link to={"/shop/women"}>
                 {" "}
@@ -229,7 +244,7 @@ const Home = () => {
             <Grid size={12} borderRadius={4} ref={kidRef} sx={{
               ...(useSlideUp(kidVisible)),
               position: "relative",
-              '&::after': after("Kids wear", 67, 20, 'white')
+              '&::after': after("Kids wear", 67, 20, 'white',kidVisible)
             }}>
               <Link to={"/shop/kids"}>
                 {" "}
@@ -257,7 +272,7 @@ const Home = () => {
               sx={{
                 ...(useSlideUp(homeVisible)),
                 position: "relative",
-                '&::after': after("Home Appliances", 65, 20, 'white')
+                '&::after': after("Home Appliances", 65, 20, 'white',homeVisible)
               }}
             >
               <Link to={"/shop/home"}>
@@ -285,7 +300,7 @@ const Home = () => {
             <Grid size={12} borderRadius={4} ref={beautyRef} sx={{
               ...(useSlideUp(beautyVisible)),
               position: "relative",
-              '&::after': after("Beauty Products", 65, 20, 'white')
+              '&::after': after("Beauty Products", 65, 20, 'white',beautyVisible)
             }}>
               <Link to={"/shop/beauty"}>
                 {" "}

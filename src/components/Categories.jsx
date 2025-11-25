@@ -15,9 +15,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import homePage from "../../public/images/MiniMall.png";
 const images = [
-  { url: "/images/mens.jpg", nav: "/shop/men", tooltip: "Men" },
-  { url: "/images/women.jpg", nav: "/shop/women", tooltip: "Women" },
-  { url: "/images/kids.jpg", nav: "/shop/kids", tooltip: "Kids" },
+  { url: "/images/mens.jpg", nav: "/shop/men", tooltip: "Men's wear" },
+  { url: "/images/women.jpg", nav: "/shop/women", tooltip: "Women's wear" },
+  { url: "/images/kids.jpg", nav: "/shop/kids", tooltip: "Kids wear" },
   {
     url: "/images/homeSection.jpg",
     nav: "/shop/home",

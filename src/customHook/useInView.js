@@ -24,7 +24,7 @@ export const useSlideUp = (visible) => ({
     '@keyframes slideup': {
         '0%': {
 
-            transform: 'translateX(-400px) scale(1.1)'
+            transform: 'translateY(200px)'
         },
         '100%': {
             transform: 'translate(0)'
