@@ -200,7 +200,7 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px',
+                    borderRadius: '10px',
                   }}
                 />
               </Link>
@@ -228,7 +228,7 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px'
+                    borderRadius: '10px'
                   }}
                 />
               </Link>
@@ -255,7 +255,7 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px'
+                    borderRadius: '10px'
                   }}
                 />
               </Link>
@@ -284,7 +284,7 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px'
+                    borderRadius: '10px'
                   }}
                 />{" "}
               </Link>
@@ -311,7 +311,7 @@ const Home = () => {
                     width: "100%",
                     maxWidth: '370px',
                     height: "200px",
-                    borderRadius: '20px'
+                    borderRadius: '10px'
                   }}
                 />
               </Link>
